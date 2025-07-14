@@ -12,10 +12,11 @@ main:
 
   - title: "COIN: Confidence Score-Guided Distillation for Annotation-Free Cell Segmentation"
     authors: <strong>Sanghyun Jo*</strong>, Seo Jin Lee*, Seungwoo Lee, Seohyung Hong, Hyungseok Seo, Kyungsu Kim (*equal contribution)
-    conference_short: ICCV
+    conference_short: ICCV'25
     conference: IEEE/CVF International Conference on Computer Vision <strong>(ICCV)</strong>, 2025.
     pdf: https://arxiv.org/pdf/2503.11439
     code: https://github.com/shjo-april/COIN
     page: https://shjo-april.github.io/COIN/
-    image: ./assets/img/flowdps.jpg
+    image: ./assets/img/COIN.png
     # notes: -
+
