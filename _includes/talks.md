@@ -9,7 +9,7 @@
   </li>
 
   <li>
-    <strong>Advanced AI Developments & OGQ Industrial and Academic Achievements</strong> – <autocolor>Yonsei University</autocolor><br>
+    <strong>Advanced AI Developments</strong> – <autocolor>Yonsei University</autocolor><br>
     <small style="color:gray;">Nov 2023</small>
   </li>
 
@@ -19,7 +19,7 @@
   </li>
 
   <li>
-    <strong>Experience Sharing Session: DACON and Vision Research</strong> – <a href="https://www.linkedin.com/school/modulabs/?originalSubdomain=kr"><autocolor>MODULABS</autocolor></a><br>
+    <strong>Experience Sharing Session: Vision Research</strong> – <a href="https://www.linkedin.com/school/modulabs/?originalSubdomain=kr"><autocolor>MODULABS</autocolor></a><br>
     <small style="color:gray;">Nov 2022</small><br>
     <a href="http://youtube.com/watch?v=uSs3xV3RIqQ&t=555s"><autocolor>YouTube Video</autocolor></a>
   </li>
