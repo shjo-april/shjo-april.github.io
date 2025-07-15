@@ -10,6 +10,24 @@ main:
   #   image: ./assets/img/coz.jpg
   #   notes: 600+ Github Stars
 
+  - title: "ISAC: Training-Free Instance-to-Semantic Attention Control for Improving Multi-Instance Generation"
+    authors: <strong>Sanghyun Jo*</strong>, Wooyeol Lee*, Ziseok Lee*, Kyungsu Kim<sup>†</sup>
+    conference_short: Under Review
+    conference: arXiv:2505.20935
+    pdf: https://arxiv.org/pdf/2505.20935
+    # code:
+    # page: 
+    image: ./assets/img/ISAC.png
+
+  - title: "DiffEGG: Diffusion-Driven Edge Generation as a Pixel-Annotation-Free Alternative for Instance Annotation"
+    authors: <strong>Sanghyun Jo*</strong>, Ziseok Lee*, Wooyeol Lee, Kyungsu Kim<sup>†</sup>
+    conference_short: Under Review
+    conference: arXiv:2503.07982
+    pdf: https://arxiv.org/pdf/2503.07982
+    code: https://github.com/shjo-april/DiffEGG
+    # page: https://shjo-april.github.io/COIN/
+    image: ./assets/img/DiffEGG.png
+
   - title: "COIN: Confidence Score-Guided Distillation for Annotation-Free Cell Segmentation"
     authors: <strong>Sanghyun Jo*</strong>, Seo Jin Lee*, Seungwoo Lee, Seohyung Hong, Hyungseok Seo<sup>†</sup>, Kyungsu Kim<sup>†</sup>
     conference_short: ICCV'25
@@ -20,3 +38,61 @@ main:
     image: ./assets/img/COIN.png
     # notes: -
 
+  - title: "Early Timestep Zero-Shot Candidate Selection for Instruction-Guided Image Editing"
+    authors: Joowon Kim*, Ziseok Lee*, Donghyeon Cho, <strong>Sanghyun Jo</strong>, Yeonsung Jung, Kyungsu Kim<sup>†</sup>, Eunho Yang<sup>†</sup>
+    conference_short: ICCV'25
+    conference: IEEE/CVF International Conference on Computer Vision <strong>(ICCV)</strong>, 2025.
+    pdf: https://arxiv.org/pdf/2504.13490
+    # code: https://github.com/shjo-april/COIN
+    # page: https://shjo-april.github.io/COIN/
+    image: ./assets/img/ELECT.png
+    # notes: -
+
+  - title: "DHR: Dual Features-Driven Hierarchical Rebalancing in Inter-and Intra-Class Regions for Weakly-Supervised Semantic Segmentation"
+    authors: <strong>Sanghyun Jo</strong>, Fei Pan, In-Jae Yu, Kyungsu Kim<sup>†</sup>
+    conference_short: ECCV'24
+    conference: European Conference on Computer Vision <strong>(ECCV)</strong>, 2024.
+    pdf: https://www.ecva.net/papers/eccv_2024/papers_ECCV/papers/10547.pdf
+    code: https://github.com/shjo-april/DHR
+    # page: https://shjo-april.github.io/DHR/
+    image: ./assets/img/DHR.png
+    # notes: https://eccv.ecva.net/virtual/2024/poster/2631
+
+  - title: "TTD: Text-Tag Self-Distillation Enhancing Image-Text Alignment in CLIP to Alleviate Single Tag Bias"
+    authors: <strong>Sanghyun Jo*</strong>, Soohyun Ryu*, Sungyub Kim, Eunho Yang, Kyungsu Kim<sup>†</sup>
+    conference_short: ECCV'24
+    conference: European Conference on Computer Vision <strong>(ECCV)</strong>, 2024.
+    pdf: https://www.ecva.net/papers/eccv_2024/papers_ECCV/papers/10592.pdf
+    code: https://github.com/shjo-april/TTD
+    # page: https://shjo-april.github.io/TTD/
+    image: ./assets/img/TTD.png
+    # notes: https://eccv.ecva.net/virtual/2024/poster/2259
+
+  - title: "MARS: Model-agnostic Biased Object Removal without Additional Supervision for Weakly-Supervised Semantic Segmentation"
+    authors: <strong>Sanghyun Jo</strong>, In-Jae Yu, Kyungsu Kim<sup>†</sup>
+    conference_short: ICCV'23
+    conference: IEEE/CVF International Conference on Computer Vision <strong>(ICCV)</strong>, 2023.
+    pdf: https://openaccess.thecvf.com/content/ICCV2023/papers/Jo_MARS_Model-agnostic_Biased_Object_Removal_without_Additional_Supervision_for_Weakly-Supervised_ICCV_2023_paper.pdf
+    code: https://github.com/shjo-april/MARS
+    # page: https://shjo-april.github.io/COIN/
+    image: ./assets/img/MARS.png
+    # notes: -
+
+  - title: "RecurSeed and EdgePredictMix: Pseudo-Label Refinement Learning for Weakly Supervised Semantic Segmentation across Single- and Multi-Stage Frameworks"
+    authors: <strong>Sanghyun Jo</strong>, In-Jae Yu, Kyungsu Kim<sup>†</sup>
+    conference_short: Under Review
+    conference: arXiv:2204.06754
+    pdf: https://arxiv.org/pdf/2204.06754
+    code: https://github.com/shjo-april/RecurSeed_and_EdgePredictMix
+    # page: https://shjo-april.github.io/RSEPM/
+    image: ./assets/img/RSEPM.png
+
+  - title: "Puzzle-CAM: Improved localization via matching partial and full features"
+    authors: <strong>Sanghyun Jo</strong>, In-Jae Yu<sup>†</sup>
+    conference_short: ICIP'21
+    conference: IEEE International Conference on Image Processing <strong>(ICIP)</strong>, 2021.
+    pdf: https://arxiv.org/pdf/2101.11253
+    code: https://github.com/shjo-april/PuzzleCAM
+    # page: https://shjo-april.github.io/PuzzleCAM/
+    image: ./assets/img/PuzzleCAM.png
+    # notes: -
