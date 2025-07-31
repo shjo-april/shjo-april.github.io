@@ -43,8 +43,8 @@ main:
     conference_short: ICCV'25
     conference: IEEE/CVF International Conference on Computer Vision <strong>(ICCV)</strong>, 2025.
     pdf: https://arxiv.org/pdf/2504.13490
-    # code: https://github.com/shjo-april/COIN
-    # page: https://shjo-april.github.io/COIN/
+    code: https://github.com/Joow0n-Kim/ELECT
+    page: https://elect-diffusion.github.io/
     image: ./assets/img/ELECT.png
     # notes: -
 
