@@ -4,11 +4,9 @@ layout: homepage
 
 ## About Me
 
-I lead AI research and development at [OGQ](https://ogqmarket.naver.com/), where I have been building practical and interpretable machine learning systems since 2017. My work focuses on designing models that go beyond academic benchmarks—aiming instead for tangible, real-world impact through robustness, transparency, and usability.
+I lead AI research and development at [OGQ](https://www.ogqcorp.com/), where I have been building practical and interpretable machine learning systems since 2017. My primary focus is on designing models that prioritize tangible real-world impact through robustness, transparency, and usability rather than chasing purely academic benchmarks.
 
-Since 2021, I have been fortunate to be advised by [Prof. Kyungsu Kim](https://scholar.google.com/citations?user=RbJDbtgAAAAJ&hl=en). As an external researcher in the [SNU AIBL Lab](https://aibl.snu.ac.kr/), I’ve had the opportunity to collaborate closely and receive continued mentorship. His guidance has deeply shaped my thinking around explainable AI, data-efficient learning, and research integrity. Under his supervision, I’ve pursued AI that is not only powerful but also understandable and responsible.
-
-<!-- My long-term goal is to develop AI technologies that meaningfully contribute to the world—anchored in a strong sense of collaboration, independence, and ethics as a researcher. -->
+Since 2021, I have been conducting research under the supervision of [Prof. Kyungsu Kim](https://aibl.snu.ac.kr/team/pi-information) at the [SNU AIBL Lab](https://aibl.snu.ac.kr/). This collaboration has deeply influenced my approach to explainable AI and data-efficient learning. Integrating these insights, I strive to develop AI systems that are not only powerful but also understandable and responsible.
 
 ## News
 
