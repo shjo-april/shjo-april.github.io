@@ -2,7 +2,7 @@
 layout: homepage
 ---
 
-## About Me
+## Biography
 
 I lead AI research and development at [OGQ](https://www.ogqcorp.com/), where I have been building practical and interpretable machine learning systems since 2017. My primary focus is on designing models that prioritize tangible real-world impact through robustness, transparency, and usability rather than chasing purely academic benchmarks.
 
