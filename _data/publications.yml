@@ -11,7 +11,7 @@ main:
   #   notes: 600+ Github Stars
 
   - title: "EraseLoRA: MLLM-Driven Foreground Exclusion and Background Subtype Aggregation for Dataset-Free Object Removal"
-    authors: <strong>Sanghyun Jo*</strong>, Donghwan Lee*, Eunji Jung*, Seong Je Oh, Kyungsu Kim<sup>†</sup>
+    authors: <strong>Sanghyun Jo*<sup>†</sup></strong>, Donghwan Lee*, Eunji Jung*, Seong Je Oh, Kyungsu Kim<sup>†</sup>
     conference_short: Under Review
     conference: arXiv:2512.21545
     pdf: https://arxiv.org/pdf/2512.21545
