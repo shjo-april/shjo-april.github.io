@@ -13,8 +13,8 @@ main:
   - title: "EraseLoRA: MLLM-Driven Foreground Exclusion and Background Subtype Aggregation for Dataset-Free Object Removal"
     authors: <strong>Sanghyun Jo*</strong>, Donghwan Lee*, Eunji Jung*, Seong Je Oh, Kyungsu Kim<sup>†</sup>
     conference_short: Under Review
-    # conference: arXiv:2512.10339
-    # pdf: https://arxiv.org/pdf/2512.10339
+    conference: arXiv:2512.21545
+    pdf: https://arxiv.org/pdf/2512.21545
     # code:
     # page: 
     image: ./assets/img/EraseLoRA.png
