@@ -18,6 +18,7 @@ main:
     # code:
     # page: 
     image: ./assets/img/EraseLoRA.png
+    notes: First & Co-corresponding author
 
   - title: "On the Collapse of Generative Paths: A Criterion and Correction for Diffusion Steering"
     authors: Ziseok Lee*, Minyeong Hwang*, <strong>Sanghyun Jo</strong>, Wooyeol Lee, Jihyung Ko, Young Bin Park, Jae-Mun Choi, Eunho Yang<sup>†</sup>, Kyungsu Kim<sup>†</sup>
@@ -27,6 +28,7 @@ main:
     # code:
     # page: 
     image: ./assets/img/ACE.png
+    notes: Co-author
 
   - title: "ISAC: Training-Free Instance-to-Semantic Attention Control for Improving Multi-Instance Generation"
     authors: <strong>Sanghyun Jo*</strong>, Wooyeol Lee*, Ziseok Lee*, Kyungsu Kim<sup>†</sup>
@@ -36,6 +38,7 @@ main:
     # code:
     # page: 
     image: ./assets/img/ISAC.png
+    notes: First Author
 
   - title: "TRACE: Your Diffusion Model is Secretly an Instance Edge Detector"
     authors: <strong>Sanghyun Jo*</strong>, Ziseok Lee*, Wooyeol Lee, Jonghyun Choi, Jaesik Park<sup>†</sup>, Kyungsu Kim<sup>†</sup>
@@ -45,6 +48,7 @@ main:
     # code: https://github.com/shjo-april/DiffEGG
     # page: https://shjo-april.github.io/COIN/
     image: ./assets/img/TRACE.png
+    notes: First Author
 
   - title: "COIN: Confidence Score-Guided Distillation for Annotation-Free Cell Segmentation"
     authors: <strong>Sanghyun Jo*</strong>, Seo Jin Lee*, Seungwoo Lee, Seohyung Hong, Hyungseok Seo<sup>†</sup>, Kyungsu Kim<sup>†</sup>
@@ -54,7 +58,7 @@ main:
     code: https://github.com/shjo-april/COIN
     page: https://shjo-april.github.io/COIN/
     image: ./assets/img/COIN.png
-    # notes: -
+    notes: First Author
 
   - title: "Early Timestep Zero-Shot Candidate Selection for Instruction-Guided Image Editing"
     authors: Joowon Kim*, Ziseok Lee*, Donghyeon Cho, <strong>Sanghyun Jo</strong>, Yeonsung Jung, Kyungsu Kim<sup>†</sup>, Eunho Yang<sup>†</sup>
@@ -64,7 +68,7 @@ main:
     code: https://github.com/Joow0n-Kim/ELECT
     page: https://elect-diffusion.github.io/
     image: ./assets/img/ELECT.png
-    # notes: -
+    notes: Co-author
 
   - title: "DHR: Dual Features-Driven Hierarchical Rebalancing in Inter-and Intra-Class Regions for Weakly-Supervised Semantic Segmentation"
     authors: <strong>Sanghyun Jo</strong>, Fei Pan, In-Jae Yu, Kyungsu Kim<sup>†</sup>
@@ -74,7 +78,7 @@ main:
     code: https://github.com/shjo-april/DHR
     # page: https://shjo-april.github.io/DHR/
     image: ./assets/img/DHR.png
-    # notes: https://eccv.ecva.net/virtual/2024/poster/2631
+    notes: First Author
 
   - title: "TTD: Text-Tag Self-Distillation Enhancing Image-Text Alignment in CLIP to Alleviate Single Tag Bias"
     authors: <strong>Sanghyun Jo*</strong>, Soohyun Ryu*, Sungyub Kim, Eunho Yang, Kyungsu Kim<sup>†</sup>
@@ -84,7 +88,7 @@ main:
     code: https://github.com/shjo-april/TTD
     # page: https://shjo-april.github.io/TTD/
     image: ./assets/img/TTD.png
-    # notes: https://eccv.ecva.net/virtual/2024/poster/2259
+    notes: First Author
 
   - title: "MARS: Model-agnostic Biased Object Removal without Additional Supervision for Weakly-Supervised Semantic Segmentation"
     authors: <strong>Sanghyun Jo</strong>, In-Jae Yu, Kyungsu Kim<sup>†</sup>
@@ -94,7 +98,7 @@ main:
     code: https://github.com/shjo-april/MARS
     # page: https://shjo-april.github.io/COIN/
     image: ./assets/img/MARS.png
-    # notes: -
+    notes: First Author
 
   - title: "RecurSeed and EdgePredictMix: Pseudo-Label Refinement Learning for Weakly Supervised Semantic Segmentation across Single- and Multi-Stage Frameworks"
     authors: <strong>Sanghyun Jo</strong>, In-Jae Yu, Kyungsu Kim<sup>†</sup>
@@ -104,6 +108,7 @@ main:
     code: https://github.com/shjo-april/RecurSeed_and_EdgePredictMix
     # page: https://shjo-april.github.io/RSEPM/
     image: ./assets/img/RSEPM.png
+    notes: First Author
 
   - title: "Puzzle-CAM: Improved localization via matching partial and full features"
     authors: <strong>Sanghyun Jo</strong>, In-Jae Yu<sup>†</sup>
@@ -113,4 +118,4 @@ main:
     code: https://github.com/shjo-april/PuzzleCAM
     # page: https://shjo-april.github.io/PuzzleCAM/
     image: ./assets/img/PuzzleCAM.png
-    notes: 140+ Citations
+    notes: First Author; 140+ Citations
