@@ -102,7 +102,7 @@ main:
 
   - title: "RecurSeed and EdgePredictMix: Pseudo-Label Refinement Learning for Weakly Supervised Semantic Segmentation across Single- and Multi-Stage Frameworks"
     authors: <strong>Sanghyun Jo</strong>, In-Jae Yu, Kyungsu Kim<sup>†</sup>
-    conference_short: Under Review
+    conference_short: Preprint
     conference: arXiv:2204.06754
     pdf: https://arxiv.org/pdf/2204.06754
     code: https://github.com/shjo-april/RecurSeed_and_EdgePredictMix
