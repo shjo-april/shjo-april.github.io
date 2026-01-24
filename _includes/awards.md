@@ -2,7 +2,7 @@
 
 <ul style="margin:0 0 20px;">
   <li>
-    <a href="https://cvpr.thecvf.com/Conferences/2025" target="_blank"><autocolor>
+    <a href="https://cvpr.thecvf.com/Conferences/2025/ProgramCommittee#all-outstanding-reviewer" target="_blank"><autocolor>
       🏆 Outstanding Reviewer – CVPR 2025
     </autocolor></a><br>
     <small style="color:gray;">Jun 2025</small><br>
