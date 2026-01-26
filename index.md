@@ -10,6 +10,7 @@ Since 2021, I have been conducting research under the supervision of [Prof. Kyun
 
 ## News
 
+- **[2026.01]** A paper ([**TRACE**](https://shjo-april.github.io/TRACE/)) accepted to **ICLR 2026**.
 - **[2025.06]** Two papers ([**COIN**](https://shjo-april.github.io/COIN/), [**ELECT**](https://elect-diffusion.github.io/)) accepted to **ICCV 2025**.
 - **[2025.06]** Named an **Outstanding Reviewer** for **CVPR 2025**.
 - **[2024.07]** Two papers ([**DHR**](https://www.ecva.net/papers/eccv_2024/papers_ECCV/papers/10547.pdf), [**TTD**](https://www.ecva.net/papers/eccv_2024/papers_ECCV/papers/10592.pdf)) accepted to **ECCV 2024**.

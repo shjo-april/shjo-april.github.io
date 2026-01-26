@@ -42,8 +42,8 @@ main:
 
   - title: "TRACE: Your Diffusion Model is Secretly an Instance Edge Detector"
     authors: <strong>Sanghyun Jo*</strong>, Ziseok Lee*, Wooyeol Lee, Jonghyun Choi, Jaesik Park<sup>†</sup>, Kyungsu Kim<sup>†</sup>
-    conference_short: Under Review
-    conference: arXiv:2503.07982
+    conference_short: ICLR'26
+    conference: International Conference on Learning Representations <strong>(ICLR)</strong>, 2026.
     pdf: https://arxiv.org/pdf/2503.07982
     # code: https://github.com/shjo-april/DiffEGG
     # page: https://shjo-april.github.io/COIN/
