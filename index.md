@@ -10,6 +10,7 @@ Since 2021, I have been conducting research under the supervision of [Prof. Kyun
 
 ## News
 
+- **[2026.02]** Our [**TRACE**](https://openreview.net/forum?id=BjElYlJKMj), a diffusion-driven unsupervised instance annotator, is selected as an **Oral** paper at **ICLR 2026**.
 - **[2026.01]** A paper ([**TRACE**](https://arxiv.org/pdf/2503.07982)) accepted to **ICLR 2026**.
 - **[2025.06]** Two papers ([**COIN**](https://shjo-april.github.io/COIN/), [**ELECT**](https://elect-diffusion.github.io/)) accepted to **ICCV 2025**.
 - **[2025.06]** Named an **Outstanding Reviewer** for **CVPR 2025**.
