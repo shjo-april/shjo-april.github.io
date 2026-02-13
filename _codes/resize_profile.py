@@ -3,7 +3,9 @@ import sanghyunjo as shjo
 image = shjo.imread('./assets/img/profile.jpg')
 
 ih, iw = image.shape[:2]
-print((iw, ih))
+print((iw, ih)); input()
+
+shjo.imwrite('./assets/img/profile_slack.jpg', shjo.resize(image, scale=0.90))
 
 crop_ih = int(ih * 0.7)
 crop_image = image[:crop_ih, :]
