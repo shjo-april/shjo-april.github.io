@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sanghyun Jo | Principal AI Researcher</title>
+    <meta name="description" content="Sanghyun Jo is a Principal AI researcher at OGQ and SNU AIBL Lab, building robust and interpretable AI systems for real-world impact.">
+    <meta name="keywords" content="Sanghyun Jo, Principal AI researcher, interpretable machine learning, OGQ, SNU AIBL, explainable AI, robust models">
+    <link rel="canonical" href="https://shjo-april.github.io/">
+    <meta property="og:title" content="Sanghyun Jo | Principal AI Researcher">
+    <meta property="og:description" content="Building robust and interpretable AI systems for real-world impact.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://shjo-april.github.io/">
+    <link rel="icon" media="(prefers-color-scheme:dark)" href="./assets/img/shjo_logo_cropped.png" type="image/png">
+    <link rel="icon" media="(prefers-color-scheme:light)" href="./assets/img/shjo_logo_cropped.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.4/css/academicons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --bg-primary:#0a0a0f;--bg-secondary:#12121a;--bg-card:#181824;--bg-card-hover:#1e1e2e;
+            --gold:#c9a84c;--gold-light:#e4c96a;--gold-dim:rgba(201,168,76,0.15);--gold-glow:rgba(201,168,76,0.3);
+            --text-primary:#e8e6e1;--text-secondary:#9a9890;--text-dim:#6a6860;
+            --accent-red:#d4534b;--accent-blue:#5b8fd4;--border:rgba(201,168,76,0.12);
+            --font-display:'Cormorant Garamond',Georgia,serif;
+            --font-body:'DM Sans',-apple-system,sans-serif;
+            --font-mono:'JetBrains Mono',monospace;
+            --max-width:1240px;--transition:0.4s cubic-bezier(0.16,1,0.3,1);
+        }
+        *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+        html{scroll-behavior:smooth;scrollbar-width:thin;scrollbar-color:var(--gold-dim) var(--bg-primary)}
+        body{font-family:var(--font-body);background:var(--bg-primary);color:var(--text-primary);line-height:1.7;font-size:16.5px;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+        a{color:var(--gold);text-decoration:none;transition:color 0.3s}a:hover{color:var(--gold-light)}
+        ::selection{background:var(--gold-dim);color:var(--gold-light)}
+
+        body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");pointer-events:none;z-index:9999}
+
+        /* Top Bar */
+        .topbar{position:relative;z-index:100;padding:0 2.5rem;background:var(--bg-primary);border-bottom:1px solid var(--border)}
+        .topbar-inner{max-width:var(--max-width);margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:48px}
+        .topbar-id{font-family:var(--font-display);font-size:1.2rem;font-weight:600;color:var(--text-primary);display:flex;align-items:center;gap:0.6rem}
+        .topbar-id .sep{color:var(--text-dim);font-weight:400}
+        .topbar-id .affil{font-family:var(--font-body);font-size:0.85rem;font-weight:400;color:var(--text-secondary)}
+        .topbar-links{display:flex;gap:1.8rem}
+        .topbar-links a{color:var(--text-secondary);font-size:0.82rem;letter-spacing:0.06em;text-transform:uppercase;font-weight:500;transition:color 0.3s}
+        .topbar-links a:hover{color:var(--gold)}
+
+        /* Landing */
+        .landing{position:relative;display:flex;flex-direction:column;overflow:hidden}
+        .landing-bg{position:absolute;inset:0;overflow:hidden}
+        .landing-bg::before{content:'';position:absolute;top:-20%;right:-15%;width:700px;height:700px;background:radial-gradient(circle,rgba(201,168,76,0.06) 0%,transparent 60%);animation:floatOrb 20s ease-in-out infinite}
+        .landing-bg::after{content:'';position:absolute;bottom:-15%;left:-10%;width:500px;height:500px;background:radial-gradient(circle,rgba(91,143,212,0.04) 0%,transparent 60%);animation:floatOrb 25s ease-in-out infinite reverse}
+        @keyframes floatOrb{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(40px,-30px) scale(1.05)}66%{transform:translate(-20px,20px) scale(0.95)}}
+        .landing-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(201,168,76,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(201,168,76,0.03) 1px,transparent 1px);background-size:80px 80px;mask-image:radial-gradient(ellipse 70% 60% at 50% 40%,black,transparent)}
+
+        /* Hero Row */
+        .hero-row{position:relative;flex:0 0 auto;padding:3.2rem 2.5rem 0}
+        .hero-inner{max-width:var(--max-width);margin:0 auto;display:grid;grid-template-columns:240px 1fr;gap:3.5rem;align-items:center}
+
+        .profile-card{text-align:center}
+        .profile-image-wrap{position:relative;width:190px;height:190px;margin:0 auto 1.2rem}
+        .profile-image-wrap::before{content:'';position:absolute;inset:-3px;border-radius:50%;background:conic-gradient(from 0deg,var(--gold),transparent 40%,var(--gold-dim) 60%,transparent 80%,var(--gold));animation:rotateRing 8s linear infinite;opacity:0.6}
+        @keyframes rotateRing{to{transform:rotate(360deg)}}
+        .profile-image-wrap img{position:relative;width:100%;height:100%;border-radius:50%;object-fit:cover;object-position:center 20%;border:3px solid var(--bg-primary);z-index:1}
+        .profile-name{font-family:var(--font-display);font-size:1.8rem;font-weight:700;color:var(--text-primary);margin-bottom:0.15rem}
+        .profile-role{font-size:0.8rem;color:var(--gold);font-weight:600;letter-spacing:0.03em;text-transform:none;margin-bottom:0.2rem}
+        .profile-affiliation{font-size:0.92rem;color:var(--text-secondary);margin-bottom:0.15rem}
+        .profile-email{font-family:var(--font-mono);font-size:0.8rem;color:var(--text-dim);margin-bottom:1rem}
+        .social-links{display:flex;justify-content:center;gap:0.45rem;flex-wrap:wrap}
+        .social-links a{display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:9px;background:var(--bg-card);border:1px solid var(--border);color:var(--text-secondary);font-size:1.05rem;transition:all 0.3s}
+        .social-links a:hover{color:var(--gold);border-color:var(--gold-dim);background:var(--gold-dim);transform:translateY(-2px)}
+
+        .hero-bio{}
+        .bio-heading{font-family:var(--font-display);font-size:1.85rem;font-weight:700;color:var(--text-primary);margin-bottom:0.8rem;padding-bottom:0.5rem;border-bottom:1px solid var(--border);display:flex;align-items:baseline;gap:0.8rem}
+        .bio-heading-label{font-family:var(--font-mono);font-size:0.7rem;color:var(--gold);letter-spacing:0.12em;text-transform:uppercase}
+        .hero-bio-text{color:var(--text-secondary);font-size:1rem;line-height:1.8;margin-bottom:0.65rem}
+        .hero-stats{display:flex;gap:2.8rem;margin-top:1.4rem;padding-top:1.4rem;border-top:1px solid var(--border)}
+        .stat-value{font-family:var(--font-display);font-size:2rem;font-weight:700;color:var(--gold);line-height:1}
+        .stat-label{font-size:0.78rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.08em;margin-top:0.2rem}
+
+        /* News Row */
+        .news-row{position:relative;flex:1 1 auto;display:flex;align-items:flex-start;padding:1.8rem 2.5rem 2.5rem}
+        .news-inner{max-width:var(--max-width);margin:0 auto;width:100%}
+        .news-header{display:flex;align-items:baseline;gap:1rem;margin-bottom:0.8rem;padding-bottom:0.6rem;border-bottom:1px solid var(--border)}
+        .news-title{font-family:var(--font-display);font-size:1.55rem;font-weight:700;color:var(--text-primary)}
+        .news-label{font-family:var(--font-mono);font-size:0.72rem;color:var(--gold);letter-spacing:0.12em;text-transform:uppercase}
+        .news-grid{display:grid;grid-template-columns:1fr 1fr;gap:0}
+        .news-col{display:flex;flex-direction:column}
+        .news-col:first-child{border-right:1px solid var(--border);padding-right:2rem}
+        .news-col:last-child{padding-left:2rem}
+        .news-item{display:grid;grid-template-columns:82px 1fr;gap:1rem;padding:0.75rem 0;border-bottom:1px solid rgba(201,168,76,0.06);align-items:start;opacity:0;transform:translateY(10px)}
+        .news-item:last-child{border-bottom:none}
+        .news-item.animate-in{opacity:1;transform:translateY(0);transition:all 0.4s ease}
+        .news-date{font-family:var(--font-mono);font-size:0.78rem;color:var(--text-dim);padding-top:0.1rem}
+        .news-content{font-size:0.92rem;color:var(--text-secondary);line-height:1.6}
+        .news-content strong{color:var(--text-primary);font-weight:600}
+        .news-content a{border-bottom:1px solid var(--gold-dim)}
+        .news-content a:hover{border-bottom-color:var(--gold)}
+        .news-highlight{display:inline-block;background:var(--gold-dim);color:var(--gold-light);font-size:0.7rem;font-weight:700;padding:0.1em 0.45em;border-radius:3px;text-transform:uppercase;letter-spacing:0.04em;vertical-align:middle;margin-left:0.2rem}
+
+
+        /* Sections */
+        .section{padding:5rem 2.5rem;position:relative}
+        .container{max-width:var(--max-width);margin:0 auto}
+        .section-header{margin-bottom:2.5rem}
+        .section-label{font-family:var(--font-mono);font-size:0.76rem;color:var(--gold);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:0.4rem}
+        .section-title{font-family:var(--font-display);font-size:2.5rem;font-weight:700;color:var(--text-primary);line-height:1.2}
+        .section-divider{height:1px;background:linear-gradient(90deg,transparent,var(--border),var(--gold-dim),var(--border),transparent)}
+
+        /* Publications */
+        .pub-list{display:flex;flex-direction:column;gap:1.5rem}
+        .pub-card{display:grid;grid-template-columns:230px 1fr;gap:1.8rem;padding:1.5rem;background:var(--bg-card);border:1px solid var(--border);border-radius:14px;transition:all var(--transition);opacity:0;transform:translateY(20px)}
+        .pub-card.animate-in{opacity:1;transform:translateY(0);transition:opacity 0.5s ease,transform 0.5s ease,border-color 0.3s,background 0.3s}
+        .pub-card:hover{border-color:var(--gold-dim);background:var(--bg-card-hover)}
+        .pub-image{position:relative;border-radius:10px;overflow:hidden;aspect-ratio:16/10;background:var(--bg-secondary)}
+        .pub-image img{width:100%;height:100%;object-fit:cover;transition:transform 0.6s ease}
+        .pub-card:hover .pub-image img{transform:scale(1.04)}
+        .pub-badge{position:absolute;top:8px;left:8px;font-family:var(--font-mono);font-size:0.68rem;font-weight:600;padding:0.15em 0.45em;border-radius:4px;letter-spacing:0.04em;z-index:2}
+        .pub-badge.oral{background:linear-gradient(135deg,#d4534b,#e06b5f);color:#fff}
+        .pub-badge.conference{background:rgba(91,143,212,0.85);color:#fff}
+        .pub-badge.preprint{background:rgba(150,150,150,0.6);color:#ddd}
+        .pub-badge.review{background:rgba(201,168,76,0.7);color:#fff}
+        .pub-info{display:flex;flex-direction:column;justify-content:center}
+        .pub-title{font-size:1.02rem;font-weight:600;color:var(--text-primary);line-height:1.4;margin-bottom:0.4rem}
+        .pub-authors{font-size:0.88rem;color:var(--text-secondary);line-height:1.5;margin-bottom:0.3rem}
+        .pub-venue{font-size:0.84rem;color:var(--text-dim);font-style:italic;margin-bottom:0.4rem}
+        .pub-note{display:inline-block;font-size:0.78rem;color:var(--accent-red);font-weight:600;font-style:italic;margin-bottom:0.5rem}
+        .pub-links{display:flex;gap:0.4rem;flex-wrap:wrap}
+        .pub-link{font-family:var(--font-mono);font-size:0.74rem;padding:0.3em 0.7em;border-radius:5px;background:var(--bg-secondary);border:1px solid var(--border);color:var(--text-secondary);transition:all 0.3s;display:inline-flex;align-items:center;gap:0.3em}
+        .pub-link:hover{border-color:var(--gold-dim);color:var(--gold);background:var(--gold-dim)}
+
+        /* Services & Awards */
+        .dual-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem}
+        .info-block-title{font-family:var(--font-display);font-size:1.6rem;font-weight:700;color:var(--text-primary);margin-bottom:1.3rem;padding-bottom:0.7rem;border-bottom:1px solid var(--border)}
+        .service-group-label{font-size:0.78rem;font-weight:600;color:var(--gold);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:0.5rem;margin-top:1rem}
+        .service-group-label:first-child{margin-top:0}
+        .service-item{font-size:0.92rem;color:var(--text-secondary);padding:0.3rem 0 0.3rem 1rem;position:relative}
+        .service-item::before{content:'';position:absolute;left:0;top:50%;width:4px;height:4px;border-radius:50%;background:var(--gold-dim);border:1px solid var(--gold);transform:translateY(-50%)}
+        .award-item{padding:0.8rem 0;border-bottom:1px solid var(--border)}
+        .award-item:last-child{border-bottom:none}
+        .award-title{font-size:0.95rem;font-weight:600;color:var(--text-primary);margin-bottom:0.2rem}
+        .award-date{font-family:var(--font-mono);font-size:0.76rem;color:var(--text-dim);margin-bottom:0.2rem}
+        .award-desc{font-size:0.88rem;color:var(--text-secondary);line-height:1.5}
+        .talk-item{padding:0.7rem 0;border-bottom:1px solid var(--border)}
+        .talk-item:last-child{border-bottom:none}
+        .talk-title{font-size:0.95rem;font-weight:600;color:var(--text-primary);margin-bottom:0.15rem}
+        .talk-venue{font-size:0.88rem;color:var(--text-secondary)}
+        .talk-date{font-family:var(--font-mono);font-size:0.76rem;color:var(--text-dim);margin-top:0.1rem}
+        .talk-video{display:inline-flex;align-items:center;gap:0.3em;font-size:0.8rem;color:var(--gold);margin-top:0.2rem}
+
+        .footer{padding:2.5rem 2rem;border-top:1px solid var(--border);text-align:center}
+        .footer-text{font-size:0.82rem;color:var(--text-dim)}
+
+        [data-animate]{opacity:0;transform:translateY(20px)}
+        [data-animate].animate-in{opacity:1;transform:translateY(0);transition:opacity 0.6s ease,transform 0.6s ease}
+
+        @media(max-width:900px){
+            .hero-inner{grid-template-columns:1fr;text-align:center;gap:1.5rem}
+                        .hero-stats{justify-content:center}
+            .profile-card{order:-1}
+            .profile-image-wrap{width:120px;height:120px}
+            .news-grid{grid-template-columns:1fr}
+            .news-col:first-child{border-right:none;padding-right:0}
+            .news-col:last-child{padding-left:0}
+        }
+        @media(max-width:768px){
+            .pub-card{grid-template-columns:1fr}
+            .pub-image{aspect-ratio:16/8}
+            .dual-grid{grid-template-columns:1fr;gap:2rem}
+            .topbar-links{gap:1rem}.topbar-links a{font-size:0.7rem}
+            .section{padding:3rem 1.2rem}
+        }
+        @media(max-width:480px){
+            .hero-stats{flex-wrap:wrap;gap:1.5rem}
+                        .news-item{grid-template-columns:1fr;gap:0.2rem}
+        }
+    </style>
+</head>
+<body>
+
+<header class="topbar">
+    <div class="topbar-inner">
+        <div class="topbar-id">
+            Sanghyun Jo <span class="sep">|</span> <span class="affil">OGQ &middot; SNU AIBL Lab</span>
+        </div>
+        <div class="topbar-links">
+            <a href="#publications">Publications</a>
+            <a href="#services">Services</a>
+            <a href="#awards">Awards</a>
+        </div>
+    </div>
+</header>
+
+<!-- ===== Landing: Hero + News in One Viewport ===== -->
+<section class="landing" id="top">
+    <div class="landing-bg"><div class="landing-grid"></div></div>
+
+    <div class="hero-row">
+        <div class="hero-inner">
+            <div class="profile-card" data-animate>
+                <div class="profile-image-wrap">
+                    <img src="./assets/img/profile.jpg" alt="Sanghyun Jo">
+                </div>
+                <div class="profile-name">Sanghyun Jo</div>
+                <div class="profile-role">Principal AI Researcher</div>
+                <div class="profile-affiliation">
+                    <a href="https://www.ogqcorp.com/" target="_blank">OGQ</a> &middot; <a href="https://aibl.snu.ac.kr/" target="_blank">SNU AIBL Lab</a>
+                </div>
+                <div class="profile-email">shjo.april@gmail.com</div>
+                <div class="social-links">
+                    <a href="https://scholar.google.com/citations?user=xgP6q2YAAAAJ&hl=en" target="_blank" title="Google Scholar"><i class="ai ai-google-scholar"></i></a>
+                    <a href="https://openreview.net/profile?id=%7ESanghyun_Jo1" target="_blank" title="OpenReview"><i class="fa-solid fa-pen-to-square" style="font-size:0.8rem"></i></a>
+                    <a href="https://github.com/shjo-april/" target="_blank" title="GitHub"><i class="fa-brands fa-github"></i></a>
+                    <a href="https://www.linkedin.com/in/sanghyun-jo-b61201238/" target="_blank" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                </div>
+            </div>
+
+            <div class="hero-bio" data-animate data-delay="100">
+                <h2 class="bio-heading">Biography <span class="bio-heading-label">// About Me</span></h2>
+                <p class="hero-bio-text">
+                    I lead AI research and development at <a href="https://www.ogqcorp.com/" target="_blank">OGQ</a>, where I have been building practical and interpretable machine learning systems since 2017. My primary focus is on designing models that prioritize tangible real-world impact , emphasizing robustness, transparency, and usability alongside strong empirical performance.
+                </p>
+                <p class="hero-bio-text">
+                    Since 2021, I have been conducting research under the supervision of <a href="https://aibl.snu.ac.kr/team/pi-information" target="_blank">Prof. Kyungsu Kim</a> at the <a href="https://aibl.snu.ac.kr/" target="_blank">SNU AIBL Lab</a>. This collaboration has deeply influenced my approach to explainable AI and data-efficient learning. Integrating these insights, I strive to develop AI systems that are not only powerful but also understandable and responsible.
+                </p>
+                <div class="hero-stats">
+                    <div class="stat-item"><div class="stat-value" id="pubCount">-</div><div class="stat-label">Publications</div></div>
+                    <div class="stat-item"><div class="stat-value" id="yearsAI">-</div><div class="stat-label">Years in AI Industry</div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="news-row" id="news">
+        <div class="news-inner">
+            <div class="news-header">
+                <h2 class="news-title">News</h2>
+                <span class="news-label">// Latest Updates</span>
+            </div>
+            <div class="news-grid">
+                <div class="news-col">
+                    <div class="news-item" data-animate><div class="news-date">2026.02</div><div class="news-content"><a href="https://openreview.net/forum?id=BjElYlJKMj"><strong>TRACE</strong></a> selected as <strong>Oral</strong> at <strong>ICLR 2026</strong> (223 papers, 1.13%) <span class="news-highlight">Oral</span></div></div>
+                    <div class="news-item" data-animate><div class="news-date">2026.01</div><div class="news-content"><a href="https://arxiv.org/pdf/2503.07982"><strong>TRACE</strong></a> accepted to <strong>ICLR 2026</strong></div></div>
+                    <div class="news-item" data-animate><div class="news-date">2025.06</div><div class="news-content">Two papers (<a href="https://shjo-april.github.io/COIN/"><strong>COIN</strong></a>, <a href="https://elect-diffusion.github.io/"><strong>ELECT</strong></a>) accepted to <strong>ICCV 2025</strong></div></div>
+                    <div class="news-item" data-animate><div class="news-date">2025.06</div><div class="news-content">Named <strong>Outstanding Reviewer</strong> for <strong>CVPR 2025</strong> <span class="news-highlight">Award</span></div></div>
+                </div>
+                <div class="news-col">
+                    <div class="news-item" data-animate><div class="news-date">2024.07</div><div class="news-content">Two papers (<a href="https://www.ecva.net/papers/eccv_2024/papers_ECCV/papers/10547.pdf"><strong>DHR</strong></a>, <a href="https://www.ecva.net/papers/eccv_2024/papers_ECCV/papers/10592.pdf"><strong>TTD</strong></a>) accepted to <strong>ECCV 2024</strong></div></div>
+                    <div class="news-item" data-animate><div class="news-date">2023.07</div><div class="news-content"><a href="https://openaccess.thecvf.com/content/ICCV2023/papers/Jo_MARS_Model-agnostic_Biased_Object_Removal_without_Additional_Supervision_for_Weakly-Supervised_ICCV_2023_paper.pdf"><strong>MARS</strong></a> accepted to <strong>ICCV 2023</strong></div></div>
+                    <div class="news-item" data-animate><div class="news-date">2021.01</div><div class="news-content"><a href="https://arxiv.org/pdf/2101.11253"><strong>Puzzle-CAM</strong></a> accepted to <strong>ICIP 2021</strong></div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ===== Publications ===== -->
+<section class="section" id="publications">
+    <div class="container">
+        <div class="section-header" data-animate>
+            <div class="section-label">// Selected Works</div>
+            <h2 class="section-title">Publications</h2>
+        </div>
+        <div class="pub-list">
+
+            <div class="pub-card" data-animate>
+                <div class="pub-image"><span class="pub-badge review">Under Review</span><img src="./assets/img/EraseLoRA.png" alt="EraseLoRA"></div>
+                <div class="pub-info">
+                    <div class="pub-title">EraseLoRA: MLLM-Driven Foreground Exclusion and Background Subtype Aggregation for Dataset-Free Object Removal</div>
+                    <div class="pub-authors"><strong>Sanghyun Jo*&#8224;</strong>, Donghwan Lee*, Eunji Jung*, Seong Je Oh, Kyungsu Kim&#8224;</div>
+                    <div class="pub-venue">arXiv:2512.21545</div>
+                    <div class="pub-note">Co-first &amp; Co-corresponding author</div>
+                    <div class="pub-links"><a href="https://arxiv.org/pdf/2512.21545" target="_blank" class="pub-link"><i class="fa-solid fa-file-pdf"></i> PDF</a></div>
+                </div>
+            </div>
+
+            <div class="pub-card" data-animate>
+                <div class="pub-image"><span class="pub-badge review">Under Review</span><img src="./assets/img/ACE.png" alt="ACE"></div>
+                <div class="pub-info">
+                    <div class="pub-title">On the Collapse of Generative Paths: A Criterion and Correction for Diffusion Steering</div>
+                    <div class="pub-authors">Ziseok Lee*, Minyeong Hwang*, <strong>Sanghyun Jo</strong>, Wooyeol Lee, Jihyung Ko, Young Bin Park, Jae-Mun Choi, Eunho Yang&#8224;, Kyungsu Kim&#8224;</div>
+                    <div class="pub-venue">arXiv:2512.10339</div>
+                    <div class="pub-links"><a href="https://arxiv.org/pdf/2512.10339" target="_blank" class="pub-link"><i class="fa-solid fa-file-pdf"></i> PDF</a></div>
+                </div>
+            </div>
+
+            <div class="pub-card" data-animate>
+                <div class="pub-image"><span class="pub-badge review">Under Review</span><img src="./assets/img/ISAC.png" alt="ISAC"></div>
+                <div class="pub-info">
+                    <div class="pub-title">ISAC: Training-Free Instance-to-Semantic Attention Control for Improving Multi-Instance Generation</div>
+                    <div class="pub-authors"><strong>Sanghyun Jo*</strong>, Wooyeol Lee*, Ziseok Lee*, Kyungsu Kim&#8224;</div>
+                    <div class="pub-venue">arXiv:2505.20935</div>
+                    <div class="pub-note">Co-first author</div>
+                    <div class="pub-links"><a href="https://arxiv.org/pdf/2505.20935" target="_blank" class="pub-link"><i class="fa-solid fa-file-pdf"></i> PDF</a></div>
+                </div>
+            </div>
+
+            <div class="pub-card" data-animate>
+                <div class="pub-image"><span class="pub-badge oral">ICLR'26 Oral</span><img src="./assets/img/TRACE.png" alt="TRACE"></div>
+                <div class="pub-info">
+                    <div class="pub-title">TRACE: Your Diffusion Model is Secretly an Instance Edge Detector</div>
+                    <div class="pub-authors"><strong>Sanghyun Jo*</strong>, Ziseok Lee*, Wooyeol Lee, Jonghyun Choi, Jaesik Park&#8224;, Kyungsu Kim&#8224;</div>
+                    <div class="pub-venue">International Conference on Learning Representations (ICLR), 2026.</div>
+                    <div class="pub-note">Co-first author; Oral [Top 1.13%]</div>
+                    <div class="pub-links">
+                        <a href="https://openreview.net/pdf?id=BjElYlJKMj" target="_blank" class="pub-link"><i class="fa-solid fa-file-pdf"></i> PDF</a>
+                        <a href="https://github.com/shjo-april/TRACE" target="_blank" class="pub-link"><i class="fa-brands fa-github"></i> Code</a>
+                        <a href="https://shjo-april.github.io/TRACE/" target="_blank" class="pub-link"><i class="fa-solid fa-globe"></i> Project</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pub-card" data-animate>
+                <div class="pub-image"><span class="pub-badge conference">ICCV'25</span><img src="./assets/img/COIN.png" alt="COIN"></div>
+                <div class="pub-info">
+                    <div class="pub-title">COIN: Confidence Score-Guided Distillation for Annotation-Free Cell Segmentation</div>
+                    <div class="pub-authors"><strong>Sanghyun Jo*</strong>, Seo Jin Lee*, Seungwoo Lee, Seohyung Hong, Hyungseok Seo&#8224;, Kyungsu Kim&#8224;</div>
+                    <div class="pub-venue">IEEE/CVF International Conference on Computer Vision (ICCV), 2025.</div>
+                    <div class="pub-note">Co-first author</div>
+                    <div class="pub-links">
+                        <a href="https://arxiv.org/pdf/2503.11439" target="_blank" class="pub-link"><i class="fa-solid fa-file-pdf"></i> PDF</a>
+                        <a href="https://github.com/shjo-april/COIN" target="_blank" class="pub-link"><i class="fa-brands fa-github"></i> Code</a>
+                        <a href="https://shjo-april.github.io/COIN/" target="_blank" class="pub-link"><i class="fa-solid fa-globe"></i> Project</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pub-card" data-animate>
+                <div class="pub-image"><span class="pub-badge conference">ICCV'25</span><img src="./assets/img/ELECT.png" alt="ELECT"></div>
+                <div class="pub-info">
+                    <div class="pub-title">Early Timestep Zero-Shot Candidate Selection for Instruction-Guided Image Editing</div>
+                    <div class="pub-authors">Joowon Kim*, Ziseok Lee*, Donghyeon Cho, <strong>Sanghyun Jo</strong>, Yeonsung Jung, Kyungsu Kim&#8224;, Eunho Yang&#8224;</div>
+                    <div class="pub-venue">IEEE/CVF International Conference on Computer Vision (ICCV), 2025.</div>
+                    <div class="pub-links">
+                        <a href="https://arxiv.org/pdf/2504.13490" target="_blank" class="pub-link"><i class="fa-solid fa-file-pdf"></i> PDF</a>
+                        <a href="https://github.com/Joow0n-Kim/ELECT" target="_blank" class="pub-link"><i class="fa-brands fa-github"></i> Code</a>
+                        <a href="https://elect-diffusion.github.io/" target="_blank" class="pub-link"><i class="fa-solid fa-globe"></i> Project</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pub-card" data-animate>
+                <div class="pub-image"><span class="pub-badge conference">ECCV'24</span><img src="./assets/img/DHR.png" alt="DHR"></div>
+                <div class="pub-info">
+                    <div class="pub-title">DHR: Dual Features-Driven Hierarchical Rebalancing in Inter-and Intra-Class Regions for Weakly-Supervised Semantic Segmentation</div>
+                    <div class="pub-authors"><strong>Sanghyun Jo</strong>, Fei Pan, In-Jae Yu, Kyungsu Kim&#8224;</div>
+                    <div class="pub-venue">European Conference on Computer Vision (ECCV), 2024.</div>
+                    <div class="pub-note">First author</div>
+                    <div class="pub-links">
+                        <a href="https://www.ecva.net/papers/eccv_2024/papers_ECCV/papers/10547.pdf" target="_blank" class="pub-link"><i class="fa-solid fa-file-pdf"></i> PDF</a>
+                        <a href="https://github.com/shjo-april/DHR" target="_blank" class="pub-link"><i class="fa-brands fa-github"></i> Code</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pub-card" data-animate>
+                <div class="pub-image"><span class="pub-badge conference">ECCV'24</span><img src="./assets/img/TTD.png" alt="TTD"></div>
+                <div class="pub-info">
+                    <div class="pub-title">TTD: Text-Tag Self-Distillation Enhancing Image-Text Alignment in CLIP to Alleviate Single Tag Bias</div>
+                    <div class="pub-authors"><strong>Sanghyun Jo*</strong>, Soohyun Ryu*, Sungyub Kim, Eunho Yang, Kyungsu Kim&#8224;</div>
+                    <div class="pub-venue">European Conference on Computer Vision (ECCV), 2024.</div>
+                    <div class="pub-note">Co-first author</div>
+                    <div class="pub-links">
+                        <a href="https://www.ecva.net/papers/eccv_2024/papers_ECCV/papers/10592.pdf" target="_blank" class="pub-link"><i class="fa-solid fa-file-pdf"></i> PDF</a>
+                        <a href="https://github.com/shjo-april/TTD" target="_blank" class="pub-link"><i class="fa-brands fa-github"></i> Code</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pub-card" data-animate>
+                <div class="pub-image"><span class="pub-badge conference">ICCV'23</span><img src="./assets/img/MARS.png" alt="MARS"></div>
+                <div class="pub-info">
+                    <div class="pub-title">MARS: Model-agnostic Biased Object Removal without Additional Supervision for Weakly-Supervised Semantic Segmentation</div>
+                    <div class="pub-authors"><strong>Sanghyun Jo</strong>, In-Jae Yu, Kyungsu Kim&#8224;</div>
+                    <div class="pub-venue">IEEE/CVF International Conference on Computer Vision (ICCV), 2023.</div>
+                    <div class="pub-note">First author</div>
+                    <div class="pub-links">
+                        <a href="https://openaccess.thecvf.com/content/ICCV2023/papers/Jo_MARS_Model-agnostic_Biased_Object_Removal_without_Additional_Supervision_for_Weakly-Supervised_ICCV_2023_paper.pdf" target="_blank" class="pub-link"><i class="fa-solid fa-file-pdf"></i> PDF</a>
+                        <a href="https://github.com/shjo-april/MARS" target="_blank" class="pub-link"><i class="fa-brands fa-github"></i> Code</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pub-card" data-animate>
+                <div class="pub-image"><span class="pub-badge preprint">Preprint</span><img src="./assets/img/RSEPM.png" alt="RSEPM"></div>
+                <div class="pub-info">
+                    <div class="pub-title">RecurSeed and EdgePredictMix: Pseudo-Label Refinement Learning for Weakly Supervised Semantic Segmentation</div>
+                    <div class="pub-authors"><strong>Sanghyun Jo</strong>, In-Jae Yu, Kyungsu Kim&#8224;</div>
+                    <div class="pub-venue">arXiv:2204.06754</div>
+                    <div class="pub-note">First author</div>
+                    <div class="pub-links">
+                        <a href="https://arxiv.org/pdf/2204.06754" target="_blank" class="pub-link"><i class="fa-solid fa-file-pdf"></i> PDF</a>
+                        <a href="https://github.com/shjo-april/RecurSeed_and_EdgePredictMix" target="_blank" class="pub-link"><i class="fa-brands fa-github"></i> Code</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pub-card" data-animate>
+                <div class="pub-image"><span class="pub-badge conference">ICIP'21</span><img src="./assets/img/PuzzleCAM.png" alt="PuzzleCAM"></div>
+                <div class="pub-info">
+                    <div class="pub-title">Puzzle-CAM: Improved localization via matching partial and full features</div>
+                    <div class="pub-authors"><strong>Sanghyun Jo</strong>, In-Jae Yu&#8224;</div>
+                    <div class="pub-venue">IEEE International Conference on Image Processing (ICIP), 2021.</div>
+                    <div class="pub-note">First author; 150+ citations</div>
+                    <div class="pub-links">
+                        <a href="https://arxiv.org/pdf/2101.11253" target="_blank" class="pub-link"><i class="fa-solid fa-file-pdf"></i> PDF</a>
+                        <a href="https://github.com/shjo-april/PuzzleCAM" target="_blank" class="pub-link"><i class="fa-brands fa-github"></i> Code</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ===== Services & Awards ===== -->
+<section class="section" id="services">
+    <div class="container">
+        <div class="section-header" data-animate>
+            <div class="section-label">// Professional Activities</div>
+            <h2 class="section-title">Services &amp; Awards</h2>
+        </div>
+        <div class="dual-grid">
+            <div class="info-block" data-animate id="awards">
+                <div class="info-block-title">Academic Services</div>
+                <div class="service-group-label">Conference Reviewing</div>
+                <div class="service-item">CVPR 2025&ndash;2026</div>
+                <div class="service-item">ICLR 2026</div>
+                <div class="service-item">ECCV 2026</div>
+                <div class="service-item">ICCV 2025</div>
+                <div class="service-item">ICIP 2022&ndash;2024</div>
+                <div class="service-item">ICPR 2024</div>
+                <div class="service-item">ICML 2022</div>
+                <div class="service-group-label">Journal Reviewing</div>
+                <div class="service-item">IJCV 2024&ndash;2026</div>
+                <div class="service-item">IEEE TCSVT 2022</div>
+            </div>
+            <div class="info-block" data-animate>
+                <div class="info-block-title">Awards</div>
+                <div class="award-item">
+                    <div class="award-title">&#127942; Outstanding Reviewer, CVPR 2025</div>
+                    <div class="award-date">Jun 2025</div>
+                    <div class="award-desc">Selected as one of 711 outstanding reviewers out of 12,593 (Top 5.6%).</div>
+                </div>
+                <div class="award-item">
+                    <div class="award-title">&#129351; 1st Place, Legal Judgment Prediction AI Challenge</div>
+                    <div class="award-date">Jun 2023 &ndash; Jul 2023</div>
+                    <div class="award-desc">1st out of 1,153 participants. Case representation and multi-branch modeling for predicting civil court rulings.</div>
+                </div>
+                <div class="award-item">
+                    <div class="award-title">&#127941; 5th Place, Synthetic Data Object Detection AI Challenge</div>
+                    <div class="award-date">May 2023 &ndash; Jun 2023</div>
+                    <div class="award-desc">5th out of 1,747 participants. Robust vehicle detector under domain shift.</div>
+                </div>
+                <div class="info-block-title" style="margin-top:1.8rem;">Talks</div>
+                <div class="talk-item">
+                    <div class="talk-title">ECCV 2024 Paper Presentation</div>
+                    <div class="talk-venue">MODULABS</div>
+                    <div class="talk-date">Dec 2024</div>
+                    <a href="https://www.youtube.com/watch?v=U5WcwfjWiJg&t=37s" target="_blank" class="talk-video"><i class="fa-brands fa-youtube"></i> Watch</a>
+                </div>
+                <div class="talk-item">
+                    <div class="talk-title">Advanced AI Developments</div>
+                    <div class="talk-venue">Yonsei University</div>
+                    <div class="talk-date">Nov 2023</div>
+                </div>
+                <div class="talk-item">
+                    <div class="talk-title">Strategies for Reducing Labeling Costs in Vision AI</div>
+                    <div class="talk-venue">Google Developer Groups (GDG)</div>
+                    <div class="talk-date">Oct 2023</div>
+                </div>
+                <div class="talk-item">
+                    <div class="talk-title">Experience Sharing Session: Vision Research</div>
+                    <div class="talk-venue">MODULABS</div>
+                    <div class="talk-date">Nov 2022</div>
+                    <a href="http://youtube.com/watch?v=uSs3xV3RIqQ&t=555s" target="_blank" class="talk-video"><i class="fa-brands fa-youtube"></i> Watch</a>
+                </div>
+                <div class="talk-item">
+                    <div class="talk-title">RSEPM Paper Presentation</div>
+                    <div class="talk-venue">MODULABS</div>
+                    <div class="talk-date">Oct 2022</div>
+                    <a href="https://www.youtube.com/watch?v=loznONvplo8&list=PLv6H9ngYdJbKcGl2VrVBr8YAClPcVrrim&index=92" target="_blank" class="talk-video"><i class="fa-brands fa-youtube"></i> Watch</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer class="footer">
+    <div class="container">
+        <p class="footer-text">&copy; 2026 Sanghyun Jo &middot; Licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">CC BY-SA 4.0</a>.</p>
+    </div>
+</footer>
+
+<script>
+// Auto-calculate stats
+document.addEventListener('DOMContentLoaded', () => {
+    // Count publication cards
+    const pubCount = document.querySelectorAll('.pub-card').length;
+    document.getElementById('pubCount').textContent = pubCount;
+
+    // Calculate years in AI (started 2017)
+    const startYear = 2017;
+    const currentYear = new Date().getFullYear();
+    const years = currentYear - startYear;
+    document.getElementById('yearsAI').textContent = years + '+';
+});
+
+
+// Scroll Animations
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const delay = entry.target.dataset.delay || 0;
+            setTimeout(() => entry.target.classList.add('animate-in'), parseInt(delay))
+            observer.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+document.querySelectorAll('[data-animate]').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
