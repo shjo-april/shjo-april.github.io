@@ -27,11 +27,11 @@
             --font-display:'Cormorant Garamond',Georgia,serif;
             --font-body:'DM Sans',-apple-system,sans-serif;
             --font-mono:'JetBrains Mono',monospace;
-            --max-width:1240px;--transition:0.4s cubic-bezier(0.16,1,0.3,1);
+            --max-width:1500px;--transition:0.4s cubic-bezier(0.16,1,0.3,1);
         }
         *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-        html{scroll-behavior:smooth;scrollbar-width:thin;scrollbar-color:var(--gold-dim) var(--bg-primary)}
-        body{font-family:var(--font-body);background:var(--bg-primary);color:var(--text-primary);line-height:1.7;font-size:16.5px;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+        html{scroll-behavior:smooth;scrollbar-width:thin;scrollbar-color:var(--gold-dim) var(--bg-primary);font-size:clamp(16px,0.55vw + 9px,18.5px)}
+        body{font-family:var(--font-body);background:var(--bg-primary);color:var(--text-primary);line-height:1.7;font-size:1.03rem;-webkit-font-smoothing:antialiased;overflow-x:hidden}
         a{color:var(--gold);text-decoration:none;transition:color 0.3s}a:hover{color:var(--gold-light)}
         ::selection{background:var(--gold-dim);color:var(--gold-light)}
 
@@ -187,6 +187,7 @@
         </div>
         <div class="topbar-links">
             <a href="#publications">Publications</a>
+            <a href="#under-review">Under Review</a>
             <a href="#services">Services</a>
             <a href="#awards">Awards</a>
         </div>
@@ -206,7 +207,7 @@
                 <div class="profile-name">Sanghyun Jo</div>
                 <div class="profile-role">Principal AI Researcher</div>
                 <div class="profile-affiliation">
-                    <a href="https://www.ogqcorp.com/" target="_blank">OGQ</a> &middot; <a href="https://aibl.snu.ac.kr/" target="_blank">SNU AIBL Lab</a>
+                    <a href="https://ogqmarket.naver.com/" target="_blank">OGQ</a> &middot; <a href="https://aibl.snu.ac.kr/" target="_blank">SNU AIBL Lab</a>
                 </div>
                 <div class="profile-email">shjo.april@gmail.com</div>
                 <div class="social-links">
@@ -214,16 +215,17 @@
                     <a href="https://openreview.net/profile?id=%7ESanghyun_Jo1" target="_blank" title="OpenReview"><i class="fa-solid fa-pen-to-square" style="font-size:0.8rem"></i></a>
                     <a href="https://github.com/shjo-april/" target="_blank" title="GitHub"><i class="fa-brands fa-github"></i></a>
                     <a href="https://www.linkedin.com/in/sanghyun-jo-b61201238/" target="_blank" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                    <a href="./index_files/CV_Sanghyun%20Jo_260517.pdf" target="_blank" title="CV"><i class="ai ai-cv"></i></a>
                 </div>
             </div>
 
             <div class="hero-bio" data-animate data-delay="100">
                 <h2 class="bio-heading">Biography</h2>
                 <p class="hero-bio-text">
-                    I lead AI research and development at <a href="https://www.ogqcorp.com/" target="_blank">OGQ</a>, where I have been building practical and interpretable machine learning systems since 2017. My primary focus is on designing models that prioritize tangible real-world impact , emphasizing robustness, transparency, and usability alongside strong empirical performance.
+                    My research focuses on reducing annotation and optimization burdens in visual learning through generative priors and lightweight interaction mechanisms. By leveraging the implicit knowledge embedded in large-scale foundation models, I explore data-efficient and training-free approaches to overcome the limitations of resource-intensive pipelines. This methodology drives my work across diverse applications, spanning weakly-supervised segmentation, multimodal alignment, and controllable generation.
                 </p>
                 <p class="hero-bio-text">
-                    Since 2021, I have been conducting research under the supervision of <a href="https://aibl.snu.ac.kr/team/pi-information" target="_blank">Prof. Kyungsu Kim</a> at the <a href="https://aibl.snu.ac.kr/" target="_blank">SNU AIBL Lab</a>. This collaboration has deeply influenced my approach to explainable AI and data-efficient learning. Integrating these insights, I strive to develop AI systems that are not only powerful but also understandable and responsible.
+                    I have been with <a href="https://ogqmarket.naver.com/" target="_blank"><strong>OGQ</strong></a> since 2017, currently serving as the <strong>Principal AI Researcher</strong> and leading industrial AI research and development to maximize tangible real-world impact. In parallel, I have been pursuing my research under the official advisement of <a href="https://aibl.snu.ac.kr/team/pi-information" target="_blank"><strong>Prof. Kyungsu Kim</strong></a> since 2021. Following his appointment at Seoul National University, I joined the <a href="https://aibl.snu.ac.kr/" target="_blank"><strong>SNU AIBL Lab</strong></a> as an <strong>Affiliated Researcher</strong>. In this role, I mentor graduate and undergraduate researchers and lead core projects, including recent works where I serve as a co-corresponding author. Integrating industrial R&amp;D leadership with academic rigor, I aim to develop machine learning systems that are both scientifically grounded and practically deployable.
                 </p>
                 <div class="hero-stats">
                     <div class="stat-item"><div class="stat-value" id="pubCount">-</div><div class="stat-label">Publications</div></div>
@@ -240,9 +242,9 @@
             </div>
             <div class="news-grid">
                 <div class="news-col">
-                    <div class="news-item" data-animate><div class="news-date">2026.05</div><div class="news-content"><strong>CoP</strong> accepted to <strong>MICCAI 2026</strong> as <strong>Early Accept</strong> (Top 9%)</div></div>
+                    <div class="news-item" data-animate><div class="news-date">2026.05</div><div class="news-content"><strong>CoP</strong> accepted to <strong>MICCAI 2026</strong> as <strong>Early Accept</strong> (Top 9% of 4,601)</div></div>
                     <div class="news-item" data-animate><div class="news-date">2026.05</div><div class="news-content"><a href="https://openreview.net/forum?id=emv2qsi3TG"><strong>ACE</strong></a> accepted to <strong>ICML 2026</strong></div></div>
-                    <div class="news-item" data-animate><div class="news-date">2026.02</div><div class="news-content"><a href="https://openreview.net/forum?id=BjElYlJKMj"><strong>TRACE</strong></a> selected as <strong>Oral</strong> at <strong>ICLR 2026</strong> (223 papers, 1.13%) <span class="news-highlight">Oral</span></div></div>
+                    <div class="news-item" data-animate><div class="news-date">2026.02</div><div class="news-content"><a href="https://openreview.net/forum?id=BjElYlJKMj"><strong>TRACE</strong></a> selected as <strong>Oral</strong> at <strong>ICLR 2026</strong> (Top 1.13%, 223 of 19,735) <span class="news-highlight">Oral</span></div></div>
                     <div class="news-item" data-animate><div class="news-date">2026.01</div><div class="news-content"><a href="https://openreview.net/forum?id=BjElYlJKMj"><strong>TRACE</strong></a> accepted to <strong>ICLR 2026</strong></div></div>
                     <div class="news-item" data-animate><div class="news-date">2025.06</div><div class="news-content">Two papers (<a href="https://shjo-april.github.io/COIN/"><strong>COIN</strong></a>, <a href="https://elect-diffusion.github.io/"><strong>ELECT</strong></a>) accepted to <strong>ICCV 2025</strong></div></div>
                 </div>
@@ -269,34 +271,12 @@
         <div class="pub-list">
 
             <div class="pub-card" data-animate>
-                <div class="pub-image"><span class="pub-badge review">Under Review</span><img src="./assets/img/EraseLoRA.png" alt="EraseLoRA"></div>
-                <div class="pub-info">
-                    <div class="pub-title">EraseLoRA: MLLM-Driven Foreground Exclusion and Background Subtype Aggregation for Dataset-Free Object Removal</div>
-                    <div class="pub-authors"><strong>Sanghyun Jo*&#8224;</strong>, Donghwan Lee*, Eunji Jung*, Seong Je Oh, Kyungsu Kim&#8224;</div>
-                    <div class="pub-venue">arXiv:2512.21545</div>
-                    <div class="pub-note">Co-first &amp; Co-corresponding author</div>
-                    <div class="pub-links"><a href="https://arxiv.org/pdf/2512.21545" target="_blank" class="pub-link"><i class="fa-solid fa-file-pdf"></i> PDF</a></div>
-                </div>
-            </div>
-
-            <div class="pub-card" data-animate>
-                <div class="pub-image"><span class="pub-badge review">Under Review</span><img src="./assets/img/ISAC.png" alt="ISAC"></div>
-                <div class="pub-info">
-                    <div class="pub-title">ISAC: Training-Free Instance-to-Semantic Attention Control for Improving Multi-Instance Generation</div>
-                    <div class="pub-authors"><strong>Sanghyun Jo*</strong>, Wooyeol Lee*, Ziseok Lee*, Kyungsu Kim&#8224;</div>
-                    <div class="pub-venue">arXiv:2505.20935</div>
-                    <div class="pub-note">Co-first author</div>
-                    <div class="pub-links"><a href="https://arxiv.org/pdf/2505.20935" target="_blank" class="pub-link"><i class="fa-solid fa-file-pdf"></i> PDF</a></div>
-                </div>
-            </div>
-
-            <div class="pub-card" data-animate>
                 <div class="pub-image"><span class="pub-badge conference">MICCAI'26</span><img src="./index_files/CoP.png" alt="CoP"></div>
                 <div class="pub-info">
                     <div class="pub-title">One Click per Cell Type Suffices: Training-free Group Interaction for Cell Instance Segmentation</div>
                     <div class="pub-authors"><strong>Sanghyun Jo</strong>, Seo Jin Lee, Seohyung Hong, Yoorim Gang, Hyeongsub Kim, Hyungseok Seo&#8224;, Kyungsu Kim&#8224;</div>
                     <div class="pub-venue">International Conference on Medical Image Computing and Computer Assisted Intervention (MICCAI), 2026.</div>
-                    <div class="pub-note">First author; Early Accept [Top 9%]</div>
+                    <div class="pub-note">First author; Early Accept, Top 9% (out of 4,601 submissions)</div>
                 </div>
             </div>
 
@@ -306,6 +286,7 @@
                     <div class="pub-title">On the Collapse of Generative Paths: A Criterion and Correction for Diffusion Steering</div>
                     <div class="pub-authors">Ziseok Lee*, Minyeong Hwang*, <strong>Sanghyun Jo</strong>, Wooyeol Lee, Jihyung Ko, Young Bin Park, Jae-Mun Choi, Eunho Yang&#8224;, Kyungsu Kim&#8224;</div>
                     <div class="pub-venue">International Conference on Machine Learning (ICML), 2026.</div>
+                    <div class="pub-note">Co-author; Acceptance Rate 26.6% (6,352 of 23,918 submissions)</div>
                     <div class="pub-links">
                         <a href="https://openreview.net/pdf?id=emv2qsi3TG" target="_blank" class="pub-link"><i class="fa-solid fa-file-pdf"></i> PDF</a>
                         <a href="https://openreview.net/forum?id=emv2qsi3TG" target="_blank" class="pub-link"><i class="fa-solid fa-pen-to-square"></i> OpenReview</a>
@@ -320,7 +301,7 @@
                     <div class="pub-title">TRACE: Your Diffusion Model is Secretly an Instance Edge Detector</div>
                     <div class="pub-authors"><strong>Sanghyun Jo*</strong>, Ziseok Lee*, Wooyeol Lee, Jonghyun Choi, Jaesik Park&#8224;, Kyungsu Kim&#8224;</div>
                     <div class="pub-venue">International Conference on Learning Representations (ICLR), 2026.</div>
-                    <div class="pub-note">Co-first author; Oral [Top 1.13%]</div>
+                    <div class="pub-note">Co-first author; Oral, Top 1.13% (223 of 19,735 submissions)</div>
                     <div class="pub-links">
                         <a href="https://openreview.net/pdf?id=BjElYlJKMj" target="_blank" class="pub-link"><i class="fa-solid fa-file-pdf"></i> PDF</a>
                         <a href="https://openreview.net/forum?id=BjElYlJKMj" target="_blank" class="pub-link"><i class="fa-solid fa-pen-to-square"></i> OpenReview</a>
@@ -338,7 +319,7 @@
                     <div class="pub-title">COIN: Confidence Score-Guided Distillation for Annotation-Free Cell Segmentation</div>
                     <div class="pub-authors"><strong>Sanghyun Jo*</strong>, Seo Jin Lee*, Seungwoo Lee, Seohyung Hong, Hyungseok Seo&#8224;, Kyungsu Kim&#8224;</div>
                     <div class="pub-venue">IEEE/CVF International Conference on Computer Vision (ICCV), 2025.</div>
-                    <div class="pub-note">Co-first author</div>
+                    <div class="pub-note">Co-first author; Acceptance Rate 24.0% (2,698 of 11,239 submissions)</div>
                     <div class="pub-links">
                         <a href="https://arxiv.org/pdf/2503.11439" target="_blank" class="pub-link"><i class="fa-solid fa-file-pdf"></i> PDF</a>
                         <a href="https://github.com/shjo-april/COIN" target="_blank" class="pub-link"><i class="fa-brands fa-github"></i> Code</a>
@@ -353,6 +334,7 @@
                     <div class="pub-title">Early Timestep Zero-Shot Candidate Selection for Instruction-Guided Image Editing</div>
                     <div class="pub-authors">Joowon Kim*, Ziseok Lee*, Donghyeon Cho, <strong>Sanghyun Jo</strong>, Yeonsung Jung, Kyungsu Kim&#8224;, Eunho Yang&#8224;</div>
                     <div class="pub-venue">IEEE/CVF International Conference on Computer Vision (ICCV), 2025.</div>
+                    <div class="pub-note">Co-author; Acceptance Rate 24.0% (2,698 of 11,239 submissions)</div>
                     <div class="pub-links">
                         <a href="https://arxiv.org/pdf/2504.13490" target="_blank" class="pub-link"><i class="fa-solid fa-file-pdf"></i> PDF</a>
                         <a href="https://github.com/Joow0n-Kim/ELECT" target="_blank" class="pub-link"><i class="fa-brands fa-github"></i> Code</a>
@@ -367,7 +349,7 @@
                     <div class="pub-title">DHR: Dual Features-Driven Hierarchical Rebalancing in Inter-and Intra-Class Regions for Weakly-Supervised Semantic Segmentation</div>
                     <div class="pub-authors"><strong>Sanghyun Jo</strong>, Fei Pan, In-Jae Yu, Kyungsu Kim&#8224;</div>
                     <div class="pub-venue">European Conference on Computer Vision (ECCV), 2024.</div>
-                    <div class="pub-note">First author</div>
+                    <div class="pub-note">First author; Acceptance Rate 27.9% (2,395 of 8,585 submissions)</div>
                     <div class="pub-links">
                         <a href="https://www.ecva.net/papers/eccv_2024/papers_ECCV/papers/10547.pdf" target="_blank" class="pub-link"><i class="fa-solid fa-file-pdf"></i> PDF</a>
                         <a href="https://github.com/shjo-april/DHR" target="_blank" class="pub-link"><i class="fa-brands fa-github"></i> Code</a>
@@ -381,7 +363,7 @@
                     <div class="pub-title">TTD: Text-Tag Self-Distillation Enhancing Image-Text Alignment in CLIP to Alleviate Single Tag Bias</div>
                     <div class="pub-authors"><strong>Sanghyun Jo*</strong>, Soohyun Ryu*, Sungyub Kim, Eunho Yang, Kyungsu Kim&#8224;</div>
                     <div class="pub-venue">European Conference on Computer Vision (ECCV), 2024.</div>
-                    <div class="pub-note">Co-first author</div>
+                    <div class="pub-note">Co-first author; Acceptance Rate 27.9% (2,395 of 8,585 submissions)</div>
                     <div class="pub-links">
                         <a href="https://www.ecva.net/papers/eccv_2024/papers_ECCV/papers/10592.pdf" target="_blank" class="pub-link"><i class="fa-solid fa-file-pdf"></i> PDF</a>
                         <a href="https://github.com/shjo-april/TTD" target="_blank" class="pub-link"><i class="fa-brands fa-github"></i> Code</a>
@@ -395,7 +377,7 @@
                     <div class="pub-title">MARS: Model-agnostic Biased Object Removal without Additional Supervision for Weakly-Supervised Semantic Segmentation</div>
                     <div class="pub-authors"><strong>Sanghyun Jo</strong>, In-Jae Yu, Kyungsu Kim&#8224;</div>
                     <div class="pub-venue">IEEE/CVF International Conference on Computer Vision (ICCV), 2023.</div>
-                    <div class="pub-note">First author</div>
+                    <div class="pub-note">First author; Acceptance Rate 26.7% (2,160 of 8,088 submissions)</div>
                     <div class="pub-links">
                         <a href="https://openaccess.thecvf.com/content/ICCV2023/papers/Jo_MARS_Model-agnostic_Biased_Object_Removal_without_Additional_Supervision_for_Weakly-Supervised_ICCV_2023_paper.pdf" target="_blank" class="pub-link"><i class="fa-solid fa-file-pdf"></i> PDF</a>
                         <a href="https://github.com/shjo-april/MARS" target="_blank" class="pub-link"><i class="fa-brands fa-github"></i> Code</a>
@@ -428,6 +410,42 @@
                         <a href="https://arxiv.org/pdf/2101.11253" target="_blank" class="pub-link"><i class="fa-solid fa-file-pdf"></i> PDF</a>
                         <a href="https://github.com/shjo-april/PuzzleCAM" target="_blank" class="pub-link"><i class="fa-brands fa-github"></i> Code</a>
                     </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ===== Under Review ===== -->
+<section class="section" id="under-review">
+    <div class="container">
+        <div class="section-header" data-animate>
+            <h2 class="section-title">Under Review</h2>
+        </div>
+        <div class="pub-list">
+
+            <div class="pub-card" data-animate>
+                <div class="pub-image"><span class="pub-badge review">Under Review</span><img src="./assets/img/EraseLoRA.png" alt="EraseLoRA"></div>
+                <div class="pub-info">
+                    <div class="pub-title">EraseLoRA: MLLM-Driven Foreground Exclusion and Background Subtype Aggregation for Dataset-Free Object Removal</div>
+                    <div class="pub-authors"><strong>Sanghyun Jo*&#8224;</strong>, Donghwan Lee*, Eunji Jung*, Seong Je Oh, Kyungsu Kim&#8224;</div>
+                    <div class="pub-venue">arXiv:2512.21545</div>
+                    <div class="pub-note">Co-first &amp; Co-corresponding author</div>
+                    <div class="pub-links"><a href="https://arxiv.org/pdf/2512.21545" target="_blank" class="pub-link"><i class="fa-solid fa-file-pdf"></i> PDF</a></div>
+                </div>
+            </div>
+
+            <div class="pub-card" data-animate>
+                <div class="pub-image"><span class="pub-badge review">Under Review</span><img src="./assets/img/ISAC.png" alt="ISAC"></div>
+                <div class="pub-info">
+                    <div class="pub-title">ISAC: Training-Free Instance-to-Semantic Attention Control for Improving Multi-Instance Generation</div>
+                    <div class="pub-authors"><strong>Sanghyun Jo*</strong>, Wooyeol Lee*, Ziseok Lee*, Kyungsu Kim&#8224;</div>
+                    <div class="pub-venue">arXiv:2505.20935</div>
+                    <div class="pub-note">Co-first author</div>
+                    <div class="pub-links"><a href="https://arxiv.org/pdf/2505.20935" target="_blank" class="pub-link"><i class="fa-solid fa-file-pdf"></i> PDF</a></div>
                 </div>
             </div>
 
@@ -477,7 +495,7 @@
                     <div class="award-date">May 2023 &ndash; Jun 2023</div>
                     <div class="award-desc">5th out of 1,747 participants. Robust vehicle detector under domain shift.</div>
                 </div>
-                <div class="info-block-title" style="margin-top:1.8rem;">Talks</div>
+                <div class="info-block-title" style="margin-top:1.8rem;">Invited Talks</div>
                 <div class="talk-item">
                     <div class="talk-title">TRACE Oral Presentation</div>
                     <div class="talk-venue">ICLR 2026, Oral Session 5B (Video and Scene Generation)</div>
