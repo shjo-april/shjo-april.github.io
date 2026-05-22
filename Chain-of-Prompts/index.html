@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" type="image/svg+xml" href="./static/images/star.svg">
+    <link rel="apple-touch-icon" href="./static/images/star.svg">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chain-of-Prompts: One Click per Cell Type Suffices</title>
+    <meta name="description" content="Chain-of-Prompts (CoP): Training-free Group Interaction for Cell Instance Segmentation. MICCAI 2026 Early Accept (Top 9%).">
+    <meta name="keywords" content="Chain-of-Prompts, CoP, cell instance segmentation, SAM, interactive segmentation, group prompting, training-free, MICCAI 2026, histopathology">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Chain-of-Prompts: MICCAI 2026 Early Accept (Top 9%)">
+    <meta property="og:description" content="One Click per Cell Type Suffices: Training-free Group Interaction for Cell Instance Segmentation">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://shjo-april.github.io/Chain-of-Prompts">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400&family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <!-- Academicons & Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.4/css/academicons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <link rel="stylesheet" href="static/css/style.css">
+</head>
+<body>
+
+<!-- ===== Floating Nav ===== -->
+<nav class="floating-nav" id="floatingNav">
+    <div class="nav-inner">
+        <span class="nav-logo" style="letter-spacing:1px;">Chain-of-Prompts</span>
+        <div class="nav-links">
+            <a href="#abstract">Abstract</a>
+            <a href="#method">Method</a>
+            <a href="#results">Results</a>
+            <a href="#video">Video</a>
+            <a href="#bibtex">BibTeX</a>
+        </div>
+    </div>
+</nav>
+
+<!-- ===== Hero Section ===== -->
+<header class="hero">
+    <div class="hero-particles" id="particles"></div>
+    <div class="hero-gradient"></div>
+    <div class="hero-content">
+        <!-- Early Accept Badge -->
+        <div class="oral-badge" data-animate="fade-down">
+            <div class="oral-badge-glow"></div>
+            <div class="oral-badge-inner">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                </svg>
+                <span>MICCAI 2026 Early Accept (Top 9%)</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                </svg>
+            </div>
+        </div>
+
+        <h1 class="hero-title" data-animate="fade-up">
+            <span class="title-trace" style="font-size:clamp(44px,6vw,84px);letter-spacing:2px;">Chain-of-Prompts</span>
+            <span class="title-separator"></span>
+            <span class="title-sub">One Click per Cell Type Suffices:<br>Training-free Group Interaction for Cell Instance Segmentation</span>
+        </h1>
+
+        <!-- Authors -->
+        <div class="authors" data-animate="fade-up" data-delay="200">
+            <div class="author-row">
+                <span class="author"><a href="https://shjo-april.github.io/" target="_blank">Sanghyun Jo</a><sup>1,2</sup></span>
+                <span class="author">Seo Jin Lee<sup>2</sup></span>
+                <span class="author">Seohyung Hong<sup>2</sup></span>
+                <span class="author">Yoorim Gang<sup>2</sup></span>
+                <span class="author">Hyeongsub Kim<sup>2,3</sup></span>
+                <span class="author">Hyungseok Seo<sup>2†</sup></span>
+                <span class="author"><a href="https://aibl.snu.ac.kr/team/pi-information" target="_blank">Kyungsu Kim</a><sup>2†</sup></span>
+            </div>
+            <div class="affiliation-row">
+                <span><sup>1</sup>OGQ</span>
+                <span><sup>2</sup>Seoul National University</span>
+                <span><sup>3</sup>LG CNS</span>
+            </div>
+            <div class="author-note">
+                <span><sup>†</sup>Corresponding authors</span>
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="hero-actions" data-animate="fade-up" data-delay="300">
+            <a href="javascript:void(0)" class="btn btn-primary btn-disabled" aria-disabled="true" tabindex="-1" title="Coming soon (MICCAI 2026 release window)">
+                <i class="fa-solid fa-file-pdf"></i>
+                <span>Paper<br><small>(Coming Soon)</small></span>
+            </a>
+            <a href="./static/data/Supplementary.mp4" target="_blank" class="btn btn-secondary">
+                <i class="fa-solid fa-film"></i>
+                <span>Supplementary</span>
+            </a>
+            <a href="javascript:void(0)" class="btn btn-secondary btn-disabled" aria-disabled="true" tabindex="-1" title="Coming soon">
+                <i class="fa-brands fa-github"></i>
+                <span>Code<br><small>(Coming Soon)</small></span>
+            </a>
+            <a href="javascript:void(0)" class="btn btn-secondary btn-disabled" aria-disabled="true" tabindex="-1" title="Coming soon">
+                <i class="fa-solid fa-person-chalkboard"></i>
+                <span>Slides<br><small>(Coming Soon)</small></span>
+            </a>
+            <a href="javascript:void(0)" class="btn btn-secondary btn-disabled" aria-disabled="true" tabindex="-1" title="Coming soon">
+                <i class="fa-solid fa-image"></i>
+                <span>Poster<br><small>(Coming Soon)</small></span>
+            </a>
+        </div>
+    </div>
+
+    <div class="hero-scroll-hint">
+        <span>Scroll to explore</span>
+        <div class="scroll-arrow"></div>
+    </div>
+</header>
+
+<!-- ===== TL;DR / Key Insight ===== -->
+<section class="section tldr-section">
+    <div class="container">
+        <div class="tldr-card" data-animate="fade-up">
+            <div class="tldr-icon">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                </svg>
+            </div>
+            <h2 class="tldr-label">Key Insight</h2>
+            <p class="tldr-text">
+                SAM's frozen image encoder already <strong>clusters same-type cells</strong> in its feature space before any prompt is given.
+                CoP exploits this property to propagate <strong>a single click per cell type</strong> to all instances of that type, retaining
+                <strong>92.7% of per-instance performance with 81.7&times; fewer prompts</strong>, fully training-free.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Motivation (Teaser): the problem ===== -->
+<section class="section section-dark">
+    <div class="container">
+        <h2 class="section-title" data-animate="fade-up">
+            Motivation
+        </h2>
+        <p class="section-lead" data-animate="fade-up" style="text-align:center;max-width:880px;margin:-12px auto 32px;font-size:18px;color:var(--text-secondary);line-height:1.6;">
+            Cell-specific models break on unseen cell types, while interactive foundation models such as SAM3
+            require one click per instance. <strong>Neither path scales to histopathology images with hundreds of cells.</strong>
+        </p>
+        <div class="method-overview" data-animate="fade-up">
+            <div class="method-figure">
+                <div class="figure-frame-glow">
+                    <div class="figure-frame">
+                        <img src="static/images/teaser.png" alt="Pretrained models fail on unseen cell types; SAM3 needs per-instance clicks">
+                    </div>
+                </div>
+                <p class="figure-caption">
+                    <strong>Existing pipelines force a hard trade-off.</strong>
+                    Cell-specific baselines and open-vocabulary detectors miss out-of-distribution cell types (red dashed boxes),
+                    and SAM3 generalizes only by clicking every cell (<em>e.g.</em>, 245 clicks per image).
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Our Approach (Highlight): the solution ===== -->
+<section class="section">
+    <div class="container">
+        <h2 class="section-title" data-animate="fade-up">
+            Our Approach: Group Prompting
+        </h2>
+        <p class="section-lead" data-animate="fade-up" style="text-align:center;max-width:880px;margin:-12px auto 32px;font-size:18px;color:var(--text-secondary);line-height:1.6;">
+            We replace per-instance clicking, the long-standing <em>O(N)</em> bottleneck, with
+            <strong style="color:var(--gold);">Group Prompting</strong>: one click per cell type, recursively propagated across all same-type cells.
+        </p>
+        <div class="observation-grid" data-animate="fade-up">
+            <div class="obs-figure">
+                <div class="figure-frame-glow">
+                    <div class="figure-frame figure-frame-padded">
+                        <img src="static/images/highlight.png" alt="Group Prompting: from 245 clicks to 3">
+                    </div>
+                </div>
+                <p class="figure-caption">
+                    <strong>From 245 Clicks to 3.</strong>
+                    With just <strong>3 clicks</strong> (one per cell type), CoP reaches
+                    <strong>92.7% of the per-instance upper bound</strong> with <strong>81.7&times; fewer prompts</strong>.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Abstract ===== -->
+<section class="section section-dark" id="abstract">
+    <div class="container">
+        <h2 class="section-title" data-animate="fade-up">
+            <span class="section-number">01</span>
+            Abstract
+        </h2>
+        <div class="abstract-content" data-animate="fade-up">
+            <p>
+                Cell instance segmentation models trained on cell-specific datasets suffer severe performance drops on out-of-distribution cell types,
+                while interactive foundation models overcome this through per-instance prompting at a cost that is prohibitively expensive
+                for histopathology images containing hundreds to thousands of densely packed instances.
+            </p>
+            <p>
+                We introduce <em>Group Prompting</em>, a new paradigm that shifts interactive segmentation from per-instance <em>O(N)</em>
+                to per-type <em>O(T)</em>, where a single click per cell type suffices to segment all instances of that type.
+                Our key observation is that the frozen image encoder of the Segment Anything Model (SAM) already clusters same-type cells
+                in its feature space before any prompt is given. Exploiting this property, we propose <strong>Chain-of-Prompts (CoP)</strong>,
+                a training-free framework that recursively expands a single user click by (1) identifying reliable same-type locations through
+                non-parametric gating of multi-scale encoder features, and (2) selecting the most spatially distant reliable point as the next
+                prompt to maximize coverage.
+            </p>
+            <p>
+                On three cell-type-annotated benchmarks, CoP with one click per type retains over <strong>90%</strong> of per-instance performance
+                and surpasses fully-supervised methods without any additional training. On four morphologically homogeneous benchmarks,
+                a single click retains over <strong>99%</strong>.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Key Contributions ===== -->
+<section class="section">
+    <div class="container">
+        <h2 class="section-title" data-animate="fade-up">
+            <span class="section-number">02</span>
+            Contributions
+        </h2>
+        <div class="contributions-grid">
+            <div class="contrib-card" data-animate="fade-up" data-delay="0">
+                <div class="contrib-number">&#9312;</div>
+                <h3>Group Prompting</h3>
+                <p>Shifts interactive segmentation from per-instance <em>O(N)</em> to per-type <em>O(T)</em> interaction, reducing annotation cost from the number of cells to the number of cell types while remaining robust to out-of-distribution types without cell-specific training.</p>
+            </div>
+            <div class="contrib-card" data-animate="fade-up" data-delay="100">
+                <div class="contrib-number">&#9313;</div>
+                <h3>Chain-of-Prompts</h3>
+                <p>A training-free framework that recursively expands prompt coverage by combining <em>Hierarchical Similarity Gating</em> (HSG) and <em>Farthest Prompt Recursion</em> (FPR), maintaining precision <strong>&geq; 96%</strong> at every iteration.</p>
+            </div>
+            <div class="contrib-card" data-animate="fade-up" data-delay="200">
+                <div class="contrib-number">&#9314;</div>
+                <h3>Generalization on 7 Benchmarks</h3>
+                <p>Retains over <strong>90%</strong> of per-instance performance on cell-type-annotated datasets and over <strong>99%</strong> on morphologically homogeneous datasets, outperforming fully-supervised methods that require complete mask annotations.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Method Overview ===== -->
+<section class="section section-dark" id="method">
+    <div class="container">
+        <h2 class="section-title" data-animate="fade-up">
+            <span class="section-number">03</span>
+            Method
+        </h2>
+
+        <div class="method-overview" data-animate="fade-up">
+            <div class="method-figure">
+                <div class="figure-frame-glow">
+                    <div class="figure-frame">
+                        <img src="static/images/method_overview.png" alt="CoP Method Overview">
+                    </div>
+                </div>
+                <p class="figure-caption">
+                    <strong>Two Steps, Zero Training: Identify Reliable Cells, Then Expand.</strong>
+                    A frozen SAM encoder extracts high- and low-resolution feature maps once per image.
+                    HSG turns each user click into a reliable point set via hierarchical similarity gating + connected-component labeling.
+                    FPR then iteratively re-prompts the farthest uncovered point until no new cells appear, decoding the converged set into instance masks.
+                </p>
+            </div>
+        </div>
+
+        <!-- Method Steps -->
+        <div class="method-steps">
+            <div class="method-step" data-animate="fade-up">
+                <div class="step-connector"></div>
+                <div class="step-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 12h18M12 3v18"/></svg>
+                </div>
+                <div class="step-content">
+                    <h3>Hierarchical Similarity Gating (HSG)</h3>
+                    <p>A single feature scale cannot achieve spatial precision and type selectivity simultaneously. HSG element-wise gates SAM's high-resolution and low-resolution features so the product suppresses tissue-level false activations of <em>F<sub>h</sub></em> while preserving its sharp localization, then non-parametrically thresholds at &mu;+&sigma; and applies connected-component labeling to extract reliable point centroids.</p>
+                </div>
+            </div>
+            <div class="method-step" data-animate="fade-up">
+                <div class="step-connector"></div>
+                <div class="step-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v6m0 10v6M4.22 4.22l4.24 4.24m7.08 7.08l4.24 4.24M1 12h6m10 0h6M4.22 19.78l4.24-4.24m7.08-7.08l4.24-4.24"/></svg>
+                </div>
+                <div class="step-content">
+                    <h3>Farthest Prompt Recursion (FPR)</h3>
+                    <p>Feature similarity decays across distant tissue regions, so a single prompt under-covers far-away cells. FPR selects the reliable point that is farthest (in image coordinates) from all previous prompts, feeds it back into HSG, and merges newly discovered points into the reliable set. The cycle repeats until convergence, ensuring whole-image coverage without feature drift.</p>
+                </div>
+            </div>
+            <div class="method-step" data-animate="fade-up">
+                <div class="step-connector"></div>
+                <div class="step-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                </div>
+                <div class="step-content">
+                    <h3>Training-Free Mask Decoding</h3>
+                    <p>Each point in the converged reliable set is decoded into an instance mask via SAM's frozen decoder; overlapping predictions are resolved by non-maximum suppression at IoU&nbsp;&gt;&nbsp;0.5. The entire pipeline operates in feature space without any backpropagation or task-specific training.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Results ===== -->
+<section class="section section-dark" id="results">
+    <div class="container">
+        <h2 class="section-title" data-animate="fade-up">
+            <span class="section-number">04</span>
+            Results
+        </h2>
+
+        <!-- Highlight Numbers -->
+        <div class="results-highlights" data-animate="fade-up">
+            <div class="highlight-card">
+                <div class="highlight-value">92.7%</div>
+                <div class="highlight-metric">of Upper Bound</div>
+                <div class="highlight-desc">vs. per-instance SAM3<br>on CoNIC</div>
+            </div>
+            <div class="highlight-card">
+                <div class="highlight-value">81.7&times;</div>
+                <div class="highlight-metric">Fewer Prompts</div>
+                <div class="highlight-desc">245 clicks &rarr; 3 clicks<br>group prompting</div>
+            </div>
+            <div class="highlight-card">
+                <div class="highlight-value">&gt;90%</div>
+                <div class="highlight-metric">Retention</div>
+                <div class="highlight-desc">on 3 cell-type-annotated<br>benchmarks</div>
+            </div>
+            <div class="highlight-card">
+                <div class="highlight-value">&gt;99%</div>
+                <div class="highlight-metric">Retention</div>
+                <div class="highlight-desc">on 4 morphologically<br>homogeneous benchmarks</div>
+            </div>
+        </div>
+
+        <!-- Main Tables -->
+        <div class="result-block full-width" data-animate="fade-up">
+            <h3>One Click per Type Beats Fully-Supervised Models</h3>
+            <div class="figure-frame-glow">
+                <div class="figure-frame figure-frame-padded">
+                    <img src="static/images/table_typed.png" alt="Table 1: quantitative comparison on cell-type-annotated benchmarks">
+                </div>
+            </div>
+            <p class="figure-caption">
+                <strong>Cell-Type-Annotated Benchmarks (CoNIC, CoNSeP, GlaS).</strong>
+                Prompt types: &Tau; text, &Vscr; visual, &Mscr; mask supervision, &Pscr;<sub>N</sub> per-instance points, &Pscr;<sub>T</sub> per-type points.
+                With only one click per cell type, CoP retains <strong>&geq; 90%</strong> of per-instance performance on every benchmark
+                and outperforms fully-supervised methods that require complete mask annotations.
+            </p>
+        </div>
+
+        <div class="result-block full-width" data-animate="fade-up">
+            <h3>&gt;99% Retention from a Single Click</h3>
+            <div class="figure-frame-glow">
+                <div class="figure-frame figure-frame-padded">
+                    <img src="static/images/table_homog.png" alt="Table 2: quantitative results on benchmarks without cell-type annotations">
+                </div>
+            </div>
+            <p class="figure-caption">
+                <strong>Morphologically Homogeneous Benchmarks (MoNuSeg, TNBC, CryoNuSeg, CPM-17).</strong>
+                When cells within an image share similar morphology, CoP segments every instance from a single click
+                and retains <strong>&gt; 99%</strong> of per-instance performance.
+            </p>
+        </div>
+
+        <!-- Qualitative -->
+        <div class="result-block full-width" data-animate="fade-up">
+            <h3>CoP Recovers Cells That Supervised Models Miss</h3>
+            <div class="figure-frame-glow">
+                <div class="figure-frame figure-frame-padded">
+                    <img src="static/images/qualitative.png" alt="Qualitative comparison on CoNIC">
+                </div>
+            </div>
+            <p class="figure-caption">
+                <strong>Qualitative comparison on CoNIC.</strong>
+                Fully-supervised baselines drop entire cell populations that fall outside their training distribution (red dashed boxes),
+                while CoP discovers them from a single click per type.
+            </p>
+        </div>
+
+        <!-- UMAP -->
+        <div class="result-block full-width" data-animate="fade-up">
+            <h3>Why It Works: SAM Already Clusters Same-Type Cells</h3>
+            <div class="figure-frame-glow">
+                <div class="figure-frame figure-frame-padded">
+                    <img src="static/images/umap.png" alt="UMAP of SAM features">
+                </div>
+            </div>
+            <p class="figure-caption">
+                <strong>UMAP of SAM's frozen encoder features at GT centroids.</strong>
+                (a) <em>F<sub>h</sub></em> mixes cell types; (b) <em>F<sub>l</sub></em> groups same-type cells without any training.
+                CoP exploits this latent clustering: no fine-tuning, no labels, just the right propagation rule.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Supplementary Video ===== -->
+<section class="section" id="video">
+    <div class="container">
+        <h2 class="section-title" data-animate="fade-up">
+            <span class="section-number">05</span>
+            Supplementary Video
+        </h2>
+        <div class="method-overview" data-animate="fade-up">
+            <div class="method-figure">
+                <div class="figure-frame-glow">
+                    <div class="figure-frame">
+                        <video controls preload="metadata" style="width:100%;height:auto;display:block;background:#000;">
+                            <source src="./static/data/Supplementary.mp4" type="video/mp4">
+                            Your browser does not support the HTML5 video tag. <a href="./static/data/Supplementary.mp4">Download the video</a>.
+                        </video>
+                    </div>
+                </div>
+                <p class="figure-caption">
+                    <strong>One Click, Hundreds of Cells.</strong>
+                    Watch CoP recursively expand a single user click into every same-type cell in the image.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== BibTeX ===== -->
+<section class="section section-dark" id="bibtex">
+    <div class="container">
+        <h2 class="section-title" data-animate="fade-up">
+            <span class="section-number">06</span>
+            Citation
+        </h2>
+        <div class="bibtex-block" data-animate="fade-up">
+            <div class="bibtex-header">
+                <span>BibTeX</span>
+                <button class="copy-btn" onclick="copyBibtex()">
+                    <i class="fa-regular fa-copy"></i>
+                    <span>Copy</span>
+                </button>
+            </div>
+            <pre class="bibtex-code" id="bibtexCode">@inproceedings{jo2026cop,
+  title     = {One Click per Cell Type Suffices: Training-free Group Interaction for Cell Instance Segmentation},
+  author    = {Jo, Sanghyun and Lee, Seo Jin and Hong, Seohyung and Gang, Yoorim and Kim, Hyeongsub and Seo, Hyungseok and Kim, Kyungsu},
+  booktitle = {International Conference on Medical Image Computing and Computer Assisted Intervention (MICCAI)},
+  year      = {2026},
+  note      = {Early Accept (Top 9\%)}
+}</pre>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Footer ===== -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-left">
+                <span class="footer-logo" style="letter-spacing:1px;">Chain-of-Prompts</span>
+                <span class="footer-venue">MICCAI 2026 &middot; Early Accept</span>
+            </div>
+            <div class="footer-right">
+                <p>Template inspired by <a href="https://nerfies.github.io" target="_blank">Nerfies</a>. Licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">CC BY-SA 4.0</a>.</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script>
+// ===== Copy BibTeX =====
+function copyBibtex() {
+    const text = document.getElementById('bibtexCode').textContent;
+    navigator.clipboard.writeText(text).then(() => {
+        const btn = document.querySelector('.copy-btn span');
+        btn.textContent = 'Copied!';
+        setTimeout(() => btn.textContent = 'Copy', 2000);
+    });
+}
+
+// ===== Floating Nav =====
+const nav = document.getElementById('floatingNav');
+window.addEventListener('scroll', () => {
+    nav.classList.toggle('visible', window.scrollY > 600);
+});
+
+// ===== Scroll Animations =====
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const delay = entry.target.dataset.delay || 0;
+            setTimeout(() => {
+                entry.target.classList.add('animate-in');
+            }, parseInt(delay));
+            observer.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+document.querySelectorAll('[data-animate]').forEach(el => observer.observe(el));
+
+// ===== Particle Background =====
+(function() {
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    const container = document.getElementById('particles');
+    container.appendChild(canvas);
+
+    let w, h, particles = [];
+
+    function resize() {
+        w = canvas.width = container.offsetWidth;
+        h = canvas.height = container.offsetHeight;
+    }
+
+    function createParticles() {
+        particles = [];
+        const count = Math.floor((w * h) / 15000);
+        for (let i = 0; i < count; i++) {
+            particles.push({
+                x: Math.random() * w,
+                y: Math.random() * h,
+                vx: (Math.random() - 0.5) * 0.3,
+                vy: (Math.random() - 0.5) * 0.3,
+                r: Math.random() * 1.5 + 0.5,
+                o: Math.random() * 0.3 + 0.1
+            });
+        }
+    }
+
+    function draw() {
+        ctx.clearRect(0, 0, w, h);
+        particles.forEach(p => {
+            p.x += p.vx;
+            p.y += p.vy;
+            if (p.x < 0 || p.x > w) p.vx *= -1;
+            if (p.y < 0 || p.y > h) p.vy *= -1;
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(212, 175, 55, ${p.o})`;
+            ctx.fill();
+        });
+
+        // Draw connections
+        for (let i = 0; i < particles.length; i++) {
+            for (let j = i + 1; j < particles.length; j++) {
+                const dx = particles[i].x - particles[j].x;
+                const dy = particles[i].y - particles[j].y;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                if (dist < 120) {
+                    ctx.beginPath();
+                    ctx.moveTo(particles[i].x, particles[i].y);
+                    ctx.lineTo(particles[j].x, particles[j].y);
+                    ctx.strokeStyle = `rgba(212, 175, 55, ${0.06 * (1 - dist / 120)})`;
+                    ctx.lineWidth = 0.5;
+                    ctx.stroke();
+                }
+            }
+        }
+        requestAnimationFrame(draw);
+    }
+
+    resize();
+    createParticles();
+    draw();
+    window.addEventListener('resize', () => { resize(); createParticles(); });
+})();
+</script>
+
+</body>
+</html>
