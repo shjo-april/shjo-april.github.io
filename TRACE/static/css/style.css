@@ -41,8 +41,8 @@
     --font-body: 'Source Sans 3', -apple-system, sans-serif;
     --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
 
-    --container-width: 980px;
-    --container-wide: 1100px;
+    --container-width: 1180px;
+    --container-wide: 1320px;
     --section-gap: 120px;
 
     --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
@@ -63,7 +63,8 @@ body {
     background: var(--bg-primary);
     color: var(--text-primary);
     line-height: 1.7;
-    font-size: 17px;
+    /* Scales 17px on small screens to ~20px on wide displays. */
+    font-size: clamp(17px, 0.45vw + 12px, 20px);
     overflow-x: hidden;
 }
 
@@ -303,12 +304,12 @@ img { max-width: 100%; height: auto; display: block; }
 
 .tldr-icon { display: inline-flex; align-items: center; justify-content: center; width: 56px; height: 56px; border-radius: 16px; background: rgba(212, 175, 55, 0.08); color: var(--gold); margin-bottom: 16px; }
 .tldr-label { font-family: var(--font-mono); font-size: 11px; font-weight: 500; color: var(--gold); letter-spacing: 2.5px; text-transform: uppercase; margin-bottom: 20px; }
-.tldr-text { font-size: 19px; line-height: 1.85; color: var(--text-secondary); max-width: 720px; margin: 0 auto; }
+.tldr-text { font-size: clamp(19px, 0.5vw + 13px, 22px); line-height: 1.85; color: var(--text-secondary); max-width: 820px; margin: 0 auto; }
 .tldr-text strong { color: var(--text-primary); font-weight: 600; }
 
 /* ===== Abstract ===== */
-.abstract-content { max-width: 780px; }
-.abstract-content p { font-size: 17px; line-height: 1.9; color: var(--text-secondary); margin-bottom: 22px; }
+.abstract-content { max-width: 880px; }
+.abstract-content p { font-size: clamp(17px, 0.45vw + 12px, 20px); line-height: 1.9; color: var(--text-secondary); margin-bottom: 22px; }
 .abstract-content p:last-child { margin-bottom: 0; }
 .abstract-content strong { color: var(--text-primary); font-weight: 600; }
 .abstract-content em { color: var(--gold); font-style: normal; }
@@ -329,8 +330,8 @@ img { max-width: 100%; height: auto; display: block; }
 .contrib-card:hover { border-color: var(--border-gold); transform: translateY(-4px); box-shadow: 0 16px 48px rgba(0, 0, 0, 0.35), 0 0 0 1px var(--border-gold); }
 .contrib-card:hover::before { opacity: 1; }
 .contrib-number { font-size: 28px; margin-bottom: 16px; color: var(--gold); }
-.contrib-card h3 { font-family: var(--font-display); font-size: 20px; font-weight: 600; margin-bottom: 12px; color: var(--text-primary); }
-.contrib-card p { font-size: 15px; line-height: 1.75; color: var(--text-secondary); }
+.contrib-card h3 { font-family: var(--font-display); font-size: clamp(20px, 0.45vw + 14.5px, 23px); font-weight: 600; margin-bottom: 12px; color: var(--text-primary); }
+.contrib-card p { font-size: clamp(15px, 0.4vw + 11px, 17.5px); line-height: 1.75; color: var(--text-secondary); }
 
 /* ============================================================
    FIGURE FRAMES — Premium treatment for white-background images
@@ -364,7 +365,7 @@ img { max-width: 100%; height: auto; display: block; }
 .figure-frame-padded img { border-radius: 4px; }
 
 /* Figure caption */
-.figure-caption { font-size: 14.5px; line-height: 1.75; color: var(--text-secondary); padding: 18px 4px 0; }
+.figure-caption { font-size: clamp(14.5px, 0.35vw + 11px, 17px); line-height: 1.75; color: var(--text-secondary); padding: 18px 4px 0; }
 .figure-caption strong { color: var(--text-primary); }
 
 /* Legacy placeholder fallback */
@@ -400,8 +401,8 @@ img { max-width: 100%; height: auto; display: block; }
 }
 .section-dark .step-icon { background: var(--bg-secondary); }
 .step-icon svg { width: 18px; height: 18px; }
-.step-content h3 { font-family: var(--font-display); font-size: 22px; font-weight: 600; color: var(--text-primary); margin-bottom: 10px; }
-.step-content p { font-size: 16px; line-height: 1.85; color: var(--text-secondary); }
+.step-content h3 { font-family: var(--font-display); font-size: clamp(22px, 0.5vw + 16px, 26px); font-weight: 600; color: var(--text-primary); margin-bottom: 10px; }
+.step-content p { font-size: clamp(16px, 0.4vw + 11.5px, 18.5px); line-height: 1.85; color: var(--text-secondary); }
 
 /* ===== Results ===== */
 .results-highlights { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 64px; }
@@ -446,24 +447,24 @@ img { max-width: 100%; height: auto; display: block; }
 /* ===== BibTeX ===== */
 .bibtex-block {
     background: var(--bg-card-solid); border: 1px solid var(--border);
-    border-radius: 18px; overflow: hidden; max-width: 700px;
+    border-radius: 18px; overflow: hidden; max-width: 960px; margin: 0 auto;
 }
 .bibtex-header {
     display: flex; justify-content: space-between; align-items: center;
-    padding: 16px 24px; border-bottom: 1px solid var(--border);
+    padding: 18px 28px; border-bottom: 1px solid var(--border);
     background: rgba(255, 255, 255, 0.015);
 }
-.bibtex-header span { font-family: var(--font-mono); font-size: 12px; color: var(--text-muted); letter-spacing: 1.5px; text-transform: uppercase; }
+.bibtex-header span { font-family: var(--font-mono); font-size: clamp(13px, 0.25vw + 11px, 15px); color: var(--text-muted); letter-spacing: 1.5px; text-transform: uppercase; }
 
 .copy-btn {
-    display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px;
+    display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px;
     background: transparent; border: 1px solid var(--border-strong); border-radius: 8px;
-    color: var(--text-secondary); font-family: var(--font-body); font-size: 13px;
+    color: var(--text-secondary); font-family: var(--font-body); font-size: clamp(14px, 0.25vw + 12px, 16px);
     cursor: pointer; transition: all 0.25s;
 }
 .copy-btn:hover { border-color: var(--gold); color: var(--gold); background: rgba(212, 175, 55, 0.04); }
 
-.bibtex-code { padding: 24px; font-family: var(--font-mono); font-size: 13px; line-height: 1.8; color: var(--text-secondary); overflow-x: auto; white-space: pre; }
+.bibtex-code { padding: 28px; font-family: var(--font-mono); font-size: clamp(14px, 0.3vw + 11px, 17px); line-height: 1.8; color: var(--text-secondary); overflow-x: auto; white-space: pre; }
 
 /* ===== Acknowledgments ===== */
 .ack-content p { font-size: 16px; line-height: 1.85; color: var(--text-secondary); max-width: 720px; }
