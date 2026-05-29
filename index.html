@@ -156,6 +156,7 @@
         .visitors-label{font-size:0.78rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-dim);margin-bottom:0.9rem}
         .visitors img{max-width:100%;height:auto;border-radius:4px;opacity:0.92;transition:opacity 0.3s}
         .visitors img:hover{opacity:1}
+        .visitor-map{max-width:800px;margin:0 auto;overflow-x:auto;border-radius:6px}
 
         [data-animate]{opacity:0;transform:translateY(20px)}
         [data-animate].animate-in{opacity:1;transform:translateY(0);transition:opacity 0.6s ease,transform 0.6s ease}
@@ -599,10 +600,10 @@
 
 <section class="visitors" data-animate>
     <div class="container">
-        <p class="visitors-label">Visitors by Country</p>
-        <a href="https://info.flagcounter.com/gI1x" target="_blank" rel="noopener">
-            <img src="https://s05.flagcounter.com/count2/gI1x/bg_181824/txt_E8E6E1/border_C9A84C/columns_6/maxflags_24/viewers_0/labels_0/pageviews_1/flags_0/percent_0/" alt="Flag Counter">
-        </a>
+        <p class="visitors-label">Visitors Around the World</p>
+        <div class="visitor-map">
+            <script type="text/javascript" id="mapmyvisitors" src="https://mapmyvisitors.com/map.js?cl=2a2a38&w=800&t=tt&d=rS4QF9w4loXgos2oKxvSGoSxIwNdZKDnlDLd9Ge4eas&co=181824&cmo=6a6860&cmn=c9a84c&ct=e8e6e1"></script>
+        </div>
     </div>
 </section>
 
