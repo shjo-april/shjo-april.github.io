@@ -149,6 +149,9 @@
         .talk-venue{font-size:0.88rem;color:var(--text-secondary)}
         .talk-date{font-family:var(--font-mono);font-size:0.76rem;color:var(--text-dim);margin-top:0.1rem}
         .talk-video{display:inline-flex;align-items:center;gap:0.3em;font-size:0.8rem;color:var(--gold);margin-top:0.2rem}
+        .talks-block{margin-top:2.5rem}
+        .talks-grid{column-count:2;column-gap:2.5rem;margin-top:0.3rem}
+        .talks-grid .talk-item{break-inside:avoid;-webkit-column-break-inside:avoid}
 
         .footer{padding:2.5rem 2rem;border-top:1px solid var(--border);text-align:center}
         .footer-text{font-size:0.82rem;color:var(--text-dim)}
@@ -174,6 +177,7 @@
             .pub-card{grid-template-columns:1fr}
             .pub-image{aspect-ratio:16/8}
             .dual-grid{grid-template-columns:1fr;gap:2rem}
+            .talks-grid{column-count:1}
             .topbar-links{gap:1rem}.topbar-links a{font-size:0.7rem}
             .section{padding:3rem 1.2rem}
         }
@@ -558,7 +562,12 @@
                     <div class="award-date">May 2023 &ndash; Jun 2023</div>
                     <div class="award-desc">5th out of 1,747 participants. Robust vehicle detector under domain shift.</div>
                 </div>
-                <div class="info-block-title" style="margin-top:1.8rem;">Invited Talks</div>
+            </div>
+        </div>
+
+        <div class="talks-block" data-animate>
+            <div class="info-block-title">Invited Talks</div>
+            <div class="talks-grid">
                 <div class="talk-item">
                     <div class="talk-title">TRACE Oral Presentation</div>
                     <div class="talk-venue">ICLR 2026, Oral Session 5B (Video and Scene Generation)</div>
