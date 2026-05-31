@@ -103,9 +103,9 @@
                 <i class="fa-solid fa-film"></i>
                 <span>Supplementary</span>
             </a>
-            <a href="javascript:void(0)" class="btn btn-secondary btn-disabled" aria-disabled="true" tabindex="-1" title="Coming soon">
+            <a href="https://github.com/shjo-april/Chain-of-Prompts" target="_blank" class="btn btn-secondary">
                 <i class="fa-brands fa-github"></i>
-                <span>Code<br><small>(Coming Soon)</small></span>
+                <span>Code</span>
             </a>
             <a href="javascript:void(0)" class="btn btn-secondary btn-disabled" aria-disabled="true" tabindex="-1" title="Coming soon">
                 <i class="fa-solid fa-person-chalkboard"></i>
@@ -123,6 +123,25 @@
         <div class="scroll-arrow"></div>
     </div>
 </header>
+
+<!-- ===== Hero Demo: Main Visualization ===== -->
+<section class="section">
+    <div class="container">
+        <div class="method-overview" data-animate="fade-up">
+            <div class="method-figure">
+                <div class="figure-frame-glow">
+                    <div class="figure-frame">
+                        <img src="static/images/hero.gif" alt="Group Prompting (SAM3 + CoP) segments every cell in 3 clicks; per-instance prompting keeps clicking to 245" style="width:100%;height:auto;display:block;">
+                    </div>
+                </div>
+                <p class="figure-caption">
+                    <strong>Group Prompting (SAM3 + CoP) segments every cell in 3 clicks</strong>;
+                    per-instance prompting (SAM3) keeps clicking to 245.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
 
 <!-- ===== TL;DR / Key Insight ===== -->
 <section class="section tldr-section">
@@ -345,6 +364,21 @@
                 <div class="highlight-metric">Retention</div>
                 <div class="highlight-desc">on 4 morphologically<br>homogeneous benchmarks</div>
             </div>
+        </div>
+
+        <!-- Headline Figure: O(T) vs O(N) -->
+        <div class="result-block full-width" data-animate="fade-up">
+            <h3>Group Prompting Tracks the Upper Bound with 81.7&times; Fewer Prompts</h3>
+            <div class="figure-frame-glow">
+                <div class="figure-frame figure-frame-padded">
+                    <img src="static/images/figure2.png" alt="Figure 2: Group Prompting O(T) vs. per-instance prompting O(N) on CoNSeP/test_2, with AJI vs. number of prompts">
+                </div>
+            </div>
+            <p class="figure-caption">
+                <strong>Group Prompting O(T) vs. per-instance O(N) on CoNSeP/test_2.</strong>
+                A single click per cell type (left) recovers the same cell populations that per-instance prompting reaches with 245 clicks,
+                while the AJI vs. number-of-prompts curve (right) tracks the upper bound.
+            </p>
         </div>
 
         <!-- Main Tables -->
