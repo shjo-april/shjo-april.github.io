@@ -145,10 +145,12 @@
         .award-desc{font-size:0.88rem;color:var(--text-secondary);line-height:1.5}
         .talk-item{padding:0.7rem 0;border-bottom:1px solid var(--border)}
         .talk-item:last-child{border-bottom:none}
-        .talk-title{font-size:0.95rem;font-weight:600;color:var(--text-primary);margin-bottom:0.15rem}
+        .talk-header{display:flex;align-items:baseline;justify-content:space-between;gap:0.8rem;margin-bottom:0.15rem}
+        .talk-title{font-size:0.95rem;font-weight:600;color:var(--text-primary);flex:1;min-width:0}
+        .talk-date{font-family:var(--font-mono);font-size:0.76rem;color:var(--text-dim);flex-shrink:0;white-space:nowrap}
         .talk-venue{font-size:0.88rem;color:var(--text-secondary)}
-        .talk-date{font-family:var(--font-mono);font-size:0.76rem;color:var(--text-dim);margin-top:0.1rem}
-        .talk-video{display:inline-flex;align-items:center;gap:0.3em;font-size:0.8rem;color:var(--gold);margin-top:0.2rem}
+        .talk-links{display:flex;flex-wrap:wrap;gap:0.9rem;margin-top:0.25rem}
+        .talk-link{display:inline-flex;align-items:center;gap:0.3em;font-size:0.8rem;color:var(--gold)}
         .talks-block{margin-top:2.5rem}
         .talks-grid{column-count:2;column-gap:2.5rem;margin-top:0.3rem}
         .talks-grid .talk-item{break-inside:avoid;-webkit-column-break-inside:avoid}
@@ -157,6 +159,7 @@
         .footer-text{font-size:0.82rem;color:var(--text-dim)}
         .visitors{padding:2rem 2rem 0.5rem;text-align:center}
         .visitors-label{font-size:0.78rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-dim);margin-bottom:0.9rem}
+        .visitors-since{text-transform:none;letter-spacing:0;font-family:var(--font-mono);font-size:0.7rem;color:var(--text-dim);margin-left:0.5em;opacity:0.85}
         .visitors img{max-width:100%;height:auto;border-radius:4px;opacity:0.92;transition:opacity 0.3s}
         .visitors img:hover{opacity:1}
         .visitor-map{max-width:800px;margin:0 auto;overflow-x:auto;border-radius:6px}
@@ -570,38 +573,76 @@
             <div class="info-block-title">Invited Talks</div>
             <div class="talks-grid">
                 <div class="talk-item">
-                    <div class="talk-title">TRACE Oral Presentation</div>
-                    <div class="talk-venue">ICLR 2026, Oral Session 5B (Video and Scene Generation)</div>
-                    <div class="talk-date">Apr 2026</div>
-                    <a href="https://iclr.cc/virtual/2026/session/10012003" target="_blank" class="talk-video"><i class="fa-solid fa-circle-play"></i> Watch</a>
-                </div>
-                <div class="talk-item">
-                    <div class="talk-title">ECCV 2024 Paper Presentation</div>
-                    <div class="talk-venue">MODULABS</div>
-                    <div class="talk-date">Dec 2024</div>
-                    <a href="https://www.youtube.com/watch?v=U5WcwfjWiJg&t=37s" target="_blank" class="talk-video"><i class="fa-brands fa-youtube"></i> Watch</a>
-                </div>
-                <div class="talk-item">
-                    <div class="talk-title">Advanced AI Developments</div>
+                    <div class="talk-header">
+                        <div class="talk-title">Vision AI: Research and Applications</div>
+                        <div class="talk-date">2026.06</div>
+                    </div>
                     <div class="talk-venue">Yonsei University</div>
-                    <div class="talk-date">Nov 2023</div>
+                    <div class="talk-links">
+                        <a href="./assets/pdf/260603_SanghyunJo_OGQ_VisionAI_Yonsei.pdf" target="_blank" class="talk-link"><i class="fa-solid fa-file-pdf"></i> Slides</a>
+                    </div>
                 </div>
                 <div class="talk-item">
-                    <div class="talk-title">Strategies for Reducing Labeling Costs in Vision AI</div>
+                    <div class="talk-header">
+                        <div class="talk-title">TRACE Oral Presentation at ICLR 2026</div>
+                        <div class="talk-date">2026.04</div>
+                    </div>
+                    <div class="talk-venue">Oral Session 5B (Video and Scene Generation)</div>
+                    <div class="talk-links">
+                        <a href="https://iclr.cc/virtual/2026/session/10012003" target="_blank" class="talk-link"><i class="fa-solid fa-circle-play"></i> Watch</a>
+                    </div>
+                </div>
+                <div class="talk-item">
+                    <div class="talk-header">
+                        <div class="talk-title">ECCV 2024 Paper Presentation</div>
+                        <div class="talk-date">2024.12</div>
+                    </div>
+                    <div class="talk-venue">MODULABS</div>
+                    <div class="talk-links">
+                        <a href="https://www.youtube.com/watch?v=U5WcwfjWiJg&t=37s" target="_blank" class="talk-link"><i class="fa-brands fa-youtube"></i> Watch</a>
+                    </div>
+                </div>
+                <div class="talk-item">
+                    <div class="talk-header">
+                        <div class="talk-title">Advanced AI Developments</div>
+                        <div class="talk-date">2023.12</div>
+                    </div>
+                    <div class="talk-venue">Yonsei University</div>
+                    <div class="talk-links">
+                        <a href="./assets/pdf/231201_SanghyunJo_OGQ_Yonsei.pdf" target="_blank" class="talk-link"><i class="fa-solid fa-file-pdf"></i> Slides</a>
+                    </div>
+                </div>
+                <div class="talk-item">
+                    <div class="talk-header">
+                        <div class="talk-title">Strategies for Reducing Labeling Costs in Vision AI</div>
+                        <div class="talk-date">2023.10</div>
+                    </div>
                     <div class="talk-venue">Google Developer Groups (GDG)</div>
-                    <div class="talk-date">Oct 2023</div>
+                    <div class="talk-links">
+                        <a href="./assets/pdf/231021_GDG_VisionAI.pdf" target="_blank" class="talk-link"><i class="fa-solid fa-file-pdf"></i> Slides</a>
+                    </div>
                 </div>
                 <div class="talk-item">
-                    <div class="talk-title">Experience Sharing Session: Vision Research</div>
+                    <div class="talk-header">
+                        <div class="talk-title">Experience Sharing Session: Vision Research</div>
+                        <div class="talk-date">2022.11</div>
+                    </div>
                     <div class="talk-venue">MODULABS</div>
-                    <div class="talk-date">Nov 2022</div>
-                    <a href="http://youtube.com/watch?v=uSs3xV3RIqQ&t=555s" target="_blank" class="talk-video"><i class="fa-brands fa-youtube"></i> Watch</a>
+                    <div class="talk-links">
+                        <a href="./assets/pdf/221122_MODULABS_Experience.pdf" target="_blank" class="talk-link"><i class="fa-solid fa-file-pdf"></i> Slides</a>
+                        <a href="http://youtube.com/watch?v=uSs3xV3RIqQ&t=555s" target="_blank" class="talk-link"><i class="fa-brands fa-youtube"></i> Watch</a>
+                    </div>
                 </div>
                 <div class="talk-item">
-                    <div class="talk-title">RSEPM Paper Presentation</div>
+                    <div class="talk-header">
+                        <div class="talk-title">RSEPM Paper Presentation</div>
+                        <div class="talk-date">2022.10</div>
+                    </div>
                     <div class="talk-venue">MODULABS</div>
-                    <div class="talk-date">Oct 2022</div>
-                    <a href="https://www.youtube.com/watch?v=loznONvplo8&list=PLv6H9ngYdJbKcGl2VrVBr8YAClPcVrrim&index=92" target="_blank" class="talk-video"><i class="fa-brands fa-youtube"></i> Watch</a>
+                    <div class="talk-links">
+                        <a href="./assets/pdf/221004_MODULABS_RSEPM.pdf" target="_blank" class="talk-link"><i class="fa-solid fa-file-pdf"></i> Slides</a>
+                        <a href="https://www.youtube.com/watch?v=loznONvplo8&list=PLv6H9ngYdJbKcGl2VrVBr8YAClPcVrrim&index=92" target="_blank" class="talk-link"><i class="fa-brands fa-youtube"></i> Watch</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -610,7 +651,7 @@
 
 <section class="visitors" data-animate>
     <div class="container">
-        <p class="visitors-label">Visitors Around the World</p>
+        <p class="visitors-label">Visitors Around the World <span class="visitors-since">(since 2026.05)</span></p>
         <div class="visitor-map">
             <script type="text/javascript" id="mapmyvisitors" src="https://mapmyvisitors.com/map.js?cl=2a2a38&w=800&t=tt&d=rS4QF9w4loXgos2oKxvSGoSxIwNdZKDnlDLd9Ge4eas&co=181824&cmo=6a6860&cmn=c9a84c&ct=e8e6e1"></script>
         </div>
