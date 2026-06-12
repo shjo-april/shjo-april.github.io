@@ -669,9 +669,7 @@
 <section class="visitors" data-animate>
     <div class="container">
         <p class="visitors-label">Visitors Around the World <span class="visitors-since">(since 2026.05.29)</span></p>
-        <div class="visitor-map">
-            <script type="text/javascript" id="mapmyvisitors" src="https://mapmyvisitors.com/map.js?cl=2a2a38&w=800&t=tt&d=rS4QF9w4loXgos2oKxvSGoSxIwNdZKDnlDLd9Ge4eas&co=181824&cmo=6a6860&cmn=c9a84c&ct=e8e6e1"></script>
-        </div>
+        <div class="visitor-map" id="visitor-map"></div>
     </div>
 </section>
 
@@ -707,6 +705,19 @@ const observer = new IntersectionObserver((entries) => {
     });
 }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
 document.querySelectorAll('[data-animate]').forEach(el => observer.observe(el));
+
+
+// Load the third-party visitor map after the page has fully rendered, so a slow or
+// unreachable map service never blocks rendering while still counting every visit.
+window.addEventListener('load', () => {
+    const visitorMap = document.getElementById('visitor-map');
+    if (!visitorMap) return;
+    const s = document.createElement('script');
+    s.id = 'mapmyvisitors';
+    s.async = true;
+    s.src = 'https://mapmyvisitors.com/map.js?cl=2a2a38&w=800&t=tt&d=rS4QF9w4loXgos2oKxvSGoSxIwNdZKDnlDLd9Ge4eas&co=181824&cmo=6a6860&cmn=c9a84c&ct=e8e6e1';
+    visitorMap.appendChild(s);
+});
 </script>
 
 </body>
