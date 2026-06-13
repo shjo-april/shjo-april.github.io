@@ -114,8 +114,8 @@
         .pub-card{display:grid;grid-template-columns:230px 1fr;gap:1.8rem;padding:1.5rem;background:var(--bg-card);border:1px solid var(--border);border-radius:14px;transition:all var(--transition);opacity:0;transform:translateY(20px)}
         .pub-card.animate-in{opacity:1;transform:translateY(0);transition:opacity 0.5s ease,transform 0.5s ease,border-color 0.3s,background 0.3s}
         .pub-card:hover{border-color:var(--gold-dim);background:var(--bg-card-hover)}
-        .pub-image{position:relative;border-radius:10px;overflow:hidden;aspect-ratio:16/10;background:var(--bg-secondary)}
-        .pub-image img{width:100%;height:100%;object-fit:cover;transition:transform 0.6s ease}
+        .pub-image{position:relative;border-radius:10px;overflow:hidden;background:var(--bg-secondary)}
+        .pub-image img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 0.6s ease}
         .pub-card:hover .pub-image img{transform:scale(1.04)}
         .pub-badge{position:absolute;top:8px;left:8px;font-family:var(--font-mono);font-size:0.68rem;font-weight:600;padding:0.15em 0.45em;border-radius:4px;letter-spacing:0.04em;z-index:2}
         .pub-badge.award{background:linear-gradient(135deg,#2e7d32,#43a047);color:#fff}
@@ -130,7 +130,7 @@
         .role-tag{display:inline-block;font-family:var(--font-mono);font-size:0.7rem;font-weight:700;font-style:normal;letter-spacing:0.02em;padding:0.16em 0.5em;border-radius:4px;margin-right:0.5rem;vertical-align:middle;line-height:1.5}
         .role-tag.lead{background:var(--gold);color:var(--bg-primary);border:1px solid var(--gold)}
         .role-tag.corr{background:transparent;color:var(--gold-light);border:1px solid var(--gold)}
-        .role-tag.co{background:transparent;color:var(--text-dim);border:1px solid var(--border)}
+        .role-tag.co{background:rgba(154,152,144,0.16);color:var(--text-secondary);border:1px solid rgba(154,152,144,0.4)}
         .pub-links{display:flex;gap:0.4rem;flex-wrap:wrap}
         .pub-link{font-family:var(--font-mono);font-size:0.74rem;padding:0.3em 0.7em;border-radius:5px;background:var(--bg-secondary);border:1px solid var(--border);color:var(--text-secondary);transition:all 0.3s;display:inline-flex;align-items:center;gap:0.3em}
         .pub-link:hover{border-color:var(--gold-dim);color:var(--gold);background:var(--gold-dim)}
