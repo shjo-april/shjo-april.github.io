@@ -140,6 +140,7 @@
         .info-block-title{font-family:var(--font-display);font-size:1.6rem;font-weight:700;color:var(--text-primary);margin-bottom:1.3rem;padding-bottom:0.7rem;border-bottom:1px solid var(--border)}
         .service-group-label{font-size:0.78rem;font-weight:600;color:var(--gold);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:0.5rem;margin-top:1rem}
         .service-group-label:first-child{margin-top:0}
+        .service-cols{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
         .service-item{font-size:0.92rem;color:var(--text-secondary);padding:0.3rem 0 0.3rem 1rem;position:relative}
         .service-item::before{content:'';position:absolute;left:0;top:50%;width:4px;height:4px;border-radius:50%;background:var(--gold-dim);border:1px solid var(--gold);transform:translateY(-50%)}
         .award-item{padding:0.8rem 0;border-bottom:1px solid var(--border)}
@@ -332,6 +333,7 @@
                         <a href="https://shjo-april.github.io/TRACE/" target="_blank" class="pub-link"><i class="fa-solid fa-globe"></i> Project</a>
                         <a href="./TRACE/static/data/Slides.pdf" target="_blank" class="pub-link"><i class="fa-solid fa-person-chalkboard"></i> Slides</a>
                         <a href="./TRACE/static/data/Poster.pdf" target="_blank" class="pub-link"><i class="fa-solid fa-image"></i> Poster</a>
+                        <a href="https://iclr.cc/virtual/2026/session/10012003" target="_blank" class="pub-link"><i class="fa-solid fa-circle-play"></i> Video</a>
                     </div>
                 </div>
             </div>
@@ -557,19 +559,25 @@
         <div class="dual-grid">
             <div class="info-block" data-animate id="awards">
                 <div class="info-block-title">Academic Services</div>
-                <div class="service-group-label">Conference Reviewing</div>
-                <div class="service-item">NeurIPS 2026</div>
-                <div class="service-item"><a href="https://cvpr.thecvf.com/Conferences/2025/ProgramCommittee#all-outstanding-reviewer" target="_blank">CVPR 2025&ndash;2026</a></div>
-                <div class="service-item"><a href="https://iclr.cc/Conferences/2026/Reviewers" target="_blank">ICLR 2026</a></div>
-                <div class="service-item">ECCV 2026</div>
-                <div class="service-item">MICCAI 2026</div>
-                <div class="service-item"><a href="https://iccv.thecvf.com/Conferences/2025/ProgramCommittee#all-reviewers-w-at-least-1-review" target="_blank">ICCV 2025</a></div>
-                <div class="service-item">ICPR 2024</div>
-                <div class="service-item">ICIP 2022&ndash;2024</div>
-                <div class="service-item"><a href="https://icml.cc/Conferences/2022/Reviewers" target="_blank">ICML 2022</a></div>
-                <div class="service-group-label">Journal Reviewing</div>
-                <div class="service-item">IJCV 2024&ndash;2026</div>
-                <div class="service-item">IEEE TCSVT 2022</div>
+                <div class="service-cols">
+                    <div>
+                        <div class="service-group-label">Conference Reviewing</div>
+                        <div class="service-item">NeurIPS 2026</div>
+                        <div class="service-item"><a href="https://cvpr.thecvf.com/Conferences/2025/ProgramCommittee#all-outstanding-reviewer" target="_blank">CVPR 2025&ndash;2026</a></div>
+                        <div class="service-item"><a href="https://iclr.cc/Conferences/2026/Reviewers" target="_blank">ICLR 2026</a></div>
+                        <div class="service-item">ECCV 2026</div>
+                        <div class="service-item">MICCAI 2026</div>
+                        <div class="service-item"><a href="https://iccv.thecvf.com/Conferences/2025/ProgramCommittee#all-reviewers-w-at-least-1-review" target="_blank">ICCV 2025</a></div>
+                        <div class="service-item">ICPR 2024</div>
+                        <div class="service-item">ICIP 2022&ndash;2024</div>
+                        <div class="service-item"><a href="https://icml.cc/Conferences/2022/Reviewers" target="_blank">ICML 2022</a></div>
+                    </div>
+                    <div>
+                        <div class="service-group-label">Journal Reviewing</div>
+                        <div class="service-item">IJCV 2024&ndash;2026</div>
+                        <div class="service-item">IEEE TCSVT 2022</div>
+                    </div>
+                </div>
             </div>
             <div class="info-block" data-animate>
                 <div class="info-block-title">Awards</div>
@@ -643,6 +651,7 @@
                     <div class="talk-venue">Google Developer Groups (GDG)</div>
                     <div class="talk-links">
                         <a href="./assets/pdf/231021_GDG_VisionAI.pdf" target="_blank" class="talk-link"><i class="fa-solid fa-file-pdf"></i> Slides (KR)</a>
+                        <a href="https://www.youtube.com/watch?v=htzUzlfwrug" target="_blank" class="talk-link"><i class="fa-brands fa-youtube"></i> Watch</a>
                     </div>
                 </div>
                 <div class="talk-item">
