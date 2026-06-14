@@ -126,10 +126,6 @@
                 <i class="fa-solid fa-circle-play"></i>
                 <span>Video</span>
             </a>
-            <a href="javascript:void(0)" class="btn btn-secondary btn-disabled" aria-disabled="true" tabindex="-1" title="Coming soon">
-                <img src="https://huggingface.co/front/assets/huggingface_logo-noborder.svg" alt="HF" style="width:18px;height:18px;vertical-align:middle;">
-                <span>Demo<br><small>(Coming Soon)</small></span>
-            </a>
         </div>
     </div>
 
@@ -362,15 +358,11 @@
         <!-- Qualitative -->
         <div class="result-block full-width" data-animate="fade-up">
             <h3>Qualitative Results</h3>
-            <div class="figure-placeholder wide">
-                <div class="placeholder-text">
-                    <i class="fa-solid fa-images"></i>
-                    <p>Qualitative Comparison<br><small>Coming soon</small></p>
-                </div>
+            <div class="figure-frame figure-frame-padded figure-frame-wide">
+                <img src="static/data/qualitative.png" alt="Qualitative Comparison">
             </div>
             <p class="figure-caption">
-                TRACE instance edges reconnect fragmented masks and separate adjacent objects. 
-                White dotted circles mark corrected boundaries.
+                TRACE yields instance-aware edges, unlike the gradient or texture-contrast edges from Canny, HED, PiDiNet, and DiffusionEdge. As a refinement signal for the ProMerge baseline, only TRACE's edges sharpen instance segmentation toward the ground truth.
             </p>
         </div>
 
