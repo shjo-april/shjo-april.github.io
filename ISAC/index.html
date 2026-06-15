@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" type="image/svg+xml" href="./static/images/star.svg">
+    <link rel="apple-touch-icon" href="./static/images/star.svg">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ISAC: Training-Free Instance-to-Semantic Attention Control</title>
+    <meta name="description" content="ISAC: a training-free, model-agnostic objective that stabilizes self-attention instance layouts and then binds cross-attention semantics for multi-instance text-to-image generation.">
+    <meta name="keywords" content="ISAC, instance-to-semantic, attention control, multi-instance generation, text-to-image, diffusion, training-free, self-attention, cross-attention, IntraCompBench">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="ISAC: Training-Free Instance-to-Semantic Attention Control">
+    <meta property="og:description" content="Stabilize self-attention instance layouts first, then bind cross-attention semantics, for training-free multi-instance generation.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://shjo-april.github.io/ISAC">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400&family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <!-- Academicons & Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.4/css/academicons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <link rel="stylesheet" href="static/css/style.css">
+
+    <!-- ISAC-specific: algorithm blocks and data tables -->
+    <style>
+        .data-table-wrap{max-width:820px;margin:1.4rem auto 0.4rem;overflow-x:auto}
+        .data-table{width:100%;border-collapse:collapse;font-family:var(--font-mono);font-size:0.82rem;color:var(--text-secondary)}
+        .data-table th,.data-table td{padding:0.5rem 0.7rem;text-align:center;border-bottom:1px solid var(--border)}
+        .data-table thead th{color:var(--gold);font-weight:600;border-bottom:1px solid var(--border-gold)}
+        .data-table td:first-child,.data-table th:first-child{text-align:left;color:var(--text-primary)}
+        .data-table tr.is-ours{background:var(--accent-dim)}
+        .data-table tr.is-ours td{color:var(--text-primary);font-weight:600}
+        .data-table tr.is-ours td:first-child{color:var(--gold-light)}
+        .data-table .best{color:var(--gold-light);font-weight:700}
+    </style>
+</head>
+<body>
+
+<!-- ===== Floating Nav ===== -->
+<nav class="floating-nav" id="floatingNav">
+    <div class="nav-inner">
+        <span class="nav-logo" style="letter-spacing:1px;">ISAC</span>
+        <div class="nav-links">
+            <a href="#abstract">Abstract</a>
+            <a href="#method">Method</a>
+            <a href="#results">Results</a>
+            <a href="#applications">Applications</a>
+            <a href="#bibtex">BibTeX</a>
+        </div>
+    </div>
+</nav>
+
+<!-- ===== Hero Section ===== -->
+<header class="hero">
+    <div class="hero-particles" id="particles"></div>
+    <div class="hero-gradient"></div>
+    <div class="hero-content">
+        <!-- Status Badge -->
+        <div class="oral-badge" data-animate="fade-down">
+            <div class="oral-badge-glow"></div>
+            <div class="oral-badge-inner">
+                <span>Under Review</span>
+            </div>
+        </div>
+
+        <h1 class="hero-title" data-animate="fade-up">
+            <span class="title-trace" style="font-size:clamp(56px,9vw,120px);letter-spacing:6px;">ISAC</span>
+            <span class="title-separator"></span>
+            <span class="title-sub">Training-Free Instance-to-Semantic Attention Control<br>for Multi-Instance Generation</span>
+        </h1>
+
+        <!-- Authors -->
+        <div class="authors" data-animate="fade-up" data-delay="200">
+            <div class="author-row">
+                <span class="author"><a href="https://shjo-april.github.io/" target="_blank">Sanghyun Jo</a><sup>1,2&#8902;&#8224;</sup></span>
+                <span class="author"><a href="https://thisiswooyeol.github.io/" target="_blank">Wooyeol Lee</a><sup>2&#8902;</sup></span>
+                <span class="author"><a href="https://ziseoklee.github.io/" target="_blank">Ziseok Lee</a><sup>2&#8902;</sup></span>
+                <span class="author"><a href="https://ppolon.github.io/" target="_blank">Jonghyun Choi</a><sup>2</sup></span>
+                <span class="author"><a href="https://jaesik.info/" target="_blank">Jaesik Park</a><sup>2</sup></span>
+                <span class="author"><a href="https://aibl.snu.ac.kr/team/pi-information" target="_blank">Kyungsu Kim</a><sup>2&#8224;</sup></span>
+            </div>
+            <div class="affiliation-row">
+                <span><sup>1</sup>OGQ</span>
+                <span><sup>2</sup>Seoul National University</span>
+            </div>
+            <div class="author-note">
+                <span><sup>&#8902;</sup>Equal contribution</span>
+                <span><sup>&#8224;</sup>Corresponding authors</span>
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="hero-actions" data-animate="fade-up" data-delay="300">
+            <a href="./static/data/Manuscript.pdf" target="_blank" class="btn btn-primary">
+                <i class="fa-solid fa-file-pdf"></i>
+                <span>Paper</span>
+            </a>
+            <a href="https://arxiv.org/abs/2505.20935" target="_blank" class="btn btn-secondary">
+                <i class="ai ai-arxiv"></i>
+                <span>arXiv</span>
+            </a>
+            <a href="javascript:void(0)" class="btn btn-secondary btn-disabled" aria-disabled="true" tabindex="-1" title="Coming soon">
+                <i class="fa-brands fa-github"></i>
+                <span>Code<br><small>(Coming Soon)</small></span>
+            </a>
+            <a href="javascript:void(0)" class="btn btn-secondary btn-disabled" aria-disabled="true" tabindex="-1" title="Coming soon">
+                <i class="fa-solid fa-database"></i>
+                <span>IntraCompBench<br><small>(Coming Soon)</small></span>
+            </a>
+        </div>
+    </div>
+
+    <div class="hero-scroll-hint">
+        <span>Scroll to explore</span>
+        <div class="scroll-arrow"></div>
+    </div>
+</header>
+
+<!-- ===== Hero Demo: Main Visualization ===== -->
+<section class="section">
+    <div class="container">
+        <div class="method-overview" data-animate="fade-up">
+            <div class="method-figure">
+                <div class="figure-frame-glow">
+                    <div class="figure-frame figure-frame-padded">
+                        <img src="static/images/teaser.png" alt="Qualitative comparison on multi-instance prompts: SD1.5, InitNO, Self-Cross, and ISAC" style="width:100%;height:auto;display:block;">
+                    </div>
+                </div>
+                <p class="figure-caption">
+                    <strong>Where prior training-free methods merge or mix, ISAC separates and binds.</strong>
+                    On <em>&ldquo;two horses&rdquo;</em> and <em>&ldquo;a dog and a sheep&rdquo;</em>, SD1.5, InitNO, and Self-Cross omit, merge, or confuse instances.
+                    ISAC<sub>LO</sub> (latent optimization) keeps every requested instance distinct.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== TL;DR / Key Insight ===== -->
+<section class="section tldr-section">
+    <div class="container">
+        <div class="tldr-card" data-animate="fade-up">
+            <div class="tldr-icon">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                </svg>
+            </div>
+            <h2 class="tldr-label">Key Insight</h2>
+            <p class="tldr-text">
+                Token-conditioned <strong>cross-attention</strong> can separate concepts, but it assumes instance regions have
+                <em>already</em> emerged, so in early denoising it cannot carve them out, and count failures and semantic mixing persist.
+                <strong>Self-attention</strong>, by contrast, exposes <strong>class-agnostic instance layouts</strong> early.
+                ISAC <strong>stabilizes self-attention instance layouts first, then binds cross-attention semantics within them</strong>,
+                fully training-free, model-agnostic, with no external vision models.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Motivation: the problem ===== -->
+<section class="section section-dark">
+    <div class="container">
+        <h2 class="section-title" data-animate="fade-up">
+            Motivation
+        </h2>
+        <p class="section-lead" data-animate="fade-up" style="text-align:center;max-width:880px;margin:-12px auto 32px;font-size:18px;color:var(--text-secondary);line-height:1.6;">
+            Open-weight diffusion models still <strong>omit or merge requested objects</strong> (count failures) and
+            <strong>leak attributes across instances</strong> (semantic mixing), especially when instances are semantically similar.
+        </p>
+        <div class="method-overview" data-animate="fade-up">
+            <div class="method-figure">
+                <div class="figure-frame-glow">
+                    <div class="figure-frame figure-frame-padded">
+                        <img src="static/images/motivation.png" alt="Semantic overlap of instance-aware semantic masks across class pairs grouped by supercategory">
+                    </div>
+                </div>
+                <p class="figure-caption">
+                    <strong>Semantic mixing is strongest within a supercategory.</strong>
+                    We build instance-aware semantic masks and measure their Dice overlap for each class pair.
+                    Overlap is consistently higher for pairs in the same supercategory (blue boxes), showing that
+                    token-level semantics spill across multiple similar objects, motivating an <em>instance-first</em> hierarchy.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Why It Works: diffusion dynamics ===== -->
+<section class="section">
+    <div class="container">
+        <h2 class="section-title" data-animate="fade-up">
+            Why It Works: Structure Before Semantics
+        </h2>
+        <p class="section-lead" data-animate="fade-up" style="text-align:center;max-width:880px;margin:-12px auto 32px;font-size:18px;color:var(--text-secondary);line-height:1.6;">
+            In early denoising, <strong style="color:var(--gold);">instance structure emerges in self-attention</strong> while semantics are still
+            underdeveloped. ISAC exploits this asymmetry: form instances from structure first, then assign semantics.
+        </p>
+        <div class="observation-grid" data-animate="fade-up">
+            <div class="obs-figure">
+                <div class="figure-frame-glow">
+                    <div class="figure-frame figure-frame-padded">
+                        <img src="static/images/dynamics.png" alt="Dynamics of text-to-image diffusion: self-attention vs cross-attention vs Grounding DINO across timesteps">
+                    </div>
+                </div>
+                <p class="figure-caption">
+                    <strong>Dynamics of T2I diffusion.</strong>
+                    Early steps form class-agnostic instance structure in self-attention; semantics (cross-attention) sharpen later.
+                    Detection models such as Grounding DINO rely on strong semantic cues, so they become effective only in late steps,
+                    too late to carve out instances.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Abstract ===== -->
+<section class="section section-dark" id="abstract">
+    <div class="container">
+        <h2 class="section-title" data-animate="fade-up">
+            <span class="section-number">01</span>
+            Abstract
+        </h2>
+        <div class="abstract-content" data-animate="fade-up">
+            <p>
+                Recent open-weight text-to-image (T2I) diffusion models still struggle with multi-instance prompts, often omitting or merging
+                instances and mixing semantics among similar objects. We trace these failures to early denoising steps, before instance
+                boundaries are reliably stabilized.
+            </p>
+            <p>
+                Existing training-free guidance is largely driven by cross-attention or other token-conditioned semantic signals. Such guidance
+                can separate concepts at the token level, but largely assumes that distinct instance regions have already emerged; in early
+                denoising steps it cannot reliably carve out these regions, so count failures and semantic mixing persist. By contrast,
+                self-attention exposes class-agnostic instance layouts during early denoising. To exploit this asymmetry, we propose
+                <strong>ISAC</strong> (Instance-to-Semantic Attention Control), a training-free, model-agnostic objective that first stabilizes
+                self-attention layouts and then binds cross-attention semantics within them, without fine-tuning or external vision models.
+            </p>
+            <p>
+                Across T2I-CompBench, HRS-Bench, and our newly curated <strong>IntraCompBench</strong>, ISAC consistently outperforms prior
+                training-free methods. Furthermore, ISAC enhances layout-to-image controllers by refining coarse, overlapping bounding boxes
+                into dense instance masks.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Key Contributions ===== -->
+<section class="section">
+    <div class="container">
+        <h2 class="section-title" data-animate="fade-up">
+            <span class="section-number">02</span>
+            Contributions
+        </h2>
+        <div class="contributions-grid">
+            <div class="contrib-card" data-animate="fade-up" data-delay="0">
+                <div class="contrib-number">&#9312;</div>
+                <h3>Instance-to-Semantic Hierarchy</h3>
+                <p>ISAC is a training-free, model-agnostic objective that enforces an instance-to-semantic hierarchy: it separates <em>instance formation</em> from <em>semantic assignment</em>, stabilizing class-agnostic layouts from self-attention before binding cross-attention semantics within them.</p>
+            </div>
+            <div class="contrib-card" data-animate="fade-up" data-delay="100">
+                <div class="contrib-number">&#9313;</div>
+                <h3>Diagnosis of Semantic Mixing</h3>
+                <p>We quantify semantic mixing via the Dice overlap between instance-aware semantic masks, revealing substantially higher overlap for class pairs <strong>within the same supercategory</strong>, the regime where count failures and mixing are most severe.</p>
+            </div>
+            <div class="contrib-card" data-animate="fade-up" data-delay="200">
+                <div class="contrib-number">&#9314;</div>
+                <h3>IntraCompBench</h3>
+                <p>A new benchmark for explicit <strong>2&ndash;5-instance counting</strong> and <strong>intra-supercategory</strong> multi-class compositions, stress-testing the similar-object cases that existing benchmarks do not isolate.</p>
+            </div>
+        </div>
+
+        <div class="result-block full-width" data-animate="fade-up" style="margin-top:48px;">
+            <h3>How ISAC Differs</h3>
+            <div class="figure-frame-glow">
+                <div class="figure-frame figure-frame-padded">
+                    <img src="static/images/table_concept.png" alt="Conceptual comparison of methods for multi-instance text-to-image generation">
+                </div>
+            </div>
+            <p class="figure-caption">
+                <strong>Conceptual comparison.</strong>
+                ISAC is the only method that preserves instance structure first, separates semantic masks, stays diffusion-backbone agnostic,
+                and needs no fine-tuning or extra counting model.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Method Overview ===== -->
+<section class="section section-dark" id="method">
+    <div class="container">
+        <h2 class="section-title" data-animate="fade-up">
+            <span class="section-number">03</span>
+            Method
+        </h2>
+
+        <div class="method-overview" data-animate="fade-up">
+            <div class="method-figure">
+                <div class="figure-frame-glow">
+                    <div class="figure-frame figure-frame-padded">
+                        <img src="static/images/method.png" alt="Overview of ISAC: Phase 1 instance formation and Phase 2 instance-aware semantic separation">
+                    </div>
+                </div>
+                <p class="figure-caption">
+                    <strong>Two phases along the denoising trajectory.</strong>
+                    Phase 1 clusters the self-attention map into <em>N</em> class-agnostic instance masks and repels their overlap to establish clean
+                    layouts early. Phase 2 injects this stabilized structure into cross-attention to form instance-aware semantic masks, then applies a
+                    repel-and-bind loss so semantics follow instance shapes. An instance-to-semantic schedule shifts weight from Phase 1 to Phase 2 over time.
+                </p>
+            </div>
+        </div>
+
+        <!-- Method Steps -->
+        <div class="method-steps">
+            <div class="method-step" data-animate="fade-up">
+                <div class="step-connector"></div>
+                <div class="step-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 12h18M12 3v18"/></svg>
+                </div>
+                <div class="step-content">
+                    <h3>Phase 1 &middot; Instance Formation (<em>L<sub>ins</sub></em>)</h3>
+                    <p>Same-instance pixels attend to each other more strongly, so the most discriminative self-attention clusters reveal disjoint instance layouts. ISAC builds a foreground gate from cross-attention, clusters self-attention into <em>N</em> class-agnostic masks, and penalizes their worst overlap via <em>Maximum Pixel-wise Overlap</em> (MPO), carving out the requested number of separated regions <strong>before</strong> any class label is assigned.</p>
+                </div>
+            </div>
+            <div class="method-step" data-animate="fade-up">
+                <div class="step-connector"></div>
+                <div class="step-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v6m0 10v6M4.22 4.22l4.24 4.24m7.08 7.08l4.24 4.24M1 12h6m10 0h6M4.22 19.78l4.24-4.24m7.08-7.08l4.24-4.24"/></svg>
+                </div>
+                <div class="step-content">
+                    <h3>Phase 2 &middot; Instance-aware Semantic Separation (<em>L<sub>sem</sub></em>)</h3>
+                    <p>With sharp instance structure in place, ISAC injects it into cross-attention (<em>CA<sup>ins</sup> = SA &middot; CA</em>) to form instance-aware semantic masks, then applies a <em>repel-and-bind</em> loss: tokens for different instances are pushed apart, while class and attribute tokens of the same instance are pulled together, so semantics follow instance shapes without leaking across regions.</p>
+                </div>
+            </div>
+            <div class="method-step" data-animate="fade-up">
+                <div class="step-connector"></div>
+                <div class="step-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                </div>
+                <div class="step-content">
+                    <h3>Instance-to-Semantic Schedule</h3>
+                    <p>A single schedule aligns the objective with diffusion dynamics: <em>&lambda;<sub>ins</sub>(t) = t/T</em> and <em>&lambda;<sub>sem</sub>(t) = 1 &minus; t/T</em>, so early steps focus on instance formation and later steps on semantic refinement. The objective plugs into latent optimization (<strong>ISAC<sub>LO</sub></strong>) or latent selection (<strong>ISAC<sub>LS</sub></strong>), with one shared step size across all models and benchmarks.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Algorithm 1 -->
+        <div class="result-block full-width" data-animate="fade-up">
+            <div class="figure-frame-glow">
+                <div class="figure-frame figure-frame-padded">
+                    <img src="static/images/algo1.png" alt="Algorithm 1: ISAC with Latent Optimization (ISAC-LO)">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Results ===== -->
+<section class="section section-dark" id="results">
+    <div class="container">
+        <h2 class="section-title" data-animate="fade-up">
+            <span class="section-number">04</span>
+            Results
+        </h2>
+
+        <!-- Highlight Numbers -->
+        <div class="results-highlights" data-animate="fade-up">
+            <div class="highlight-card">
+                <div class="highlight-value">1.9&times;</div>
+                <div class="highlight-metric">Multi-Object Gain</div>
+                <div class="highlight-desc">over the diffusion<br>baseline</div>
+            </div>
+            <div class="highlight-card">
+                <div class="highlight-value">+10%</div>
+                <div class="highlight-metric">vs. Count-Supervised</div>
+                <div class="highlight-desc">accuracy, with<br>no extra training</div>
+            </div>
+            <div class="highlight-card">
+                <div class="highlight-value">52%</div>
+                <div class="highlight-metric">Multi-Class Accuracy</div>
+                <div class="highlight-desc">IntraCompBench on<br>SD3.5-M (vs. 34%)</div>
+            </div>
+            <div class="highlight-card">
+                <div class="highlight-value">3</div>
+                <div class="highlight-metric">Benchmarks</div>
+                <div class="highlight-desc">T2I-CompBench &middot; HRS-Bench<br>&middot; IntraCompBench</div>
+            </div>
+        </div>
+
+        <!-- Main Table -->
+        <div class="result-block full-width" data-animate="fade-up">
+            <h3>Consistent Gains Across Benchmarks and Backbones</h3>
+            <div class="figure-frame-glow">
+                <div class="figure-frame figure-frame-padded">
+                    <img src="static/images/results_table.png" alt="Quantitative comparison on HRS-Bench, T2I-CompBench, and IntraCompBench (Multi-Class)">
+                </div>
+            </div>
+            <p class="figure-caption">
+                <strong>Quantitative comparison on HRS-Bench, T2I-CompBench, and IntraCompBench (Multi-Class).</strong>
+                At inference cost comparable to other attention-control methods, ISAC<sub>LO</sub> outperforms every prior training-free baseline on
+                both SD1.5 and SD3.5-M, with the largest gains in the crowded intra-category regime (e.g., multi-class accuracy 25%&nbsp;&rarr;&nbsp;52% on SD3.5-M).
+            </p>
+        </div>
+
+        <!-- Schedule ablation -->
+        <div class="result-block full-width" data-animate="fade-up">
+            <h3>Why the Order Matters: Instance Before Semantics</h3>
+            <div class="data-table-wrap">
+                <table class="data-table">
+                    <thead>
+                        <tr><th>Loss schedule</th><th>&lambda;<sub>ins</sub>(t)</th><th>&lambda;<sub>sem</sub>(t)</th><th>Multi-Class</th><th>Multi-Instance</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Instance only</td><td>1</td><td>0</td><td>10%</td><td>65%</td></tr>
+                        <tr><td>Semantic only</td><td>0</td><td>1</td><td>28%</td><td>54%</td></tr>
+                        <tr><td>Fixed balance</td><td>0.5</td><td>0.5</td><td>25%</td><td>60%</td></tr>
+                        <tr><td>Semantic &rarr; Instance</td><td>1&minus;t/T</td><td>t/T</td><td>21%</td><td>55%</td></tr>
+                        <tr class="is-ours"><td>Instance &rarr; Semantic (ours)</td><td>t/T</td><td>1&minus;t/T</td><td class="best">36%</td><td class="best">69%</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="figure-caption">
+                <strong>Effect of the loss schedule (SD1.5).</strong>
+                Forming instances first and binding semantics later (our schedule) wins on both metrics. Instance-only cannot assign semantics,
+                and semantic-first is unstable without prior boundary stabilization.
+            </p>
+        </div>
+
+        <!-- vs count-supervised -->
+        <div class="result-block full-width" data-animate="fade-up">
+            <h3>Beats Count-Supervised Methods, Training-Free</h3>
+            <p class="section-lead" style="text-align:center;max-width:840px;margin:0 auto;color:var(--text-secondary);font-size:17px;line-height:1.65;">
+                Given the same instance-count supervision, ISAC<sub>LO</sub> reaches <strong>70%</strong> (SD1.4) and <strong>76%</strong> (SDXL)
+                instance-counting accuracy, surpassing Counting Guidance (49%) and CountGen (69%), with no fine-tuning, no auxiliary networks,
+                and no mask labels. A VLM judge (GPT-5.5) independently reproduces these gains, confirming they are not detector-specific.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Applications ===== -->
+<section class="section" id="applications">
+    <div class="container">
+        <h2 class="section-title" data-animate="fade-up">
+            <span class="section-number">05</span>
+            Applications
+        </h2>
+
+        <!-- Layout-to-Image -->
+        <div class="result-block full-width" data-animate="fade-up">
+            <h3>Layout-to-Image: Carving Dense Masks from Coarse Boxes</h3>
+            <p class="section-lead" style="text-align:center;max-width:880px;margin:0 auto 26px;color:var(--text-secondary);font-size:17px;line-height:1.6;">
+                Applied on top of the GLIGEN controller, ISAC<sub>LO</sub> separates adjacent and overlapping boxes early in the trajectory.
+                On HRS-Bench it lifts counting F1 from <strong>0.666 to 0.713</strong> and color accuracy from <strong>0.307 to 0.452</strong>,
+                beating the layout-refinement baseline CAR&amp;SAR.
+            </p>
+            <div class="figure-frame-glow">
+                <div class="figure-frame figure-frame-padded">
+                    <img src="static/images/app_layout.png" alt="Qualitative examples of applying ISAC to the GLIGEN layout-to-image controller">
+                </div>
+            </div>
+            <p class="figure-caption">
+                <strong>ISAC on GLIGEN.</strong>
+                From coarse, overlapping reference layouts, ISAC carves dense instance masks so neighboring objects stay distinct, where the controller alone merges them.
+            </p>
+        </div>
+
+        <!-- Closing the gap to commercial -->
+        <div class="result-block full-width" data-animate="fade-up" style="margin-top:40px;">
+            <h3>Closing the Gap to Commercial Models</h3>
+            <p class="section-lead" style="text-align:center;max-width:880px;margin:0 auto 26px;color:var(--text-secondary);font-size:17px;line-height:1.6;">
+                Applied to strong open-weight backbones, ISAC<sub>LS</sub> moves Qwen-Image (multi-class <strong>48% &rarr; 56%</strong>) and
+                Flux.2-dev (<strong>88% &rarr; 92%</strong>) toward the upper bound set by GPT-Image-1.5 and Nano Banana 2, with no fine-tuning.
+            </p>
+            <div class="figure-frame-glow">
+                <div class="figure-frame figure-frame-padded">
+                    <img src="static/images/app_commercial.png" alt="Two-dimensional comparison of average performance on IntraCompBench, open-weight + ISAC vs commercial models">
+                </div>
+            </div>
+            <p class="figure-caption">
+                <strong>Open-weight + ISAC moves toward the commercial upper bound.</strong>
+                On IntraCompBench, ISAC<sub>LS</sub> shifts open-weight models up and to the right on both axes, narrowing the gap to closed-source systems.
+            </p>
+            <div class="figure-frame-glow" style="margin-top:22px;">
+                <div class="figure-frame figure-frame-padded">
+                    <img src="static/images/table_commercial.png" alt="Performance comparison between open-weight models equipped with ISAC and commercial models">
+                </div>
+            </div>
+        </div>
+
+        <!-- Latent selection -->
+        <div class="result-block full-width" data-animate="fade-up" style="margin-top:40px;">
+            <h3>Gradient-Free Scaling via Latent Selection (ISAC<sub>LS</sub>)</h3>
+            <p class="section-lead" style="text-align:center;max-width:880px;margin:0 auto 8px;color:var(--text-secondary);font-size:17px;line-height:1.6;">
+                For large backbones where backpropagation is costly, ISAC also works as a <strong>verifier</strong>: score a batch of candidate latents
+                with the ISAC objective and keep the best (best-of-10). This gradient-free variant lifts Flux.1-dev multi-class accuracy from
+                <strong>31% to 51%</strong> with no model gradients.
+            </p>
+            <div class="figure-frame-glow">
+                <div class="figure-frame figure-frame-padded">
+                    <img src="static/images/algo2.png" alt="Algorithm 2: ISAC with Latent Selection (ISAC-LS)">
+                </div>
+            </div>
+            <div class="figure-frame-glow" style="margin-top:18px;">
+                <div class="figure-frame figure-frame-padded">
+                    <img src="static/images/app_selection.png" alt="Qualitative results of latent selection: best vs worst samples scored by the ISAC objective">
+                </div>
+            </div>
+            <p class="figure-caption">
+                <strong>ISAC as a verifier.</strong>
+                The ISAC score cleanly separates good candidates from samples with missing instances or semantic mixing on Flux.1-dev and Qwen-Image.
+            </p>
+        </div>
+
+        <!-- Generality -->
+        <div class="result-block full-width" data-animate="fade-up" style="margin-top:40px;">
+            <h3>Plug-and-Play Across Backbones</h3>
+            <div class="contributions-grid" style="margin-top:8px;">
+                <div class="contrib-card">
+                    <h3>Few-Step Models</h3>
+                    <p>Even under tight 8-step and 4-step budgets, ISAC<sub>LO</sub> boosts multi-class accuracy on <strong>Z-Image-Turbo (48% &rarr; 68%)</strong> and <strong>Flux.2-klein-4B (34% &rarr; 54%)</strong>, confirming suitability for low-latency use.</p>
+                </div>
+                <div class="contrib-card">
+                    <h3>Fine-Tuned Models</h3>
+                    <p>ISAC<sub>LO</sub> is complementary to supervised fine-tuning: stacked on <strong>TokenCompose (8% &rarr; 36%)</strong> and <strong>IterComp (5% &rarr; 30%)</strong>, it further improves multi-class accuracy.</p>
+                </div>
+                <div class="contrib-card">
+                    <h3>Text and Layout</h3>
+                    <p>One objective serves both text-to-image backbones (SD1.5, SD3.5-M, Flux, Qwen-Image) and layout-to-image controllers (GLIGEN), with schedules fixed by design and a single shared step size.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Qualitative Gallery ===== -->
+<section class="section section-dark">
+    <div class="container">
+        <h2 class="section-title" data-animate="fade-up">
+            <span class="section-number">06</span>
+            Qualitative Gallery
+        </h2>
+        <div class="method-overview" data-animate="fade-up">
+            <div class="method-figure">
+                <div class="figure-frame-glow">
+                    <div class="figure-frame figure-frame-padded">
+                        <img src="static/images/gallery.png" alt="Qualitative comparison of attention-control methods on SD1.5 and SD3.5-M">
+                    </div>
+                </div>
+                <p class="figure-caption">
+                    <strong>Across prompts and backbones.</strong>
+                    From simple color-shape pairs to crowded scenes of vehicles and animals, ISAC allocates distinct, spatially coherent instances
+                    to each requested class while keeping their attributes, where InitNO and Self-Cross blur boundaries or merge categories.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Limitation ===== -->
+<section class="section">
+    <div class="container">
+        <h2 class="section-title" data-animate="fade-up">
+            <span class="section-number">07</span>
+            Limitation
+        </h2>
+        <div class="method-overview" data-animate="fade-up">
+            <div class="method-figure">
+                <div class="figure-frame-glow">
+                    <div class="figure-frame figure-frame-padded">
+                        <img src="static/images/limitation.png" alt="Limitation of ISAC: depth ordering through transparent materials">
+                    </div>
+                </div>
+                <p class="figure-caption">
+                    <strong>No explicit 3D understanding.</strong>
+                    ISAC operates on 2D attention, so prompts requiring depth ordering through transparent materials (e.g., <em>&ldquo;two apples behind a glass bottle&rdquo;</em>) remain hard.
+                    3D- and physics-aware extensions are left to future work.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== BibTeX ===== -->
+<section class="section section-dark" id="bibtex">
+    <div class="container">
+        <h2 class="section-title" data-animate="fade-up">
+            <span class="section-number">08</span>
+            Citation
+        </h2>
+        <div class="bibtex-block" data-animate="fade-up">
+            <div class="bibtex-header">
+                <span>BibTeX</span>
+                <button class="copy-btn" onclick="copyBibtex()">
+                    <i class="fa-regular fa-copy"></i>
+                    <span>Copy</span>
+                </button>
+            </div>
+            <pre class="bibtex-code" id="bibtexCode">@article{jo2025isac,
+  title   = {ISAC: Training-Free Instance-to-Semantic Attention Control for Multi-Instance Generation},
+  author  = {Jo, Sanghyun and Lee, Wooyeol and Lee, Ziseok and Choi, Jonghyun and Park, Jaesik and Kim, Kyungsu},
+  journal = {arXiv preprint arXiv:2505.20935},
+  year    = {2025}
+}</pre>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Footer ===== -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-left">
+                <span class="footer-logo" style="letter-spacing:1px;">ISAC</span>
+                <span class="footer-venue">arXiv:2505.20935 &middot; Under Review</span>
+            </div>
+            <div class="footer-right">
+                <p>Template inspired by <a href="https://nerfies.github.io" target="_blank">Nerfies</a>. Licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">CC BY-SA 4.0</a>.</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script>
+// ===== Copy BibTeX =====
+function copyBibtex() {
+    const text = document.getElementById('bibtexCode').textContent;
+    navigator.clipboard.writeText(text).then(() => {
+        const btn = document.querySelector('.copy-btn span');
+        btn.textContent = 'Copied!';
+        setTimeout(() => btn.textContent = 'Copy', 2000);
+    });
+}
+
+// ===== Floating Nav =====
+const nav = document.getElementById('floatingNav');
+window.addEventListener('scroll', () => {
+    nav.classList.toggle('visible', window.scrollY > 600);
+});
+
+// ===== Scroll Animations =====
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const delay = entry.target.dataset.delay || 0;
+            setTimeout(() => {
+                entry.target.classList.add('animate-in');
+            }, parseInt(delay));
+            observer.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+document.querySelectorAll('[data-animate]').forEach(el => observer.observe(el));
+
+// ===== Particle Background =====
+(function() {
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    const container = document.getElementById('particles');
+    container.appendChild(canvas);
+
+    let w, h, particles = [];
+
+    function resize() {
+        w = canvas.width = container.offsetWidth;
+        h = canvas.height = container.offsetHeight;
+    }
+
+    function createParticles() {
+        particles = [];
+        const count = Math.floor((w * h) / 15000);
+        for (let i = 0; i < count; i++) {
+            particles.push({
+                x: Math.random() * w,
+                y: Math.random() * h,
+                vx: (Math.random() - 0.5) * 0.3,
+                vy: (Math.random() - 0.5) * 0.3,
+                r: Math.random() * 1.5 + 0.5,
+                o: Math.random() * 0.3 + 0.1
+            });
+        }
+    }
+
+    function draw() {
+        ctx.clearRect(0, 0, w, h);
+        particles.forEach(p => {
+            p.x += p.vx;
+            p.y += p.vy;
+            if (p.x < 0 || p.x > w) p.vx *= -1;
+            if (p.y < 0 || p.y > h) p.vy *= -1;
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(212, 175, 55, ${p.o})`;
+            ctx.fill();
+        });
+
+        for (let i = 0; i < particles.length; i++) {
+            for (let j = i + 1; j < particles.length; j++) {
+                const dx = particles[i].x - particles[j].x;
+                const dy = particles[i].y - particles[j].y;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                if (dist < 120) {
+                    ctx.beginPath();
+                    ctx.moveTo(particles[i].x, particles[i].y);
+                    ctx.lineTo(particles[j].x, particles[j].y);
+                    ctx.strokeStyle = `rgba(212, 175, 55, ${0.06 * (1 - dist / 120)})`;
+                    ctx.lineWidth = 0.5;
+                    ctx.stroke();
+                }
+            }
+        }
+        requestAnimationFrame(draw);
+    }
+
+    resize();
+    createParticles();
+    draw();
+    window.addEventListener('resize', () => { resize(); createParticles(); });
+})();
+</script>
+
+</body>
+</html>
