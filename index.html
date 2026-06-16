@@ -137,6 +137,32 @@
         .pub-link{font-family:var(--font-mono);font-size:0.74rem;padding:0.3em 0.7em;border-radius:5px;background:var(--bg-secondary);border:1px solid var(--border);color:var(--text-secondary);transition:all 0.3s;display:inline-flex;align-items:center;gap:0.3em}
         .pub-link:hover{border-color:var(--gold-dim);color:var(--gold);background:var(--gold-dim)}
 
+        /* Industry Impact */
+        .impact-intro{color:var(--text-secondary);font-size:1rem;max-width:790px;margin:-0.6rem 0 2rem;opacity:0;transform:translateY(20px)}
+        .impact-intro.animate-in{opacity:1;transform:none;transition:opacity 0.5s ease,transform 0.5s ease}
+        .impact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.2rem}
+        .impact-card{display:flex;flex-direction:column;padding:1.5rem;background:var(--bg-card);border:1px solid var(--border);border-radius:14px;opacity:0;transform:translateY(20px)}
+        .impact-card.animate-in{opacity:1;transform:none;transition:opacity 0.5s ease,transform 0.5s ease,border-color 0.3s,background 0.3s}
+        .impact-card:hover{border-color:var(--gold-dim);background:var(--bg-card-hover)}
+        .impact-logos{display:flex;flex-wrap:wrap;gap:0.4rem;align-items:center;margin-bottom:0.95rem}
+        .brand{font-family:var(--font-display);font-size:0.8rem;font-weight:700;letter-spacing:0.01em;padding:0.2em 0.6em;border-radius:6px;background:var(--bg-secondary);border:1px solid var(--border);line-height:1.35;white-space:nowrap;color:var(--text-secondary)}
+        .brand-naver{color:#06c167}
+        .brand-samsung{color:#7fa8e8}
+        .brand-yonhap{color:#9fb4d0}
+        .brand-soop{color:#4fa8ff}
+        .brand-skt{color:#f0654e}
+        .brand-jtbc{color:#e58aae}
+        .brand-sbs{color:#5bc0be}
+        .brand-kwater{color:#3fb0de}
+        .brand-police{color:#6e8fe0}
+        .brand-eyenix{color:#c2a85a}
+        .impact-title{font-family:var(--font-display);font-size:1.18rem;font-weight:700;color:var(--text-primary);margin-bottom:0.5rem}
+        .impact-desc{font-size:0.9rem;color:var(--text-secondary);line-height:1.62}
+        .deploy-tag{font-family:var(--font-mono);font-size:0.6rem;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;padding:0.2em 0.55em;border-radius:4px;vertical-align:middle;margin-left:0.45rem;line-height:1.5;white-space:nowrap}
+        .deploy-cloud{background:rgba(91,143,212,0.14);color:#83aaea;border:1px solid rgba(91,143,212,0.4)}
+        .deploy-hybrid{background:rgba(91,192,190,0.13);color:#6fcfcc;border:1px solid rgba(91,192,190,0.4)}
+        .deploy-onprem{background:var(--gold-dim);color:var(--gold-light);border:1px solid var(--gold-dim)}
+
         /* Services & Awards */
         .dual-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem}
         .info-block-title{font-family:var(--font-display);font-size:1.6rem;font-weight:700;color:var(--text-primary);margin-bottom:1.3rem;padding-bottom:0.7rem;border-bottom:1px solid var(--border)}
@@ -208,6 +234,7 @@
             <a href="#publications">Publications</a>
             <a href="#under-review">Under Review</a>
             <a href="#preprints">Preprints</a>
+            <a href="#impact">Impact</a>
             <a href="#services">Services</a>
             <a href="#awards">Awards</a>
         </div>
@@ -545,6 +572,67 @@
                         <a href="https://github.com/shjo-april/RecurSeed_and_EdgePredictMix" target="_blank" class="pub-link"><i class="fa-brands fa-github"></i> Code</a>
                     </div>
                 </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ===== Industry Impact ===== -->
+<section class="section" id="impact">
+    <div class="container">
+        <div class="section-header" data-animate>
+            <h2 class="section-title">From AI Research to Industry Impact</h2>
+        </div>
+        <p class="impact-intro" data-animate>I take state-of-the-art models from publication to production, building and deploying them across both cloud and on-premise systems at major platforms, broadcasters, and public institutions.</p>
+        <div class="impact-grid">
+
+            <div class="impact-card" data-animate>
+                <div class="impact-logos">
+                    <span class="brand brand-naver">NAVER</span>
+                    <span class="brand brand-samsung">SAMSUNG</span>
+                    <span class="brand brand-yonhap">Yonhap News</span>
+                </div>
+                <div class="impact-title">Content Tagging API <span class="deploy-tag deploy-cloud">Cloud &middot; SaaS</span></div>
+                <div class="impact-desc">Image and video tagging behind content search, auto-tagging tens of millions of images per day across 10 languages, with multi-year contract renewals.</div>
+            </div>
+
+            <div class="impact-card" data-animate data-delay="60">
+                <div class="impact-logos">
+                    <span class="brand brand-naver">NAVER</span>
+                    <span class="brand brand-soop">SOOP</span>
+                    <span class="brand brand-skt">SKT Chat+</span>
+                </div>
+                <div class="impact-title">Market Content Moderation <span class="deploy-tag deploy-cloud">Cloud</span></div>
+                <div class="impact-desc">Automated review and filtering across the OGQ Markets, screening 59M+ creator assets for quality, trend fit, and copyright and abuse without manual review.</div>
+            </div>
+
+            <div class="impact-card" data-animate data-delay="120">
+                <div class="impact-logos">
+                    <span class="brand brand-jtbc">JTBC</span>
+                    <span class="brand brand-sbs">SBS</span>
+                </div>
+                <div class="impact-title">Broadcast Generative AI <span class="deploy-tag deploy-hybrid">Cloud &middot; On-Prem</span></div>
+                <div class="impact-desc">Generative pipelines for broadcast video de-identification and AI virtual advertising (PPL), cutting post-production cost by about 35%.</div>
+            </div>
+
+            <div class="impact-card" data-animate data-delay="180">
+                <div class="impact-logos">
+                    <span class="brand brand-kwater">K-water</span>
+                    <span class="brand brand-police">Korean National Police Agency</span>
+                </div>
+                <div class="impact-title">Public-Safety Video Analytics <span class="deploy-tag deploy-onprem">On-Premise</span></div>
+                <div class="impact-desc">On-premise intelligent video analytics across 42 nationwide sites with 5 KISA performance certifications, plus drone-based real-time analysis for public safety.</div>
+            </div>
+
+            <div class="impact-card" data-animate data-delay="240">
+                <div class="impact-logos">
+                    <span class="brand brand-eyenix">EYENIX</span>
+                </div>
+                <div class="impact-title">Edge AI &amp; Model Compression <span class="deploy-tag deploy-onprem">Edge &middot; On-Device</span></div>
+                <div class="impact-desc">NPU model compression and lightweighting for edge-camera SoCs, enabling real-time inference directly on resource-constrained devices.</div>
             </div>
 
         </div>
