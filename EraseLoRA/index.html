@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" type="image/svg+xml" href="./static/images/star.svg">
+    <link rel="apple-touch-icon" href="./static/images/star.svg">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EraseLoRA: MLLM-Driven Foreground Exclusion and Background Subtype Aggregation for Dataset-Free Object Removal</title>
+    <meta name="description" content="EraseLoRA: a dataset-free object removal framework that replaces attention surgery with MLLM-driven background-aware reasoning and test-time adaptation.">
+    <meta name="keywords" content="EraseLoRA, object removal, multimodal large-language model, MLLM, test-time adaptation, dataset-free, diffusion, background-aware, inpainting">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="EraseLoRA: MLLM-Driven Foreground Exclusion and Background Subtype Aggregation for Dataset-Free Object Removal">
+    <meta property="og:description" content="Replace attention surgery with background-aware reasoning: separate target, non-target foregrounds, and clean background, then aggregate background subtypes at test time. Dataset-free.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://shjo-april.github.io/EraseLoRA">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400&family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <!-- Academicons & Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.4/css/academicons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <link rel="stylesheet" href="static/css/style.css">
+</head>
+<body>
+
+<!-- ===== Floating Nav ===== -->
+<nav class="floating-nav" id="floatingNav">
+    <div class="nav-inner">
+        <span class="nav-logo" style="letter-spacing:1px;">EraseLoRA</span>
+        <div class="nav-links">
+            <a href="#abstract">Abstract</a>
+            <a href="#method">Method</a>
+            <a href="#results">Results</a>
+            <a href="#bibtex">BibTeX</a>
+        </div>
+    </div>
+</nav>
+
+<!-- ===== Hero Section ===== -->
+<header class="hero">
+    <div class="hero-particles" id="particles"></div>
+    <div class="hero-gradient"></div>
+    <div class="hero-content">
+        <!-- Status Badge -->
+        <div class="oral-badge" data-animate="fade-down">
+            <div class="oral-badge-glow"></div>
+            <div class="oral-badge-inner">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                </svg>
+                <span>ECCV 2026</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                </svg>
+            </div>
+        </div>
+
+        <h1 class="hero-title" data-animate="fade-up">
+            <span class="title-trace" style="font-size:clamp(44px,7vw,92px);letter-spacing:3px;">EraseLoRA</span>
+            <span class="title-separator"></span>
+            <span class="title-sub" style="font-size:clamp(16px,2.5vw,24px);">MLLM-Driven Foreground Exclusion and Background Subtype Aggregation<br>for Dataset-Free Object Removal</span>
+        </h1>
+
+        <!-- Authors -->
+        <div class="authors" data-animate="fade-up" data-delay="200">
+            <div class="author-row">
+                <span class="author"><a href="https://shjo-april.github.io/" target="_blank">Sanghyun Jo</a><sup>1,2&#8902;&#8224;</sup></span>
+                <span class="author"><a href="https://tdrlee.github.io/" target="_blank">Donghwan Lee</a><sup>2&#8902;</sup></span>
+                <span class="author">Eunji Jung<sup>2&#8902;</sup></span>
+                <span class="author">Seong Je Oh<sup>2</sup></span>
+                <span class="author"><a href="https://aibl.snu.ac.kr/team/pi-information" target="_blank">Kyungsu Kim</a><sup>2&#8224;</sup></span>
+            </div>
+            <div class="affiliation-row">
+                <span><sup>1</sup>OGQ</span>
+                <span><sup>2</sup>Seoul National University</span>
+            </div>
+            <div class="author-note">
+                <span><sup>&#8902;</sup>Equal contribution</span>
+                <span><sup>&#8224;</sup>Corresponding authors</span>
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="hero-actions" data-animate="fade-up" data-delay="300">
+            <a href="./static/data/EraseLoRA_camera-ready.pdf" target="_blank" class="btn btn-primary">
+                <i class="fa-solid fa-file-pdf"></i>
+                <span>Paper</span>
+            </a>
+            <a href="https://arxiv.org/abs/2512.21545" target="_blank" class="btn btn-secondary">
+                <i class="ai ai-arxiv"></i>
+                <span>arXiv</span>
+            </a>
+            <a href="javascript:void(0)" class="btn btn-secondary btn-disabled" aria-disabled="true" tabindex="-1" title="Coming soon">
+                <i class="fa-brands fa-github"></i>
+                <span>Code<br><small>(Coming Soon)</small></span>
+            </a>
+        </div>
+    </div>
+
+    <div class="hero-scroll-hint">
+        <span>Scroll to explore</span>
+        <div class="scroll-arrow"></div>
+    </div>
+</header>
+
+<!-- ===== Hero Demo: Teaser ===== -->
+<section class="section">
+    <div class="container">
+        <div class="method-overview" data-animate="fade-up">
+            <div class="method-figure">
+                <div class="figure-frame-glow">
+                    <div class="figure-frame figure-frame-padded">
+                        <img src="static/images/teaser.jpg" alt="Qualitative comparison with prior dataset-free object removal methods: DesignEdit, AttentiveEraser, and EraseLoRA" style="width:100%;height:auto;display:block;">
+                    </div>
+                </div>
+                <p class="figure-caption">
+                    <strong>Prior dataset-free methods regenerate non-target objects; EraseLoRA excludes them.</strong>
+                    Previous state-of-the-art approaches treat only the masked region as foreground, misinterpreting non-target objects as background and regenerating them.
+                    EraseLoRA identifies and excludes non-target foregrounds and reconstructs the masked region from diverse background subtypes, enabling faithful removal.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== TL;DR / Key Insight ===== -->
+<section class="section tldr-section">
+    <div class="container">
+        <div class="tldr-card" data-animate="fade-up">
+            <div class="tldr-icon">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                </svg>
+            </div>
+            <h2 class="tldr-label">Key Insight</h2>
+            <p class="tldr-text">
+                Prior dataset-free removal performs <strong>attention surgery</strong>, blocking the diffusion model's self-attention inside the mask so it ignores the target.
+                But this has no notion of <em>what the background actually is</em>: it regenerates non-target objects it mistakes for background, and blurs across distinct background subtypes.
+                <strong>EraseLoRA replaces attention surgery with explicit background-aware reasoning</strong>: a multimodal LLM separates target, non-target foregrounds, and clean background,
+                and test-time optimization aggregates background subtypes as complementary pieces, all with <strong>no training data</strong>.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Motivation ===== -->
+<section class="section section-dark">
+    <div class="container">
+        <h2 class="section-title" data-animate="fade-up">
+            Motivation
+        </h2>
+        <p class="section-lead" data-animate="fade-up" style="text-align:center;max-width:900px;margin:-12px auto 32px;font-size:18px;color:var(--text-secondary);line-height:1.6;">
+            Object removal is not hole-filling. It must <strong>prevent the masked target from reappearing</strong> and
+            <strong>reconstruct the occluded background</strong> with structural and contextual fidelity. Recent dataset-free methods
+            redirect self-attention away from the mask, but fail in two ways rooted in the same cause: the absence of explicit background-aware reasoning.
+        </p>
+        <div class="method-overview" data-animate="fade-up" style="margin-bottom:36px;">
+            <div class="method-figure">
+                <div class="figure-frame-glow">
+                    <div class="figure-frame figure-frame-padded">
+                        <img src="static/images/motivation.jpg" alt="Artifacts from attention manipulation by prior dataset-free methods">
+                    </div>
+                </div>
+                <p class="figure-caption">
+                    <strong>Artifacts from attention manipulation.</strong>
+                    Recent dataset-free methods directly modify attention inside the mask without identifying background cues, leaving residual structure and blurred, misaligned reconstructions.
+                </p>
+            </div>
+        </div>
+        <div class="contributions-grid">
+            <div class="contrib-card" data-animate="fade-up" data-delay="0">
+                <h3>Failure 1 &middot; Non-Target Re-generation</h3>
+                <p>Treating the masked region as the <em>sole</em> foreground, prior methods misinterpret non-target objects outside the mask as background and regenerate them, producing unwanted content.</p>
+            </div>
+            <div class="contrib-card" data-animate="fade-up" data-delay="100">
+                <h3>Failure 2 &middot; Background Blurring</h3>
+                <p>Applying uniform attention constraints without distinguishing diverse background subtypes blurs textures and misaligns structure at the boundaries between disparate regions.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Abstract ===== -->
+<section class="section" id="abstract">
+    <div class="container">
+        <h2 class="section-title" data-animate="fade-up">
+            <span class="section-number">01</span>
+            Abstract
+        </h2>
+        <div class="abstract-content" data-animate="fade-up">
+            <p>
+                Object removal must prevent the masked target from reappearing and reconstruct the occluded background with structural and
+                contextual fidelity, rather than merely filling a hole plausibly. Recent dataset-free approaches manipulate the diffusion model's
+                internal self-attention to prevent it from referencing the masked region, yet they fail in two critical ways: (i) they treat the
+                masked region as the sole foreground, misinterpreting non-target objects as background and regenerating them, and (ii) they apply
+                uniform attention constraints without distinguishing diverse background subtypes, leading to textural blurring and structural
+                misalignment. Both failures stem from the absence of explicit background-aware reasoning.
+            </p>
+            <p>
+                We propose <strong>EraseLoRA</strong>, a dataset-free framework that replaces attention surgery with background-aware reasoning and
+                test-time adaptation. The first stage, <strong>Background-aware Foreground Exclusion (BFE)</strong>, leverages a multimodal
+                large-language model to separate target foreground, non-target foregrounds, and clean background from a single image-mask pair.
+                The second stage, <strong>Background-aware Reconstruction with Subtype Aggregation (BRSA)</strong>, performs test-time optimization
+                that treats inferred background subtypes as complementary pieces, enforcing their consistent integration through reconstruction and
+                alignment objectives without explicit attention intervention.
+            </p>
+            <p>
+                As a model-agnostic plug-in applicable to diverse diffusion backbones, EraseLoRA reconstructs backgrounds at least <strong>23% more
+                faithful</strong> to the original scene than previous dataset-free methods while <strong>nearly halving</strong> unwanted foreground
+                re-generation, and surpasses all dataset-driven approaches in both aspects despite requiring <strong>no training data</strong>.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Contributions ===== -->
+<section class="section section-dark">
+    <div class="container">
+        <h2 class="section-title" data-animate="fade-up">
+            <span class="section-number">02</span>
+            Contributions
+        </h2>
+        <div class="contributions-grid">
+            <div class="contrib-card" data-animate="fade-up" data-delay="0">
+                <div class="contrib-number">&#9312;</div>
+                <h3>Background-aware Reasoning</h3>
+                <p>We identify that dataset-free object removal fails for lack of explicit background reasoning, and replace fragile <em>attention surgery</em> with a reasoning-driven, test-time framework that needs no training data.</p>
+            </div>
+            <div class="contrib-card" data-animate="fade-up" data-delay="100">
+                <div class="contrib-number">&#9313;</div>
+                <h3>Foreground Exclusion (BFE)</h3>
+                <p>An MLLM separates <strong>target foreground</strong>, <strong>non-target foregrounds</strong>, and <strong>clean background</strong> from a single image-mask pair, so non-target objects are excluded rather than regenerated.</p>
+            </div>
+            <div class="contrib-card" data-animate="fade-up" data-delay="200">
+                <div class="contrib-number">&#9314;</div>
+                <h3>Subtype Aggregation (BRSA)</h3>
+                <p>Test-time optimization treats inferred <strong>background subtypes as complementary pieces</strong>, integrating them through reconstruction and alignment objectives, without any explicit attention intervention.</p>
+            </div>
+        </div>
+
+        <div class="result-block full-width" data-animate="fade-up" style="margin-top:44px;">
+            <h3>How EraseLoRA Differs</h3>
+            <div class="figure-frame-glow">
+                <div class="figure-frame figure-frame-padded">
+                    <img src="static/images/tbl_concept.png" alt="Conceptual comparison of EraseLoRA with previous object removal approaches">
+                </div>
+            </div>
+            <p class="figure-caption">
+                <strong>Conceptual comparison.</strong>
+                EraseLoRA is the only dataset-free method that identifies non-target foregrounds, leverages multiple background subtypes, and stays model-agnostic.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Method ===== -->
+<section class="section" id="method">
+    <div class="container">
+        <h2 class="section-title" data-animate="fade-up">
+            <span class="section-number">03</span>
+            Method
+        </h2>
+        <p class="section-lead" data-animate="fade-up" style="text-align:center;max-width:900px;margin:-12px auto 32px;font-size:18px;color:var(--text-secondary);line-height:1.6;">
+            EraseLoRA runs in two stages: first <strong style="color:var(--gold);">reason about the scene</strong> to decide what is foreground vs. background,
+            then <strong style="color:var(--gold);">reconstruct</strong> the masked region by aggregating background subtypes at test time.
+        </p>
+
+        <div class="method-overview" data-animate="fade-up" style="margin-bottom:8px;">
+            <div class="method-figure">
+                <div class="figure-frame-glow">
+                    <div class="figure-frame figure-frame-padded">
+                        <img src="static/images/method.png" alt="Overview of EraseLoRA: Stage 1 Background-aware Foreground Exclusion and Stage 2 Background-aware Reconstruction with Subtype Aggregation">
+                    </div>
+                </div>
+                <p class="figure-caption">
+                    <strong>Overview of EraseLoRA.</strong>
+                    Stage 1 (BFE) separates target foreground, non-target foregrounds, and background from a single image-mask pair using an MLLM.
+                    Stage 2 (BRSA) performs test-time optimization that aggregates inferred background subtypes as complementary pieces.
+                </p>
+            </div>
+        </div>
+
+        <div class="method-steps">
+            <div class="method-step" data-animate="fade-up">
+                <div class="step-connector"></div>
+                <div class="step-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+                </div>
+                <div class="step-content">
+                    <h3>Stage 1 &middot; Background-aware Foreground Exclusion (BFE)</h3>
+                    <p>From a single image-mask pair, a multimodal large-language model partitions the scene into the <em>target foreground</em> to remove, <em>non-target foregrounds</em> that must be preserved, and the <em>clean background</em> available for reconstruction. By explicitly excluding non-target foregrounds, BFE stops the diffusion model from mistaking other objects for background and regenerating them.</p>
+                </div>
+            </div>
+            <div class="method-step" data-animate="fade-up">
+                <div class="step-connector"></div>
+                <div class="step-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+                </div>
+                <div class="step-content">
+                    <h3>Stage 2 &middot; Background-aware Reconstruction with Subtype Aggregation (BRSA)</h3>
+                    <p>Rather than constraining attention uniformly, BRSA treats the inferred background subtypes as complementary pieces and performs test-time optimization that enforces their consistent integration through reconstruction and alignment objectives. This preserves local detail within each subtype and coherent structure across subtype boundaries, with no explicit attention intervention.</p>
+                </div>
+            </div>
+            <div class="method-step" data-animate="fade-up">
+                <div class="step-connector"></div>
+                <div class="step-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                </div>
+                <div class="step-content">
+                    <h3>Model-agnostic Plug-in</h3>
+                    <p>EraseLoRA requires no training data and adds no auxiliary networks to the backbone. It plugs into diverse diffusion backbones as a test-time procedure, making background-aware removal broadly applicable.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="result-block full-width" data-animate="fade-up" style="margin-top:44px;">
+            <h3>How the MLLM Reasons About the Scene</h3>
+            <div class="figure-frame-glow">
+                <div class="figure-frame figure-frame-padded">
+                    <img src="static/images/reasoning.png" alt="Background-aware reasoning of the MLLM for object removal versus prior MLLM use in image generation">
+                </div>
+            </div>
+            <p class="figure-caption">
+                <strong>Background-aware reasoning power of the MLLM.</strong>
+                Unlike prior work that uses MLLMs to reason over the visible scene for generation, EraseLoRA prompts the MLLM to infer which foreground and background tags lie behind the target, then extracts their masks.
+            </p>
+        </div>
+
+        <div class="result-block full-width" data-animate="fade-up" style="margin-top:40px;">
+            <h3>Stage 1 &middot; Excluding Non-Target Foregrounds</h3>
+            <div class="figure-frame-glow">
+                <div class="figure-frame figure-frame-padded">
+                    <img src="static/images/foreground.jpg" alt="Identification of non-target foregrounds by EraseLoRA versus prior methods">
+                </div>
+            </div>
+            <p class="figure-caption">
+                <strong>Identification of non-target foregrounds.</strong>
+                Prior methods treat the entire unmasked region as background, causing regeneration of non-target objects. EraseLoRA separates target foreground, non-target foregrounds, and clean background.
+            </p>
+        </div>
+
+        <div class="result-block full-width" data-animate="fade-up" style="margin-top:40px;">
+            <h3>Stage 2 &middot; Aggregating Background Subtypes</h3>
+            <div class="figure-frame-glow">
+                <div class="figure-frame figure-frame-padded">
+                    <img src="static/images/puzzle.jpg" alt="Effect of the background puzzle loss: each background subtype flows into the mask as a complementary piece">
+                </div>
+            </div>
+            <p class="figure-caption">
+                <strong>Effect of the background puzzle loss.</strong>
+                Each background subtype flows into the mask as a complementary piece, and a reconstruction-and-alignment objective integrates them into a coherent background.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Results ===== -->
+<section class="section section-dark" id="results">
+    <div class="container">
+        <h2 class="section-title" data-animate="fade-up">
+            <span class="section-number">04</span>
+            Results
+        </h2>
+
+        <!-- Highlight Numbers -->
+        <div class="results-highlights" data-animate="fade-up">
+            <div class="highlight-card">
+                <div class="highlight-value">&ge;23%</div>
+                <div class="highlight-metric">More Faithful Background</div>
+                <div class="highlight-desc">vs. prior<br>dataset-free methods</div>
+            </div>
+            <div class="highlight-card">
+                <div class="highlight-value">&asymp;&frac12;</div>
+                <div class="highlight-metric">Foreground Re-generation</div>
+                <div class="highlight-desc">unwanted re-generation<br>nearly halved</div>
+            </div>
+            <div class="highlight-card">
+                <div class="highlight-value">0</div>
+                <div class="highlight-metric">Training Data</div>
+                <div class="highlight-desc">fully<br>dataset-free</div>
+            </div>
+            <div class="highlight-card">
+                <div class="highlight-value">MLLM</div>
+                <div class="highlight-metric">Background-aware</div>
+                <div class="highlight-desc">reasoning, not<br>attention surgery</div>
+            </div>
+        </div>
+
+        <div class="result-block full-width" data-animate="fade-up">
+            <h3>Quantitative Comparison</h3>
+            <div class="figure-frame-glow">
+                <div class="figure-frame figure-frame-padded">
+                    <img src="static/images/tbl_main.png" alt="Quantitative comparison with previous state-of-the-art methods on OpenImages V7 and RORD">
+                </div>
+            </div>
+            <p class="figure-caption">
+                <strong>Quantitative comparison on OpenImages V7 and RORD.</strong>
+                EraseLoRA leads all dataset-free methods on background similarity (BG Sim.) and foreground similarity (FG Sim.), and surpasses dataset-driven methods, with no training data. Higher BG Sim. and lower FG Sim. are better.
+            </p>
+        </div>
+
+        <div class="result-block full-width" data-animate="fade-up" style="margin-top:40px;">
+            <h3>Qualitative Comparison</h3>
+            <div class="figure-frame-glow">
+                <div class="figure-frame figure-frame-padded">
+                    <img src="static/images/gallery.jpg" alt="Qualitative comparison on OpenImages V7 and RORD against dataset-driven and dataset-free object removal methods">
+                </div>
+            </div>
+            <p class="figure-caption">
+                <strong>Qualitative comparison on OpenImages V7 and RORD.</strong>
+                Without any paired data, EraseLoRA avoids unwanted background changes and non-target regeneration, matching or surpassing dataset-driven methods.
+            </p>
+        </div>
+
+        <div class="result-block full-width" data-animate="fade-up" style="margin-top:40px;">
+            <h3>Beats Dataset-Driven Methods, Without Any Training Data</h3>
+            <p class="section-lead" style="text-align:center;max-width:880px;margin:0 auto;color:var(--text-secondary);font-size:17px;line-height:1.65;">
+                Across diffusion backbones, EraseLoRA reconstructs backgrounds at least <strong>23% more faithful</strong> to the original scene than
+                previous dataset-free methods, while <strong>nearly halving</strong> unwanted foreground re-generation. It surpasses all
+                dataset-driven approaches on both axes, despite using <strong>no training data, no auxiliary networks, and no attention surgery</strong>.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Analysis & Ablations ===== -->
+<section class="section" id="analysis">
+    <div class="container">
+        <h2 class="section-title" data-animate="fade-up">
+            <span class="section-number">05</span>
+            Analysis &amp; Ablations
+        </h2>
+
+        <div class="result-block full-width" data-animate="fade-up">
+            <h3>Effect of Foreground Exclusion (BFE)</h3>
+            <div class="figure-frame-glow">
+                <div class="figure-frame figure-frame-padded">
+                    <img src="static/images/bfe_effect.jpg" alt="Effect of BFE on prior methods and EraseLoRA in occlusion cases">
+                </div>
+            </div>
+            <p class="figure-caption">
+                <strong>Foreground exclusion prevents non-target regeneration.</strong>
+                Adding BFE to prior dataset-free methods suppresses regeneration of non-target objects, and EraseLoRA stays robust in occlusion cases.
+            </p>
+        </div>
+
+        <div class="result-block full-width" data-animate="fade-up" style="margin-top:40px;">
+            <h3>Ablation: Foreground Exclusion and Loss Components</h3>
+            <div class="figure-frame-glow">
+                <div class="figure-frame figure-frame-padded">
+                    <img src="static/images/tbl_bfe.png" alt="Ablation of non-target foreground exclusion and BRSA loss components">
+                </div>
+            </div>
+            <p class="figure-caption">
+                <strong>Each component helps.</strong>
+                (Left) Adding BFE to prior methods improves both background and foreground similarity. (Right) Combining the reconstruction and puzzle losses in BRSA yields the most faithful reconstruction.
+            </p>
+        </div>
+
+        <div class="result-block full-width" data-animate="fade-up" style="margin-top:40px;">
+            <h3>Loss Components in BRSA</h3>
+            <div class="figure-frame-glow">
+                <div class="figure-frame figure-frame-padded">
+                    <img src="static/images/loss_components.jpg" alt="Visualization of reconstruction and puzzle loss components in BRSA">
+                </div>
+            </div>
+            <p class="figure-caption">
+                <strong>Reconstruction preserves structure; the puzzle loss completes the mask.</strong>
+                Using both objectives together yields a coherent background reconstruction inside the masked region.
+            </p>
+        </div>
+
+        <div class="result-block full-width" data-animate="fade-up" style="margin-top:40px;">
+            <h3>Applicability Across MLLMs and Tag2Mask Models</h3>
+            <div class="figure-frame-glow">
+                <div class="figure-frame figure-frame-padded">
+                    <img src="static/images/tbl_applic.png" alt="Applicability of EraseLoRA across different MLLMs and Tag2Mask models">
+                </div>
+            </div>
+            <p class="figure-caption">
+                <strong>Robust to component choices.</strong>
+                EraseLoRA remains effective across a range of MLLMs and Tag2Mask segmentation models, confirming it is not tied to a specific backbone.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Applications ===== -->
+<section class="section section-dark" id="applications">
+    <div class="container">
+        <h2 class="section-title" data-animate="fade-up">
+            <span class="section-number">06</span>
+            Applications
+        </h2>
+
+        <div class="result-block full-width" data-animate="fade-up">
+            <h3>Interactive Control</h3>
+            <div class="figure-frame-glow">
+                <div class="figure-frame figure-frame-padded">
+                    <img src="static/images/interactive.jpg" alt="Interactive control: users generate customized non-target foreground masks for BFE from manual points">
+                </div>
+            </div>
+            <p class="figure-caption">
+                <strong>User-guided foreground exclusion.</strong>
+                An interactive interface lets users generate customized non-target foreground masks for BFE from manual points, giving fine control over what is preserved.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- ===== BibTeX ===== -->
+<section class="section" id="bibtex">
+    <div class="container">
+        <h2 class="section-title" data-animate="fade-up">
+            <span class="section-number">07</span>
+            Citation
+        </h2>
+        <div class="bibtex-block" data-animate="fade-up">
+            <div class="bibtex-header">
+                <span>BibTeX</span>
+                <button class="copy-btn" onclick="copyBibtex()">
+                    <i class="fa-regular fa-copy"></i>
+                    <span>Copy</span>
+                </button>
+            </div>
+            <pre class="bibtex-code" id="bibtexCode">@inproceedings{jo2026eraselora,
+  title     = {EraseLoRA: MLLM-Driven Foreground Exclusion and Background Subtype Aggregation for Dataset-Free Object Removal},
+  author    = {Jo, Sanghyun and Lee, Donghwan and Jung, Eunji and Oh, Seong Je and Kim, Kyungsu},
+  booktitle = {European Conference on Computer Vision (ECCV)},
+  year      = {2026}
+}</pre>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Footer ===== -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-left">
+                <span class="footer-logo" style="letter-spacing:1px;">EraseLoRA</span>
+                <span class="footer-venue">ECCV 2026 &middot; arXiv:2512.21545</span>
+            </div>
+            <div class="footer-right">
+                <p>Template inspired by <a href="https://nerfies.github.io" target="_blank">Nerfies</a>. Licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">CC BY-SA 4.0</a>.</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script>
+// ===== Copy BibTeX =====
+function copyBibtex() {
+    const text = document.getElementById('bibtexCode').textContent;
+    navigator.clipboard.writeText(text).then(() => {
+        const btn = document.querySelector('.copy-btn span');
+        btn.textContent = 'Copied!';
+        setTimeout(() => btn.textContent = 'Copy', 2000);
+    });
+}
+
+// ===== Floating Nav =====
+const nav = document.getElementById('floatingNav');
+window.addEventListener('scroll', () => {
+    nav.classList.toggle('visible', window.scrollY > 600);
+});
+
+// ===== Scroll Animations =====
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const delay = entry.target.dataset.delay || 0;
+            setTimeout(() => {
+                entry.target.classList.add('animate-in');
+            }, parseInt(delay));
+            observer.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+document.querySelectorAll('[data-animate]').forEach(el => observer.observe(el));
+
+// ===== Particle Background =====
+(function() {
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    const container = document.getElementById('particles');
+    container.appendChild(canvas);
+
+    let w, h, particles = [];
+
+    function resize() {
+        w = canvas.width = container.offsetWidth;
+        h = canvas.height = container.offsetHeight;
+    }
+
+    function createParticles() {
+        particles = [];
+        const count = Math.floor((w * h) / 15000);
+        for (let i = 0; i < count; i++) {
+            particles.push({
+                x: Math.random() * w,
+                y: Math.random() * h,
+                vx: (Math.random() - 0.5) * 0.3,
+                vy: (Math.random() - 0.5) * 0.3,
+                r: Math.random() * 1.5 + 0.5,
+                o: Math.random() * 0.3 + 0.1
+            });
+        }
+    }
+
+    function draw() {
+        ctx.clearRect(0, 0, w, h);
+        particles.forEach(p => {
+            p.x += p.vx;
+            p.y += p.vy;
+            if (p.x < 0 || p.x > w) p.vx *= -1;
+            if (p.y < 0 || p.y > h) p.vy *= -1;
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(212, 175, 55, ${p.o})`;
+            ctx.fill();
+        });
+
+        for (let i = 0; i < particles.length; i++) {
+            for (let j = i + 1; j < particles.length; j++) {
+                const dx = particles[i].x - particles[j].x;
+                const dy = particles[i].y - particles[j].y;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                if (dist < 120) {
+                    ctx.beginPath();
+                    ctx.moveTo(particles[i].x, particles[i].y);
+                    ctx.lineTo(particles[j].x, particles[j].y);
+                    ctx.strokeStyle = `rgba(212, 175, 55, ${0.06 * (1 - dist / 120)})`;
+                    ctx.lineWidth = 0.5;
+                    ctx.stroke();
+                }
+            }
+        }
+        requestAnimationFrame(draw);
+    }
+
+    resize();
+    createParticles();
+    draw();
+    window.addEventListener('resize', () => { resize(); createParticles(); });
+})();
+</script>
+
+</body>
+</html>
