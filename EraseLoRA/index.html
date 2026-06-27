@@ -109,42 +109,24 @@
     </div>
 </header>
 
-<!-- ===== Hero Demo: Teaser ===== -->
+<!-- ===== Demo Video ===== -->
 <section class="section">
     <div class="container">
         <div class="method-overview" data-animate="fade-up">
             <div class="method-figure">
                 <div class="figure-frame-glow">
                     <div class="figure-frame figure-frame-padded">
-                        <img src="static/images/teaser.jpg" alt="Qualitative comparison with prior dataset-free object removal methods: DesignEdit, AttentiveEraser, and EraseLoRA" style="width:100%;height:auto;display:block;">
+                        <video autoplay muted loop playsinline poster="static/images/EraseLoRA_Final_poster.jpg" style="width:100%;height:auto;display:block;border-radius:6px;">
+                            <source src="static/images/EraseLoRA_Final.webm" type="video/webm">
+                            <source src="static/images/EraseLoRA_Final.mp4" type="video/mp4">
+                        </video>
                     </div>
                 </div>
                 <p class="figure-caption">
-                    <strong>Prior dataset-free methods regenerate non-target objects; EraseLoRA excludes them.</strong>
-                    Previous state-of-the-art approaches treat only the masked region as foreground, misinterpreting non-target objects as background and regenerating them.
-                    EraseLoRA identifies and excludes non-target foregrounds and reconstructs the masked region from diverse background subtypes, enabling faithful removal.
+                    <strong>EraseLoRA in action.</strong>
+                    Dataset-free object removal that excludes non-target foregrounds and reconstructs the occluded background from diverse subtypes, with no training data.
                 </p>
             </div>
-        </div>
-    </div>
-</section>
-
-<!-- ===== TL;DR / Key Insight ===== -->
-<section class="section tldr-section">
-    <div class="container">
-        <div class="tldr-card" data-animate="fade-up">
-            <div class="tldr-icon">
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                    <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
-                </svg>
-            </div>
-            <h2 class="tldr-label">Key Insight</h2>
-            <p class="tldr-text">
-                Prior dataset-free removal performs <strong>attention surgery</strong>, blocking the diffusion model's self-attention inside the mask so it ignores the target.
-                But this has no notion of <em>what the background actually is</em>: it regenerates non-target objects it mistakes for background, and blurs across distinct background subtypes.
-                <strong>EraseLoRA replaces attention surgery with explicit background-aware reasoning</strong>: a multimodal LLM separates target, non-target foregrounds, and clean background,
-                and test-time optimization aggregates background subtypes as complementary pieces, all with <strong>no training data</strong>.
-            </p>
         </div>
     </div>
 </section>
@@ -182,6 +164,26 @@
                 <h3>Failure 2 &middot; Background Blurring</h3>
                 <p>Applying uniform attention constraints without distinguishing diverse background subtypes blurs textures and misaligns structure at the boundaries between disparate regions.</p>
             </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== TL;DR / Key Insight ===== -->
+<section class="section tldr-section">
+    <div class="container">
+        <div class="tldr-card" data-animate="fade-up">
+            <div class="tldr-icon">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                </svg>
+            </div>
+            <h2 class="tldr-label">Key Insight</h2>
+            <p class="tldr-text">
+                Prior dataset-free removal performs <strong>attention surgery</strong>, blocking the diffusion model's self-attention inside the mask so it ignores the target.
+                But this has no notion of <em>what the background actually is</em>: it regenerates non-target objects it mistakes for background, and blurs across distinct background subtypes.
+                <strong>EraseLoRA replaces attention surgery with explicit background-aware reasoning</strong>: a multimodal LLM separates target, non-target foregrounds, and clean background,
+                and test-time optimization aggregates background subtypes as complementary pieces, all with <strong>no training data</strong>.
+            </p>
         </div>
     </div>
 </section>
@@ -393,6 +395,19 @@
         </div>
 
         <div class="result-block full-width" data-animate="fade-up">
+            <h3>EraseLoRA vs. Prior Dataset-Free Methods</h3>
+            <div class="figure-frame-glow">
+                <div class="figure-frame figure-frame-padded">
+                    <img src="static/images/teaser.jpg" alt="Qualitative comparison with prior dataset-free object removal methods: DesignEdit, AttentiveEraser, and EraseLoRA">
+                </div>
+            </div>
+            <p class="figure-caption">
+                <strong>Faithful removal without regenerating non-target objects.</strong>
+                Prior dataset-free methods treat only the masked region as foreground and regenerate non-target objects. EraseLoRA identifies and excludes non-target foregrounds and reconstructs the masked region from diverse background subtypes.
+            </p>
+        </div>
+
+        <div class="result-block full-width" data-animate="fade-up" style="margin-top:40px;">
             <h3>Quantitative Comparison</h3>
             <div class="figure-frame-glow">
                 <div class="figure-frame figure-frame-padded">
