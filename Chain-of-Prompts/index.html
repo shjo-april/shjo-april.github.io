@@ -37,7 +37,6 @@
             <a href="#abstract">Abstract</a>
             <a href="#method">Method</a>
             <a href="#results">Results</a>
-            <a href="#video">Video</a>
             <a href="#bibtex">BibTeX</a>
         </div>
     </div>
@@ -85,17 +84,13 @@
 
         <!-- Action Buttons -->
         <div class="hero-actions" data-animate="fade-up" data-delay="300">
-            <a href="./static/data/Chain-of-Prompts.pdf" target="_blank" class="btn btn-primary">
+            <a href="https://arxiv.org/pdf/2605.29429" target="_blank" class="btn btn-primary">
                 <i class="fa-solid fa-file-pdf"></i>
                 <span>Paper</span>
             </a>
             <a href="https://arxiv.org/abs/2605.29429" target="_blank" class="btn btn-secondary">
                 <i class="ai ai-arxiv"></i>
                 <span>arXiv</span>
-            </a>
-            <a href="./static/data/Supplementary.mp4" target="_blank" class="btn btn-secondary">
-                <i class="fa-solid fa-film"></i>
-                <span>Supplementary</span>
             </a>
             <a href="https://github.com/shjo-april/Chain-of-Prompts" target="_blank" class="btn btn-secondary">
                 <i class="fa-brands fa-github"></i>
@@ -150,7 +145,8 @@
             <p class="tldr-text">
                 SAM's frozen image encoder already <strong>clusters same-type cells</strong> in its feature space before any prompt is given.
                 CoP exploits this property to propagate <strong>a single click per cell type</strong> to all instances of that type, retaining
-                <strong>92.7% of per-instance performance with 81.7&times; fewer prompts</strong>, fully training-free.
+                <strong>over 90% of per-instance performance across eleven benchmarks</strong> while cutting annotation clicks by
+                <strong>97.6% on average (42.5&times; fewer)</strong>, fully training-free.
             </p>
         </div>
     </div>
@@ -197,13 +193,14 @@
             <div class="obs-figure">
                 <div class="figure-frame-glow">
                     <div class="figure-frame figure-frame-padded">
-                        <img src="static/images/highlight.png" alt="Group Prompting: from 245 clicks to 3">
+                        <img src="static/images/figure2.png" alt="Group Prompting O(T) vs. per-instance O(N) on CoNSeP/test_2, with AJI vs. number of prompts">
                     </div>
                 </div>
                 <p class="figure-caption">
-                    <strong>From 245 Clicks to 3.</strong>
-                    With just <strong>3 clicks</strong> (one per cell type), CoP reaches
-                    <strong>92.7% of the per-instance upper bound</strong> with <strong>81.7&times; fewer prompts</strong>.
+                    <strong>From 245 Clicks to 3 on CoNSeP/test_2.</strong>
+                    Per-instance prompting <em>O(N)</em> needs 245 clicks to reach the upper bound, while Group Prompting <em>O(T)</em>
+                    reaches <strong>93.9% of that upper bound</strong> from just <strong>3 clicks</strong> (one per cell type),
+                    <strong>81.7&times; fewer prompts</strong>.
                 </p>
             </div>
         </div>
@@ -233,9 +230,11 @@
                 prompt to maximize coverage.
             </p>
             <p>
-                On three cell-type-annotated benchmarks, CoP with one click per type retains over <strong>90%</strong> of per-instance performance
-                and surpasses fully-supervised methods without any additional training. On four morphologically homogeneous benchmarks,
-                a single click retains over <strong>99%</strong>.
+                Across <strong>eleven benchmarks</strong> in three regimes, CoP retains over <strong>90%</strong> of per-instance performance without any
+                additional training and consistently surpasses fully-supervised baselines: over <strong>90%</strong> with one click per cell type on
+                H&amp;E cell-type-annotated data (CoNIC, CoNSeP, PanNuke), <strong>98&ndash;99%</strong> with one click per image on H&amp;E homogeneous data
+                (MoNuSeg, TNBC, CryoNuSeg, CPM-17), and over <strong>95%</strong> under a staining-modality shift on non-H&amp;E microscopy
+                (CellBinDB, Cellpose, Kromp, LIVECell).
             </p>
         </div>
     </div>
@@ -261,8 +260,8 @@
             </div>
             <div class="contrib-card" data-animate="fade-up" data-delay="200">
                 <div class="contrib-number">&#9314;</div>
-                <h3>Generalization on 7 Benchmarks</h3>
-                <p>Retains over <strong>90%</strong> of per-instance performance on cell-type-annotated datasets and over <strong>99%</strong> on morphologically homogeneous datasets, outperforming fully-supervised methods that require complete mask annotations.</p>
+                <h3>Generalization on 11 Benchmarks</h3>
+                <p>Retains over <strong>90%</strong> of per-instance performance on H&amp;E cell-type-annotated data, <strong>98&ndash;99%</strong> on H&amp;E homogeneous data, and over <strong>95%</strong> under a staining-modality shift on non-H&amp;E microscopy, outperforming fully-supervised methods that require complete mask annotations.</p>
             </div>
         </div>
     </div>
@@ -339,9 +338,9 @@
         <!-- Highlight Numbers -->
         <div class="results-highlights" data-animate="fade-up">
             <div class="highlight-card">
-                <div class="highlight-value">92.7%</div>
+                <div class="highlight-value">93.9%</div>
                 <div class="highlight-metric">of Upper Bound</div>
-                <div class="highlight-desc">vs. per-instance SAM3<br>on CoNIC</div>
+                <div class="highlight-desc">vs. per-instance SAM3<br>on CoNSeP</div>
             </div>
             <div class="highlight-card">
                 <div class="highlight-value">81.7&times;</div>
@@ -349,30 +348,15 @@
                 <div class="highlight-desc">245 clicks &rarr; 3 clicks<br>group prompting</div>
             </div>
             <div class="highlight-card">
-                <div class="highlight-value">&gt;90%</div>
-                <div class="highlight-metric">Retention</div>
-                <div class="highlight-desc">on 3 cell-type-annotated<br>benchmarks</div>
+                <div class="highlight-value">42.5&times;</div>
+                <div class="highlight-metric">Avg Fewer Prompts</div>
+                <div class="highlight-desc">97.6% fewer clicks<br>across 11 benchmarks</div>
             </div>
             <div class="highlight-card">
-                <div class="highlight-value">&gt;99%</div>
+                <div class="highlight-value">&gt;90%</div>
                 <div class="highlight-metric">Retention</div>
-                <div class="highlight-desc">on 4 morphologically<br>homogeneous benchmarks</div>
+                <div class="highlight-desc">on all 11 benchmarks<br>fully training-free</div>
             </div>
-        </div>
-
-        <!-- Headline Figure: O(T) vs O(N) -->
-        <div class="result-block full-width" data-animate="fade-up">
-            <h3>Group Prompting Tracks the Upper Bound with 81.7&times; Fewer Prompts</h3>
-            <div class="figure-frame-glow">
-                <div class="figure-frame figure-frame-padded">
-                    <img src="static/images/figure2.png" alt="Figure 2: Group Prompting O(T) vs. per-instance prompting O(N) on CoNSeP/test_2, with AJI vs. number of prompts">
-                </div>
-            </div>
-            <p class="figure-caption">
-                <strong>Group Prompting O(T) vs. per-instance O(N) on CoNSeP/test_2.</strong>
-                A single click per cell type (left) recovers the same cell populations that per-instance prompting reaches with 245 clicks,
-                while the AJI vs. number-of-prompts curve (right) tracks the upper bound.
-            </p>
         </div>
 
         <!-- Main Tables -->
@@ -380,28 +364,42 @@
             <h3>One Click per Type Beats Fully-Supervised Models</h3>
             <div class="figure-frame-glow">
                 <div class="figure-frame figure-frame-padded">
-                    <img src="static/images/table_typed.png" alt="Table 1: quantitative comparison on cell-type-annotated benchmarks">
+                    <img src="static/images/table_typed.png" alt="Table 1: quantitative comparison on H&amp;E cell-type-annotated benchmarks">
                 </div>
             </div>
             <p class="figure-caption">
-                <strong>Cell-Type-Annotated Benchmarks (CoNIC, CoNSeP, GlaS).</strong>
-                Prompt types: &Tau; text, &Vscr; visual, &Mscr; mask supervision, &Pscr;<sub>N</sub> per-instance points, &Pscr;<sub>T</sub> per-type points.
+                <strong>H&amp;E Cell-Type-Annotated Benchmarks (CoNIC, CoNSeP, PanNuke).</strong>
+                Prompt types: &Tau; text, &Vscr; visual, &#10007; unsupervised, &Mscr; mask supervision, &Pscr;<sub>N</sub> per-instance points, &Pscr;<sub>T</sub> per-type points.
                 With only one click per cell type, CoP retains <strong>&geq; 90%</strong> of per-instance performance on every benchmark
-                and outperforms fully-supervised methods that require complete mask annotations.
+                (<em>e.g.</em>, 0.731 vs. 0.801 AJI on CoNIC) and outperforms every fully-supervised and open-vocabulary baseline.
             </p>
         </div>
 
         <div class="result-block full-width" data-animate="fade-up">
-            <h3>&gt;99% Retention from a Single Click</h3>
+            <h3>98&ndash;99% Retention from a Single Click</h3>
             <div class="figure-frame-glow">
                 <div class="figure-frame figure-frame-padded">
-                    <img src="static/images/table_homog.png" alt="Table 2: quantitative results on benchmarks without cell-type annotations">
+                    <img src="static/images/table_he_untyped.png" alt="Table 2: quantitative results on H&amp;E untyped benchmarks">
                 </div>
             </div>
             <p class="figure-caption">
-                <strong>Morphologically Homogeneous Benchmarks (MoNuSeg, TNBC, CryoNuSeg, CPM-17).</strong>
-                When cells within an image share similar morphology, CoP segments every instance from a single click
-                and retains <strong>&gt; 99%</strong> of per-instance performance.
+                <strong>H&amp;E Homogeneous Benchmarks (MoNuSeg, TNBC, CryoNuSeg, CPM-17).</strong>
+                When cells within an image share similar morphology they act as a single type, so one click per image propagates to the whole field:
+                CoP retains <strong>98&ndash;99%</strong> of the per-instance upper bound for both &mu;SAM and SAM3.
+            </p>
+        </div>
+
+        <div class="result-block full-width" data-animate="fade-up">
+            <h3>Robust Under a Staining-Modality Shift</h3>
+            <div class="figure-frame-glow">
+                <div class="figure-frame figure-frame-padded">
+                    <img src="static/images/table_non-he_untyped.png" alt="Table 3: quantitative results on non-H&amp;E untyped benchmarks">
+                </div>
+            </div>
+            <p class="figure-caption">
+                <strong>Non-H&amp;E Microscopy Benchmarks (CellBinDB, Cellpose, Kromp, LIVECell).</strong>
+                H&amp;E-trained supervised models collapse under the modality shift (CellViT drops to <strong>0.002</strong> AJI on CellBinDB),
+                while CoP, reading only the frozen encoder's features, preserves <strong>&gt; 95%</strong> of the per-instance upper bound on all four benchmarks.
             </p>
         </div>
 
@@ -414,9 +412,9 @@
                 </div>
             </div>
             <p class="figure-caption">
-                <strong>Qualitative comparison on CoNIC.</strong>
-                Fully-supervised baselines drop entire cell populations that fall outside their training distribution (red dashed boxes),
-                while CoP discovers them from a single click per type.
+                <strong>Qualitative comparison.</strong>
+                Fully-supervised baselines miss cell populations outside their training distribution and collapse to near-empty masks under a
+                staining-modality change (red dashed boxes), while CoP recovers the missing instances from one click per type, or per image when types are unlabeled.
             </p>
         </div>
 
@@ -429,45 +427,20 @@
                 </div>
             </div>
             <p class="figure-caption">
-                <strong>UMAP of SAM's frozen encoder features at GT centroids.</strong>
+                <strong>UMAP of SAM's frozen encoder features at GT cell centroids (CoNSeP/test_2).</strong>
                 (a) <em>F<sub>h</sub></em> mixes cell types; (b) <em>F<sub>l</sub></em> groups same-type cells without any training.
-                CoP exploits this latent clustering: no fine-tuning, no labels, just the right propagation rule.
+                This structure comes from SAM's prompt&ndash;mask pretraining, not encoder scale: swapping in DINOv3, EVA-CLIP, or SDXL features
+                drops CoP to <strong>&le; 0.435</strong> AJI on CoNIC (vs. <strong>0.731</strong> with SAM3).
             </p>
         </div>
     </div>
 </section>
 
-<!-- ===== Supplementary Video ===== -->
-<section class="section" id="video">
+<!-- ===== BibTeX ===== -->
+<section class="section" id="bibtex">
     <div class="container">
         <h2 class="section-title" data-animate="fade-up">
             <span class="section-number">05</span>
-            Supplementary Video
-        </h2>
-        <div class="method-overview" data-animate="fade-up">
-            <div class="method-figure">
-                <div class="figure-frame-glow">
-                    <div class="figure-frame">
-                        <video controls preload="metadata" style="width:100%;height:auto;display:block;background:#000;">
-                            <source src="./static/data/Supplementary.mp4" type="video/mp4">
-                            Your browser does not support the HTML5 video tag. <a href="./static/data/Supplementary.mp4">Download the video</a>.
-                        </video>
-                    </div>
-                </div>
-                <p class="figure-caption">
-                    <strong>One Click, Hundreds of Cells.</strong>
-                    Watch CoP recursively expand a single user click into every same-type cell in the image.
-                </p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ===== BibTeX ===== -->
-<section class="section section-dark" id="bibtex">
-    <div class="container">
-        <h2 class="section-title" data-animate="fade-up">
-            <span class="section-number">06</span>
             Citation
         </h2>
         <div class="bibtex-block" data-animate="fade-up">
