@@ -124,6 +124,30 @@
     </div>
 </header>
 
+<!-- ===== Demo: Latent Optimization ===== -->
+<section class="section">
+    <div class="container">
+        <div class="method-overview" data-animate="fade-up">
+            <div class="method-figure">
+                <div class="figure-frame-glow">
+                    <div class="figure-frame figure-frame-padded">
+                        <video autoplay muted loop playsinline poster="static/images/ISAC_LatentOptimization_poster.jpg" style="width:100%;height:auto;display:block;border-radius:6px;">
+                            <source src="static/images/ISAC_LatentOptimization.webm" type="video/webm">
+                            <source src="static/images/ISAC_LatentOptimization.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                </div>
+                <p class="figure-caption">
+                    <strong>ISAC<sub>LO</sub> in action.</strong>
+                    From the same seed on <em>&ldquo;a cat, a dog, and a bear&rdquo;</em>, the baseline (SD3.5-M, SDXL) drops an instance,
+                    while ISAC keeps all three. The instance-aware semantic binding maps (right) show semantics settling into
+                    separated instances as latent optimization proceeds along the denoising trajectory.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- ===== Hero Demo: Main Visualization ===== -->
 <section class="section">
     <div class="container">
@@ -502,7 +526,20 @@
                 with the ISAC objective and keep the best (best-of-10). This gradient-free variant lifts Flux.1-dev multi-class accuracy from
                 <strong>31% to 51%</strong> with no model gradients.
             </p>
-            <div class="figure-frame-glow">
+            <div class="figure-frame-glow" style="margin-top:22px;">
+                <div class="figure-frame figure-frame-padded">
+                    <video autoplay muted loop playsinline poster="static/images/ISAC_LatentSelection_poster.jpg" style="width:100%;height:auto;display:block;border-radius:6px;">
+                        <source src="static/images/ISAC_LatentSelection.webm" type="video/webm">
+                        <source src="static/images/ISAC_LatentSelection.mp4" type="video/mp4">
+                    </video>
+                </div>
+            </div>
+            <p class="figure-caption">
+                <strong>ISAC<sub>LS</sub> in action.</strong>
+                On <em>&ldquo;two cats and two dogs&rdquo;</em> (Flux.2-dev, Qwen-Image), the ISAC objective scores a 3&times;3 batch of
+                candidate latents during denoising and keeps the best, rejecting samples with missing instances or semantic mixing.
+            </p>
+            <div class="figure-frame-glow" style="margin-top:22px;">
                 <div class="figure-frame figure-frame-padded">
                     <img src="static/images/algo2.png" alt="Algorithm 2: ISAC with Latent Selection (ISAC-LS)">
                 </div>
