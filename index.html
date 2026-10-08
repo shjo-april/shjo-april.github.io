@@ -133,6 +133,10 @@
         .role-tag.lead{background:var(--gold);color:var(--bg-primary);border:1px solid var(--gold)}
         .role-tag.corr{background:transparent;color:var(--gold-light);border:1px solid var(--gold)}
         .role-tag.co{background:rgba(154,152,144,0.16);color:var(--text-secondary);border:1px solid rgba(154,152,144,0.4)}
+        .role-tag.oral{background:linear-gradient(135deg,#2e7d32,#43a047);color:#fff;border:1px solid #2e7d32}
+        /* keep titles and short lines from ending on a single stranded word */
+        .pub-title,.news-content{text-wrap:balance}
+        .pub-venue,.pub-note,.pub-authors,.hero-bio-text{text-wrap:pretty}
         .pub-links{display:flex;gap:0.4rem;flex-wrap:wrap}
         .pub-link{font-family:var(--font-mono);font-size:0.74rem;padding:0.3em 0.7em;border-radius:5px;background:var(--bg-secondary);border:1px solid var(--border);color:var(--text-secondary);transition:all 0.3s;display:inline-flex;align-items:center;gap:0.3em}
         .pub-link:hover{border-color:var(--gold-dim);color:var(--gold);background:var(--gold-dim)}
@@ -269,10 +273,10 @@
             <div class="hero-bio" data-animate data-delay="100">
                 <h2 class="bio-heading">Biography</h2>
                 <p class="hero-bio-text">
-                    My research focuses on reducing annotation and optimization burdens in visual learning through generative priors and lightweight interaction mechanisms. By leveraging the implicit knowledge embedded in large-scale foundation models, I explore data-efficient and training-free approaches to overcome the limitations of resource-intensive pipelines. This methodology drives my work across diverse applications, spanning weakly-supervised segmentation, multimodal alignment, and controllable generation.
+                    My research works toward <strong>Physical AI</strong>: vision systems that perceive the physical world, let people interact with what is perceived, and remain deployable under real-world constraints. I pursue three connected axes, treating them not as separate topics but as the perception, generation, and deployment layers of a single pipeline: <strong>segmentation, extending from images to video and 3D</strong>; <strong>interactive segmentation and editing</strong>; and <strong>multimodal distillation and quantization</strong>. Across all three, my approach is to exploit the implicit knowledge already embedded in large-scale foundation models, using generative priors and lightweight interaction to remove the annotation and optimization burdens that make vision systems expensive to build and maintain.
                 </p>
                 <p class="hero-bio-text">
-                    I have been with <a href="https://ogqmarket.naver.com/" target="_blank"><strong>OGQ</strong></a> since 2017, currently serving as the <strong>Principal AI Researcher</strong> and leading industrial AI research and development to maximize tangible real-world impact. In parallel, I have been pursuing my research under the official advisement of <a href="https://aibl.snu.ac.kr/team/pi-information" target="_blank"><strong>Prof. Kyungsu Kim</strong></a> since 2021. Following his appointment at Seoul National University, I joined the <a href="https://aibl.snu.ac.kr/" target="_blank"><strong>SNU AIBL Lab</strong></a> as an <strong>Affiliated Researcher</strong>. In this role, I mentor graduate and undergraduate researchers and lead core projects, including recent works where I serve as a co-corresponding author. Integrating industrial R&amp;D leadership with academic rigor, I aim to develop machine learning systems that are both scientifically grounded and practically deployable.
+                    I have been with <a href="https://ogqmarket.naver.com/" target="_blank"><strong>OGQ</strong></a> since 2017, currently serving as the <strong>Principal AI Researcher</strong> and leading industrial AI research and development to maximize tangible real-world impact. In parallel, I have pursued my research under the guidance of <a href="https://aibl.snu.ac.kr/team/pi-information" target="_blank"><strong>Prof. Kyungsu Kim</strong></a> since 2021; following his appointment at Seoul National University, I joined the <a href="https://aibl.snu.ac.kr/" target="_blank"><strong>SNU AIBL Lab</strong></a> as an <strong>Affiliated Researcher</strong> in September 2024, where I mentor graduate and undergraduate researchers and lead core projects as a co-corresponding author. Integrating industrial R&amp;D leadership with academic rigor, I aim to develop machine learning systems that are both scientifically grounded and practically deployable.
                 </p>
                 <div class="hero-stats">
                     <div class="stat-item"><div class="stat-value" id="pubCount">-</div><div class="stat-label">Publications</div></div>
@@ -289,12 +293,14 @@
             </div>
             <div class="news-grid">
                 <div class="news-col">
+                    <div class="news-item" data-animate><div class="news-date">2026.10</div><div class="news-content"><a href="https://shjo-april.github.io/Chain-of-Prompts/"><strong>CoP</strong></a> selected as <strong>Oral</strong> at <strong>ACCV 2026</strong> <span class="news-highlight">Oral</span></div></div>
+                    <div class="news-item" data-animate><div class="news-date">2026.09</div><div class="news-content"><a href="https://shjo-april.github.io/Chain-of-Prompts/"><strong>CoP</strong></a> accepted to <strong>ACCV 2026</strong></div></div>
                     <div class="news-item" data-animate><div class="news-date">2026.06</div><div class="news-content">Two papers (<a href="https://shjo-april.github.io/ISAC/"><strong>ISAC</strong></a>, <a href="https://arxiv.org/abs/2512.21545"><strong>EraseLoRA</strong></a>) accepted to <strong>ECCV 2026</strong></div></div>
                     <div class="news-item" data-animate><div class="news-date">2026.06</div><div class="news-content"><a href="https://hyeongsubkim.github.io/GeneRAG-project-page/"><strong>GeneRAG</strong></a> accepted to <strong>MICCAI 2026</strong></div></div>                    <div class="news-item" data-animate><div class="news-date">2026.05</div><div class="news-content"><a href="https://ziseoklee.github.io/projects/ACE/"><strong>ACE</strong></a> accepted to <strong>ICML 2026</strong></div></div>
                     <div class="news-item" data-animate><div class="news-date">2026.02</div><div class="news-content"><a href="https://shjo-april.github.io/TRACE/"><strong>TRACE</strong></a> selected as <strong>Oral</strong> at <strong>ICLR 2026</strong> (Top 1.13%, 223 of 19,735) <span class="news-highlight">Oral</span></div></div>
-                    <div class="news-item" data-animate><div class="news-date">2026.01</div><div class="news-content"><a href="https://shjo-april.github.io/TRACE/"><strong>TRACE</strong></a> accepted to <strong>ICLR 2026</strong></div></div>
                 </div>
                 <div class="news-col">
+                    <div class="news-item" data-animate><div class="news-date">2026.01</div><div class="news-content"><a href="https://shjo-april.github.io/TRACE/"><strong>TRACE</strong></a> accepted to <strong>ICLR 2026</strong></div></div>
                     <div class="news-item" data-animate><div class="news-date">2025.06</div><div class="news-content">Two papers (<a href="https://shjo-april.github.io/COIN/"><strong>COIN</strong></a>, <a href="https://elect-diffusion.github.io/"><strong>ELECT</strong></a>) accepted to <strong>ICCV 2025</strong></div></div>
                     <div class="news-item" data-animate><div class="news-date">2025.06</div><div class="news-content">Named <a href="https://cvpr.thecvf.com/Conferences/2025/ProgramCommittee#all-outstanding-reviewer"><strong>Outstanding Reviewer</strong></a> at <strong>CVPR 2025</strong> (Top 5.6%) <span class="news-highlight">Award</span></div></div>
                     <div class="news-item" data-animate><div class="news-date">2024.07</div><div class="news-content">Two papers (<a href="https://www.ecva.net/papers/eccv_2024/papers_ECCV/papers/10547.pdf"><strong>DHR</strong></a>, <a href="https://www.ecva.net/papers/eccv_2024/papers_ECCV/papers/10592.pdf"><strong>TTD</strong></a>) accepted to <strong>ECCV 2024</strong></div></div>
@@ -316,6 +322,22 @@
             <h2 class="section-title">Publications</h2>
         </div>
         <div class="pub-list">
+
+            <div class="pub-card" data-animate>
+                <div class="pub-image"><span class="pub-badge award">ACCV'26 Oral</span><img src="./index_files/CoP.png" alt="CoP"></div>
+                <div class="pub-info">
+                    <div class="pub-title">One Click per Cell Type Suffices: Training-free Group Interaction for Cell Instance Segmentation</div>
+                    <div class="pub-authors"><strong>Sanghyun Jo</strong>, Seo Jin Lee, Seohyung Hong, Yoorim Gang, Hyeongsub Kim, Hyungseok Seo&#8224;, Kyungsu Kim&#8224;</div>
+                    <div class="pub-venue">Asian Conference on Computer Vision (ACCV), 2026.</div>
+                    <div class="pub-note"><span class="role-tag lead">First Author</span><span class="role-tag oral">Oral</span>Also accepted at <a href="https://asci.artificialintelligencepathology.org/" target="_blank">NeurIPS 2026 Workshop</a> (ASCI; Non-Archival)</div>
+                    <div class="pub-links">
+                        <a href="https://arxiv.org/pdf/2605.29429" target="_blank" class="pub-link"><i class="fa-solid fa-file-pdf"></i> PDF</a>
+                        <a href="https://arxiv.org/abs/2605.29429" target="_blank" class="pub-link"><i class="ai ai-arxiv"></i> arXiv</a>
+                        <a href="https://github.com/shjo-april/Chain-of-Prompts" target="_blank" class="pub-link"><i class="fa-brands fa-github"></i> Code</a>
+                        <a href="https://shjo-april.github.io/Chain-of-Prompts/" target="_blank" class="pub-link"><i class="fa-solid fa-globe"></i> Project</a>
+                    </div>
+                </div>
+            </div>
 
             <div class="pub-card" data-animate>
                 <div class="pub-image"><span class="pub-badge conference">ECCV'26</span><img src="./assets/img/ISAC.png" alt="ISAC"></div>
@@ -376,7 +398,7 @@
                     <div class="pub-title">TRACE: Your Diffusion Model is Secretly an Instance Edge Detector</div>
                     <div class="pub-authors"><strong>Sanghyun Jo*</strong>, Ziseok Lee*, Wooyeol Lee, Jonghyun Choi, Jaesik Park&#8224;, Kyungsu Kim&#8224;</div>
                     <div class="pub-venue">International Conference on Learning Representations (ICLR), 2026.</div>
-                    <div class="pub-note"><span class="role-tag lead">Co-First Author</span>Oral, Top 1.13% (223 of 19,735 submissions)</div>
+                    <div class="pub-note"><span class="role-tag lead">Co-First Author</span><span class="role-tag oral">Oral</span>Top 1.13% (223 of 19,735 submissions)</div>
                     <div class="pub-links">
                         <a href="https://openreview.net/pdf?id=BjElYlJKMj" target="_blank" class="pub-link"><i class="fa-solid fa-file-pdf"></i> PDF</a>
                         <a href="https://openreview.net/forum?id=BjElYlJKMj" target="_blank" class="pub-link"><i class="fa-solid fa-pen-to-square"></i> OpenReview</a>
@@ -525,17 +547,16 @@
         <div class="pub-list">
 
             <div class="pub-card" data-animate>
-                <div class="pub-image"><span class="pub-badge review">Under Review</span><img src="./index_files/CoP.png" alt="CoP"></div>
+                <div class="pub-image"><span class="pub-badge review">Under Review</span><img src="./assets/img/D2R.png" alt="D2R"></div>
                 <div class="pub-info">
-                    <div class="pub-title">One Click per Cell Type Suffices: Training-free Group Interaction for Cell Instance Segmentation</div>
-                    <div class="pub-authors"><strong>Sanghyun Jo</strong>, Seo Jin Lee, Seohyung Hong, Yoorim Gang, Hyeongsub Kim, Hyungseok Seo&#8224;, Kyungsu Kim&#8224;</div>
-                    <div class="pub-venue">arXiv:2605.29429</div>
-                    <div class="pub-note"><span class="role-tag lead">First Author</span></div>
+                    <div class="pub-title">Depth-to-RGB: Repurposing a Frozen Depth Estimator for Geometry-Guided Compositing</div>
+                    <div class="pub-authors"><strong>Sanghyun Jo&#8224;</strong>, Chae Yeon Lim, Donghwan Lee, Sihyun Kim, Soo Ye Kim, Kyungsu Kim&#8224;</div>
+                    <div class="pub-venue">arXiv:2610.09125</div>
+                    <div class="pub-note"><span class="role-tag lead">First &amp; Co-Corresponding Author</span></div>
                     <div class="pub-links">
-                        <a href="https://arxiv.org/pdf/2605.29429" target="_blank" class="pub-link"><i class="fa-solid fa-file-pdf"></i> PDF</a>
-                        <a href="https://arxiv.org/abs/2605.29429" target="_blank" class="pub-link"><i class="ai ai-arxiv"></i> arXiv</a>
-                        <a href="https://github.com/shjo-april/Chain-of-Prompts" target="_blank" class="pub-link"><i class="fa-brands fa-github"></i> Code</a>
-                        <a href="https://shjo-april.github.io/Chain-of-Prompts/" target="_blank" class="pub-link"><i class="fa-solid fa-globe"></i> Project</a>
+                        <a href="https://arxiv.org/pdf/2610.09125" target="_blank" class="pub-link"><i class="fa-solid fa-file-pdf"></i> PDF</a>
+                        <a href="https://arxiv.org/abs/2610.09125" target="_blank" class="pub-link"><i class="ai ai-arxiv"></i> arXiv</a>
+                        <a href="https://shjo-april.github.io/Depth2RGB/" target="_blank" class="pub-link"><i class="fa-solid fa-globe"></i> Project</a>
                     </div>
                 </div>
             </div>

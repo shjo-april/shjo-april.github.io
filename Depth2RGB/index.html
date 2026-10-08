@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" type="image/svg+xml" href="./static/images/star.svg">
+    <link rel="apple-touch-icon" href="./static/images/star.svg">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Depth-to-RGB: Repurposing a Frozen Depth Estimator for Geometry-Guided Compositing</title>
+    <meta name="description" content="Depth-to-RGB (D2R): Repurposing a Frozen Depth Estimator for Geometry-Guided Compositing. Under Review.">
+    <meta name="keywords" content="Depth-to-RGB, D2R, object compositing, composite depth, depth estimation, reference-based compositing, diffusion, AnyInsertion++">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Depth-to-RGB: Repurposing a Frozen Depth Estimator for Geometry-Guided Compositing">
+    <meta property="og:description" content="D2R predicts the depth of a composite that does not exist yet, then synthesizes RGB under that fixed geometry.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://shjo-april.github.io/Depth2RGB">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <!-- Academicons & Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.4/css/academicons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <link rel="stylesheet" href="static/css/style.css">
+</head>
+<body>
+
+<!-- ===== Floating Nav ===== -->
+<nav class="floating-nav" id="floatingNav">
+    <div class="nav-inner">
+        <span class="nav-logo">Depth-to-RGB</span>
+        <div class="nav-links">
+            <a href="#abstract">Abstract</a>
+            <a href="#method">Method</a>
+            <a href="#results">Results</a>
+            <a href="#analysis">Analysis</a>
+            <a href="#bibtex">BibTeX</a>
+        </div>
+    </div>
+</nav>
+
+<!-- ===== Hero: title panel ===== -->
+<header class="hero">
+    <div class="container">
+        <div class="hero-card">
+            <div class="status">Under Review</div>
+
+            <h1 class="hero-title">Depth-to-RGB</h1>
+            <p class="hero-sub">Repurposing a Frozen Depth Estimator for Geometry-Guided Compositing</p>
+
+            <!-- Authors -->
+            <div class="authors">
+                <span class="author"><a href="https://shjo-april.github.io/" target="_blank">Sanghyun Jo</a><sup>1,2,†</sup></span>
+                <span class="author">Chae Yeon Lim<sup>1,2</sup></span>
+                <span class="author"><a href="https://tdrlee.github.io/" target="_blank">Donghwan Lee</a><sup>2</sup></span>
+                <span class="author">Sihyun Kim<sup>2</sup></span>
+                <span class="author"><a href="https://sites.google.com/view/sooyekim" target="_blank">Soo Ye Kim</a><sup>3</sup></span>
+                <span class="author"><a href="https://aibl.snu.ac.kr/team/pi-information" target="_blank">Kyungsu Kim</a><sup>2,†</sup></span>
+            </div>
+
+            <!-- Affiliations -->
+            <div class="affils">
+                <span class="affil"><sup>1</sup><img src="static/images/ogq.png" srcset="static/images/ogq.png 1x, static/images/ogq_2x.png 2x" width="82" height="26" alt="OGQ"></span>
+                <span class="affil"><sup>2</sup><img src="static/images/snu.png" srcset="static/images/snu.png 1x, static/images/snu_2x.png 2x" width="38" height="40" alt=""><span>Seoul National University</span></span>
+                <span class="affil"><sup>3</sup><img src="static/images/adobe.svg" width="91" height="24" alt="Adobe"><span>Research</span></span>
+            </div>
+            <div class="author-note"><sup>†</sup> Corresponding authors</div>
+
+            <!-- Action Buttons -->
+            <div class="hero-actions">
+                <a href="https://arxiv.org/pdf/2610.09125" target="_blank" class="btn btn-primary">
+                    <i class="fa-solid fa-file-pdf"></i><span>Paper</span>
+                </a>
+                <a href="https://arxiv.org/abs/2610.09125" target="_blank" class="btn btn-secondary">
+                    <i class="ai ai-arxiv"></i><span>arXiv</span>
+                </a>
+                <a class="btn btn-secondary btn-disabled" aria-disabled="true" tabindex="-1" title="Coming soon">
+                    <i class="fa-brands fa-github"></i><span>Code</span><span class="soon">Soon</span>
+                </a>
+                <a class="btn btn-secondary btn-disabled" aria-disabled="true" tabindex="-1" title="Coming soon">
+                    <i class="fa-solid fa-database"></i><span>AnyInsertion++</span><span class="soon">Soon</span>
+                </a>
+            </div>
+
+            <a class="lab-logo" href="https://aibl.snu.ac.kr" target="_blank" title="SNU AIBL: Artificial Intelligence &amp; Bioinformatics Lab">
+                <img src="static/images/aibl.png" srcset="static/images/aibl.png 1x, static/images/aibl_2x.png 2x" width="119" height="104" alt="AIBL, Seoul National University">
+            </a>
+        </div>
+    </div>
+</header>
+
+<!-- ===== Teaser ===== -->
+<section class="section section-tight">
+    <div class="container">
+        <div class="figure-block" data-animate>
+            <div class="figure-frame">
+                <img src="static/images/teaser.jpg" alt="D2R predicts composite depth first and then generates RGB, while closed- and open-source baselines generate RGB in one shot">
+            </div>
+            <p class="figure-caption">
+                <strong>Depth first, then RGB.</strong>
+                D2R predicts composite depth (seventh column) and holds it fixed while generating RGB (eighth).
+                It preserves the reference appearance while matching the target shape and pose; one-shot open- and closed-source
+                baselines miss the target geometry, alter object identity, or modify the surrounding content.
+            </p>
+        </div>
+
+        <div class="insight" data-animate>
+            <div class="insight-label">Key Insight</div>
+            <p class="insight-text">
+                A pretrained depth estimator already knows how to decode scene features into depth.
+                D2R keeps it <strong>frozen</strong> and learns only <strong>reference-conditioned corrections</strong> to the background's features,
+                so the unchanged decoder outputs the depth of a scene that <strong>does not exist yet</strong>.
+                Holding this composite depth fixed during RGB synthesis cuts category-disjoint AbsRel by <strong>43.7%</strong>
+                and improves PSNR by <strong>2.4&nbsp;dB</strong> over the matched RGB baseline.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Motivation: the missing geometric condition ===== -->
+<section class="section section-tint">
+    <div class="container">
+        <h2 class="section-title" data-animate>Motivation</h2>
+        <p class="section-lead" data-animate>
+            A background, a reference, and a 2D mask guide appearance and placement, but they leave the geometry of the completed scene implicit.
+            <strong>We call the missing condition composite depth: the depth of the entire scene after compositing.</strong>
+        </p>
+        <div class="figure-block" data-animate>
+            <div class="figure-frame">
+                <img class="tbl" style="--pt:432" src="static/images/table_geometry.png" alt="Comparison of geometry conditions used by reference-based compositing methods">
+            </div>
+            <p class="figure-caption">
+                <strong>How existing methods obtain geometry.</strong>
+                Most methods infer it implicitly during RGB denoising. Others reuse the depth of an input image, assemble
+                foreground and background depth by rules, or need a user-posed 3D proxy.
+                D2R predicts composite depth from the standard inputs alone and fixes it before RGB generation.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Abstract ===== -->
+<section class="section" id="abstract">
+    <div class="container">
+        <h2 class="section-title" data-animate><span class="section-number">1</span>Abstract</h2>
+        <div class="abstract-content" data-animate>
+            <p>
+                Reference-based object compositing inserts or replaces an object using a background image, a reference image, and a 2D compositing mask.
+                These inputs guide appearance and placement but leave the completed scene's geometry implicit, which can distort object structure
+                or alter the surroundings.
+            </p>
+            <p>
+                Our <strong>Depth-to-RGB (D2R)</strong> framework predicts <em>composite depth</em> for a scene not yet observed in the RGB inputs.
+                It learns reference-conditioned corrections to a frozen depth estimator using encoder features of paired completed scenes as targets.
+                The unchanged decoder maps the corrected representation to the intended scene's depth, which a separately trained renderer holds
+                fixed during RGB synthesis. Under matched architecture and training, encoder-feature supervision reduces OOD Stage-1 AbsRel by
+                <strong>31.4%</strong> relative to decoded-depth supervision.
+            </p>
+            <p>
+                We also introduce <strong>AnyInsertion++</strong> with paired in-distribution and category-disjoint splits to evaluate generalization
+                beyond compositing training categories. The complete D2R system leads <strong>12 open-source and 3 closed-source baselines</strong>
+                in estimator-derived geometry and photometric quality on both paired splits. On category-disjoint data, D2R reduces AbsRel by
+                <strong>43.7%</strong> and improves PSNR by <strong>2.4&nbsp;dB</strong> over the matched RGB baseline. Across three unpaired benchmarks,
+                D2R leads both identity metrics and reduces mean CLIP reference cosine distance by <strong>55%</strong> relative to the strongest baseline.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Key Contributions ===== -->
+<section class="section section-tint">
+    <div class="container">
+        <h2 class="section-title" data-animate><span class="section-number">2</span>Contributions</h2>
+        <div class="contributions-grid">
+            <div class="contrib-card" data-animate data-delay="0">
+                <div class="contrib-number">PROBLEM</div>
+                <h3>Composite Depth</h3>
+                <p>We address the missing geometric condition in reference-based object compositing: predicting the completed scene's relative depth from a background image, a reference image, and a 2D compositing mask.</p>
+            </div>
+            <div class="contrib-card" data-animate data-delay="100">
+                <div class="contrib-number">SOLUTION</div>
+                <h3>Depth-to-RGB</h3>
+                <p>Reference-conditioned corrections to a <strong>frozen depth estimator</strong>, supervised by encoder features of paired completed scenes, followed by an RGB renderer trained to use the resulting depth as a fixed geometric condition.</p>
+            </div>
+            <div class="contrib-card" data-animate data-delay="200">
+                <div class="contrib-number">RESULTS</div>
+                <h3>AnyInsertion++</h3>
+                <p>A curated benchmark with <strong>426 paired cases</strong> and a category-disjoint split. D2R leads all <strong>15 baselines</strong> on both paired splits and on both identity metrics across three unpaired benchmarks.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Method Overview ===== -->
+<section class="section" id="method">
+    <div class="container">
+        <h2 class="section-title" data-animate><span class="section-number">3</span>Method</h2>
+
+        <div class="figure-block" data-animate>
+            <div class="figure-frame">
+                <img src="static/images/method_overview.png" alt="Overview of Depth-to-RGB: Stage 1 predicts composite depth, Stage 2 synthesizes RGB under that fixed depth">
+            </div>
+            <p class="figure-caption">
+                <strong>Two stages: predict the composite's depth, then render RGB under it.</strong>
+                Stage 1 predicts composite depth through reference-conditioned corrections to background features in a frozen depth estimator.
+                Stage 2 synthesizes RGB with this depth held fixed throughout sampling.
+            </p>
+        </div>
+
+        <!-- Method Steps -->
+        <div class="method-steps">
+            <div class="method-step" data-animate>
+                <div class="step-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 12h18M12 3v18"/></svg>
+                </div>
+                <div class="step-content">
+                    <h3>Stage 1: Predicting Composite Depth</h3>
+                    <p>The encoder and decoder of the depth estimator stay frozen. Mask-conditioned <em>depth injectors</em>, attached at the encoder blocks the decoder reads, attend to background and reference features and add residual corrections. Training matches the corrected features to the encoder features of the paired completed scene, so the unchanged decoder already maps them to the intended depth. Zero-initialized projections start from the frozen estimator, and corrections span the full token grid so object and surrounding geometry are inferred jointly.</p>
+                </div>
+            </div>
+            <div class="method-step" data-animate>
+                <div class="step-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v6m0 10v6M4.22 4.22l4.24 4.24m7.08 7.08l4.24 4.24M1 12h6m10 0h6M4.22 19.78l4.24-4.24m7.08-7.08l4.24-4.24"/></svg>
+                </div>
+                <div class="step-content">
+                    <h3>Stage 2: Synthesizing RGB with Fixed Depth</h3>
+                    <p>The masked background, the reference, and the composite depth are arranged as patches on one in-context canvas, and only LoRA parameters of the denoiser are trained. Besides the RGB loss, a depth-patch denoising loss and an RGB-depth consistency loss teach the renderer to follow the condition: the frozen estimator is applied to the one-step clean RGB estimate and compared with the paired target, weighted by 1&minus;<em>t</em> to discount noisy early estimates. The depth patch receives predicted or ground-truth depth with equal probability, exposing the renderer to prediction errors without using them as targets.</p>
+                </div>
+            </div>
+            <div class="method-step" data-animate>
+                <div class="step-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                </div>
+                <div class="step-content">
+                    <h3>Inference: Depth Once, Then RGB</h3>
+                    <p>Stage 1 predicts the composite depth in a single feed-forward pass (56.5&nbsp;ms, about 0.25% of the FLUX sampling time), and the same depth is reused across all 28 RGB sampling steps. No completed target image, measured depth, or user-posed 3D proxy is needed at inference.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Results ===== -->
+<section class="section section-tint" id="results">
+    <div class="container">
+        <h2 class="section-title" data-animate><span class="section-number">4</span>Results</h2>
+
+        <!-- Highlight Numbers -->
+        <div class="results-highlights" data-animate>
+            <div class="highlight-card">
+                <div class="highlight-value">43.7%</div>
+                <div class="highlight-metric">Lower AbsRel</div>
+                <div class="highlight-desc">category-disjoint split, vs. matched RGB baseline</div>
+            </div>
+            <div class="highlight-card">
+                <div class="highlight-value">+2.4&nbsp;dB</div>
+                <div class="highlight-metric">PSNR</div>
+                <div class="highlight-desc">category-disjoint split, vs. matched RGB baseline</div>
+            </div>
+            <div class="highlight-card">
+                <div class="highlight-value">55%</div>
+                <div class="highlight-metric">Lower CLIP Distance</div>
+                <div class="highlight-desc">to the reference, averaged over 3 unpaired benchmarks</div>
+            </div>
+            <div class="highlight-card">
+                <div class="highlight-value">15</div>
+                <div class="highlight-metric">Baselines Outperformed</div>
+                <div class="highlight-desc">12 open-source and 3 closed-source systems</div>
+            </div>
+        </div>
+
+        <!-- Main Tables -->
+        <div class="figure-block" data-animate>
+            <h3>Leading 15 Baselines on Unseen Categories</h3>
+            <div class="figure-frame">
+                <img class="tbl" style="--pt:460" src="static/images/table_ood.png" alt="Table 3: category-disjoint results on AnyInsertion++">
+            </div>
+            <p class="figure-caption">
+                <strong>Category-Disjoint Split of AnyInsertion++ (139 cases).</strong>
+                Object categories are absent from compositing training. D2R leads every geometric, photometric, and identity metric;
+                against the retrained Insert-Anything<sup>*</sup> it lowers AbsRel from <strong>0.119 to 0.067</strong> and raises PSNR from
+                <strong>21.6 to 24.0&nbsp;dB</strong>. Supplying ground-truth composite depth instead of the Stage-1 prediction changes AbsRel by only about 8 to 12%.
+            </p>
+        </div>
+
+        <div class="figure-block" data-animate>
+            <h3>Consistent Gains In-Distribution</h3>
+            <div class="figure-frame">
+                <img class="tbl" style="--pt:460" src="static/images/table_id.png" alt="Table 2: in-distribution results on AnyInsertion++">
+            </div>
+            <p class="figure-caption">
+                <strong>In-Distribution Split of AnyInsertion++ (287 cases).</strong>
+                Relative to the strongest baseline for each metric across both paired splits, D2R reduces AbsRel by at least <strong>22%</strong>
+                and LPIPS by at least <strong>19%</strong>, while improving PSNR by at least <strong>1.0&nbsp;dB</strong>.
+            </p>
+        </div>
+
+        <div class="figure-block" data-animate>
+            <h3>Reference Identity Across Photos, Cartoons, and Art</h3>
+            <div class="figure-frame">
+                <img class="tbl" style="--pt:458" src="static/images/table_unpaired.png" alt="Table 4: identity on unpaired compositing benchmarks">
+            </div>
+            <p class="figure-caption">
+                <strong>Unpaired Benchmarks (TF-ICON, AIComposer, ComplexCompo; 332, 272, and 300 cases).</strong>
+                Without any identity-specific loss, D2R leads both identity metrics on all three benchmarks, reducing mean reference cosine distance by
+                <strong>55.4%</strong> with CLIP and <strong>22.6%</strong> with DINO over Insert-Anything<sup>*</sup>.
+            </p>
+        </div>
+
+        <!-- Qualitative -->
+        <div class="figure-block" data-animate>
+            <h3>Shape and Placement Follow the Predicted Depth</h3>
+            <div class="figure-frame">
+                <img src="static/images/qualitative_ood.jpg" alt="Qualitative results on the AnyInsertion++ category-disjoint split">
+            </div>
+            <p class="figure-caption">
+                <strong>Qualitative results on the category-disjoint split.</strong>
+                Columns follow the teaser: reference, background with mask, two closed-source and two open-source baselines,
+                then D2R's Stage-1 composite depth and the resulting RGB. All D2R examples use predicted depth.
+            </p>
+        </div>
+
+        <div class="figure-block" data-animate>
+            <h3>Geometry-Aware Composites in Illustrated Scenes</h3>
+            <div class="figure-frame">
+                <img src="static/images/qualitative_stylized.jpg" alt="Qualitative results on AIComposer with illustrated and artistic backgrounds">
+            </div>
+            <p class="figure-caption">
+                <strong>Qualitative results on AIComposer.</strong>
+                A depth sensor viewing a flat picture measures only its surface, but a learned estimator infers relative depth from RGB cues.
+                D2R repurposes this capability to predict the intended composite's geometry in illustrated landscapes and an ink drawing.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Analysis ===== -->
+<section class="section" id="analysis">
+    <div class="container">
+        <h2 class="section-title" data-animate><span class="section-number">5</span>Analysis</h2>
+
+        <div class="figure-block" data-animate>
+            <h3>Encoder Features Are the Right Target</h3>
+            <div class="figure-frame">
+                <img class="tbl" style="--pt:340" src="static/images/table_supervision.png" alt="Table 5: effect of the supervision target with a matched depth predictor">
+            </div>
+            <p class="figure-caption">
+                <strong>Same injector, frozen encoder and decoder; only the supervision target changes.</strong>
+                Matching the completed scene's encoder features lowers Stage-1 AbsRel by <strong>30.9%</strong> in-distribution and
+                <strong>31.4%</strong> out-of-distribution relative to supervising the decoded depth, without backpropagating through the decoder.
+            </p>
+        </div>
+
+        <div class="figure-block" data-animate>
+            <h3>Predict Geometry First, Then Hold It Fixed</h3>
+            <div class="figure-frame">
+                <img class="tbl" style="--pt:428" src="static/images/table_strategies.png" alt="Table 6: geometric and photometric performance across geometry strategies">
+            </div>
+            <p class="figure-caption">
+                <strong>Five ways to supply geometry.</strong>
+                Heuristic depth fusion, latent optimization toward predicted depth, and joint denoising from background depth each trail
+                sequential synthesis under a fixed predicted depth, which improves both metrics on both splits.
+            </p>
+        </div>
+
+        <div class="figure-block" data-animate>
+            <h3>One Depth Interface, Four Generators</h3>
+            <div class="figure-frame">
+                <img class="tbl" style="--pt:440" src="static/images/table_generators.png" alt="Table 9: depth-conditioned RGB synthesis across generators">
+            </div>
+            <p class="figure-caption">
+                <strong>The same Stage-1 depth, four RGB generators.</strong>
+                Adapting SD2, SDXL, Qwen, and FLUX.1-Fill to use the depth condition reduces category-disjoint AbsRel by
+                <strong>18% to 32%</strong> and raises PSNR by <strong>1.08 to 2.13&nbsp;dB</strong> over their pretrained versions.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- ===== BibTeX ===== -->
+<section class="section section-tint" id="bibtex">
+    <div class="container">
+        <h2 class="section-title" data-animate><span class="section-number">6</span>Citation</h2>
+        <div class="bibtex-block" data-animate>
+            <div class="bibtex-header">
+                <span>BibTeX</span>
+                <button class="copy-btn" onclick="copyBibtex()">
+                    <i class="fa-regular fa-copy"></i>
+                    <span>Copy</span>
+                </button>
+            </div>
+            <pre class="bibtex-code" id="bibtexCode">@article{jo2026d2r,
+  title   = {Depth-to-RGB: Repurposing a Frozen Depth Estimator for Geometry-Guided Compositing},
+  author  = {Jo, Sanghyun and Lim, Chae Yeon and Lee, Donghwan and Kim, Sihyun and Kim, Soo Ye and Kim, Kyungsu},
+  journal = {arXiv preprint arXiv:2610.09125},
+  year    = {2026}
+}</pre>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Footer ===== -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-left">
+                <span class="footer-logo">Depth-to-RGB</span>
+                <span class="footer-venue">Under Review &middot; arXiv:2610.09125</span>
+            </div>
+            <div class="footer-right">
+                Template inspired by <a href="https://nerfies.github.io" target="_blank">Nerfies</a> &middot; <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">CC BY-SA 4.0</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script>
+// ===== Copy BibTeX =====
+function copyBibtex() {
+    const text = document.getElementById('bibtexCode').textContent;
+    navigator.clipboard.writeText(text).then(() => {
+        const btn = document.querySelector('.copy-btn span');
+        btn.textContent = 'Copied!';
+        setTimeout(() => btn.textContent = 'Copy', 2000);
+    });
+}
+
+// ===== Floating Nav =====
+const nav = document.getElementById('floatingNav');
+window.addEventListener('scroll', () => {
+    nav.classList.toggle('visible', window.scrollY > 520);
+});
+
+// ===== Scroll Animations =====
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const delay = entry.target.dataset.delay || 0;
+            setTimeout(() => {
+                entry.target.classList.add('animate-in');
+            }, parseInt(delay));
+            observer.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('[data-animate]').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
