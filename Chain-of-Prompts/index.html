@@ -19,7 +19,7 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400&family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
     <!-- Academicons & Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.4/css/academicons.min.css">
@@ -32,7 +32,7 @@
 <!-- ===== Floating Nav ===== -->
 <nav class="floating-nav" id="floatingNav">
     <div class="nav-inner">
-        <span class="nav-logo" style="letter-spacing:1px;">Chain-of-Prompts</span>
+        <span class="nav-logo">Chain-of-Prompts</span>
         <div class="nav-links">
             <a href="#abstract">Abstract</a>
             <a href="#method">Method</a>
@@ -42,107 +42,72 @@
     </div>
 </nav>
 
-<!-- ===== Hero Section ===== -->
+<!-- ===== Hero: title panel ===== -->
 <header class="hero">
-    <div class="hero-particles" id="particles"></div>
-    <div class="hero-gradient"></div>
-    <div class="hero-content">
-        <!-- Status Badge -->
-        <div class="oral-badge" data-animate="fade-down">
-            <div class="oral-badge-glow"></div>
-            <div class="oral-badge-inner">
-                <span>Under Review</span>
-            </div>
-        </div>
+    <div class="container">
+        <div class="hero-card">
+            <div class="status">Under Review</div>
 
-        <h1 class="hero-title" data-animate="fade-up">
-            <span class="title-trace" style="font-size:clamp(44px,6vw,84px);letter-spacing:2px;">Chain-of-Prompts</span>
-            <span class="title-separator"></span>
-            <span class="title-sub">One Click per Cell Type Suffices:<br>Training-free Group Interaction for Cell Instance Segmentation</span>
-        </h1>
+            <h1 class="hero-title">Chain-of-Prompts</h1>
+            <p class="hero-sub">One Click per Cell Type Suffices: Training-free Group Interaction for Cell Instance Segmentation</p>
 
-        <!-- Authors -->
-        <div class="authors" data-animate="fade-up" data-delay="200">
-            <div class="author-row">
+            <!-- Authors -->
+            <div class="authors">
                 <span class="author"><a href="https://shjo-april.github.io/" target="_blank">Sanghyun Jo</a><sup>1,2</sup></span>
                 <span class="author">Seo Jin Lee<sup>2</sup></span>
                 <span class="author">Seohyung Hong<sup>2</sup></span>
                 <span class="author">Yoorim Gang<sup>2</sup></span>
                 <span class="author"><a href="https://sites.google.com/view/hyeongsub/" target="_blank">Hyeongsub Kim</a><sup>2,3</sup></span>
-                <span class="author">Hyungseok Seo<sup>2†</sup></span>
-                <span class="author"><a href="https://aibl.snu.ac.kr/team/pi-information" target="_blank">Kyungsu Kim</a><sup>2†</sup></span>
+                <span class="author">Hyungseok Seo<sup>2,†</sup></span>
+                <span class="author"><a href="https://aibl.snu.ac.kr/team/pi-information" target="_blank">Kyungsu Kim</a><sup>2,†</sup></span>
             </div>
-            <div class="affiliation-row">
-                <span><sup>1</sup>OGQ</span>
-                <span><sup>2</sup>Seoul National University</span>
-                <span><sup>3</sup>LG CNS</span>
+
+            <!-- Affiliations -->
+            <div class="affils">
+                <span class="affil"><sup>1</sup><img src="static/images/ogq.png" srcset="static/images/ogq.png 1x, static/images/ogq_2x.png 2x" width="82" height="26" alt="OGQ"></span>
+                <span class="affil"><sup>2</sup><img src="static/images/snu.png" srcset="static/images/snu.png 1x, static/images/snu_2x.png 2x" width="38" height="40" alt=""><span>Seoul National University</span></span>
+                <span class="affil"><sup>3</sup><img src="static/images/lgcns.png" srcset="static/images/lgcns.png 1x, static/images/lgcns_2x.png 2x" width="99" height="24" alt="LG CNS"></span>
             </div>
-            <div class="author-note">
-                <span><sup>†</sup>Corresponding authors</span>
+            <div class="author-note"><sup>†</sup> Corresponding authors</div>
+
+            <!-- Action Buttons -->
+            <div class="hero-actions">
+                <a href="https://arxiv.org/pdf/2605.29429" target="_blank" class="btn btn-primary">
+                    <i class="fa-solid fa-file-pdf"></i><span>Paper</span>
+                </a>
+                <a href="https://arxiv.org/abs/2605.29429" target="_blank" class="btn btn-secondary">
+                    <i class="ai ai-arxiv"></i><span>arXiv</span>
+                </a>
+                <a href="https://github.com/shjo-april/Chain-of-Prompts" target="_blank" class="btn btn-secondary">
+                    <i class="fa-brands fa-github"></i><span>Code</span>
+                </a>
+                <a class="btn btn-secondary btn-disabled" aria-disabled="true" tabindex="-1" title="Coming soon">
+                    <i class="fa-solid fa-person-chalkboard"></i><span>Slides</span><span class="soon">Soon</span>
+                </a>
+                <a class="btn btn-secondary btn-disabled" aria-disabled="true" tabindex="-1" title="Coming soon">
+                    <i class="fa-solid fa-image"></i><span>Poster</span><span class="soon">Soon</span>
+                </a>
             </div>
         </div>
-
-        <!-- Action Buttons -->
-        <div class="hero-actions" data-animate="fade-up" data-delay="300">
-            <a href="https://arxiv.org/pdf/2605.29429" target="_blank" class="btn btn-primary">
-                <i class="fa-solid fa-file-pdf"></i>
-                <span>Paper</span>
-            </a>
-            <a href="https://arxiv.org/abs/2605.29429" target="_blank" class="btn btn-secondary">
-                <i class="ai ai-arxiv"></i>
-                <span>arXiv</span>
-            </a>
-            <a href="https://github.com/shjo-april/Chain-of-Prompts" target="_blank" class="btn btn-secondary">
-                <i class="fa-brands fa-github"></i>
-                <span>Code</span>
-            </a>
-            <a href="javascript:void(0)" class="btn btn-secondary btn-disabled" aria-disabled="true" tabindex="-1" title="Coming soon">
-                <i class="fa-solid fa-person-chalkboard"></i>
-                <span>Slides<br><small>(Coming Soon)</small></span>
-            </a>
-            <a href="javascript:void(0)" class="btn btn-secondary btn-disabled" aria-disabled="true" tabindex="-1" title="Coming soon">
-                <i class="fa-solid fa-image"></i>
-                <span>Poster<br><small>(Coming Soon)</small></span>
-            </a>
-        </div>
-    </div>
-
-    <div class="hero-scroll-hint">
-        <span>Scroll to explore</span>
-        <div class="scroll-arrow"></div>
     </div>
 </header>
 
 <!-- ===== Hero Demo: Main Visualization ===== -->
-<section class="section">
+<section class="section section-tight">
     <div class="container">
-        <div class="method-overview" data-animate="fade-up">
-            <div class="method-figure">
-                <div class="figure-frame-glow">
-                    <div class="figure-frame">
-                        <img src="static/images/hero.gif" alt="Group Prompting (SAM3 + CoP) segments every cell in 3 clicks; per-instance prompting keeps clicking to 245" style="width:100%;height:auto;display:block;">
-                    </div>
-                </div>
-                <p class="figure-caption">
-                    <strong>Group Prompting (SAM3 + CoP) segments every cell in 3 clicks</strong>;
-                    per-instance prompting (SAM3) keeps clicking to 245.
-                </p>
+        <div class="figure-block" data-animate>
+            <div class="figure-frame">
+                <img src="static/images/hero.gif" alt="Group Prompting (SAM3 + CoP) segments every cell in 3 clicks; per-instance prompting keeps clicking to 245">
             </div>
+            <p class="figure-caption">
+                <strong>Group Prompting (SAM3 + CoP) segments every cell in 3 clicks</strong>;
+                per-instance prompting (SAM3) keeps clicking to 245.
+            </p>
         </div>
-    </div>
-</section>
 
-<!-- ===== TL;DR / Key Insight ===== -->
-<section class="section tldr-section">
-    <div class="container">
-        <div class="tldr-card" data-animate="fade-up">
-            <div class="tldr-icon">
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                    <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
-                </svg>
-            </div>
-            <h2 class="tldr-label">Key Insight</h2>
-            <p class="tldr-text">
+        <div class="insight" data-animate>
+            <div class="insight-label">Key Insight</div>
+            <p class="insight-text">
                 SAM's frozen image encoder already <strong>clusters same-type cells</strong> in its feature space before any prompt is given.
                 CoP exploits this property to propagate <strong>a single click per cell type</strong> to all instances of that type, retaining
                 <strong>over 90% of per-instance performance across eleven benchmarks</strong> while cutting annotation clicks by
@@ -153,28 +118,22 @@
 </section>
 
 <!-- ===== Motivation (Teaser): the problem ===== -->
-<section class="section section-dark">
+<section class="section section-tint">
     <div class="container">
-        <h2 class="section-title" data-animate="fade-up">
-            Motivation
-        </h2>
-        <p class="section-lead" data-animate="fade-up" style="text-align:center;max-width:880px;margin:-12px auto 32px;font-size:18px;color:var(--text-secondary);line-height:1.6;">
+        <h2 class="section-title" data-animate>Motivation</h2>
+        <p class="section-lead" data-animate>
             Cell-specific models break on unseen cell types, while interactive foundation models such as SAM3
             require one click per instance. <strong>Neither path scales to histopathology images with hundreds of cells.</strong>
         </p>
-        <div class="method-overview" data-animate="fade-up">
-            <div class="method-figure">
-                <div class="figure-frame-glow">
-                    <div class="figure-frame">
-                        <img src="static/images/teaser.png" alt="Pretrained models fail on unseen cell types; SAM3 needs per-instance clicks">
-                    </div>
-                </div>
-                <p class="figure-caption">
-                    <strong>Existing pipelines force a hard trade-off.</strong>
-                    Cell-specific baselines and open-vocabulary detectors miss out-of-distribution cell types (red dashed boxes),
-                    and SAM3 generalizes only by clicking every cell (<em>e.g.</em>, 245 clicks per image).
-                </p>
+        <div class="figure-block" data-animate>
+            <div class="figure-frame">
+                <img src="static/images/teaser.png" alt="Pretrained models fail on unseen cell types; SAM3 needs per-instance clicks">
             </div>
+            <p class="figure-caption">
+                <strong>Existing pipelines force a hard trade-off.</strong>
+                Cell-specific baselines and open-vocabulary detectors miss out-of-distribution cell types (red dashed boxes),
+                and SAM3 generalizes only by clicking every cell (<em>e.g.</em>, 245 clicks per image).
+            </p>
         </div>
     </div>
 </section>
@@ -182,39 +141,30 @@
 <!-- ===== Our Approach (Highlight): the solution ===== -->
 <section class="section">
     <div class="container">
-        <h2 class="section-title" data-animate="fade-up">
-            Our Approach: Group Prompting
-        </h2>
-        <p class="section-lead" data-animate="fade-up" style="text-align:center;max-width:880px;margin:-12px auto 32px;font-size:18px;color:var(--text-secondary);line-height:1.6;">
+        <h2 class="section-title" data-animate>Our Approach: Group Prompting</h2>
+        <p class="section-lead" data-animate>
             We replace per-instance clicking, the long-standing <em>O(N)</em> bottleneck, with
-            <strong style="color:var(--gold);">Group Prompting</strong>: one click per cell type, recursively propagated across all same-type cells.
+            <strong>Group Prompting</strong>: one click per cell type, recursively propagated across all same-type cells.
         </p>
-        <div class="observation-grid" data-animate="fade-up">
-            <div class="obs-figure">
-                <div class="figure-frame-glow">
-                    <div class="figure-frame figure-frame-padded">
-                        <img src="static/images/figure2.png" alt="Group Prompting O(T) vs. per-instance O(N) on CoNSeP/test_2, with AJI vs. number of prompts">
-                    </div>
-                </div>
-                <p class="figure-caption">
-                    <strong>From 245 Clicks to 3 on CoNSeP/test_2.</strong>
-                    Per-instance prompting <em>O(N)</em> needs 245 clicks to reach the upper bound, while Group Prompting <em>O(T)</em>
-                    reaches <strong>93.9% of that upper bound</strong> from just <strong>3 clicks</strong> (one per cell type),
-                    <strong>81.7&times; fewer prompts</strong>.
-                </p>
+        <div class="figure-block" data-animate>
+            <div class="figure-frame">
+                <img src="static/images/figure2.png" alt="Group Prompting O(T) vs. per-instance O(N) on CoNSeP/test_2, with AJI vs. number of prompts">
             </div>
+            <p class="figure-caption">
+                <strong>From 245 Clicks to 3 on CoNSeP/test_2.</strong>
+                Per-instance prompting <em>O(N)</em> needs 245 clicks to reach the upper bound, while Group Prompting <em>O(T)</em>
+                reaches <strong>93.9% of that upper bound</strong> from just <strong>3 clicks</strong> (one per cell type),
+                <strong>81.7&times; fewer prompts</strong>.
+            </p>
         </div>
     </div>
 </section>
 
 <!-- ===== Abstract ===== -->
-<section class="section section-dark" id="abstract">
+<section class="section section-tint" id="abstract">
     <div class="container">
-        <h2 class="section-title" data-animate="fade-up">
-            <span class="section-number">01</span>
-            Abstract
-        </h2>
-        <div class="abstract-content" data-animate="fade-up">
+        <h2 class="section-title" data-animate><span class="section-number">1</span>Abstract</h2>
+        <div class="abstract-content" data-animate>
             <p>
                 Cell instance segmentation models trained on cell-specific datasets suffer severe performance drops on out-of-distribution cell types,
                 while interactive foundation models overcome this through per-instance prompting at a cost that is prohibitively expensive
@@ -243,23 +193,20 @@
 <!-- ===== Key Contributions ===== -->
 <section class="section">
     <div class="container">
-        <h2 class="section-title" data-animate="fade-up">
-            <span class="section-number">02</span>
-            Contributions
-        </h2>
+        <h2 class="section-title" data-animate><span class="section-number">2</span>Contributions</h2>
         <div class="contributions-grid">
-            <div class="contrib-card" data-animate="fade-up" data-delay="0">
-                <div class="contrib-number">&#9312;</div>
+            <div class="contrib-card" data-animate data-delay="0">
+                <div class="contrib-number">PARADIGM</div>
                 <h3>Group Prompting</h3>
                 <p>Shifts interactive segmentation from per-instance <em>O(N)</em> to per-type <em>O(T)</em> interaction, reducing annotation cost from the number of cells to the number of cell types while remaining robust to out-of-distribution types without cell-specific training.</p>
             </div>
-            <div class="contrib-card" data-animate="fade-up" data-delay="100">
-                <div class="contrib-number">&#9313;</div>
+            <div class="contrib-card" data-animate data-delay="100">
+                <div class="contrib-number">METHOD</div>
                 <h3>Chain-of-Prompts</h3>
                 <p>A training-free framework that recursively expands prompt coverage by combining <em>Hierarchical Similarity Gating</em> (HSG) and <em>Farthest Prompt Recursion</em> (FPR), maintaining precision <strong>&geq; 96%</strong> at every iteration.</p>
             </div>
-            <div class="contrib-card" data-animate="fade-up" data-delay="200">
-                <div class="contrib-number">&#9314;</div>
+            <div class="contrib-card" data-animate data-delay="200">
+                <div class="contrib-number">RESULTS</div>
                 <h3>Generalization on 11 Benchmarks</h3>
                 <p>Retains over <strong>90%</strong> of per-instance performance on H&amp;E cell-type-annotated data, <strong>98&ndash;99%</strong> on H&amp;E homogeneous data, and over <strong>95%</strong> under a staining-modality shift on non-H&amp;E microscopy, outperforming fully-supervised methods that require complete mask annotations.</p>
             </div>
@@ -268,55 +215,45 @@
 </section>
 
 <!-- ===== Method Overview ===== -->
-<section class="section section-dark" id="method">
+<section class="section section-tint" id="method">
     <div class="container">
-        <h2 class="section-title" data-animate="fade-up">
-            <span class="section-number">03</span>
-            Method
-        </h2>
+        <h2 class="section-title" data-animate><span class="section-number">3</span>Method</h2>
 
-        <div class="method-overview" data-animate="fade-up">
-            <div class="method-figure">
-                <div class="figure-frame-glow">
-                    <div class="figure-frame">
-                        <img src="static/images/method_overview.png" alt="CoP Method Overview">
-                    </div>
-                </div>
-                <p class="figure-caption">
-                    <strong>Two Steps, Zero Training: Identify Reliable Cells, Then Expand.</strong>
-                    A frozen SAM encoder extracts high- and low-resolution feature maps once per image.
-                    HSG turns each user click into a reliable point set via hierarchical similarity gating + connected-component labeling.
-                    FPR then iteratively re-prompts the farthest uncovered point until no new cells appear, decoding the converged set into instance masks.
-                </p>
+        <div class="figure-block" data-animate>
+            <div class="figure-frame">
+                <img src="static/images/method_overview.png" alt="CoP Method Overview">
             </div>
+            <p class="figure-caption">
+                <strong>Two Steps, Zero Training: Identify Reliable Cells, Then Expand.</strong>
+                A frozen SAM encoder extracts high- and low-resolution feature maps once per image.
+                HSG turns each user click into a reliable point set via hierarchical similarity gating + connected-component labeling.
+                FPR then iteratively re-prompts the farthest uncovered point until no new cells appear, decoding the converged set into instance masks.
+            </p>
         </div>
 
         <!-- Method Steps -->
         <div class="method-steps">
-            <div class="method-step" data-animate="fade-up">
-                <div class="step-connector"></div>
+            <div class="method-step" data-animate>
                 <div class="step-icon">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 12h18M12 3v18"/></svg>
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 12h18M12 3v18"/></svg>
                 </div>
                 <div class="step-content">
                     <h3>Hierarchical Similarity Gating (HSG)</h3>
                     <p>A single feature scale cannot achieve spatial precision and type selectivity simultaneously. HSG element-wise gates SAM's high-resolution and low-resolution features so the product suppresses tissue-level false activations of <em>F<sub>h</sub></em> while preserving its sharp localization, then non-parametrically thresholds at &mu;+&sigma; and applies connected-component labeling to extract reliable point centroids.</p>
                 </div>
             </div>
-            <div class="method-step" data-animate="fade-up">
-                <div class="step-connector"></div>
+            <div class="method-step" data-animate>
                 <div class="step-icon">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v6m0 10v6M4.22 4.22l4.24 4.24m7.08 7.08l4.24 4.24M1 12h6m10 0h6M4.22 19.78l4.24-4.24m7.08-7.08l4.24-4.24"/></svg>
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v6m0 10v6M4.22 4.22l4.24 4.24m7.08 7.08l4.24 4.24M1 12h6m10 0h6M4.22 19.78l4.24-4.24m7.08-7.08l4.24-4.24"/></svg>
                 </div>
                 <div class="step-content">
                     <h3>Farthest Prompt Recursion (FPR)</h3>
                     <p>Feature similarity decays across distant tissue regions, so a single prompt under-covers far-away cells. FPR selects the reliable point that is farthest (in image coordinates) from all previous prompts, feeds it back into HSG, and merges newly discovered points into the reliable set. The cycle repeats until convergence, ensuring whole-image coverage without feature drift.</p>
                 </div>
             </div>
-            <div class="method-step" data-animate="fade-up">
-                <div class="step-connector"></div>
+            <div class="method-step" data-animate>
                 <div class="step-icon">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
                 </div>
                 <div class="step-content">
                     <h3>Training-Free Mask Decoding</h3>
@@ -328,44 +265,39 @@
 </section>
 
 <!-- ===== Results ===== -->
-<section class="section section-dark" id="results">
+<section class="section" id="results">
     <div class="container">
-        <h2 class="section-title" data-animate="fade-up">
-            <span class="section-number">04</span>
-            Results
-        </h2>
+        <h2 class="section-title" data-animate><span class="section-number">4</span>Results</h2>
 
         <!-- Highlight Numbers -->
-        <div class="results-highlights" data-animate="fade-up">
+        <div class="results-highlights" data-animate>
             <div class="highlight-card">
                 <div class="highlight-value">93.9%</div>
                 <div class="highlight-metric">of Upper Bound</div>
-                <div class="highlight-desc">vs. per-instance SAM3<br>on CoNSeP</div>
+                <div class="highlight-desc">vs. per-instance SAM3 on CoNSeP</div>
             </div>
             <div class="highlight-card">
                 <div class="highlight-value">81.7&times;</div>
                 <div class="highlight-metric">Fewer Prompts</div>
-                <div class="highlight-desc">245 clicks &rarr; 3 clicks<br>group prompting</div>
+                <div class="highlight-desc">245 clicks &rarr; 3 clicks with group prompting</div>
             </div>
             <div class="highlight-card">
                 <div class="highlight-value">42.5&times;</div>
                 <div class="highlight-metric">Avg Fewer Prompts</div>
-                <div class="highlight-desc">97.6% fewer clicks<br>across 11 benchmarks</div>
+                <div class="highlight-desc">97.6% fewer clicks across 11 benchmarks</div>
             </div>
             <div class="highlight-card">
                 <div class="highlight-value">&gt;90%</div>
                 <div class="highlight-metric">Retention</div>
-                <div class="highlight-desc">on all 11 benchmarks<br>fully training-free</div>
+                <div class="highlight-desc">on all 11 benchmarks, fully training-free</div>
             </div>
         </div>
 
         <!-- Main Tables -->
-        <div class="result-block full-width" data-animate="fade-up">
+        <div class="figure-block" data-animate>
             <h3>One Click per Type Beats Fully-Supervised Models</h3>
-            <div class="figure-frame-glow">
-                <div class="figure-frame figure-frame-padded">
-                    <img src="static/images/table_typed.png" alt="Table 1: quantitative comparison on H&amp;E cell-type-annotated benchmarks">
-                </div>
+            <div class="figure-frame">
+                <img src="static/images/table_typed.png" alt="Table 1: quantitative comparison on H&amp;E cell-type-annotated benchmarks">
             </div>
             <p class="figure-caption">
                 <strong>H&amp;E Cell-Type-Annotated Benchmarks (CoNIC, CoNSeP, PanNuke).</strong>
@@ -375,12 +307,10 @@
             </p>
         </div>
 
-        <div class="result-block full-width" data-animate="fade-up">
+        <div class="figure-block" data-animate>
             <h3>98&ndash;99% Retention from a Single Click</h3>
-            <div class="figure-frame-glow">
-                <div class="figure-frame figure-frame-padded">
-                    <img src="static/images/table_he_untyped.png" alt="Table 2: quantitative results on H&amp;E untyped benchmarks">
-                </div>
+            <div class="figure-frame">
+                <img src="static/images/table_he_untyped.png" alt="Table 2: quantitative results on H&amp;E untyped benchmarks">
             </div>
             <p class="figure-caption">
                 <strong>H&amp;E Homogeneous Benchmarks (MoNuSeg, TNBC, CryoNuSeg, CPM-17).</strong>
@@ -389,12 +319,10 @@
             </p>
         </div>
 
-        <div class="result-block full-width" data-animate="fade-up">
+        <div class="figure-block" data-animate>
             <h3>Robust Under a Staining-Modality Shift</h3>
-            <div class="figure-frame-glow">
-                <div class="figure-frame figure-frame-padded">
-                    <img src="static/images/table_non-he_untyped.png" alt="Table 3: quantitative results on non-H&amp;E untyped benchmarks">
-                </div>
+            <div class="figure-frame">
+                <img src="static/images/table_non-he_untyped.png" alt="Table 3: quantitative results on non-H&amp;E untyped benchmarks">
             </div>
             <p class="figure-caption">
                 <strong>Non-H&amp;E Microscopy Benchmarks (CellBinDB, Cellpose, Kromp, LIVECell).</strong>
@@ -404,12 +332,10 @@
         </div>
 
         <!-- Qualitative -->
-        <div class="result-block full-width" data-animate="fade-up">
+        <div class="figure-block" data-animate>
             <h3>CoP Recovers Cells That Supervised Models Miss</h3>
-            <div class="figure-frame-glow">
-                <div class="figure-frame figure-frame-padded">
-                    <img src="static/images/qualitative.png" alt="Qualitative comparison on CoNIC">
-                </div>
+            <div class="figure-frame">
+                <img src="static/images/qualitative.png" alt="Qualitative comparison on CoNIC">
             </div>
             <p class="figure-caption">
                 <strong>Qualitative comparison.</strong>
@@ -419,12 +345,10 @@
         </div>
 
         <!-- UMAP -->
-        <div class="result-block full-width" data-animate="fade-up">
+        <div class="figure-block" data-animate>
             <h3>Why It Works: SAM Already Clusters Same-Type Cells</h3>
-            <div class="figure-frame-glow">
-                <div class="figure-frame figure-frame-padded">
-                    <img src="static/images/umap.png" alt="UMAP of SAM features">
-                </div>
+            <div class="figure-frame">
+                <img src="static/images/umap.png" alt="UMAP of SAM features">
             </div>
             <p class="figure-caption">
                 <strong>UMAP of SAM's frozen encoder features at GT cell centroids (CoNSeP/test_2).</strong>
@@ -437,13 +361,10 @@
 </section>
 
 <!-- ===== BibTeX ===== -->
-<section class="section" id="bibtex">
+<section class="section section-tint" id="bibtex">
     <div class="container">
-        <h2 class="section-title" data-animate="fade-up">
-            <span class="section-number">05</span>
-            Citation
-        </h2>
-        <div class="bibtex-block" data-animate="fade-up">
+        <h2 class="section-title" data-animate><span class="section-number">5</span>Citation</h2>
+        <div class="bibtex-block" data-animate>
             <div class="bibtex-header">
                 <span>BibTeX</span>
                 <button class="copy-btn" onclick="copyBibtex()">
@@ -466,11 +387,11 @@
     <div class="container">
         <div class="footer-content">
             <div class="footer-left">
-                <span class="footer-logo" style="letter-spacing:1px;">Chain-of-Prompts</span>
+                <span class="footer-logo">Chain-of-Prompts</span>
                 <span class="footer-venue">Under Review &middot; arXiv:2605.29429</span>
             </div>
             <div class="footer-right">
-                <p>Template inspired by <a href="https://nerfies.github.io" target="_blank">Nerfies</a>. Licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">CC BY-SA 4.0</a>.</p>
+                Template inspired by <a href="https://nerfies.github.io" target="_blank">Nerfies</a> &middot; <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">CC BY-SA 4.0</a>
             </div>
         </div>
     </div>
@@ -490,7 +411,7 @@ function copyBibtex() {
 // ===== Floating Nav =====
 const nav = document.getElementById('floatingNav');
 window.addEventListener('scroll', () => {
-    nav.classList.toggle('visible', window.scrollY > 600);
+    nav.classList.toggle('visible', window.scrollY > 520);
 });
 
 // ===== Scroll Animations =====
@@ -504,76 +425,9 @@ const observer = new IntersectionObserver((entries) => {
             observer.unobserve(entry.target);
         }
     });
-}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
 
 document.querySelectorAll('[data-animate]').forEach(el => observer.observe(el));
-
-// ===== Particle Background =====
-(function() {
-    const canvas = document.createElement('canvas');
-    const ctx = canvas.getContext('2d');
-    const container = document.getElementById('particles');
-    container.appendChild(canvas);
-
-    let w, h, particles = [];
-
-    function resize() {
-        w = canvas.width = container.offsetWidth;
-        h = canvas.height = container.offsetHeight;
-    }
-
-    function createParticles() {
-        particles = [];
-        const count = Math.floor((w * h) / 15000);
-        for (let i = 0; i < count; i++) {
-            particles.push({
-                x: Math.random() * w,
-                y: Math.random() * h,
-                vx: (Math.random() - 0.5) * 0.3,
-                vy: (Math.random() - 0.5) * 0.3,
-                r: Math.random() * 1.5 + 0.5,
-                o: Math.random() * 0.3 + 0.1
-            });
-        }
-    }
-
-    function draw() {
-        ctx.clearRect(0, 0, w, h);
-        particles.forEach(p => {
-            p.x += p.vx;
-            p.y += p.vy;
-            if (p.x < 0 || p.x > w) p.vx *= -1;
-            if (p.y < 0 || p.y > h) p.vy *= -1;
-            ctx.beginPath();
-            ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-            ctx.fillStyle = `rgba(212, 175, 55, ${p.o})`;
-            ctx.fill();
-        });
-
-        // Draw connections
-        for (let i = 0; i < particles.length; i++) {
-            for (let j = i + 1; j < particles.length; j++) {
-                const dx = particles[i].x - particles[j].x;
-                const dy = particles[i].y - particles[j].y;
-                const dist = Math.sqrt(dx * dx + dy * dy);
-                if (dist < 120) {
-                    ctx.beginPath();
-                    ctx.moveTo(particles[i].x, particles[i].y);
-                    ctx.lineTo(particles[j].x, particles[j].y);
-                    ctx.strokeStyle = `rgba(212, 175, 55, ${0.06 * (1 - dist / 120)})`;
-                    ctx.lineWidth = 0.5;
-                    ctx.stroke();
-                }
-            }
-        }
-        requestAnimationFrame(draw);
-    }
-
-    resize();
-    createParticles();
-    draw();
-    window.addEventListener('resize', () => { resize(); createParticles(); });
-})();
 </script>
 
 </body>
