@@ -368,6 +368,19 @@
         </div>
 
         <div class="figure-block" data-animate>
+            <h3>One Injector Design, Six Depth Backbones</h3>
+            <div class="figure-frame">
+                <img class="tbl" style="--pt:406" src="static/images/table_backbones.png" alt="Table C4: Stage-1 transfer across depth backbones">
+            </div>
+            <p class="figure-caption">
+                <strong>Depth-backbone agnostic.</strong>
+                Each pair compares a frozen estimator with the same estimator plus a trained injector, scored before RGB synthesis against targets from that estimator.
+                Injection lowers AbsRel and raises &delta;<sub>1</sub> in all 12 configurations, by <strong>29% to 60%</strong> in-distribution and
+                <strong>18% to 50%</strong> out-of-distribution. Targets differ across estimators, so compare within each pair.
+            </p>
+        </div>
+
+        <div class="figure-block" data-animate>
             <h3>One Depth Interface, Four Generators</h3>
             <div class="figure-frame">
                 <img class="tbl" style="--pt:440" src="static/images/table_generators.png" alt="Table 9: depth-conditioned RGB synthesis across generators">
