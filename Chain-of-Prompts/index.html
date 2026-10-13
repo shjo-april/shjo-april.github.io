@@ -68,7 +68,7 @@
                 <span class="affil"><sup>2</sup><img src="static/images/snu.png" srcset="static/images/snu.png 1x, static/images/snu_2x.png 2x" width="38" height="40" alt=""><span>Seoul National University</span></span>
                 <span class="affil"><sup>3</sup><img src="static/images/lgcns.png" srcset="static/images/lgcns.png 1x, static/images/lgcns_2x.png 2x" width="99" height="24" alt="LG CNS"></span>
             </div>
-            <div class="author-note"><sup>†</sup> Corresponding authors</div>
+            <div class="author-note"><sup>†</sup> Corresponding authors: <a href="mailto:h.seo@snu.ac.kr" class="copy-email" title="Click to copy">h.seo@snu.ac.kr</a>, <a href="mailto:kyskim@snu.ac.kr" class="copy-email" title="Click to copy">kyskim@snu.ac.kr</a></div>
 
             <!-- Action Buttons -->
             <div class="hero-actions">
@@ -411,6 +411,19 @@ function copyBibtex() {
         setTimeout(() => btn.textContent = 'Copy', 2000);
     });
 }
+
+// ===== Copy e-mail on click =====
+// A click copies the address and shows "Copied"; without the Clipboard API (plain http) the mailto link opens instead.
+document.querySelectorAll('.copy-email').forEach(a => {
+    a.addEventListener('click', e => {
+        if (!navigator.clipboard) return;
+        e.preventDefault();
+        navigator.clipboard.writeText(a.textContent.trim()).then(() => {
+            a.classList.add('copied');
+            setTimeout(() => a.classList.remove('copied'), 1600);
+        });
+    });
+});
 
 // ===== Floating Nav =====
 const nav = document.getElementById('floatingNav');

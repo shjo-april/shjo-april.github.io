@@ -98,6 +98,13 @@ p { text-wrap: pretty; }
 .affil img, .lab-logo img { max-width: none; flex: none; }
 .author-note { margin-top: 12px; font-size: 14.5px; color: var(--ink-3); }
 .author-note sup { font-family: var(--font-sans); color: var(--teal); }
+.copy-email { position: relative; cursor: copy; border-bottom: 1px dotted var(--line-strong); }
+.copy-email:hover { text-decoration: none; border-bottom-color: var(--teal); }
+.copy-email.copied::after {
+    content: 'Copied'; position: absolute; left: 50%; bottom: calc(100% + 7px); transform: translateX(-50%);
+    font-family: var(--font-sans); font-size: 11.5px; font-weight: 600; line-height: 1; white-space: nowrap;
+    color: #fff; background: var(--ink); border-radius: 6px; padding: 5px 8px; pointer-events: none;
+}
 
 .hero-actions { margin-top: 28px; display: flex; flex-wrap: wrap; gap: 10px; padding-right: 170px; }
 .btn {
