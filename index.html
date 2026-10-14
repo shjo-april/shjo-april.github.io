@@ -58,7 +58,7 @@
 
         /* Hero Row */
         .hero-row{position:relative;flex:0 0 auto;padding:3.2rem 2.5rem 0}
-        .hero-inner{max-width:var(--max-width);margin:0 auto;display:grid;grid-template-columns:240px 1fr;gap:3.5rem;align-items:center}
+        .hero-inner{max-width:var(--max-width);margin:0 auto;display:grid;grid-template-columns:260px 1fr;gap:3.5rem;align-items:center}
 
         .profile-card{text-align:center}
         .profile-image-wrap{position:relative;width:190px;height:190px;margin:0 auto 1.2rem}
@@ -69,10 +69,11 @@
         .profile-role{font-size:0.9rem;color:var(--teal-dark);font-weight:700;letter-spacing:0.02em;text-transform:none;margin-bottom:0.2rem}
         .profile-affiliation{font-size:0.95rem;color:var(--text-secondary);font-weight:600;margin-bottom:0.15rem}
         .profile-email{font-family:var(--font-mono);font-size:0.8rem;color:var(--text-secondary);margin-bottom:1rem}
-        .social-links{display:flex;justify-content:center;gap:0.4rem}
+        .social-links{display:flex;justify-content:center;gap:6px}
         .social-links .brand-logo{width:18px;height:18px;object-fit:contain;display:block}
         .social-links .brand-logo-sq{width:19px;height:19px;border-radius:4px;object-fit:cover;display:block}
-        .social-links a{display:flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:8px;background:var(--bg-card);border:1px solid var(--border);color:var(--text-secondary);font-size:1.05rem;transition:all 0.3s}
+        .social-links .brand-logo-wide{width:21px;height:15px;display:block}
+        .social-links a{display:flex;flex:none;align-items:center;justify-content:center;width:32px;height:32px;border-radius:8px;background:var(--bg-card);border:1px solid var(--border);color:var(--text-secondary);font-size:1.05rem;transition:all 0.3s}
         .social-links a:hover{color:var(--teal);border-color:var(--teal);background:var(--teal-tint);transform:translateY(-2px)}
 
         .hero-bio{}
@@ -263,6 +264,7 @@
                 <div class="social-links">
                     <a href="https://scholar.google.com/citations?user=xgP6q2YAAAAJ&hl=en" target="_blank" title="Google Scholar"><img src="./assets/img/scholar.svg" alt="Google Scholar" class="brand-logo"></a>
                     <a href="https://openreview.net/profile?id=%7ESanghyun_Jo1" target="_blank" title="OpenReview"><img src="./assets/img/openreview.png" alt="OpenReview" class="brand-logo-sq"></a>
+                    <a href="https://www.alphaxiv.org/@sanghyun-jo" target="_blank" title="alphaXiv"><img src="./assets/img/alphaxiv.png" srcset="./assets/img/alphaxiv.png 1x, ./assets/img/alphaxiv_2x.png 2x" alt="alphaXiv" class="brand-logo-wide"></a>
                     <a href="https://orcid.org/0000-0001-5371-2069" target="_blank" title="ORCID"><img src="./assets/img/orcid.svg" alt="ORCID" class="brand-logo"></a>
                     <a href="https://github.com/shjo-april/" target="_blank" title="GitHub"><img src="./assets/img/github.svg" alt="GitHub" class="brand-logo"></a>
                     <a href="https://www.linkedin.com/in/sanghyun-jo-b61201238/" target="_blank" title="LinkedIn"><img src="./assets/img/li.svg" alt="LinkedIn" class="brand-logo"></a>
@@ -330,7 +332,7 @@
                     <div class="pub-title">One Click per Cell Type Suffices: Training-free Group Interaction for Cell Instance Segmentation</div>
                     <div class="pub-authors"><strong>Sanghyun Jo</strong>, Seo Jin Lee, Seohyung Hong, Yoorim Gang, Hyeongsub Kim, Hyungseok Seo&#8224;, Kyungsu Kim&#8224;</div>
                     <div class="pub-venue">Asian Conference on Computer Vision (ACCV), 2026.</div>
-                    <div class="pub-note"><span class="role-tag lead">First Author</span><span class="role-tag oral">Oral</span>Also selected for Spotlight Presentation (Top-10) at <a href="https://asci.artificialintelligencepathology.org/" target="_blank">NeurIPS 2026 Workshop ASCI</a> (Non-Archival)</div>
+                    <div class="pub-note"><span class="role-tag lead">First Author</span><span class="role-tag oral">Oral</span>Also selected for Spotlight Presentation (Top-10) at <span style="white-space:nowrap"><a href="https://asci.artificialintelligencepathology.org/" target="_blank">NeurIPS 2026 Workshop ASCI</a> (Non-Archival)</span></div>
                     <div class="pub-links">
                         <a href="https://arxiv.org/pdf/2605.29429" target="_blank" class="pub-link"><i class="fa-solid fa-file-pdf"></i> PDF</a>
                         <a href="https://arxiv.org/abs/2605.29429" target="_blank" class="pub-link"><i class="ai ai-arxiv"></i> arXiv</a>
