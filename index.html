@@ -144,23 +144,17 @@
         .pub-link:hover{border-color:var(--teal);color:var(--teal-dark);background:var(--teal-tint)}
 
         /* Industry Impact */
-        .impact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.2rem}
-        .impact-card{display:flex;flex-direction:column;padding:1.5rem;background:var(--bg-card);border:1px solid var(--border);border-radius:14px;opacity:0;transform:translateY(20px)}
+        .impact-list{display:flex;flex-direction:column;gap:1.2rem}
+        .impact-card{display:grid;grid-template-columns:300px 1fr;gap:1.8rem;align-items:center;padding:1.5rem;background:var(--bg-card);border:1px solid var(--border);border-radius:14px;opacity:0;transform:translateY(20px)}
         .impact-card.animate-in{opacity:1;transform:none;transition:opacity 0.5s ease,transform 0.5s ease,border-color 0.3s,background 0.3s}
         .impact-card:hover{border-color:var(--border-strong);background:var(--bg-card-hover)}
-        .impact-logos{display:flex;flex-wrap:wrap;gap:0.4rem;align-items:center;margin-bottom:0.95rem}
-        .brand{font-family:var(--font-display);font-size:0.8rem;font-weight:700;letter-spacing:0.01em;padding:0.2em 0.6em;border-radius:6px;background:var(--bg-secondary);border:1px solid var(--border);line-height:1.35;white-space:nowrap;color:var(--text-secondary)}
-        .brand-naver{color:#058f46}
-        .brand-samsung{color:#1428a0}
-        .brand-yonhap{color:#1c4f8f}
-        .brand-soop{color:#0a6fe0}
-        .brand-skt{color:#d7352a}
-        .brand-jtbc{color:#c0306b}
-        .brand-sbs{color:#0b7d83}
-        .brand-kwater{color:#0a79b0}
-        .brand-police{color:#27408f}
-        .brand-eyenix{color:#8a6a12}
-        .impact-title{font-family:var(--font-display);font-size:1.18rem;font-weight:700;color:var(--text-primary);margin-bottom:0.4rem}
+        /* client logos sit in a white panel, like the paper thumbnails above; heights are set per logo for optical balance */
+        .impact-logos{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:16px 24px;min-height:118px;padding:18px 20px;background:#fff;border:1px solid var(--border);border-radius:10px}
+        .impact-logos img{display:block;width:auto;max-width:100%}
+        .logo-group{display:inline-flex;align-items:center;gap:12px;padding:7px 12px 7px 10px;border:1px dashed var(--border-strong);border-radius:8px}
+        .logo-group-label{font-family:var(--font-mono);font-size:0.66rem;font-weight:700;letter-spacing:0.04em;color:var(--text-secondary)}
+        .logo-lockup{display:inline-flex;align-items:center;gap:10px;font-size:0.78rem;font-weight:700;line-height:1.25;color:var(--text-primary);text-align:left}
+        .impact-title{font-family:var(--font-display);font-size:1.25rem;font-weight:700;color:var(--text-primary);margin-bottom:0.4rem}
         .impact-tags{display:flex;flex-wrap:wrap;gap:0.4rem;margin-bottom:0.7rem}
         .impact-tag{font-family:var(--font-mono);font-size:0.62rem;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;padding:0.22em 0.6em;border-radius:4px;line-height:1.4;white-space:nowrap}
         .tag-cloud{background:#e8eff9;color:#2c5aa0;border:1px solid #bcd0ee}
@@ -217,6 +211,7 @@
         @media(max-width:768px){
             .pub-card{grid-template-columns:1fr}
             .pub-image{aspect-ratio:16/8}
+            .impact-card{grid-template-columns:1fr;gap:1.1rem}
             .dual-grid{grid-template-columns:1fr;gap:2rem}
             .talks-grid{column-count:1}
             .topbar-links{gap:1rem}.topbar-links a{font-size:0.7rem}
@@ -632,56 +627,66 @@
         <div class="section-header" data-animate>
             <h2 class="section-title">From AI Research to Industry Impact</h2>
         </div>
-        <div class="impact-grid">
+        <div class="impact-list">
 
             <div class="impact-card" data-animate>
                 <div class="impact-logos">
-                    <span class="brand brand-naver">NAVER</span>
-                    <span class="brand brand-samsung">SAMSUNG</span>
-                    <span class="brand brand-yonhap">Yonhap News</span>
+                    <img src="./assets/img/impact/naver.svg" alt="NAVER" title="NAVER MYBOX" height="20">
+                    <img src="./assets/img/impact/samsung.svg" alt="Samsung" title="Samsung Galaxy &amp; TV Art Store" height="17">
+                    <img src="./assets/img/impact/yonhap.png" srcset="./assets/img/impact/yonhap.png 1x, ./assets/img/impact/yonhap_2x.png 2x" alt="Yonhap News Agency" title="Yonhap News Agency" height="22">
                 </div>
-                <div class="impact-title">Content Tagging API</div>
-                <div class="impact-tags"><span class="impact-tag tag-cloud">Cloud</span></div>
-                <div class="impact-desc">Image and video tagging behind content search, auto-tagging tens of millions of images per day across 10 languages, with multi-year contract renewals.</div>
+                <div class="impact-body">
+                    <div class="impact-title">Content Tagging API</div>
+                    <div class="impact-tags"><span class="impact-tag tag-cloud">Cloud</span></div>
+                    <div class="impact-desc">Image and video tagging behind content search, auto-tagging tens of millions of images per day across 10 languages, with multi-year contract renewals.</div>
+                </div>
             </div>
 
             <div class="impact-card" data-animate data-delay="60">
                 <div class="impact-logos">
-                    <span class="brand brand-naver">NAVER</span>
-                    <span class="brand brand-soop">SOOP</span>
-                    <span class="brand brand-skt">Chat+ (SKT &middot; KT &middot; LG U+)</span>
+                    <img src="./assets/img/impact/naver.svg" alt="NAVER" title="OGQ Market on NAVER" height="20">
+                    <img src="./assets/img/impact/soop.svg" alt="SOOP" title="OGQ Market on SOOP" height="30">
+                    <span class="logo-group" title="Chat+, the joint RCS messaging service of SKT, KT, and LG U+"><span class="logo-group-label">Chat+</span><img src="./assets/img/impact/skt.svg" alt="SK telecom" height="24"><img src="./assets/img/impact/kt.png" srcset="./assets/img/impact/kt.png 1x, ./assets/img/impact/kt_2x.png 2x" alt="KT" height="24"><img src="./assets/img/impact/lguplus.svg" alt="LG U+" height="21"></span>
                 </div>
-                <div class="impact-title">Market Content Moderation</div>
-                <div class="impact-tags"><span class="impact-tag tag-cloud">Cloud</span></div>
-                <div class="impact-desc">Automated review and filtering across the OGQ Markets, screening 59M+ creator assets for quality, trend fit, and copyright and abuse without manual review.</div>
+                <div class="impact-body">
+                    <div class="impact-title">Market Content Moderation</div>
+                    <div class="impact-tags"><span class="impact-tag tag-cloud">Cloud</span></div>
+                    <div class="impact-desc">Automated review and filtering across the OGQ Markets, screening 59M+ creator assets for quality, trend fit, and copyright and abuse without manual review.</div>
+                </div>
             </div>
 
             <div class="impact-card" data-animate data-delay="120">
                 <div class="impact-logos">
-                    <span class="brand brand-jtbc">JTBC</span>
+                    <img src="./assets/img/impact/jtbc.svg" alt="JTBC" title="JTBC" height="44">
                 </div>
-                <div class="impact-title">Broadcast Generative AI</div>
-                <div class="impact-tags"><span class="impact-tag tag-cloud">Cloud</span></div>
-                <div class="impact-desc">Generative pipelines for AI virtual advertising (PPL) in broadcast, compositing product placements into video and cutting post-production cost by about 35%.</div>
+                <div class="impact-body">
+                    <div class="impact-title">Broadcast Generative AI</div>
+                    <div class="impact-tags"><span class="impact-tag tag-cloud">Cloud</span></div>
+                    <div class="impact-desc">Generative pipelines for AI virtual advertising (PPL) in broadcast, compositing product placements into video and cutting post-production cost by about 35%.</div>
+                </div>
             </div>
 
             <div class="impact-card" data-animate data-delay="180">
                 <div class="impact-logos">
-                    <span class="brand brand-kwater">K-water</span>
-                    <span class="brand brand-police">Korean National Police Agency</span>
+                    <img src="./assets/img/impact/kwater.svg" alt="K-water" title="K-water (Korea Water Resources Corporation)" height="32">
+                    <span class="logo-lockup"><img src="./assets/img/impact/knpa.svg" alt="" height="38"><span>Korean National<br>Police Agency</span></span>
                 </div>
-                <div class="impact-title">Public-Safety Video Analytics</div>
-                <div class="impact-tags"><span class="impact-tag tag-onprem">On-Premise</span></div>
-                <div class="impact-desc">On-premise intelligent video analytics across 42 nationwide sites with 5 KISA performance certifications, plus drone-based real-time analysis for public safety.</div>
+                <div class="impact-body">
+                    <div class="impact-title">Public-Safety Video Analytics</div>
+                    <div class="impact-tags"><span class="impact-tag tag-onprem">On-Premise</span></div>
+                    <div class="impact-desc">On-premise intelligent video analytics across 42 nationwide sites with 5 KISA performance certifications, plus drone-based real-time analysis for public safety.</div>
+                </div>
             </div>
 
             <div class="impact-card" data-animate data-delay="240">
                 <div class="impact-logos">
-                    <span class="brand brand-eyenix">EYENIX</span>
+                    <img src="./assets/img/impact/eyenix.png" srcset="./assets/img/impact/eyenix.png 1x, ./assets/img/impact/eyenix_2x.png 2x" alt="EYENIX" title="EYENIX" height="34">
                 </div>
-                <div class="impact-title">Edge AI &amp; Model Compression</div>
-                <div class="impact-tags"><span class="impact-tag tag-ondevice">On-Device</span></div>
-                <div class="impact-desc">NPU model compression and lightweighting for edge-camera SoCs, enabling real-time inference directly on resource-constrained devices.</div>
+                <div class="impact-body">
+                    <div class="impact-title">Edge AI &amp; Model Compression</div>
+                    <div class="impact-tags"><span class="impact-tag tag-ondevice">On-Device</span></div>
+                    <div class="impact-desc">NPU model compression and lightweighting for edge-camera SoCs, enabling real-time inference directly on resource-constrained devices.</div>
+                </div>
             </div>
 
         </div>
