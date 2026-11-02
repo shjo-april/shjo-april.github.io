@@ -248,3 +248,7 @@ p { text-wrap: pretty; }
     .affil { min-height: 52px; padding: 8px 16px 8px 11px; font-size: 15px; }
     .nav-links { gap: 16px; }
 }
+@media (max-width: 350px) {
+    .results-highlights { grid-template-columns: 1fr; }
+    .affil { white-space: normal; }
+}

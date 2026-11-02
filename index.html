@@ -11,8 +11,9 @@
     <meta property="og:description" content="Building robust and interpretable AI systems for real-world impact.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://shjo-april.github.io/">
-    <link rel="icon" media="(prefers-color-scheme:dark)" href="./assets/img/shjo_logo_cropped.png" type="image/png">
-    <link rel="icon" media="(prefers-color-scheme:light)" href="./assets/img/shjo_logo_cropped.png" type="image/png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./assets/img/site-logo/favicon_32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="./assets/img/site-logo/favicon_48.png">
+    <link rel="apple-touch-icon" href="./assets/img/site-logo/apple_touch_180.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -42,6 +43,7 @@
         .topbar{position:relative;z-index:100;padding:0 2.5rem;background:var(--bg-primary);border-bottom:1px solid var(--border)}
         .topbar-inner{max-width:var(--max-width);margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:48px}
         .topbar-id{font-family:var(--font-display);font-size:1.2rem;font-weight:600;color:var(--text-primary);display:flex;align-items:center;gap:0.6rem}
+        .topbar-id img{display:block;flex:none;width:28px;height:28px;object-fit:contain}
         .topbar-id .sep{color:var(--text-dim);font-weight:400}
         .topbar-id .affil{font-family:var(--font-body);font-size:0.85rem;font-weight:400;color:var(--text-secondary)}
         .topbar-links{display:flex;gap:1.8rem}
@@ -199,8 +201,13 @@
         [data-animate]{opacity:0;transform:translateY(20px)}
         [data-animate].animate-in{opacity:1;transform:translateY(0);transition:opacity 0.6s ease,transform 0.6s ease}
 
+        @media(max-width:1000px){
+            .topbar{padding:0 1.2rem}.topbar-inner{height:auto;display:block}
+            .topbar-id{min-height:48px}
+            .topbar-links{flex-wrap:wrap;gap:0.2rem 1rem;padding:0 0 0.5rem}.topbar-links a{white-space:nowrap;font-size:0.7rem;padding:0.2rem 0}
+        }
         @media(max-width:900px){
-            .hero-inner{grid-template-columns:1fr;text-align:center;gap:1.5rem}
+            .hero-inner{grid-template-columns:minmax(0,1fr);text-align:center;gap:1.5rem}
                         .hero-stats{justify-content:center}
             .profile-card{order:-1}
             .profile-image-wrap{width:120px;height:120px}
@@ -214,7 +221,6 @@
             .impact-card{grid-template-columns:1fr;gap:1.1rem}
             .dual-grid{grid-template-columns:1fr;gap:2rem}
             .talks-grid{column-count:1}
-            .topbar-links{gap:1rem}.topbar-links a{font-size:0.7rem}
             .section{padding:3rem 1.2rem}
         }
         @media(max-width:480px){
@@ -228,6 +234,7 @@
 <header class="topbar">
     <div class="topbar-inner">
         <div class="topbar-id">
+            <img src="./assets/img/site-logo/logo_28.png" srcset="./assets/img/site-logo/logo_28.png 1x, ./assets/img/site-logo/logo_56.png 2x, ./assets/img/site-logo/logo_84.png 3x" alt="" width="28" height="28">
             Sanghyun Jo <span class="sep">|</span> <span class="affil">OGQ &middot; SNU AIBL Lab</span>
         </div>
         <div class="topbar-links">
