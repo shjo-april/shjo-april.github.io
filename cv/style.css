@@ -115,9 +115,6 @@ sup{font-size:0.7em;line-height:0}
     .cv-item{grid-template-columns:minmax(0,1fr)}
     .cv-label{padding-top:0}
 }
-@media(max-width:480px){
-    .topbar-links{display:grid;grid-template-columns:repeat(3,max-content)}
-}
 @media print{
     .topbar,.cv-toc,.cv-actions,.footer{display:none}
     .cv-layout{display:block;padding:0}

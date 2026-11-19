@@ -87,7 +87,7 @@
         .bio-heading{font-family:var(--font-display);font-size:1.85rem;font-weight:700;color:var(--text-primary);margin-bottom:0.8rem;padding-bottom:0.5rem;border-bottom:1px solid var(--border);display:flex;align-items:baseline;gap:0.8rem}
         .bio-heading-label{font-family:var(--font-mono);font-size:0.7rem;color:var(--teal);letter-spacing:0.12em;text-transform:uppercase}
         .hero-bio-text{color:var(--text-secondary);font-size:1rem;line-height:1.8;margin-bottom:0.65rem}
-        .hero-stats{display:flex;gap:2.8rem;margin-top:1.4rem;padding-top:1.4rem;border-top:1px solid var(--border)}
+        .hero-stats{display:flex;flex-wrap:wrap;gap:1.5rem 2.8rem;margin-top:1.4rem;padding-top:1.4rem;border-top:1px solid var(--border)}
         .stat-value{font-family:var(--font-display);font-size:2rem;font-weight:700;color:var(--teal-dark);line-height:1}
         .stat-label{font-size:0.78rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.08em;margin-top:0.2rem}
 
@@ -235,7 +235,6 @@
             .section{padding:3rem 1.2rem}
         }
         @media(max-width:480px){
-            .topbar-links{display:grid;grid-template-columns:repeat(3,max-content)}
             .hero-stats{flex-wrap:wrap;gap:1.5rem}
                         .news-item{grid-template-columns:1fr;gap:0.2rem}
         }
@@ -251,7 +250,7 @@
         </div>
         <div class="topbar-links">
             <a href="#publications">Publications</a>
-            <a href="#under-review">Preprints</a>
+            <a href="#under-review">Under Review &amp; Preprints</a>
             <a href="#impact">Industry</a>
             <a href="#services">Services</a>
             <a href="#awards">Awards</a>
@@ -297,7 +296,7 @@
                 </p>
                 <div class="hero-stats">
                     <div class="stat-item"><div class="stat-value" id="pubCount">-</div><div class="stat-label">Publications</div></div>
-                    <div class="stat-item"><div class="stat-value" id="preprintCount">-</div><div class="stat-label">Preprints</div></div>
+                    <div class="stat-item"><div class="stat-value" id="reviewCount">-</div><div class="stat-label">Under Review &amp; Preprints</div></div>
                     <div class="stat-item"><div class="stat-value" id="yearsAI">-</div><div class="stat-label">Years in AI Industry</div></div>
                 </div>
             </div>
@@ -894,11 +893,11 @@
 <script>
 // Auto-calculate stats
 document.addEventListener('DOMContentLoaded', () => {
-    // Count peer-reviewed papers, and preprints already posted on arXiv
+    // Count peer-reviewed papers, and papers under review or posted as preprints
     const pubCount = document.querySelectorAll('#publications .pub-card').length;
     document.getElementById('pubCount').textContent = pubCount;
-    const preprintCount = [...document.querySelectorAll('#under-review .pub-card')].filter(card => card.querySelector('a[href*="arxiv.org"]')).length;
-    document.getElementById('preprintCount').textContent = preprintCount;
+    const reviewCount = document.querySelectorAll('#under-review .pub-card').length;
+    document.getElementById('reviewCount').textContent = reviewCount;
 
     // Calculate years in AI (started 2017-07-10)
     const start = new Date(2017, 6, 10);
