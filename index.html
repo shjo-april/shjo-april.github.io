@@ -168,6 +168,11 @@
         .tag-ondevice{background:var(--teal-tint);color:var(--teal-dark);border:1px solid #b9d5dc}
         .tag-onprem{background:#eceff1;color:var(--text-secondary);border:1px solid var(--border-strong)}
         .impact-desc{font-size:0.9rem;color:var(--text-secondary);line-height:1.62}
+        /* patents row under the deployment cards; the label column lines up with the logo panels */
+        .impact-patents{display:grid;grid-template-columns:300px 1fr;gap:1.8rem;align-items:center;margin-top:1.2rem;padding:1.2rem 1.5rem;border:1px dashed var(--border-strong);border-radius:14px}
+        .impact-patents-label{font-family:var(--font-mono);font-size:0.76rem;font-weight:700;color:var(--teal);letter-spacing:0.15em;text-transform:uppercase;text-align:center}
+        .impact-patents-text{font-size:0.9rem;color:var(--text-secondary);line-height:1.62;margin-bottom:0.6rem}
+        .impact-patents-links{display:flex;flex-wrap:wrap;gap:0.4rem}
 
         /* Services & Awards */
         .dual-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem}
@@ -224,11 +229,13 @@
             .pub-card{grid-template-columns:1fr}
             .pub-image{aspect-ratio:16/8}
             .impact-card{grid-template-columns:1fr;gap:1.1rem}
+            .impact-patents{grid-template-columns:1fr;gap:0.6rem}.impact-patents-label{text-align:left}
             .dual-grid{grid-template-columns:1fr;gap:2rem}
             .talks-grid{column-count:1}
             .section{padding:3rem 1.2rem}
         }
         @media(max-width:480px){
+            .topbar-links{display:grid;grid-template-columns:repeat(3,max-content)}
             .hero-stats{flex-wrap:wrap;gap:1.5rem}
                         .news-item{grid-template-columns:1fr;gap:0.2rem}
         }
@@ -244,10 +251,11 @@
         </div>
         <div class="topbar-links">
             <a href="#publications">Publications</a>
-            <a href="#under-review">Under Review &amp; Preprints</a>
-            <a href="#impact">Impact</a>
+            <a href="#under-review">Preprints</a>
+            <a href="#impact">Industry</a>
             <a href="#services">Services</a>
             <a href="#awards">Awards</a>
+            <a href="./cv/index.html">CV</a>
         </div>
     </div>
 </header>
@@ -275,7 +283,7 @@
                     <a href="https://orcid.org/0000-0001-5371-2069" target="_blank" title="ORCID"><img src="./assets/img/orcid.svg" alt="ORCID" class="brand-logo"></a>
                     <a href="https://github.com/shjo-april/" target="_blank" title="GitHub"><img src="./assets/img/github.svg" alt="GitHub" class="brand-logo"></a>
                     <a href="https://www.linkedin.com/in/sanghyun-jo-b61201238/" target="_blank" title="LinkedIn"><img src="./assets/img/li.svg" alt="LinkedIn" class="brand-logo"></a>
-                    <a href="./index_files/CV_Sanghyun%20Jo_261031.pdf" target="_blank" title="CV"><i class="ai ai-cv" style="color:var(--teal);font-size:1.15rem"></i></a>
+                    <a href="./cv/index.html" title="CV"><i class="ai ai-cv" style="color:var(--teal);font-size:1.15rem"></i></a>
                 </div>
             </div>
 
@@ -289,6 +297,7 @@
                 </p>
                 <div class="hero-stats">
                     <div class="stat-item"><div class="stat-value" id="pubCount">-</div><div class="stat-label">Publications</div></div>
+                    <div class="stat-item"><div class="stat-value" id="preprintCount">-</div><div class="stat-label">Preprints</div></div>
                     <div class="stat-item"><div class="stat-value" id="yearsAI">-</div><div class="stat-label">Years in AI Industry</div></div>
                 </div>
             </div>
@@ -621,7 +630,7 @@
                 </div>
                 <div class="pub-info">
                     <div class="pub-title">LiftConsensus: Lifting 2D Change Evidence into 3D via Multi-View Spatial Consensus for Retail Change Detection</div>
-                    <div class="pub-authors">Chae Yeon Lim*&#8224;, Jaehyeon Woo*, <strong>Sanghyun Jo</strong>, Kyungsu Kim&#8224;</div>
+                    <div class="pub-authors">Chae Yeon Lim*&#8224;, JaeHyeon Woo*, <strong>Sanghyun Jo</strong>, Kyungsu Kim&#8224;</div>
                     <div class="pub-venue">arXiv: TBD</div>
                     <div class="pub-note"><span class="role-tag co">Co-Author</span></div>
                 </div>
@@ -717,6 +726,20 @@
             </div>
 
         </div>
+        <div class="impact-patents" data-animate>
+            <div class="impact-patents-label">Patents</div>
+            <div class="impact-patents-body">
+                <div class="impact-patents-text">Inventor on <strong>5 registered</strong> and <strong>22 filed</strong> Korean patents (OGQ and Seoul National University).</div>
+                <div class="impact-patents-links">
+                    <a href="./cv/index.html#kr10-3048915" class="pub-link" title="Method for Background Composition of Error Object Area Performed on a Computing Device and Computing Device for Performing the Same (2026)">KR 10-3048915</a>
+                    <a href="./cv/index.html#kr10-3036286" class="pub-link" title="Dual Feature-Based Image Segmentation Method Performed by a Computing Device and Computing Device for Performing the Same (2026)">KR 10-3036286</a>
+                    <a href="./cv/index.html#kr10-2916563" class="pub-link" title="Method of Acquiring Object Segmentation Information Through Trained Neural Network and Server System Performing the Same Method (2026)">KR 10-2916563</a>
+                    <a href="./cv/index.html#kr10-2831465" class="pub-link" title="Method for Safety Management by Object Segmentation Based on Deep-Learning and System for the Method (2025)">KR 10-2831465</a>
+                    <a href="./cv/index.html#kr10-2769724" class="pub-link" title="Object De-Identification Method Through Segmentation and Server That Performs the Same Method (2025)">KR 10-2769724</a>
+                    <a href="./cv/index.html#patents" class="pub-link">Full list in CV &rarr;</a>
+                </div>
+            </div>
+        </div>
     </div>
 </section>
 
@@ -729,7 +752,7 @@
             <h2 class="section-title">Services &amp; Awards</h2>
         </div>
         <div class="dual-grid">
-            <div class="info-block" data-animate id="awards">
+            <div class="info-block" data-animate>
                 <div class="info-block-title">Academic Services</div>
                 <div class="service-cols">
                     <div>
@@ -753,7 +776,7 @@
                     </div>
                 </div>
             </div>
-            <div class="info-block" data-animate>
+            <div class="info-block" data-animate id="awards">
                 <div class="info-block-title">Awards</div>
                 <div class="award-item">
                     <div class="award-title">&#127942; <a href="https://cvpr.thecvf.com/Conferences/2025/ProgramCommittee#all-outstanding-reviewer" target="_blank">Outstanding Reviewer, CVPR 2025</a></div>
@@ -871,9 +894,11 @@
 <script>
 // Auto-calculate stats
 document.addEventListener('DOMContentLoaded', () => {
-    // Count publication cards
-    const pubCount = document.querySelectorAll('.pub-card').length;
+    // Count peer-reviewed papers, and preprints already posted on arXiv
+    const pubCount = document.querySelectorAll('#publications .pub-card').length;
     document.getElementById('pubCount').textContent = pubCount;
+    const preprintCount = [...document.querySelectorAll('#under-review .pub-card')].filter(card => card.querySelector('a[href*="arxiv.org"]')).length;
+    document.getElementById('preprintCount').textContent = preprintCount;
 
     // Calculate years in AI (started 2017-07-10)
     const start = new Date(2017, 6, 10);
