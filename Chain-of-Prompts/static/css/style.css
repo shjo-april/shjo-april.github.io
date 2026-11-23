@@ -104,9 +104,14 @@ p { text-wrap: pretty; }
 .author sup { margin-left: 1px; }
 /* the dagger reads as a plus sign in the sans face, so author marks use the serif like the paper */
 .author sup, .author-note sup { font-family: var(--font-serif); font-size: 0.68em; font-weight: 600; }
-/* desktop: all seven names on one line, spread across the card so no space is left on the right */
-@media (min-width: 1088px) {
-    .authors { display: flex; flex-wrap: wrap; justify-content: space-between; font-size: 17px; }
+/* all seven names stay on one line, spread across the card: the font follows the card width
+   (names take up to 51.6px per 1px of font size), and narrow screens fall back to wrapped lines */
+.hero-card { container-type: inline-size; }
+@container (min-width: 700px) {
+    .authors {
+        display: flex; flex-wrap: nowrap; justify-content: space-between;
+        font-size: clamp(12.5px, calc((100cqw - 54px) / 51.6), 17px);
+    }
     .author { margin-right: 0; }
 }
 
