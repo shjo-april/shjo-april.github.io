@@ -8,7 +8,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chain-of-Prompts: One Click per Cell Type Suffices</title>
-    <meta name="description" content="Chain-of-Prompts (CoP): Training-free Group Interaction for Cell Instance Segmentation. Under Review.">
+    <meta name="description" content="Chain-of-Prompts (CoP): Training-free Group Interaction for Cell Instance Segmentation. ACCV 2026 (Oral).">
     <meta name="keywords" content="Chain-of-Prompts, CoP, cell instance segmentation, SAM, interactive segmentation, group prompting, training-free, histopathology">
 
     <!-- Open Graph -->
@@ -51,26 +51,43 @@
 <header class="hero">
     <div class="container">
         <div class="hero-card">
-            <div class="status">Under Review</div>
+            <div class="venues">
+                <a class="venue-badge" href="https://accv2026.org/conference-program/#oral-8" target="_blank" title="ACCV 2026, Oral Session 8: Segmentation &amp; Medical Imaging"><span class="venue-name">ACCV 2026</span><span class="venue-award">Oral</span></a>
+                <a class="venue-badge" href="https://asci.artificialintelligencepathology.org/#asci-spotlights" target="_blank" title="NeurIPS 2026 Workshop ASCI, Spotlight (non-archival)"><span class="venue-name">NeurIPS 2026 Workshop<span class="venue-ws"> ASCI</span></span><span class="venue-award">Spotlight</span></a>
+            </div>
 
             <h1 class="hero-title">Chain-of-Prompts</h1>
             <p class="hero-sub">One Click per Cell Type Suffices: Training-free Group Interaction for Cell Instance Segmentation</p>
+            <div class="venue-note">
+                <p>
+                    <strong class="award">ACCV 2026 Oral.</strong>
+                    Accepted at ACCV 2026, the Asian Conference on Computer Vision, and selected as one of <strong>36 oral papers</strong> among 378 accepted,
+                    <span title="ACCV 2026 has not published its submission count. The estimate comes from paper IDs running up to 1417 (36 / 1417 ≈ 2.5%).">an estimated top 3% of submissions</span>
+                    (<a href="https://accv2026.org/conference-program/#oral-8" target="_blank">Oral Session 8: Segmentation &amp; Medical Imaging</a>).
+                </p>
+                <p>
+                    <strong class="award">NeurIPS 2026 Workshop ASCI Spotlight.</strong>
+                    Also selected as one of <strong>10 spotlight talks</strong> at
+                    <a href="https://asci.artificialintelligencepathology.org/#asci-spotlights" target="_blank">AI at Scale for Clinical Impact: Cancer Pathology Foundation Models</a>.
+                    The workshop version is <strong style="white-space:nowrap">non-archival</strong>: it is not included in the workshop proceedings.
+                </p>
+            </div>
 
             <!-- Authors -->
             <div class="authors">
                 <span class="author"><a href="https://shjo-april.github.io/" target="_blank">Sanghyun Jo</a><sup>1,2</sup></span>
-                <span class="author">Seo Jin Lee<sup>2</sup></span>
-                <span class="author">Seohyung Hong<sup>2</sup></span>
-                <span class="author">Yoorim Gang<sup>2</sup></span>
-                <span class="author"><a href="https://sites.google.com/view/hyeongsub/" target="_blank">Hyeongsub Kim</a><sup>2,3</sup></span>
-                <span class="author">Hyungseok Seo<sup>2,†</sup></span>
-                <span class="author"><a href="https://aibl.snu.ac.kr/team/pi-information" target="_blank">Kyungsu Kim</a><sup>2,†</sup></span>
+                <span class="author">Seo Jin Lee<sup>1</sup></span>
+                <span class="author">Seohyung Hong<sup>1</sup></span>
+                <span class="author">Yoorim Gang<sup>1</sup></span>
+                <span class="author"><a href="https://sites.google.com/view/hyeongsub/" target="_blank">Hyeongsub Kim</a><sup>1,3</sup></span>
+                <span class="author">Hyungseok Seo<sup>1,†</sup></span>
+                <span class="author"><a href="https://aibl.snu.ac.kr/team/pi-information" target="_blank">Kyungsu Kim</a><sup>1,†</sup></span>
             </div>
 
             <!-- Affiliations -->
             <div class="affils">
-                <span class="affil"><sup>1</sup><img src="static/images/ogq.png" srcset="static/images/ogq.png 1x, static/images/ogq_2x.png 2x" width="82" height="26" alt="OGQ"></span>
-                <span class="affil"><sup>2</sup><img src="static/images/snu.png" srcset="static/images/snu.png 1x, static/images/snu_2x.png 2x" width="38" height="40" alt=""><span>Seoul National University</span></span>
+                <span class="affil"><sup>1</sup><img src="static/images/snu.png" srcset="static/images/snu.png 1x, static/images/snu_2x.png 2x" width="38" height="40" alt=""><span>Seoul National University</span></span>
+                <span class="affil"><sup>2</sup><img src="static/images/ogq.png" srcset="static/images/ogq.png 1x, static/images/ogq_2x.png 2x" width="82" height="26" alt="OGQ"></span>
                 <span class="affil"><sup>3</sup><img src="static/images/lgcns.png" srcset="static/images/lgcns.png 1x, static/images/lgcns_2x.png 2x" width="99" height="24" alt="LG CNS"></span>
             </div>
             <div class="author-note"><sup>†</sup> Corresponding authors: <a href="mailto:h.seo@snu.ac.kr" class="copy-email" title="Click to copy">h.seo@snu.ac.kr</a>, <a href="mailto:kyskim@snu.ac.kr" class="copy-email" title="Click to copy">kyskim@snu.ac.kr</a></div>
@@ -106,11 +123,16 @@
     <div class="container">
         <div class="figure-block" data-animate>
             <div class="figure-frame">
-                <img src="static/images/hero.gif" alt="Group Prompting (SAM3 + CoP) segments every cell in 3 clicks; per-instance prompting keeps clicking to 245">
+                <video autoplay muted loop playsinline poster="static/images/hero_poster.jpg" aria-label="SAM 3 without CoP and with CoP on the same clicks: an H&amp;E image (CoNSeP) and a label-free phase-contrast image (LIVECell)">
+                    <source src="static/images/hero.webm" type="video/webm">
+                    <source src="static/images/hero.mp4" type="video/mp4">
+                </video>
             </div>
             <p class="figure-caption">
-                <strong>Group Prompting (SAM3 + CoP) segments every cell in 3 clicks</strong>;
-                per-instance prompting (SAM3) keeps clicking to 245.
+                <strong>The same clicks with and without CoP</strong>, on an H&amp;E image (CoNSeP) and a label-free phase-contrast image (LIVECell).
+                SAM 3 alone segments only the clicked cells (AJI 0.009 and 0.004), while CoP reaches AJI <strong>0.451</strong> and <strong>0.699</strong>
+                from the same 3 clicks and 1 click. Clicking every cell takes 245 and 87 clicks to reach 0.499 and 0.748.
+                The <a href="https://github.com/shjo-april/Chain-of-Prompts#-reproducing-the-hero-gif" target="_blank">code repository</a> reproduces this demo from the recorded runs.
             </p>
         </div>
 
@@ -381,11 +403,11 @@
                     <span>Copy</span>
                 </button>
             </div>
-            <pre class="bibtex-code" id="bibtexCode">@article{jo2026cop,
-  title   = {One Click per Cell Type Suffices: Training-free Group Interaction for Cell Instance Segmentation},
-  author  = {Jo, Sanghyun and Lee, Seo Jin and Hong, Seohyung and Gang, Yoorim and Kim, Hyeongsub and Seo, Hyungseok and Kim, Kyungsu},
-  journal = {arXiv preprint arXiv:2605.29429},
-  year    = {2026}
+            <pre class="bibtex-code" id="bibtexCode">@inproceedings{jo2026cop,
+  title     = {One Click per Cell Type Suffices: Training-free Group Interaction for Cell Instance Segmentation},
+  author    = {Jo, Sanghyun and Lee, Seo Jin and Hong, Seohyung and Gang, Yoorim and Kim, Hyeongsub and Seo, Hyungseok and Kim, Kyungsu},
+  booktitle = {Asian Conference on Computer Vision (ACCV)},
+  year      = {2026}
 }</pre>
         </div>
     </div>
@@ -397,7 +419,7 @@
         <div class="footer-content">
             <div class="footer-left">
                 <span class="footer-logo">Chain-of-Prompts</span>
-                <span class="footer-venue">Under Review &middot; arXiv:2605.29429</span>
+                <span class="footer-venue">ACCV 2026 (Oral) &middot; arXiv:2605.29429</span>
             </div>
             <div class="footer-right">
                 Template inspired by <a href="https://nerfies.github.io" target="_blank">Nerfies</a> &middot; <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">CC BY-SA 4.0</a>

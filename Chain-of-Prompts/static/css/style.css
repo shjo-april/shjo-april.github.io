@@ -12,6 +12,7 @@
     --teal: #1a6e80;
     --teal-dark: #134f5c;
     --teal-tint: #e2eef1;
+    --honor: #800020;
 
     --line: #dce5e9;
     --line-strong: #c5d2d8;
@@ -71,6 +72,20 @@ p { text-wrap: pretty; }
     white-space: nowrap;
 }
 .status::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--teal); }
+/* venue badges: the award word sits on the award colour of the homepage, so Oral and Spotlight read first */
+.venues { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 22px; }
+.venue-badge {
+    display: inline-flex; align-items: stretch; border: 1.5px solid var(--honor); border-radius: 10px; overflow: hidden;
+    font-family: var(--font-sans); font-size: 16px; font-weight: 700; line-height: 1; white-space: nowrap;
+    transition: transform 0.15s ease;
+}
+.venue-badge:hover { text-decoration: none; transform: translateY(-1px); }
+.venue-name { display: flex; align-items: center; padding: 9px 12px; background: #fff; color: var(--ink); }
+.venue-ws { margin-left: 0.28em; }
+.venue-award { display: flex; align-items: center; padding: 9px 14px; background: var(--honor); color: #fff; font-weight: 800; letter-spacing: 0.01em; }
+.venue-note { margin-top: 14px; font-size: 15.5px; line-height: 1.6; color: var(--ink-2); }
+.venue-note p + p { margin-top: 4px; }
+.venue-note .award { color: var(--honor); font-weight: 700; }
 
 .hero-title { font-size: clamp(40px, 6.4vw, 70px); font-weight: 800; letter-spacing: -0.035em; line-height: 1.02; }
 .hero-sub {
@@ -89,6 +104,11 @@ p { text-wrap: pretty; }
 .author sup { margin-left: 1px; }
 /* the dagger reads as a plus sign in the sans face, so author marks use the serif like the paper */
 .author sup, .author-note sup { font-family: var(--font-serif); font-size: 0.68em; font-weight: 600; }
+/* desktop: all seven names on one line, spread across the card so no space is left on the right */
+@media (min-width: 1088px) {
+    .authors { display: flex; flex-wrap: wrap; justify-content: space-between; font-size: 17px; }
+    .author { margin-right: 0; }
+}
 
 .affils { margin-top: 20px; display: flex; flex-wrap: wrap; gap: 10px 12px; }
 .affil {
@@ -148,7 +168,8 @@ p { text-wrap: pretty; }
 .figure-block h3 { font-size: 20.5px; font-weight: 700; letter-spacing: -0.012em; margin-bottom: 14px; }
 .figure-frame { background: #fff; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; padding: 20px 24px; }
 .section-tint .figure-frame { border-color: var(--line-strong); }
-.figure-frame img { width: 100%; height: auto; }
+.figure-frame img, .figure-frame video { width: 100%; height: auto; }
+.figure-frame video { display: block; }
 .figure-frame img.tbl { width: calc(var(--pt) / 460 * 100%); margin-inline: auto; }
 .figure-caption { margin-top: 14px; font-size: 15.5px; line-height: 1.6; color: var(--ink-2); text-wrap: pretty; }
 .figure-caption sup, .figure-caption sub { line-height: 0; }
@@ -236,6 +257,11 @@ p { text-wrap: pretty; }
     .container, .nav-inner { width: calc(100% - 32px); }
     .hero { padding-top: 22px; }
     .hero-card { padding: 28px 20px 26px; border-radius: 18px; }
+    .venues { gap: 8px; }
+    .venue-badge { font-size: 14px; }
+    .venue-name { padding: 8px 9px; }
+    .venue-award { padding: 8px 10px; }
+    .venue-ws { display: none; }
     .authors { font-size: 17.5px; }
     .author { margin-right: 11px; }
     .section { padding: 52px 0; }

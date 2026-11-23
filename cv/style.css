@@ -30,9 +30,9 @@ a:hover{color:var(--teal);text-decoration:underline;text-underline-offset:2px}
 .topbar-links a:hover{color:var(--teal);text-decoration:none}
 .topbar-links a[aria-current="page"]{color:var(--teal)}
 
-/* Header: photo, name, contacts, PDF */
-.cv-head{max-width:var(--cv-width);margin:0 auto;padding:2.6rem 2.5rem 0;display:flex;align-items:center;gap:1.7rem}
-.cv-photo{flex:none;width:112px;height:112px;border-radius:50%;object-fit:cover;object-position:center 20%;border:3px solid #fff;box-shadow:0 0 0 2px var(--teal-tint),0 0 0 3px var(--border-strong)}
+/* Header: name, contacts and PDF on the left, the whole portrait as a rectangle on the right (as in the PDF) */
+.cv-head{max-width:var(--cv-width);margin:0 auto;padding:2.6rem 2.5rem 0;display:flex;flex-direction:row-reverse;justify-content:space-between;align-items:center;gap:2rem}
+.cv-photo{flex:none;width:168px;height:auto;border-radius:10px;border:1px solid var(--border-strong)}
 .cv-id{min-width:0}
 .cv-name{font-family:var(--font-display);font-size:2.4rem;font-weight:700;line-height:1.1;color:var(--text-primary)}
 .cv-role{font-size:0.95rem;font-weight:700;color:var(--teal-dark);margin:0.3rem 0 0.75rem}
@@ -110,7 +110,7 @@ sup{font-size:0.7em;line-height:0}
 @media(max-width:600px){
     .topbar-id .sep,.topbar-id .affil{display:none}
     .cv-head{flex-direction:column;align-items:flex-start;gap:1rem}
-    .cv-photo{width:88px;height:88px}
+    .cv-photo{width:128px}
     .cv-name{font-size:2rem}
     .cv-item{grid-template-columns:minmax(0,1fr)}
     .cv-label{padding-top:0}
