@@ -87,6 +87,16 @@ p { text-wrap: pretty; }
 .author sup { margin-left: 1px; }
 /* the dagger reads as a plus sign in the sans face, so author marks use the serif like the paper */
 .author sup, .author-note sup { font-family: var(--font-serif); font-size: 0.68em; font-weight: 600; }
+/* all six names stay on one line, spread across the card: the font follows the card width
+   (names take up to 42.5px per 1px of font size), and narrow screens fall back to wrapped lines */
+.hero-card { container-type: inline-size; }
+@container (min-width: 600px) {
+    .authors {
+        display: flex; flex-wrap: nowrap; justify-content: space-between;
+        font-size: clamp(12.5px, calc((100cqw - 48px) / 42.5), 19px);
+    }
+    .author { margin-right: 0; }
+}
 
 .affils { margin-top: 20px; display: flex; flex-wrap: wrap; gap: 10px 12px; }
 .affil {
