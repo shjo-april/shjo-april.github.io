@@ -1,0 +1,314 @@
+/* Puzzle-CAM project page
+   Same light theme as the Depth-to-RGB and Chain-of-Prompts pages (../Depth2RGB/static/css/style.css):
+   white page, soft blue-grey panels, teal headings and links, bold sans titles, serif body. */
+
+:root {
+    --bg: #ffffff;
+    --panel: #f3f6f7;
+    --ink: #10181f;
+    --ink-2: #3a4853;
+    --ink-3: #6e7c87;
+
+    --teal: #1a6e80;
+    --teal-dark: #134f5c;
+    --teal-tint: #e2eef1;
+    --honor: #800020;
+
+    --line: #dce5e9;
+    --line-strong: #c5d2d8;
+
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+    --font-serif: 'Source Serif 4', 'Iowan Old Style', Georgia, 'Times New Roman', serif;
+    --font-mono: 'JetBrains Mono', 'Fira Code', Consolas, monospace;
+
+    --w: 1040px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+    background: var(--bg);
+    color: var(--ink-2);
+    font-family: var(--font-serif);
+    font-size: 17.5px;
+    line-height: 1.68;
+    -webkit-font-smoothing: antialiased;
+}
+img { max-width: 100%; display: block; }
+a { color: var(--teal); text-decoration: none; }
+a:hover { text-decoration: underline; }
+strong { color: var(--ink); font-weight: 600; }
+sub, sup { line-height: 0; }
+/* a hyphenated compound that should not break at its hyphen */
+.nb { white-space: nowrap; }
+/* a two-line subtitle breaks between its phrases, not inside one */
+.hero-sub .phrase { display: inline-block; }
+h1, h2, h3 { font-family: var(--font-sans); color: var(--ink); text-wrap: balance; }
+p { text-wrap: pretty; }
+.container { width: min(var(--w), 100% - 48px); margin-inline: auto; }
+
+/* ---------- floating nav ---------- */
+.floating-nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+    background: rgba(255, 255, 255, 0.9);
+    -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--line);
+    transform: translateY(-100%); transition: transform 0.3s ease;
+}
+.floating-nav.visible { transform: none; }
+.nav-inner {
+    width: min(var(--w), 100% - 48px); margin-inline: auto; height: 54px;
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+}
+.nav-logo { font-family: var(--font-sans); font-weight: 800; font-size: 16px; letter-spacing: -0.01em; color: var(--teal-dark); white-space: nowrap; }
+.nav-links { display: flex; gap: 22px; overflow-x: auto; scrollbar-width: none; }
+.nav-links::-webkit-scrollbar { display: none; }
+.nav-links a { font-family: var(--font-sans); font-size: 13.5px; font-weight: 600; color: var(--ink-2); white-space: nowrap; }
+.nav-links a:hover { color: var(--teal); text-decoration: none; }
+
+/* ---------- hero: the paper's title panel ---------- */
+.hero { padding: 56px 0 30px; }
+.hero-card { position: relative; background: var(--panel); border-radius: 22px; padding: 46px 52px 44px; }
+
+/* venue badges: an award word sits on the award colour of the homepage, so it reads first;
+   a venue without an award uses the conference colour of the homepage badges */
+.venues { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 22px; }
+.venue-badge {
+    display: inline-flex; align-items: stretch; border: 1.5px solid var(--honor); border-radius: 10px; overflow: hidden;
+    font-family: var(--font-sans); font-size: 16px; font-weight: 700; line-height: 1; white-space: nowrap;
+    transition: transform 0.15s ease;
+}
+a.venue-badge:hover { text-decoration: none; transform: translateY(-1px); }
+.venue-name { display: flex; align-items: center; padding: 9px 12px; background: #fff; color: var(--ink); }
+.venue-award { display: flex; align-items: center; padding: 9px 14px; background: var(--honor); color: #fff; font-weight: 800; letter-spacing: 0.01em; }
+.venue-badge.plain { border-color: var(--teal-dark); }
+.venue-badge.plain .venue-name { padding: 9px 14px; background: var(--teal-dark); color: #fff; letter-spacing: 0.01em; }
+.venue-note { margin-top: 14px; font-size: 15.5px; line-height: 1.6; color: var(--ink-2); }
+.venue-note p + p { margin-top: 4px; }
+.venue-note .award { color: var(--honor); font-weight: 700; }
+
+.hero-title { font-size: clamp(40px, 6.4vw, 70px); font-weight: 800; letter-spacing: -0.035em; line-height: 1.02; }
+.hero-sub {
+    font-family: var(--font-sans); font-size: clamp(19px, 2.3vw, 25px); font-weight: 600;
+    letter-spacing: -0.015em; line-height: 1.3; color: var(--ink); text-wrap: balance; margin-top: 18px;
+}
+
+/* authors flow as inline text so a long list splits into even lines instead of stranding one name */
+.authors { margin-top: 28px; font-size: 19px; line-height: 2; color: var(--ink); text-wrap: balance; }
+.author { display: inline-block; white-space: nowrap; margin-right: 17px; }
+.author a { color: var(--ink); border-bottom: 1px solid var(--line-strong); }
+.author a:hover { color: var(--teal); border-color: var(--teal); text-decoration: none; }
+.author sup, .affil sup { font-family: var(--font-sans); font-size: 0.62em; font-weight: 600; color: var(--teal); }
+.author sup { margin-left: 1px; }
+/* the dagger reads as a plus sign in the sans face, so author marks use the serif like the paper */
+.author sup, .author-note sup { font-family: var(--font-serif); font-size: 0.68em; font-weight: 600; }
+/* a short author list sits on one left-aligned line */
+.hero-card { container-type: inline-size; }
+@container (min-width: 560px) {
+    .author { margin-right: 30px; }
+}
+
+.affils { margin-top: 20px; display: flex; flex-wrap: wrap; gap: 10px 12px; }
+.affil {
+    display: inline-flex; align-items: center; gap: 12px; min-height: 60px;
+    background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 9px 20px 9px 13px;
+    font-family: var(--font-sans); font-size: 16px; font-weight: 600; color: var(--ink); white-space: nowrap;
+}
+.affil sup { font-size: 11.5px; align-self: flex-start; }
+/* the joining word between two institutions that share one number */
+.affil .and { font-weight: 400; color: var(--ink-2); }
+.affil img, .lab-logo img { max-width: none; flex: none; }
+/* a chip that names two institutions wraps instead of running past the card */
+.affil.long { max-width: 100%; flex-wrap: wrap; white-space: normal; row-gap: 6px; }
+.author-note { margin-top: 12px; font-size: 14.5px; color: var(--ink-3); }
+.author-note sup { color: var(--teal); }
+.author-note span + span { margin-left: 16px; }
+
+.hero-actions { margin-top: 28px; display: flex; flex-wrap: wrap; gap: 10px; }
+.hero-actions + .hero-actions { margin-top: 10px; }
+.btn {
+    display: inline-flex; align-items: center; gap: 9px;
+    font-family: var(--font-sans); font-size: 15px; font-weight: 600; padding: 11px 18px; border-radius: 11px;
+    white-space: nowrap; transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+}
+.btn:hover { text-decoration: none; transform: translateY(-1px); }
+.btn-primary { background: var(--teal-dark); color: #fff; }
+.btn-primary:hover { background: #0f424d; }
+.btn-secondary { background: #fff; color: var(--teal-dark); border: 1px solid var(--line-strong); }
+.btn-secondary:hover { border-color: var(--teal); }
+
+.lab-logo { position: absolute; right: 48px; bottom: 40px; }
+.lab-logo img { transition: transform 0.15s ease; }
+.lab-logo:hover img { transform: translateY(-2px); }
+
+/* ---------- sections ---------- */
+.section { padding: 72px 0; }
+.section-tight { padding: 26px 0 72px; }
+.section-tint { background: var(--panel); }
+.section-title {
+    display: flex; align-items: baseline; gap: 14px; margin-bottom: 26px;
+    font-size: clamp(26px, 3vw, 34px); font-weight: 800; letter-spacing: -0.02em; color: var(--teal-dark);
+}
+.section-number { color: var(--teal); }
+.section-lead { font-size: 18.5px; margin: -8px 0 28px; }
+
+/* ---------- figures and tables ----------
+   Every block has the same structure and spacing: optional heading, optional lead text, full-width white frame, caption.
+   A figure narrower than the paper's text width keeps its scale (--w) and sits centred in the same frame. */
+.figure-block + .figure-block, .results-highlights + .figure-block,
+.contributions-grid + .figure-block, .method-steps + .figure-block { margin-top: 52px; }
+.figure-block > h3 { font-size: 20.5px; font-weight: 700; letter-spacing: -0.012em; margin-bottom: 14px; }
+.block-lead { margin-bottom: 18px; }
+.block-lead:last-child { margin-bottom: 0; }
+.figure-frame { background: #fff; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; padding: 20px 24px; }
+.section-tint .figure-frame { border-color: var(--line-strong); }
+.figure-frame img, .figure-frame video { width: 100%; height: auto; }
+.figure-frame video { display: block; }
+.figure-frame .fit { width: var(--w); margin-inline: auto; }
+/* a block may stack several frames under one heading */
+.figure-frame + .figure-frame, .figure-caption + .figure-frame { margin-top: 22px; }
+/* demo videos drawn on a dark canvas: the frame takes the canvas colour, so its padding does not show as a white mat */
+.figure-frame.dark, .section-tint .figure-frame.dark { background: #08090d; border-color: #08090d; }
+/* two half-width tables of the paper, side by side */
+.frame-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 20px 28px; align-items: center; }
+/* several frames side by side under one heading; --cols sets uneven columns so two figures end at the same height */
+.frame-grid { display: grid; grid-template-columns: var(--cols, 1fr 1fr); gap: 16px; }
+.frame-grid + .frame-grid { margin-top: 16px; }
+.frame-grid .figure-frame + .figure-frame { margin-top: 0; }
+.figure-caption { margin-top: 14px; font-size: 15.5px; line-height: 1.6; color: var(--ink-2); text-wrap: pretty; }
+
+/* tables written in HTML follow the paper tables: ruled rows, our row tinted */
+.table-scroll { overflow-x: auto; }
+.data-table { width: min(100%, 760px); margin-inline: auto; border-collapse: collapse; font-family: var(--font-sans); font-size: 15px; line-height: 1.4; color: var(--ink-2); }
+.data-table th, .data-table td { padding: 9px 14px; text-align: center; white-space: nowrap; border-bottom: 1px solid var(--line); }
+.data-table thead th { font-weight: 700; color: var(--teal-dark); border-bottom: 2px solid var(--line-strong); }
+.data-table th:first-child, .data-table td:first-child { text-align: left; color: var(--ink); }
+.data-table tbody tr:last-child td { border-bottom: 0; }
+.data-table tr.is-ours td { background: var(--teal-tint); color: var(--ink); font-weight: 600; }
+.data-table .best { color: var(--teal-dark); font-weight: 800; }
+
+/* ---------- key insight ---------- */
+.insight { background: var(--panel); border-left: 5px solid var(--teal); border-radius: 0 18px 18px 0; padding: 32px 40px; margin-top: 52px; }
+.insight:first-child { margin-top: 0; }
+.insight-label {
+    font-family: var(--font-mono); font-size: 12px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--teal); margin-bottom: 10px;
+}
+.insight-text { font-size: 21px; line-height: 1.6; color: var(--ink); }
+
+/* ---------- abstract ---------- */
+.abstract-content p + p { margin-top: 14px; }
+.abstract-content em { color: var(--teal-dark); }
+
+/* ---------- contributions ---------- */
+.contributions-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.contributions-grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
+.figure-block + .contributions-grid { margin-top: 36px; }
+.contrib-card { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 24px 24px 26px; }
+.section-tint .contrib-card { border-color: var(--line-strong); }
+.contrib-number { font-family: var(--font-sans); font-size: 13px; font-weight: 700; color: var(--teal); letter-spacing: 0.04em; margin-bottom: 8px; }
+.contrib-card h3 { font-size: 18.5px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 8px; }
+.contrib-card p { font-size: 15.5px; line-height: 1.6; }
+
+/* ---------- method steps ---------- */
+.method-steps { display: grid; gap: 14px; margin-top: 36px; }
+.method-step { display: grid; grid-template-columns: 46px 1fr; gap: 18px; align-items: start; background: var(--panel); border-radius: 14px; padding: 22px 26px 24px 22px; }
+.step-icon {
+    width: 46px; height: 46px; border-radius: 12px; background: #fff; border: 1px solid var(--line);
+    display: flex; align-items: center; justify-content: center; color: var(--teal);
+}
+.step-content h3 { font-size: 19px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 6px; }
+.step-content p { font-size: 16px; line-height: 1.62; }
+/* a step may carry its own figures */
+.step-content .figure-frame { margin-top: 16px; }
+.step-content .figure-caption { font-size: 15.5px; }
+/* on a tinted band the steps turn white */
+.section-tint .method-step { background: #fff; border: 1px solid var(--line-strong); }
+.section-tint .step-icon { background: var(--panel); }
+
+/* ---------- results ---------- */
+.results-highlights { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+.highlight-card { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 22px 20px 20px; }
+.section-tint .highlight-card { border-color: var(--line-strong); }
+.highlight-value { font-family: var(--font-sans); font-size: clamp(32px, 3.8vw, 46px); font-weight: 800; letter-spacing: -0.035em; line-height: 1.05; color: var(--teal-dark); white-space: nowrap; }
+.highlight-metric { font-family: var(--font-mono); font-size: 11.5px; font-weight: 500; letter-spacing: 0.09em; text-transform: uppercase; color: var(--teal); margin-top: 8px; }
+.highlight-metric sup { text-transform: none; letter-spacing: 0; }
+.highlight-desc { font-size: 14.5px; line-height: 1.45; color: var(--ink-3); margin-top: 6px; text-wrap: balance; }
+
+/* ---------- citation ---------- */
+.bibtex-block { background: #fff; border: 1px solid var(--line-strong); border-radius: 14px; overflow: hidden; }
+.bibtex-header {
+    display: flex; align-items: center; justify-content: space-between; padding: 11px 16px 11px 20px; border-bottom: 1px solid var(--line);
+    font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-3);
+}
+.copy-btn {
+    display: inline-flex; align-items: center; gap: 7px; cursor: pointer;
+    font-family: var(--font-sans); font-size: 13px; font-weight: 600; color: var(--teal-dark);
+    background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 6px 11px;
+}
+.copy-btn:hover { border-color: var(--teal); }
+.bibtex-code { padding: 20px 24px; font-family: var(--font-mono); font-size: 13.5px; line-height: 1.75; color: var(--ink); overflow-x: auto; white-space: pre; }
+
+/* ---------- footer ---------- */
+.footer { border-top: 1px solid var(--line); padding: 26px 0 34px; }
+.footer-content { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 24px; }
+.footer-left { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px; }
+.footer-logo { font-family: var(--font-sans); font-weight: 800; color: var(--teal-dark); }
+.footer-venue, .footer-right { font-family: var(--font-mono); font-size: 12.5px; color: var(--ink-3); }
+
+/* ---------- reveal on scroll ---------- */
+[data-animate] { opacity: 0; transform: translateY(14px); transition: opacity 0.6s ease, transform 0.6s ease; }
+[data-animate].animate-in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+    [data-animate] { opacity: 1; transform: none; transition: none; }
+}
+
+/* ---------- responsive ---------- */
+@media (max-width: 900px) {
+    .contributions-grid, .contributions-grid.cols-2 { grid-template-columns: 1fr; }
+    .results-highlights { grid-template-columns: repeat(2, 1fr); }
+    .hero-card { padding: 34px 28px 32px; }
+    .hero-actions { padding-right: 0; }
+    .lab-logo { position: static; display: inline-block; margin-top: 26px; }
+    .lab-logo img { height: 80px; width: auto; }
+    .figure-frame { padding: 14px 16px; }
+    .figure-frame .fit { width: 100%; }
+    .frame-pair, .frame-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 560px) {
+    body { font-size: 16.5px; }
+    .container, .nav-inner { width: calc(100% - 32px); }
+    .hero { padding-top: 22px; }
+    .hero-card { padding: 28px 20px 26px; border-radius: 18px; }
+    .venues { gap: 8px; }
+    .venue-badge { font-size: 14px; }
+    .venue-name { padding: 8px 9px; }
+    .venue-award, .venue-badge.plain .venue-name { padding: 8px 10px; }
+    .authors { font-size: 17.5px; }
+    .author { margin-right: 11px; }
+    .author-note span { display: block; }
+    .author-note span + span { margin-left: 0; }
+    .section { padding: 52px 0; }
+    .section-tight { padding: 16px 0 52px; }
+    .insight { padding: 24px 22px; }
+    .insight-text { font-size: 18.5px; }
+    .method-step { grid-template-columns: 1fr; padding: 20px; }
+    .figure-frame { padding: 10px 12px; }
+    .figure-block + .figure-block, .results-highlights + .figure-block,
+    .contributions-grid + .figure-block, .method-steps + .figure-block, .insight { margin-top: 40px; }
+    .insight:first-child { margin-top: 0; }
+    .data-table { font-size: 13.5px; }
+    .data-table th, .data-table td { padding: 8px 9px; }
+    .affil { min-height: 52px; padding: 8px 16px 8px 11px; font-size: 15px; }
+    .affil.long { line-height: 1.3; }
+    /* phones: the floating nav keeps only the section links, so the last one is not cut off */
+    .nav-logo { display: none; }
+    .nav-inner { justify-content: center; }
+    .nav-links { gap: 16px; }
+}
+@media (max-width: 350px) {
+    .results-highlights { grid-template-columns: 1fr; }
+    .affil { white-space: normal; }
+    /* a wide wordmark shrinks with the chip on the narrowest phones */
+    .affil img { max-width: 100%; height: auto; flex: 0 1 auto; }
+}

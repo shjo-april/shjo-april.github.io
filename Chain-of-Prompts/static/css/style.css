@@ -277,6 +277,9 @@ p { text-wrap: pretty; }
     .figure-frame { padding: 10px 12px; }
     .figure-block + .figure-block, .results-highlights + .figure-block, .insight { margin-top: 40px; }
     .affil { min-height: 52px; padding: 8px 16px 8px 11px; font-size: 15px; }
+    /* phones: the floating nav keeps only the section links, so the last one is not cut off */
+    .nav-logo { display: none; }
+    .nav-inner { justify-content: center; }
     .nav-links { gap: 16px; }
 }
 @media (max-width: 350px) {

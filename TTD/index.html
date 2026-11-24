@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/img/site-logo/favicon_32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="../assets/img/site-logo/favicon_48.png">
+    <link rel="apple-touch-icon" href="../assets/img/site-logo/apple_touch_180.png">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TTD: Text-Tag Self-Distillation Enhancing Image-Text Alignment in CLIP to Alleviate Single Tag Bias</title>
+    <meta name="description" content="TTD: a two-step fine-tuning method that alleviates single tag bias in CLIP-based models using only image-text pairs, improving multi-tag classification and segmentation. ECCV 2024.">
+    <meta name="keywords" content="TTD, Text-Tag Self-Distillation, single tag bias, CLIP, image-text alignment, vision-language models, open-vocabulary segmentation, multi-tag classification, ECCV 2024">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="TTD: Text-Tag Self-Distillation Enhancing Image-Text Alignment in CLIP to Alleviate Single Tag Bias">
+    <meta property="og:description" content="CLIP-based models focus on a single tag in the text and neglect the others. TTD selects image-relevant tags by pixel-tag scoring and distills their combined map into the text map, using only image-text pairs.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://shjo-april.github.io/TTD/">
+    <meta property="og:image" content="https://shjo-april.github.io/assets/img/TTD.png">
+    <meta property="og:image:width" content="1496">
+    <meta property="og:image:height" content="1050">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <!-- Academicons & Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.4/css/academicons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <link rel="stylesheet" href="static/css/style.css">
+</head>
+<body>
+
+<!-- ===== Floating Nav ===== -->
+<nav class="floating-nav" id="floatingNav">
+    <div class="nav-inner">
+        <span class="nav-logo">TTD</span>
+        <div class="nav-links">
+            <a href="#abstract">Abstract</a>
+            <a href="#method">Method</a>
+            <a href="#results">Results</a>
+            <a href="#bibtex">BibTeX</a>
+        </div>
+    </div>
+</nav>
+
+<!-- ===== Hero: title panel ===== -->
+<header class="hero">
+    <div class="container">
+        <div class="hero-card">
+            <div class="venues">
+                <span class="venue-badge plain"><span class="venue-name">ECCV 2024</span></span>
+            </div>
+
+            <h1 class="hero-title">TTD</h1>
+            <p class="hero-sub">Text-Tag Self-Distillation Enhancing Image-Text Alignment in CLIP to Alleviate Single Tag Bias</p>
+
+            <!-- Authors -->
+            <div class="authors">
+                <span class="author"><a href="https://shjo-april.github.io/" target="_blank">Sanghyun Jo</a><sup>1,*</sup></span>
+                <span class="author">Soohyun Ryu<sup>2,*</sup></span>
+                <span class="author">Sungyub Kim<sup>2</sup></span>
+                <span class="author">Eunho Yang<sup>2,3</sup></span>
+                <span class="author"><a href="https://aibl.snu.ac.kr/pi-information" target="_blank">Kyungsu Kim</a><sup>4,&#8224;</sup></span>
+            </div>
+
+            <!-- Affiliations -->
+            <div class="affils">
+                <span class="affil"><sup>1</sup><img src="static/images/ogq.png" srcset="static/images/ogq.png 1x, static/images/ogq_2x.png 2x" width="82" height="26" alt="OGQ"></span>
+                <span class="affil"><sup>2</sup><img src="static/images/kaist_ai.png" srcset="static/images/kaist_ai.png 1x, static/images/kaist_ai_2x.png 2x" width="140" height="42" alt="KAIST AI, Graduate School of AI"></span>
+                <span class="affil"><sup>3</sup><img src="static/images/aitrics.png" srcset="static/images/aitrics.png 1x, static/images/aitrics_2x.png 2x" width="94" height="24" alt="AITRICS"></span>
+                <span class="affil long"><sup>4</sup><img src="static/images/mgh.png" srcset="static/images/mgh.png 1x, static/images/mgh_2x.png 2x" width="34" height="40" alt=""><span>Massachusetts General Hospital</span><span class="and">and</span><img src="static/images/hms.png" srcset="static/images/hms.png 1x, static/images/hms_2x.png 2x" width="35" height="40" alt=""><span>Harvard Medical School</span></span>
+            </div>
+            <div class="author-note"><span><sup>*</sup> Equal contribution</span><span><sup>&#8224;</sup> Corresponding author</span></div>
+
+            <!-- Action Buttons -->
+            <div class="hero-actions">
+                <a href="https://www.ecva.net/papers/eccv_2024/papers_ECCV/papers/10592.pdf" target="_blank" class="btn btn-primary">
+                    <i class="fa-solid fa-file-pdf"></i><span>Paper</span>
+                </a>
+                <a href="https://arxiv.org/abs/2404.00384" target="_blank" class="btn btn-secondary">
+                    <i class="ai ai-arxiv"></i><span>arXiv</span>
+                </a>
+                <a href="https://github.com/shjo-april/TTD" target="_blank" class="btn btn-secondary">
+                    <i class="fa-brands fa-github"></i><span>Code</span>
+                </a>
+                <a href="https://eccv.ecva.net/media/eccv-2024/Slides/2259_i4ex75H.pdf" target="_blank" class="btn btn-secondary">
+                    <i class="fa-solid fa-person-chalkboard"></i><span>Slides</span>
+                </a>
+                <a href="https://eccv.ecva.net/media/PosterPDFs/ECCV%202024/2259.png?t=1726141858.1666896" target="_blank" class="btn btn-secondary">
+                    <i class="fa-solid fa-image"></i><span>Poster</span>
+                </a>
+                <a href="https://youtu.be/kiCgc99BA9Y" target="_blank" class="btn btn-secondary">
+                    <i class="fa-brands fa-youtube"></i><span>Video</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- ===== Teaser and Key Insight ===== -->
+<section class="section section-tight">
+    <div class="container">
+        <div class="figure-block" data-animate>
+            <div class="figure-frame">
+                <img src="static/images/teaser.png" alt="Single tag bias in CLIP-based models: without TTD the similarity map and the tag scores highlight a single tag, and with TTD the other relevant tags are activated as well">
+            </div>
+            <p class="figure-caption">
+                <strong>Single tag bias.</strong>
+                In existing image-text alignment models, embeddings focus predominantly on a single tag.
+                (a) The similarity map between the pixels of the image and the text shows activation only in the region of a single tag (red box), ignoring other relevant tags.
+                (b) The similarity values between the image and each tag in the text highlight a single tag, while other descriptive tags (e.g., &ldquo;green&rdquo; and &ldquo;branch&rdquo;) are treated similarly to insignificant tags (e.g., &ldquo;of&rdquo; and &ldquo;a&rdquo;).
+                The predictions with TTD (green boxes) are debiased. The analysis uses TCL.
+            </p>
+        </div>
+
+        <div class="insight" data-animate>
+            <div class="insight-label">Key Insight</div>
+            <p class="insight-text">
+                CLIP-based models suffer from <strong>single tag bias</strong>: a disproportionate focus on one tag (word) of the text while the other pertinent tags are neglected.
+                TTD builds on the finding that <strong>pixels are closely correlated with a specific tag</strong>.
+                Scoring each tag by its nearest pixel extracts the tags that reflect the image-text relationship, and distilling the union of their maps into the text's map lets the model recognize all relevant tag regions, not just one,
+                <strong>using only image-text pairs</strong>.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Motivation ===== -->
+<section class="section section-tint">
+    <div class="container">
+        <h2 class="section-title" data-animate>Motivation</h2>
+        <p class="section-lead" data-animate>
+            Image-text alignment models are useful for various open-vocabulary tasks, but they suffer from single tag bias.
+            To alleviate it, <strong>extracting the tags that reflect the image-text relationship</strong> from the text is crucial.
+            Existing research often relies on external NLP models that extract tags from the text alone, <strong>without considering the image</strong>, which leads to two issues.
+        </p>
+        <div class="figure-block" data-animate>
+            <div class="figure-frame">
+                <img src="static/images/motivation.png" alt="Conceptual comparison of image-text alignment, supervised image-tag alignment with external models, and the self-supervised pixel-tag alignment of TTD">
+            </div>
+            <p class="figure-caption">
+                <strong>Previous approaches and ours.</strong>
+                (a) Image-text alignment models suffer from single tag bias.
+                (b) Existing research often relies on external NLP models to extract tags without considering images.
+                (c) TTD selects tags using only pixel information from images, eliminating the need for external models.
+            </p>
+        </div>
+        <div class="contributions-grid cols-2">
+            <div class="contrib-card" data-animate data-delay="0">
+                <div class="contrib-number">ISSUE 1</div>
+                <h3>Image-Irrelevant Tags</h3>
+                <p>Tag selection with external NLP models extracts tags that do not correlate with the corresponding image content, because these models do not consider image information.</p>
+            </div>
+            <div class="contrib-card" data-animate data-delay="100">
+                <div class="contrib-number">ISSUE 2</div>
+                <h3>Overlooked Image-Relevant Tags</h3>
+                <p>The same models cannot select some of the tags that are related to the image, particularly non-nouns in the case of NLTK, which extracts the nouns of the text.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Abstract ===== -->
+<section class="section" id="abstract">
+    <div class="container">
+        <h2 class="section-title" data-animate><span class="section-number">1</span>Abstract</h2>
+        <div class="abstract-content" data-animate>
+            <p>
+                We identify a critical bias in contemporary CLIP-based models, which we denote as <em>single tag bias</em>. This bias manifests as a
+                disproportionate focus on a singular tag (word) while neglecting other pertinent tags, stemming from CLIP embeddings prioritizing
+                one specific tag in image-text relationships.
+            </p>
+            <p>
+                In this paper, we introduce a novel two-step fine-tuning approach, <strong>Text-Tag Self-Distillation (TTD)</strong>, to address this
+                challenge. We first extract all image-relevant tags from text based on their similarity to the nearest pixels. Then, we distill a
+                combined mask containing the extracted tags' content to a text-derived mask.
+            </p>
+            <p>
+                This approach ensures the unbiased image-text alignment of the CLIP-based models using <strong>only image-text pairs</strong> without
+                necessitating additional supervision. Our technique demonstrates <strong>model-agnostic improvements</strong> in multi-tag classification
+                and segmentation tasks, surpassing competing methods that rely on external resources. The code and data are available at
+                <a href="https://github.com/shjo-april/TTD" target="_blank">https://github.com/shjo-april/TTD</a>.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Contributions ===== -->
+<section class="section section-tint">
+    <div class="container">
+        <h2 class="section-title" data-animate><span class="section-number">2</span>Contributions</h2>
+        <div class="contributions-grid">
+            <div class="contrib-card" data-animate data-delay="0">
+                <div class="contrib-number">PROBLEM</div>
+                <h3>Single Tag Bias</h3>
+                <p>We identify single tag bias in pre-trained CLIP-based models, where the focus is disproportionately on a <strong>single tag</strong> in image-text relationships.</p>
+            </div>
+            <div class="contrib-card" data-animate data-delay="100">
+                <div class="contrib-number">METHOD</div>
+                <h3>Text-Tag Self-Distillation</h3>
+                <p>We propose a novel fine-tuning method, Text-Tag Self-Distillation (TTD), which addresses single tag bias using <strong>only image-text pairs</strong>.</p>
+            </div>
+            <div class="contrib-card" data-animate data-delay="200">
+                <div class="contrib-number">RESULTS</div>
+                <h3>Model-Agnostic Gains</h3>
+                <p>We achieve superior multi-tag classification and segmentation by enhancing image-text alignment, and provide <strong>new tag and mask annotations</strong> related to text inputs.</p>
+            </div>
+        </div>
+
+        <div class="figure-block" data-animate>
+            <h3>How TTD Differs</h3>
+            <div class="figure-frame">
+                <img src="static/images/table_comparison.png" alt="Comparison of TTD with related approaches (CoCu, OVSeg, TagAlign, CaSED, GroupViT, MaskCLIP, SimSeg, TCL) on automatic annotations and methodology">
+            </div>
+            <p class="figure-caption">
+                <strong>Comparison with related approaches.</strong>
+                Among the compared methods, TTD is the only one that alleviates single tag bias, and the only one that covers all seven properties: it generates tags, tag-level masks and text-level masks, uses no external models, learns pixel-tag alignment, and follows a model-agnostic manner.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Method ===== -->
+<section class="section" id="method">
+    <div class="container">
+        <h2 class="section-title" data-animate><span class="section-number">3</span>Method</h2>
+        <p class="section-lead" data-animate>
+            TTD is a fine-tuning method with two stages: <strong>tag selection by pixel-tag scoring</strong>, which extracts the tags that represent the image-text relationship,
+            and <strong>text-tag self-distillation</strong>, which transfers their knowledge to the text.
+        </p>
+
+        <div class="figure-block" data-animate>
+            <div class="figure-frame">
+                <img src="static/images/method_overview.png" alt="High-level overview of TTD: (a) tag selection by pixel-tag scoring and (b) text-tag self-distillation">
+            </div>
+            <p class="figure-caption">
+                <strong>High-level overview of TTD.</strong>
+                (a) The global image embedding often emphasizes a single tag (&ldquo;jacuzzi&rdquo; here) due to overactivation in pixel embeddings. The colored similarity map shows the most relevant tag for each pixel, and the similarity between each tag and its most correlated pixel is used as the score.
+                (b) The similarity map between image and text should reflect all relevant tags but often highlights only one, so it is trained to align with the combined maps of the image and the pseudo-tags from (a).
+            </p>
+        </div>
+
+        <!-- Method Steps -->
+        <div class="method-steps">
+            <div class="method-step" data-animate>
+                <div class="step-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/></svg>
+                </div>
+                <div class="step-content">
+                    <h3>Pixel-Tag Scoring</h3>
+                    <p>Scoring a tag by its similarity to the pooled image embedding is affected by single tag bias, because most pixels tend to be biased towards a specific tag. TTD instead scores each tag with the pixel embedding most correlated with it, the maximum cosine similarity over all pixels. These similarity values are reused as similarity maps for distillation, which mitigates the additional computational burden.</p>
+                </div>
+            </div>
+            <div class="method-step" data-animate>
+                <div class="step-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M3 5h18l-7 8v6l-4 2v-8L3 5z"/></svg>
+                </div>
+                <div class="step-content">
+                    <h3>Tag Selection by the Largest Score Gap</h3>
+                    <p>All tags are arranged by their pixel-tag score, and the score difference between consecutive tags is computed. A substantial gap separates the tags associated with the image from the others, so the largest score gap is used as the boundary and the high-scoring tags become pseudo-tags. Unlike image-tag scoring, which relies on heuristics such as the top-k tags or a constant threshold, this selection identifies appropriate tags automatically.</p>
+                </div>
+            </div>
+            <div class="method-step" data-animate>
+                <div class="step-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                </div>
+                <div class="step-content">
+                    <h3>Text-Tag Self-Distillation</h3>
+                    <p>The union (pixel-wise maximum) of the min-max normalized similarity maps of the pseudo-tags is the ideal image-text map. The distillation loss <em>L<sub>distill</sub></em> aligns the similarity map of the text with this union, with a stop-gradient on the union map. An auxiliary loss <em>L<sub>tag</sub></em> drives the maps of non-selected tags toward zero and aligns the maps of selected tags with their normalized maps. The final loss is <em>L<sub>distill</sub></em> + <em>L<sub>tag</sub></em>.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="figure-block" data-animate>
+            <h3>An Example of Tag Selection</h3>
+            <div class="figure-frame">
+                <img src="static/images/tag_selection.png" alt="Tag selection by pixel-tag scoring: heatmaps sorted by their maximum similarity score, with the largest score gap separating the tags relevant to the image from the irrelevant ones">
+            </div>
+            <p class="figure-caption">
+                <strong>Tag selection by pixel-tag scoring.</strong>
+                With the similarity to the most correlated pixel as the score, a significant gap appears between the tags related to the image and the irrelevant ones.
+                The tags above the largest score gap are selected: in this example the largest gap (0.48) lies between &ldquo;paw&rdquo; (0.63) and &ldquo;separate&rdquo; (0.15).
+            </p>
+        </div>
+
+        <div class="figure-block" data-animate>
+            <h3>Fine-Tuning with Self-Distillation</h3>
+            <div class="figure-frame">
+                <img class="fit" style="--w:89%" src="static/images/framework.png" alt="Overall framework of TTD: pseudo-tags from tag selection build an ideal heatmap by union, which is distilled into the text heatmap, with an auxiliary tag loss">
+            </div>
+            <p class="figure-caption">
+                <strong>Overall framework.</strong>
+                The pseudo-tags obtained through tag selection are used to create an ideal heatmap representing the image-text relationship.
+                Single tag bias is addressed by distilling information between the ideal and actual heatmaps, and an auxiliary loss learns the pixel-tag relationship.
+                Throughout this process, both the image and text encoders are trained.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Results ===== -->
+<section class="section section-tint" id="results">
+    <div class="container">
+        <h2 class="section-title" data-animate><span class="section-number">4</span>Results</h2>
+
+        <!-- Highlight Numbers -->
+        <div class="results-highlights" data-animate>
+            <div class="highlight-card">
+                <div class="highlight-value">82.8</div>
+                <div class="highlight-metric">F1 Score</div>
+                <div class="highlight-desc">Multi-tag selection, 69.8 with NLTK</div>
+            </div>
+            <div class="highlight-card">
+                <div class="highlight-value">+7.2%</div>
+                <div class="highlight-metric">CaptionIoU</div>
+                <div class="highlight-desc">Text-level segmentation, on average</div>
+            </div>
+            <div class="highlight-card">
+                <div class="highlight-value">+8.5%</div>
+                <div class="highlight-metric">Average mIoU</div>
+                <div class="highlight-desc">Open-vocabulary segmentation, MaskCLIP</div>
+            </div>
+            <div class="highlight-card">
+                <div class="highlight-value">61.1</div>
+                <div class="highlight-metric">mIoU on PASCAL VOC</div>
+                <div class="highlight-desc">TCL with TTD, +6.1 over the TCL baseline</div>
+            </div>
+        </div>
+
+        <div class="figure-block" data-animate>
+            <h3>Multi-Tag Selection</h3>
+            <div class="figure-frame">
+                <img class="fit" style="--w:87%" src="static/images/table_tag_selection.png" alt="Multi-tag selection results: comparison with NLP models (NLTK, Vicuna-7B, Vicuna-33B, Qwen-72B) and comparison of scoring methods">
+            </div>
+            <p class="figure-caption">
+                <strong>Multi-tag selection.</strong>
+                (Left) Pixel-tag scoring outperforms NLP models in both F1 score and accuracy, and performs even better after fine-tuning with TTD.
+                (Right) Image-tag scoring and text-tag scoring show high precision but very low recall due to single tag bias, whereas pixel-tag scoring shows high recall.
+                P, precision; R, recall; F1, F1 score. The best results are bold and the second best are underlined.
+            </p>
+        </div>
+
+        <div class="figure-block" data-animate>
+            <h3>Qualitative Results of Tag Selection</h3>
+            <div class="figure-frame">
+                <img class="fit" style="--w:90%" src="static/images/qualitative_tag_selection.png" alt="Qualitative results of tag selection for five image-text pairs: ground truth, NLTK, Vicuna-33B, Qwen-72B and TTD, with correct, misdetected and undetected tags marked">
+            </div>
+            <p class="figure-caption">
+                <strong>Tag selection with external models and with TTD.</strong>
+                Tag selection using external models (NLTK, Vicuna-33B, Qwen-72B) suffers from two problems because the image is not considered:
+                misdetected tags (red) that do not correlate with the image content, and undetected tags (blue) that are related to the image, particularly non-nouns in the case of NLTK.
+            </p>
+        </div>
+
+        <div class="figure-block" data-animate>
+            <h3>Text-level Semantic Segmentation</h3>
+            <div class="figure-frame">
+                <img class="fit" style="--w:50%" src="static/images/table_text_seg.png" alt="Text-level semantic segmentation results of MaskCLIP and TCL with and without TTD: CaptionIoU, mFPR and mFNR">
+            </div>
+            <p class="figure-caption">
+                <strong>Text-level semantic segmentation.</strong>
+                Fine-tuning with TTD improves CaptionIoU by +9.2% for MaskCLIP and +5.1% for TCL (+7.2% on average).
+                The mFNR of MaskCLIP decreases by 0.169, indicating its improved understanding beyond a single tag, and TCL shows a decrease in mFPR.
+            </p>
+        </div>
+
+        <div class="figure-block" data-animate>
+            <h3>Qualitative Results on Text-level Segmentation</h3>
+            <div class="figure-frame">
+                <img class="fit" style="--w:95%" src="static/images/qualitative_text_seg.jpg" alt="Qualitative results on text-level segmentation: image, text, ground truth, MaskCLIP, MaskCLIP with TTD, TCL, and TCL with TTD">
+            </div>
+            <p class="figure-caption">
+                <strong>Text-level segmentation with and without TTD.</strong>
+                The original models show single tag bias, mainly capturing the region of only one tag, and TCL often generates masks that extend beyond the relevant context.
+                After fine-tuning with TTD, the models accurately activate all regions associated with the image-related tags in the text.
+            </p>
+        </div>
+
+        <div class="figure-block" data-animate>
+            <h3>Open-Vocabulary Semantic Segmentation</h3>
+            <div class="figure-frame">
+                <img src="static/images/table_main.png" alt="Open-vocabulary semantic segmentation results (mIoU) on PASCAL VOC, PASCAL Context, COCO-Object, COCO-Stuff, Cityscapes and ADE20k">
+            </div>
+            <p class="figure-caption">
+                <strong>Open-vocabulary semantic segmentation (mIoU).</strong>
+                All methods are trained only with image and text data, without additional annotations or external models, and use ViT-B/16 as the backbone.
+                TTD increases the average mIoU by 8.5% for MaskCLIP and 3.5% for TCL, and TCL with TTD outperforms the existing models on PASCAL VOC, PASCAL Context and COCO-Object.
+                <em>L</em>, external language models.
+            </p>
+        </div>
+
+        <div class="figure-block" data-animate>
+            <h3>Qualitative Results on Tag-level Segmentation</h3>
+            <div class="figure-frame">
+                <img class="fit" style="--w:80%" src="static/images/qualitative.jpg" alt="Qualitative results on tag-level segmentation for PASCAL VOC, PASCAL Context, COCO-Object, COCO-Stuff, Cityscapes and ADE20k: image, ground truth, MaskCLIP, MaskCLIP with TTD, TCL, and TCL with TTD">
+            </div>
+            <p class="figure-caption">
+                <strong>Segmentation with and without TTD.</strong>
+                With TTD, the models detect the objects that are present in the image, unlike the original models, which identify objects not actually present in the image.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Ablation ===== -->
+<section class="section" id="ablation">
+    <div class="container">
+        <h2 class="section-title" data-animate><span class="section-number">5</span>Ablation</h2>
+        <p class="section-lead" data-animate>
+            The ablations use TCL as the baseline model, and PASCAL VOC for tag-level segmentation (mIoU).
+        </p>
+
+        <div class="figure-block" data-animate>
+            <h3>Loss Terms and Tag Selection Method</h3>
+            <div class="figure-frame">
+                <img class="fit" style="--w:91%" src="static/images/table_ablation.png" alt="Ablation studies: effect of the two loss terms and effect of the tagging method on CaptionIoU and mIoU">
+            </div>
+            <p class="figure-caption">
+                <strong>Both losses and pixel-tag scoring matter.</strong>
+                (Left) <em>L<sub>distill</sub></em> improves CaptionIoU by +3.2% and mIoU by +5.8%, and the best performance is achieved when both losses are combined.
+                (Right) Selecting tags with NLTK results in a minor improvement and image-tag scoring results in a decline in both metrics, while pixel-tag scoring performs best.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- ===== BibTeX ===== -->
+<section class="section section-tint" id="bibtex">
+    <div class="container">
+        <h2 class="section-title" data-animate><span class="section-number">6</span>Citation</h2>
+        <div class="bibtex-block" data-animate>
+            <div class="bibtex-header">
+                <span>BibTeX</span>
+                <button class="copy-btn" onclick="copyBibtex()">
+                    <i class="fa-regular fa-copy"></i>
+                    <span>Copy</span>
+                </button>
+            </div>
+            <pre class="bibtex-code" id="bibtexCode">@inproceedings{jo2024ttd,
+  title     = {TTD: Text-Tag Self-Distillation Enhancing Image-Text Alignment in CLIP to Alleviate Single Tag Bias},
+  author    = {Jo, Sanghyun and Ryu, Soohyun and Kim, Sungyub and Yang, Eunho and Kim, Kyungsu},
+  booktitle = {European Conference on Computer Vision (ECCV)},
+  year      = {2024}
+}</pre>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Footer ===== -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-left">
+                <span class="footer-logo">TTD</span>
+                <span class="footer-venue">ECCV 2024 &middot; arXiv:2404.00384</span>
+            </div>
+            <div class="footer-right">
+                Template inspired by <a href="https://nerfies.github.io" target="_blank">Nerfies</a> &middot; <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">CC BY-SA 4.0</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script>
+// ===== Copy BibTeX =====
+function copyBibtex() {
+    const text = document.getElementById('bibtexCode').textContent;
+    navigator.clipboard.writeText(text).then(() => {
+        const btn = document.querySelector('.copy-btn span');
+        btn.textContent = 'Copied!';
+        setTimeout(() => btn.textContent = 'Copy', 2000);
+    });
+}
+
+// ===== Floating Nav =====
+const nav = document.getElementById('floatingNav');
+window.addEventListener('scroll', () => {
+    nav.classList.toggle('visible', window.scrollY > 520);
+});
+
+// ===== Scroll Animations =====
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const delay = entry.target.dataset.delay || 0;
+            setTimeout(() => {
+                entry.target.classList.add('animate-in');
+            }, parseInt(delay));
+            observer.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('[data-animate]').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>

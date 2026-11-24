@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/img/site-logo/favicon_32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="../assets/img/site-logo/favicon_48.png">
+    <link rel="apple-touch-icon" href="../assets/img/site-logo/apple_touch_180.png">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RecurSeed and EdgePredictMix: Pseudo-Label Refinement Learning for Weakly Supervised Semantic Segmentation across Single- and Multi-Stage Frameworks</title>
+    <meta name="description" content="RSEPM: RecurSeed recursively refines class activation maps during training and EdgePredictMix refines predicted masks with edges before mixing, for weakly supervised semantic segmentation with image-level labels.">
+    <meta name="keywords" content="RecurSeed, EdgePredictMix, RSEPM, weakly supervised semantic segmentation, WSSS, image-level labels, class activation map, pseudo-label refinement, data augmentation, single-stage, PASCAL VOC 2012, MS COCO 2014">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="RecurSeed and EdgePredictMix: Pseudo-Label Refinement Learning for Weakly Supervised Semantic Segmentation across Single- and Multi-Stage Frameworks">
+    <meta property="og:description" content="RecurSeed alternately reduces non- and false detections through recursive iterations, and EdgePredictMix further expresses object edges when combining segmentation results. 74.4% mIoU on PASCAL VOC 2012 val and 46.4% on MS COCO 2014 val.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://shjo-april.github.io/RSEPM/">
+    <meta property="og:image" content="https://shjo-april.github.io/assets/img/RSEPM.png">
+    <meta property="og:image:width" content="1511">
+    <meta property="og:image:height" content="490">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <!-- Academicons & Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.4/css/academicons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <link rel="stylesheet" href="static/css/style.css">
+</head>
+<body>
+
+<!-- ===== Floating Nav ===== -->
+<nav class="floating-nav" id="floatingNav">
+    <div class="nav-inner">
+        <span class="nav-logo">RSEPM</span>
+        <div class="nav-links">
+            <a href="#abstract">Abstract</a>
+            <a href="#method">Method</a>
+            <a href="#results">Results</a>
+            <a href="#analysis">Analysis</a>
+            <a href="#bibtex">BibTeX</a>
+        </div>
+    </div>
+</nav>
+
+<!-- ===== Hero: title panel ===== -->
+<header class="hero">
+    <div class="container">
+        <div class="hero-card">
+            <div class="venues">
+                <span class="venue-badge preprint"><span class="venue-name">Preprint</span></span>
+            </div>
+
+            <h1 class="hero-title">RSEPM</h1>
+            <p class="hero-sub"><span class="phrase">Pseudo-Label Refinement Learning for Weakly Supervised Semantic Segmentation</span> <span class="phrase">across Single- and Multi-Stage Frameworks</span></p>
+            <p class="hero-expand"><em>R</em>ecur<em>S</em>eed and <em>E</em>dge<em>P</em>redict<em>M</em>ix</p>
+
+            <!-- Authors -->
+            <div class="authors">
+                <span class="author"><a href="https://shjo-april.github.io/" target="_blank">Sanghyun Jo</a><sup>1</sup></span>
+                <span class="author">In-Jae Yu<sup>2</sup></span>
+                <span class="author"><a href="https://aibl.snu.ac.kr/pi-information" target="_blank">Kyungsu Kim</a><sup>3,&#8224;</sup></span>
+            </div>
+
+            <!-- Affiliations -->
+            <div class="affils">
+                <span class="affil"><sup>1</sup><img src="static/images/ogq.png" srcset="static/images/ogq.png 1x, static/images/ogq_2x.png 2x" width="82" height="26" alt="OGQ"></span>
+                <span class="affil"><sup>2</sup><img src="static/images/samsung.png" srcset="static/images/samsung.png 1x, static/images/samsung_2x.png 2x" width="104" height="16" alt="Samsung"><span>Electronics</span></span>
+                <span class="affil"><sup>3</sup><img src="static/images/skku.png" srcset="static/images/skku.png 1x, static/images/skku_2x.png 2x" width="158" height="40" alt="Sungkyunkwan University"></span>
+            </div>
+            <div class="author-note"><span><sup>&#8224;</sup> Corresponding author</span></div>
+
+            <!-- Action Buttons -->
+            <div class="hero-actions">
+                <a href="https://arxiv.org/pdf/2204.06754" target="_blank" class="btn btn-primary">
+                    <i class="fa-solid fa-file-pdf"></i><span>Paper</span>
+                </a>
+                <a href="https://arxiv.org/abs/2204.06754" target="_blank" class="btn btn-secondary">
+                    <i class="ai ai-arxiv"></i><span>arXiv</span>
+                </a>
+                <a href="https://github.com/shjo-april/RecurSeed_and_EdgePredictMix" target="_blank" class="btn btn-secondary">
+                    <i class="fa-brands fa-github"></i><span>Code</span>
+                </a>
+                <a href="../assets/pdf/221004_MODULABS_RSEPM.pdf" target="_blank" class="btn btn-secondary">
+                    <i class="fa-solid fa-person-chalkboard"></i><span>Slides</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- ===== Teaser and Key Insight ===== -->
+<section class="section section-tight">
+    <div class="container">
+        <div class="figure-block" data-animate>
+            <div class="figure-frame">
+                <img src="static/images/teaser.jpg" alt="Localization maps of CAM, RRM, SSSS, AFA and RSEPM for three PASCAL VOC 2012 training images">
+            </div>
+            <p class="figure-caption">
+                <strong>Localization maps on the PASCAL VOC 2012 training set.</strong>
+                Compared with conventional CAMs and existing single-stage learning frameworks (RRM, SSSS, AFA), RSEPM shows foreground and background regions more accurately, thanks to the recursive learning process (RS).
+            </p>
+        </div>
+
+        <div class="insight" data-animate>
+            <div class="insight-label">Key Insight</div>
+            <p class="insight-text">
+                Post-processing modules for class activation maps pull in opposite directions: SCG enhances spatial details for larger objects but raises false positives, while PAMR refines boundaries but can increase false negatives.
+                <strong>RecurSeed (RS) puts both inside the training loop</strong>, so the network recursively learns from its own refined seed and converges toward a mask that reduces both errors.
+                <strong>EdgePredictMix (EPM)</strong> refines predicted masks with edge information restored from the model's own predictions before mixing, addressing the ambiguity that mixing augmentation otherwise escalates at partial object boundaries.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Motivation ===== -->
+<section class="section section-tint">
+    <div class="container">
+        <h2 class="section-title" data-animate>Motivation</h2>
+        <p class="section-lead" data-animate>
+            Image-level class labels are the most economical supervision for weakly supervised semantic segmentation, yet class activation maps (CAMs) highlight only the most discriminative regions of an object.
+            Multi-stage learning frameworks mitigate this at the cost of an intricate training process, while single-stage frameworks use one unified model but lag in performance.
+            The paper names two challenges in this setting.
+        </p>
+        <div class="contributions-grid cols-2">
+            <div class="contrib-card" data-animate data-delay="0">
+                <div class="contrib-number">CHALLENGE 1</div>
+                <h3>Conflicting False Negatives and False Positives</h3>
+                <p>Self-Correlation map Generation (SCG) enhances spatial details for larger objects but raises false positives for medium and small objects. Pixel-Adaptive Mask Refinement (PAMR) reduces false positives by refining CAM boundaries, but used alone it can increase false negatives. The paper terms these conflicting issues <em>FPN-WSSS-IL</em>.</p>
+            </div>
+            <div class="contrib-card" data-animate data-delay="100">
+                <div class="contrib-number">CHALLENGE 2</div>
+                <h3>Mixing With Unrefined Masks</h3>
+                <p>Mixing augmentations such as ClassMix blend images using model-predicted masks. With image-level labels only, mixing without refining these masks escalates the ambiguity that stems from their partial object boundaries. The paper denotes this challenge <em>IBDA-WSSS-IL</em>.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Abstract ===== -->
+<section class="section" id="abstract">
+    <div class="container">
+        <h2 class="section-title" data-animate><span class="section-number">1</span>Abstract</h2>
+        <div class="abstract-content" data-animate>
+            <p>
+                Although weakly supervised semantic segmentation using only image-level labels (WSSS-IL) is potentially useful, its low
+                performance and implementation complexity still limit its application. The main causes are (a) non-detection and (b)
+                false-detection phenomena: (a) The class activation maps refined from existing WSSS-IL methods still only represent partial
+                regions for large-scale objects, and (b) for small-scale objects, over-activation causes them to deviate from the object edges.
+            </p>
+            <p>
+                We propose <strong>RecurSeed</strong>, which alternately reduces non- and false detections through recursive iterations, thereby
+                implicitly finding an optimal junction that minimizes both errors. We also propose a novel data augmentation (DA) approach
+                called <strong>EdgePredictMix</strong>, which further expresses an object's edge by utilizing the probability difference
+                information between adjacent pixels in combining the segmentation results, thereby compensating for the shortcomings when
+                applying the existing DA methods to WSSS.
+            </p>
+            <p>
+                We achieved new state-of-the-art performances on both the PASCAL VOC 2012 and MS COCO 2014 benchmarks (VOC <em>val</em>:
+                <strong>74.4%</strong>, COCO <em>val</em>: <strong>46.4%</strong>). The code is available at
+                <a href="https://github.com/shjo-april/RecurSeed_and_EdgePredictMix" target="_blank">https://github.com/shjo-april/RecurSeed_and_EdgePredictMix</a>.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Contributions ===== -->
+<section class="section section-tint">
+    <div class="container">
+        <h2 class="section-title" data-animate><span class="section-number">2</span>Contributions</h2>
+        <div class="contributions-grid">
+            <div class="contrib-card" data-animate data-delay="0">
+                <div class="contrib-number">RECURSION</div>
+                <h3>RecurSeed (RS)</h3>
+                <p>A recursion applied to the integration of SCG and PAMR, beyond their original post-processing roles. The network converges toward a mask that reduces both FN and FP, a boost of over 11% compared with non-recursive methods, and the high-order correlation improves on first-order recursion by 7.4% mIoU.</p>
+            </div>
+            <div class="contrib-card" data-animate data-delay="100">
+                <div class="contrib-number">AUGMENTATION</div>
+                <h3>EdgePredictMix (EPM)</h3>
+                <p>A novel edge refinement (EP) optimized for mixing augmentation. EPM refines predicted masks by jointly harnessing <strong>absolute and relative per-pixel probability values</strong>, and consistently boosts the performance of various WSSS methods.</p>
+            </div>
+            <div class="contrib-card" data-animate data-delay="200">
+                <div class="contrib-number">RESULTS</div>
+                <h3>Single- and Multi-Stage Results</h3>
+                <p>The single-stage framework reaches 70.6% mIoU on the VOC 2012 <em>test</em> set without advanced backbones such as transformers. Extended to a multi-stage framework by applying a random walk, it exceeds recent multi-stage methods by 1.7%.</p>
+            </div>
+        </div>
+
+        <div class="figure-block" data-animate>
+            <h3>How RS and EPM Differ From Related Work</h3>
+            <div class="figure-frame">
+                <div class="frame-pair">
+                    <img src="static/images/table_novelty_rs.png" alt="Property comparison of RecurSeed with SEAM, RRM and AFA">
+                    <img src="static/images/table_novelty_epm.png" alt="Property comparison of EdgePredictMix with Saliency Grafting, CDA and ClassMix">
+                </div>
+            </div>
+            <p class="figure-caption">
+                <strong>Property comparison with related work.</strong>
+                Among SEAM, RRM, AFA and RS, only RS reduces false negatives by using the second-order correlation.
+                Among Saliency Grafting (SG), CDA, ClassMix and EPM, only EPM refines the predicted mask using edges.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Method ===== -->
+<section class="section" id="method">
+    <div class="container">
+        <h2 class="section-title" data-animate><span class="section-number">3</span>Method</h2>
+        <p class="section-lead" data-animate>
+            The single-stage learning framework has parallel classification and segmentation branches, with two components tailored to
+            weakly supervised segmentation: <strong>RecurSeed (RS)</strong> and <strong>EdgePredictMix (EPM)</strong>.
+        </p>
+
+        <div class="figure-block" data-animate>
+            <div class="figure-frame">
+                <img src="static/images/method_overview.png" alt="Overview of the single-stage learning framework with RecurSeed and EdgePredictMix">
+            </div>
+            <p class="figure-caption">
+                <strong>Overview of the single-stage learning framework (SLF) with RS and EPM.</strong>
+                From the encoder features (e.g., ResNet-50), the classifier and the decoder (e.g., DeepLabv3+) produce CAMs and per-pixel segmentation outputs.
+                RS provides refined CAMs and pseudo masks by utilizing high-order (e.g., SCG) and image (e.g., PAMR) correlations.
+                EPM synthesizes two images, their RS outputs, and their decoder outputs refined by EP. The encoder and decoder are updated recursively with the RS-related and EPM-related losses.
+            </p>
+        </div>
+
+        <!-- Method Steps -->
+        <div class="method-steps">
+            <div class="method-step" data-animate>
+                <div class="step-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 4v5h-5"/></svg>
+                </div>
+                <div class="step-content">
+                    <h3>RecurSeed (RS)</h3>
+                    <p>At every epoch <em>t</em>, RS refines the CAM as M<sub>rs</sub>(<em>t</em>) = PAMR(SCG(M<sub>cam</sub>(<em>t</em>))), and the network is trained so that the CAM of the next step reproduces this result. A segmentation loss on the decoder output and a reconstruction loss on the CAM are minimized along with the classification loss. CertainFilter (CF) turns the RS output into foreground, background and ignored pixels with two thresholds, which avoids the influence of uncertain labels.</p>
+                </div>
+            </div>
+            <div class="method-step" data-animate>
+                <div class="step-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 17c4 0 4-10 9-10s5 10 9 10"/><path d="M3 21h18"/></svg>
+                </div>
+                <div class="step-content">
+                    <h3>Edge Refinement Using Predictions (EP)</h3>
+                    <p>EP uses absolute and relative per-pixel probability values. Thresholding the absolute class probabilities identifies uncertain regions. An edge is extracted from the relative differences between adjacent per-pixel probabilities with Canny, and superpixels are produced from the edge with connected-component labeling. Uncertain pixels are then complemented by the predominant class within each superpixel.</p>
+                </div>
+            </div>
+            <div class="method-step" data-animate>
+                <div class="step-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="12" height="12" rx="2"/><rect x="9" y="9" width="12" height="12" rx="2"/></svg>
+                </div>
+                <div class="step-content">
+                    <h3>EdgePredictMix (EPM)</h3>
+                    <p>The certain foreground regions of one image, together with its EP-refined mask and its RS seed, are pasted onto another image of the mini-batch. The network then trains on the mixed images: a cross-entropy loss makes the decoder output reproduce the mixed mask refined by EP, and a reconstruction loss makes the CAM reproduce the mixed RS. RS and EPM are used only for training, so they add no complexity at inference time.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="figure-block" data-animate>
+            <h3>RecurSeed and Edge Refinement in Detail</h3>
+            <div class="figure-frame">
+                <div class="frame-pair">
+                    <img src="static/images/method_recurseed.png" alt="CAM refinement without RecurSeed (SCG, PAMR as post-processing) and with RecurSeed (recursive update), with a qualitative comparison of pseudo masks">
+                    <img src="static/images/method_edgepredictmix.png" alt="Edge refinement using predictions with Canny and connected-component labeling, and a conceptual comparison of ClassMix and EdgePredictMix">
+                </div>
+            </div>
+            <p class="figure-caption">
+                <strong>The two components.</strong>
+                RecurSeed: without RS, SCG and PAMR are simple post-processing schemes for the CAM. With RS, the CAM improves iteratively and takes advantage of both SCG (reducing FN) and PAMR (reducing FP).
+                Edge refinement: EP creates superpixels separated by the edge between class probabilities and votes the major class within each superpixel to remove uncertain pixels. Unlike ClassMix, EPM mixes pseudo masks whose uncertain regions were eliminated by this relabeling.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Results ===== -->
+<section class="section section-tint" id="results">
+    <div class="container">
+        <h2 class="section-title" data-animate><span class="section-number">4</span>Results</h2>
+
+        <!-- Highlight Numbers -->
+        <div class="results-highlights" data-animate>
+            <div class="highlight-card">
+                <div class="highlight-value">74.4%</div>
+                <div class="highlight-metric">mIoU, VOC 2012 val</div>
+                <div class="highlight-desc">Multi-stage RSEPM, ResNet-101</div>
+            </div>
+            <div class="highlight-card">
+                <div class="highlight-value">46.4%</div>
+                <div class="highlight-metric">mIoU, COCO 2014 val</div>
+                <div class="highlight-desc">Multi-stage RSEPM, ResNet-101</div>
+            </div>
+            <div class="highlight-card">
+                <div class="highlight-value">70.6%</div>
+                <div class="highlight-metric">mIoU, VOC 2012 test</div>
+                <div class="highlight-desc">Single-stage RSEPM, ResNet-50</div>
+            </div>
+            <div class="highlight-card">
+                <div class="highlight-value">+11.4%</div>
+                <div class="highlight-metric">mIoU, VOC 2012 train</div>
+                <div class="highlight-desc">RS over the simple integration of SCG and PAMR</div>
+            </div>
+        </div>
+
+        <div class="figure-block" data-animate>
+            <h3>Comparison With State-of-the-Art Methods</h3>
+            <div class="figure-frame">
+                <img class="fit" style="--w:58%" src="static/images/table_main.png" alt="mIoU comparison of weakly supervised semantic segmentation methods on PASCAL VOC 2012 val and test and MS COCO 2014 val">
+            </div>
+            <p class="figure-caption">
+                <strong>mIoU (%) on PASCAL VOC 2012 and MS COCO 2014.</strong>
+                With image-level supervision only, single-stage RSEPM (ResNet-50) reaches 69.5 and 70.6 on VOC <em>val</em> and <em>test</em> and 42.2 on COCO <em>val</em>.
+                Multi-stage RSEPM (ResNet-101) reaches 74.4, 73.6 and 46.4.
+                Sup.: I, image-level class labels; S, saliency supervision; D, an additional dataset; B, box labels; P, point labels. * indicates a VGG&#8209;16 backbone.
+            </p>
+        </div>
+
+        <div class="figure-block" data-animate>
+            <h3>Seed Quality and Complexity</h3>
+            <div class="figure-frame">
+                <div class="frame-pair">
+                    <img src="static/images/table_seed_rw.png" alt="mIoU of single-stage seeds and of pseudo masks after a random walk on the PASCAL VOC 2012 train set">
+                    <img src="static/images/table_complexity.png" alt="Parameters, MACs and mIoU of single-stage methods on the PASCAL VOC 2012 test set">
+                </div>
+            </div>
+            <p class="figure-caption">
+                <strong>Seeds and complexity of the single-stage network.</strong>
+                On the VOC 2012 <em>train</em> set, RSEPM reaches 75.2 mIoU with the result from the trained network (Seed) and 76.7 with the pseudo masks generated by a random walk (Seed + RW).
+                On the VOC 2012 <em>test</em> set, single-stage RSEPM reaches 70.6 mIoU with 40M parameters and 32G MACs.
+            </p>
+        </div>
+
+        <div class="figure-block" data-animate>
+            <h3>Qualitative Results on PASCAL VOC 2012</h3>
+            <div class="figure-frame">
+                <img src="static/images/qualitative_voc.jpg" alt="Qualitative segmentation results on the PASCAL VOC 2012 val set: image, RSEPM prediction and ground truth">
+            </div>
+            <p class="figure-caption">
+                <strong>Segmentation results on the PASCAL VOC 2012 <em>val</em> set.</strong>
+                Each triplet shows the image, the RSEPM prediction and the ground truth.
+            </p>
+        </div>
+
+        <div class="figure-block" data-animate>
+            <h3>Qualitative Results on MS COCO 2014</h3>
+            <div class="figure-frame">
+                <img src="static/images/qualitative_coco.jpg" alt="Qualitative segmentation results on the MS COCO 2014 val set: image, RSEPM prediction and ground truth">
+            </div>
+            <p class="figure-caption">
+                <strong>Segmentation results on the MS COCO 2014 <em>val</em> set.</strong>
+                The examples include complex scenes, small objects and multiple instances.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Analysis ===== -->
+<section class="section" id="analysis">
+    <div class="container">
+        <h2 class="section-title" data-animate><span class="section-number">5</span>Analysis</h2>
+
+        <div class="figure-block" data-animate>
+            <h3>Why Recursion Matters</h3>
+            <div class="figure-frame">
+                <div class="frame-pair">
+                    <img src="static/images/table_rs_components.png" alt="Element-wise component analysis of RS, SCG and PAMR on the PASCAL VOC 2012 train set: mIoU, FP and FN">
+                    <img src="static/images/table_rs_correlation.png" alt="Effect of the first-order and second-order correlation with and without RS on the PASCAL VOC 2012 train set">
+                </div>
+            </div>
+            <p class="figure-caption">
+                <strong>Recursion makes SCG and PAMR work together.</strong>
+                In the component analysis on the VOC 2012 <em>train</em> set, the simple integration of SCG and PAMR without RS gives a marginal gain (58.0 to 59.3 mIoU) and raises FN. With RS, both FP and FN decrease and the decoder map reaches 70.7, which is +11.4% over the simple integration.
+                In the correlation study, the second-order correlation with RS improves the decoder map by 7.4% over the first-order correlation (63.3 to 70.7). Without RS the gain is 1.7%. * denotes the decoder map result.
+            </p>
+        </div>
+
+        <div class="figure-block" data-animate>
+            <h3>Recursive Improvement During Training</h3>
+            <div class="figure-frame">
+                <img class="fit" style="--w:64%" src="static/images/analysis_recursive.jpg" alt="CAM, RS and decoder maps and the pseudo masks from Decoder + CF at four training steps, next to the image and its ground truth">
+            </div>
+            <p class="figure-caption">
+                <strong>Attention maps and pseudo masks improve step by step.</strong>
+                At the initial step (a), the CAM covers the most discriminative part of the object and the decoder output fails to detect all of the foreground.
+                After RS trains the segmentation branch (b, c), the predicted masks improve. With EPM (d), the final pseudo mask (Decoder + CF) is close to the ground truth.
+            </p>
+        </div>
+
+        <div class="figure-block" data-animate>
+            <h3>EdgePredictMix vs. Other Mixing Augmentations</h3>
+            <div class="figure-frame">
+                <div class="frame-pair">
+                    <img src="static/images/table_epm_mixing.png" alt="mIoU of RecurSeed combined with CutMix, Saliency Grafting, CDA, ClassMix and EdgePredictMix on the PASCAL VOC 2012 train set">
+                    <img src="static/images/table_epm_plugin.png" alt="Effect of adding EdgePredictMix to RRM, SSSS and AFA on the PASCAL VOC 2012 val set">
+                </div>
+            </div>
+            <p class="figure-caption">
+                <strong>EPM gives the highest mIoU among the mixing methods.</strong>
+                On the VOC 2012 <em>train</em> set, with RS applied to every method, CutMix, Saliency Grafting and CDA lower the mIoU of RecurSeed (70.7), ClassMix reaches 71.2, and EdgePredictMix reaches 75.2.
+                Added to other single-stage methods on the VOC 2012 <em>val</em> set, EPM improves RRM, SSSS and AFA by 2.7%, 2.8% and 2.5%.
+            </p>
+        </div>
+
+        <div class="figure-block" data-animate>
+            <h3>Ablation of Key Components</h3>
+            <div class="figure-frame">
+                <img class="fit" style="--w:62%" src="static/images/table_components.png" alt="Ablation of the RecurSeed and EdgePredictMix losses and of EP: CAM and decoder mIoU on the PASCAL VOC 2012 train set">
+            </div>
+            <p class="figure-caption">
+                <strong>Effect of the key components of RS and EPM.</strong>
+                On the VOC 2012 <em>train</em> set, training the encoder and decoder with RS raises the decoder to 70.7 mIoU (row 3), and RS with EP reaches 71.7 even without mixing augmentation (row 4).
+                With all components, the CAM reaches 63.4 and the decoder 75.2 (row 8).
+            </p>
+        </div>
+
+        <div class="figure-block" data-animate>
+            <h3>Training Schedule and Thresholds</h3>
+            <div class="figure-frame">
+                <img src="static/images/analysis_epochs.png" alt="mIoU per epoch for CAM, RS, and RS with EPM, and mIoU as a function of the foreground and background thresholds">
+            </div>
+            <p class="figure-caption">
+                <strong>Effects of RS and EPM per epoch, and of the two CertainFilter thresholds.</strong>
+                (a) The mIoU increases steeply through RS between the 5th and 10th epochs and then saturates, so EPM is applied after the 15th epoch.
+                (b, c) The mIoU stays high under changes of the foreground threshold &delta;<sub>fg</sub> and the background threshold &delta;<sub>bg</sub>. The experiments use &delta;<sub>fg</sub> = 0.55 and &delta;<sub>bg</sub> = 0.10.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- ===== BibTeX ===== -->
+<section class="section section-tint" id="bibtex">
+    <div class="container">
+        <h2 class="section-title" data-animate><span class="section-number">6</span>Citation</h2>
+        <div class="bibtex-block" data-animate>
+            <div class="bibtex-header">
+                <span>BibTeX</span>
+                <button class="copy-btn" onclick="copyBibtex()">
+                    <i class="fa-regular fa-copy"></i>
+                    <span>Copy</span>
+                </button>
+            </div>
+            <pre class="bibtex-code" id="bibtexCode">@article{jo2022recurseed,
+  title   = {RecurSeed and EdgePredictMix: Pseudo-Label Refinement Learning for Weakly Supervised Semantic Segmentation across Single- and Multi-Stage Frameworks},
+  author  = {Jo, Sanghyun and Yu, In-Jae and Kim, Kyungsu},
+  journal = {arXiv preprint arXiv:2204.06754},
+  year    = {2022}
+}</pre>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Footer ===== -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-left">
+                <span class="footer-logo">RSEPM</span>
+                <span class="footer-venue">arXiv:2204.06754</span>
+            </div>
+            <div class="footer-right">
+                Template inspired by <a href="https://nerfies.github.io" target="_blank">Nerfies</a> &middot; <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">CC BY-SA 4.0</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script>
+// ===== Copy BibTeX =====
+function copyBibtex() {
+    const text = document.getElementById('bibtexCode').textContent;
+    navigator.clipboard.writeText(text).then(() => {
+        const btn = document.querySelector('.copy-btn span');
+        btn.textContent = 'Copied!';
+        setTimeout(() => btn.textContent = 'Copy', 2000);
+    });
+}
+
+// ===== Floating Nav =====
+const nav = document.getElementById('floatingNav');
+window.addEventListener('scroll', () => {
+    nav.classList.toggle('visible', window.scrollY > 520);
+});
+
+// ===== Scroll Animations =====
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const delay = entry.target.dataset.delay || 0;
+            setTimeout(() => {
+                entry.target.classList.add('animate-in');
+            }, parseInt(delay));
+            observer.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('[data-animate]').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>

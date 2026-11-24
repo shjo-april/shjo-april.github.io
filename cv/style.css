@@ -94,11 +94,12 @@ sup{font-size:0.7em;line-height:0}
 .footer{padding:2.5rem 2rem;border-top:1px solid var(--border);text-align:center}
 .footer-text{font-size:0.82rem;color:var(--text-dim)}
 
-@media(max-width:1000px){
+@media(max-width:1180px){
     .topbar{padding:0 1.2rem}.topbar-inner{height:auto;display:block}
     .topbar-id{min-height:48px}
     .topbar-links{flex-wrap:wrap;gap:0.2rem 1rem;padding:0 0 0.5rem}.topbar-links a{white-space:nowrap;font-size:0.7rem;padding:0.2rem 0}
 }
+@media(max-width:400px){.topbar-links{gap:0.2rem 0.7rem}.topbar-links a{letter-spacing:0.02em}}
 @media(max-width:900px){
     .cv-layout{grid-template-columns:minmax(0,1fr);gap:0;padding:0 1.2rem 3rem}
     .cv-head{padding:2rem 1.2rem 0}
@@ -121,3 +122,8 @@ sup{font-size:0.7em;line-height:0}
     .cv-head{padding:0}
     .cv-item:target{background:none;box-shadow:none}
 }
+
+/* Education entries with a logo column (the eduentry macro); an entry without a logo keeps the same indent */
+.edu{display:grid;grid-template-columns:48px minmax(0,1fr);column-gap:0.9rem;align-items:start;margin:0.55rem 0 0.9rem}
+.edu-logo img{display:block;max-width:48px;height:auto;margin-top:0.15rem}
+@media(max-width:480px){.edu{grid-template-columns:minmax(0,1fr);row-gap:0.4rem}.edu-logo:empty{display:none}}

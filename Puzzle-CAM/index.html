@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/img/site-logo/favicon_32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="../assets/img/site-logo/favicon_48.png">
+    <link rel="apple-touch-icon" href="../assets/img/site-logo/apple_touch_180.png">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Puzzle-CAM: Improved localization via matching partial and full features</title>
+    <meta name="description" content="Puzzle-CAM (ICIP 2021): weakly-supervised semantic segmentation that matches the class activation maps of tiled image patches with those of the whole image, using image-level supervision without extra parameters.">
+    <meta name="keywords" content="Puzzle-CAM, weakly-supervised semantic segmentation, WSSS, class activation maps, CAM, image-level supervision, PASCAL VOC 2012, ICIP 2021">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Puzzle-CAM: Improved localization via matching partial and full features">
+    <meta property="og:description" content="A puzzle module and reconstructing regularization match the CAMs of tiled patches with the CAM of the whole image, so the CAM covers the overall region of an object with image-level labels.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://shjo-april.github.io/Puzzle-CAM/">
+    <meta property="og:image" content="https://shjo-april.github.io/assets/img/PuzzleCAM.png">
+    <meta property="og:image:width" content="1990">
+    <meta property="og:image:height" content="650">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <!-- Academicons & Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.4/css/academicons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <link rel="stylesheet" href="static/css/style.css">
+</head>
+<body>
+
+<!-- ===== Floating Nav ===== -->
+<nav class="floating-nav" id="floatingNav">
+    <div class="nav-inner">
+        <span class="nav-logo">Puzzle-CAM</span>
+        <div class="nav-links">
+            <a href="#abstract">Abstract</a>
+            <a href="#method">Method</a>
+            <a href="#results">Results</a>
+            <a href="#bibtex">BibTeX</a>
+        </div>
+    </div>
+</nav>
+
+<!-- ===== Hero: title panel ===== -->
+<header class="hero">
+    <div class="container">
+        <div class="hero-card">
+            <div class="venues">
+                <span class="venue-badge plain"><span class="venue-name">ICIP 2021</span></span>
+            </div>
+
+            <h1 class="hero-title">Puzzle-CAM</h1>
+            <p class="hero-sub">Improved localization via matching partial and full features</p>
+
+            <!-- Authors -->
+            <div class="authors">
+                <span class="author"><a href="https://shjo-april.github.io/" target="_blank">Sanghyun Jo</a><sup>1</sup></span>
+                <span class="author">In-Jae Yu<sup>2,&#8224;</sup></span>
+            </div>
+
+            <!-- Affiliations -->
+            <div class="affils">
+                <span class="affil"><sup>1</sup><img src="static/images/gyn.png" srcset="static/images/gyn.png 1x, static/images/gyn_2x.png 2x" width="83" height="26" alt="GYN"></span>
+                <span class="affil"><sup>2</sup><img src="static/images/kaist_soc.png" srcset="static/images/kaist_soc.png 1x, static/images/kaist_soc_2x.png 2x" width="174" height="30" alt="KAIST School of Computing"></span>
+            </div>
+            <div class="author-note"><span><sup>&#8224;</sup> Corresponding author</span></div>
+
+            <!-- Action Buttons -->
+            <div class="hero-actions">
+                <a href="https://arxiv.org/pdf/2101.11253" target="_blank" class="btn btn-primary">
+                    <i class="fa-solid fa-file-pdf"></i><span>Paper</span>
+                </a>
+                <a href="https://arxiv.org/abs/2101.11253" target="_blank" class="btn btn-secondary">
+                    <i class="ai ai-arxiv"></i><span>arXiv</span>
+                </a>
+                <a href="https://github.com/shjo-april/PuzzleCAM" target="_blank" class="btn btn-secondary">
+                    <i class="fa-brands fa-github"></i><span>Code</span>
+                </a>
+                <a href="https://ieeexplore.ieee.org/document/9506058" target="_blank" class="btn btn-secondary">
+                    <i class="fa-solid fa-book"></i><span>IEEE</span>
+                </a>
+                <a href="./ICIP2021_PuzzleCAM_PPT_210722.pdf" target="_blank" class="btn btn-secondary">
+                    <i class="fa-solid fa-person-chalkboard"></i><span>Slides</span>
+                </a>
+                <a href="./ICIP2021_Poster_210718.pdf" target="_blank" class="btn btn-secondary">
+                    <i class="fa-solid fa-image"></i><span>Poster</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- ===== Teaser & Key Insight ===== -->
+<section class="section section-tight">
+    <div class="container">
+        <div class="figure-block" data-animate>
+            <div class="figure-frame">
+                <img class="fit" style="--w:54%" src="static/images/teaser.jpg" alt="Class activation maps of one image: (a) conventional CAM of the original image, (b) CAMs of the four tiled patches, (c) CAM predicted by Puzzle-CAM, which covers both people">
+            </div>
+            <p class="figure-caption">
+                <strong>CAMs generated from tiled and original images.</strong>
+                (a) Conventional CAMs from the original image, (b) CAMs generated from the tiled images, and (c) CAMs predicted by the proposed Puzzle-CAM.
+            </p>
+        </div>
+
+        <div class="insight" data-animate>
+            <div class="insight-label">Key Insight</div>
+            <p class="insight-text">
+                The CAM of an image classifier focuses on the <strong>most discriminative parts</strong> of an object, and the CAMs of isolated patches in a tiled image are
+                <strong>significantly inconsistent</strong> with the CAM of the original image.
+                Puzzle-CAM uses this difference as self-supervision: a puzzle module splits the image and merges the CAMs of its patches, and a reconstructing regularization
+                <strong>matches the merged CAM with the CAM of the whole image</strong>, so the CAM covers the overall region of an object with image-level supervision and
+                <strong>no extra parameters</strong>.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Abstract ===== -->
+<section class="section section-tint" id="abstract">
+    <div class="container">
+        <h2 class="section-title" data-animate><span class="section-number">1</span>Abstract</h2>
+        <div class="abstract-content" data-animate>
+            <p>
+                Weakly-supervised semantic segmentation (WSSS) is introduced to narrow the gap for semantic segmentation performance from
+                pixel-level supervision to image-level supervision. Most advanced approaches are based on class activation maps (CAMs) to
+                generate pseudo-labels to train the segmentation network. The main limitation of WSSS is that the process of generating
+                pseudo-labels from CAMs that use an image classifier is mainly focused on the most discriminative parts of the objects.
+            </p>
+            <p>
+                To address this issue, we propose <strong>Puzzle-CAM</strong>, a process that minimizes differences between the features from
+                separate patches and the whole image. Our method consists of <strong>a puzzle module and two regularization terms</strong> to
+                discover the most integrated region in an object. Puzzle-CAM can activate the overall region of an object using image-level
+                supervision <strong>without requiring extra parameters</strong>.
+            </p>
+            <p>
+                In experiments, Puzzle-CAM outperformed previous state-of-the-art methods using the same labels for supervision on the
+                <strong>PASCAL VOC 2012</strong> dataset. Code associated with our experiments is available at
+                <a href="https://github.com/shjo-april/PuzzleCAM" target="_blank">https://github.com/OFRIN/PuzzleCAM</a>.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Contributions ===== -->
+<section class="section">
+    <div class="container">
+        <h2 class="section-title" data-animate><span class="section-number">2</span>Contributions</h2>
+        <div class="contributions-grid">
+            <div class="contrib-card" data-animate data-delay="0">
+                <div class="contrib-number">PROBLEM</div>
+                <h3>Partial and Inconsistent CAMs</h3>
+                <p>CAMs usually focus on small parts of the semantic objects, and the CAMs generated from isolated patches of a tiled image differ from those of the original image, which enlarges the supervision gap between fully- and weakly-supervised semantic segmentation.</p>
+            </div>
+            <div class="contrib-card" data-animate data-delay="100">
+                <div class="contrib-number">METHOD</div>
+                <h3>Tiling, Merging, Matching</h3>
+                <p>Puzzle-CAM incorporates <strong>reconstructing regularization</strong> with a <strong>puzzle module</strong> that splits the image and merges the CAMs of its patches, to effectively enhance the quality of CAMs without adding layers.</p>
+            </div>
+            <div class="contrib-card" data-animate data-delay="200">
+                <div class="contrib-number">RESULTS</div>
+                <h3>State-of-the-Art Results</h3>
+                <p>Puzzle-CAM outperformed existing state-of-the-art methods with the same level of supervision on the PASCAL VOC 2012 dataset, reaching <strong>71.9%</strong> mIoU on the val set and <strong>72.2%</strong> on the test set.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Method ===== -->
+<section class="section section-tint" id="method">
+    <div class="container">
+        <h2 class="section-title" data-animate><span class="section-number">3</span>Method</h2>
+        <p class="section-lead" data-animate>
+            Puzzle-CAM is a Siamese network with a <strong>shared backbone</strong>: one branch takes the original image, the other takes its tiled patches,
+            and the loss functions <strong>match the CAMs</strong> generated from the tiled image with those of the original image.
+        </p>
+
+        <div class="figure-block" data-animate>
+            <div class="figure-frame">
+                <img src="static/images/method_overview.png" alt="Overall architecture of Puzzle-CAM: the original image and its tiled patches pass through a shared backbone, the merging module joins the patch CAMs, and classification and reconstruction losses are applied">
+            </div>
+            <p class="figure-caption">
+                <strong>The overall architecture of Puzzle-CAM.</strong>
+                The puzzle module tiles the image, generates the CAMs of the patches with the shared backbone, and merges them.
+                The reconstruction loss matches the merged CAM with the CAM of the original image, and both CAMs pass through global average pooling (GAP) for classification.
+            </p>
+        </div>
+
+        <!-- Method Steps -->
+        <div class="method-steps">
+            <div class="method-step" data-animate>
+                <div class="step-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+                </div>
+                <div class="step-content">
+                    <h3>The Puzzle Module: Tiling and Merging</h3>
+                    <p>From an input image <em>I</em> of size <em>W</em> &times; <em>H</em>, the tiling module generates four non-overlapping patches of size <em>W</em>/2 &times; <em>H</em>/2, and CAMs are generated for each patch. The merging module then attaches them into a single set of CAMs <em>A</em><sup>re</sup> that has the same shape as <em>A</em><sup>s</sup>, the CAMs of <em>I</em>.</p>
+                </div>
+            </div>
+            <div class="method-step" data-animate>
+                <div class="step-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.6 13.4l-7.2 7.2a2 2 0 0 1-2.8 0L2 12V2h10l8.6 8.6a2 2 0 0 1 0 2.8z"/><circle cx="7" cy="7" r="1.5"/></svg>
+                </div>
+                <div class="step-content">
+                    <h3>Classification Losses on Both CAMs</h3>
+                    <p>A GAP layer converts the CAMs of the original and the tiled images into prediction vectors, and a multi-label soft margin loss is applied to each: <em>L</em><sub>cls</sub> for the original image and <em>L</em><sub>p&minus;cls</sub> for the reconstructed one. The two classification losses roughly estimate the region of the object.</p>
+                </div>
+            </div>
+            <div class="method-step" data-animate>
+                <div class="step-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 1l4 4-4 4"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><path d="M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
+                </div>
+                <div class="step-content">
+                    <h3>Reconstructing Regularization</h3>
+                    <p>The reconstruction loss <em>L</em><sub>re</sub> is the L1 distance between <em>A</em><sup>s</sup> and <em>A</em><sup>re</sup>. It reinforces the CAMs from the original image and narrows the gap between pixel-level and image-level supervision. The final loss is <em>L</em>&nbsp;=&nbsp;<em>L</em><sub>cls</sub>&nbsp;+&nbsp;<em>L</em><sub>p&minus;cls</sub>&nbsp;+&nbsp;&alpha;<em>L</em><sub>re</sub>, where &alpha; is linearly ramped up to its maximum of 4. During inference, the classifier is used without the puzzle module.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Results ===== -->
+<section class="section" id="results">
+    <div class="container">
+        <h2 class="section-title" data-animate><span class="section-number">4</span>Results</h2>
+        <p class="section-lead" data-animate>
+            Puzzle-CAM is evaluated on the PASCAL VOC 2012 dataset. AffinityNet is trained on the CAMs of Puzzle-CAM to synthesize pseudo-labels,
+            which then train a DeepLabv3+ segmentation model in full supervision mode.
+        </p>
+
+        <!-- Highlight Numbers -->
+        <div class="results-highlights" data-animate>
+            <div class="highlight-card">
+                <div class="highlight-value">71.9%</div>
+                <div class="highlight-metric">PASCAL VOC 2012 val</div>
+                <div class="highlight-desc">segmentation mIoU with the ResNeSt-269 backbone</div>
+            </div>
+            <div class="highlight-card">
+                <div class="highlight-value">72.2%</div>
+                <div class="highlight-metric">PASCAL VOC 2012 test</div>
+                <div class="highlight-desc">segmentation mIoU with image-level labels only</div>
+            </div>
+            <div class="highlight-card">
+                <div class="highlight-value">74.67%</div>
+                <div class="highlight-metric">Pseudo-labels</div>
+                <div class="highlight-desc">mIoU on the PASCAL VOC 2012 train set</div>
+            </div>
+            <div class="highlight-card">
+                <div class="highlight-value">+3.71</div>
+                <div class="highlight-metric">ResNet-50 ablation</div>
+                <div class="highlight-desc">CAM mIoU over the baseline, 47.82% to 51.53%</div>
+            </div>
+        </div>
+
+        <div class="figure-block" data-animate>
+            <h3>Comparison with Existing State-of-the-Art Methods</h3>
+            <div class="figure-frame">
+                <img class="fit" style="--w:62%" src="static/images/table_main.png" alt="Table comparing Puzzle-CAM with AffinityNet, DSRG, SeeNet, IRNet, FickleNet, ICD and SEAM on the PASCAL VOC 2012 val and test sets">
+            </div>
+            <p class="figure-caption">
+                <strong>Comparison on the PASCAL VOC 2012 val and test sets (mIoU).</strong>
+                Puzzle-CAM reaches 66.9 on val and 67.7 on test with ResNeSt-101, and 71.9 and 72.2 with ResNeSt-269, using image-level labels only.
+                <em>I</em>: image-level labels. <em>S</em>: external saliency models.
+            </p>
+        </div>
+
+        <div class="figure-block" data-animate>
+            <h3>Qualitative Segmentation Results</h3>
+            <div class="figure-frame">
+                <img class="fit" style="--w:70%" src="static/images/qualitative.jpg" alt="Six PASCAL VOC 2012 val images with their ground-truth masks and the masks predicted by the segmentation model trained with Puzzle-CAM pseudo-labels">
+            </div>
+            <p class="figure-caption">
+                <strong>Qualitative segmentation results on the PASCAL VOC 2012 val set.</strong>
+                Top: original images. Middle: ground truth. Bottom: prediction of the segmentation model trained using the pseudo-labels from Puzzle-CAM.
+                The proposed method worked well on both large and small objects.
+            </p>
+        </div>
+
+        <div class="figure-block" data-animate>
+            <h3>Quality of the Pseudo-Labels</h3>
+            <div class="figure-frame">
+                <img class="fit" style="--w:62%" src="static/images/table_pseudo_labels.png" alt="Table of pseudo-label quality in mIoU for AffinityNet with ResNet-50 and Puzzle-CAM with ResNet-50, ResNeSt-50, ResNeSt-101 and ResNeSt-269: CAM, CAM with random walk, and CAM with random walk and dense CRF">
+            </div>
+            <p class="figure-caption">
+                <strong>Quality of the pseudo semantic segmentation labels in mIoU on the PASCAL VOC 2012 training set.</strong>
+                With the same ResNet-50 backbone, Puzzle-CAM improves the CAMs of the AffinityNet baseline from 47.82% to 51.53%, and with ResNeSt-269 the final pseudo-labels reach 74.67%.
+                RW: random walk with AffinityNet. dCRF: dense conditional random field.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Ablation ===== -->
+<section class="section section-tint" id="ablation">
+    <div class="container">
+        <h2 class="section-title" data-animate><span class="section-number">5</span>Ablation Study</h2>
+
+        <div class="figure-block" data-animate>
+            <h3>Loss Functions</h3>
+            <div class="figure-frame">
+                <img class="fit" style="--w:62%" src="static/images/table_ablation.png" alt="Ablation table of the Puzzle-CAM loss functions with ResNet-50: classification loss only 47.82, with patch classification loss 47.70, with reconstruction loss 49.21, with all three 51.53 mIoU">
+            </div>
+            <p class="figure-caption">
+                <strong>Ablation of the Puzzle-CAM loss functions with ResNet-50 as the backbone.</strong>
+                The reconstructing regularization <em>L</em><sub>re</sub> boosts the baseline from 47.82% to 49.21% mIoU, while the classification loss from the tiled patches <em>L</em><sub>p&minus;cls</sub> alone is similar to the baseline.
+                Using both improves the baseline by 3.71, to 51.53%.
+            </p>
+        </div>
+
+        <div class="figure-block" data-animate>
+            <h3>Effect of Each Loss on the CAMs</h3>
+            <div class="figure-frame">
+                <img class="fit" style="--w:60%" src="static/images/ablation_cams.jpg" alt="Prediction tags and CAMs of one image for four loss combinations: (a) classification loss, (b) with patch classification loss, (c) with reconstruction loss, (d) all three losses">
+            </div>
+            <p class="figure-caption">
+                <strong>Prediction tags and CAMs by combinations of loss functions.</strong>
+                With only <em>L</em><sub>re</sub> added in (c), localization improves for some classes but several classes are no longer predicted.
+                With all losses in (d), the final CAMs not only suppress over-activation but also expand into complete object activation coverage.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- ===== BibTeX ===== -->
+<section class="section" id="bibtex">
+    <div class="container">
+        <h2 class="section-title" data-animate><span class="section-number">6</span>Citation</h2>
+        <div class="bibtex-block" data-animate>
+            <div class="bibtex-header">
+                <span>BibTeX</span>
+                <button class="copy-btn" onclick="copyBibtex()">
+                    <i class="fa-regular fa-copy"></i>
+                    <span>Copy</span>
+                </button>
+            </div>
+            <pre class="bibtex-code" id="bibtexCode">@inproceedings{jo2021puzzlecam,
+  title     = {Puzzle-CAM: Improved localization via matching partial and full features},
+  author    = {Jo, Sanghyun and Yu, In-Jae},
+  booktitle = {2021 IEEE International Conference on Image Processing (ICIP)},
+  year      = {2021},
+  pages     = {639-643},
+  doi       = {10.1109/ICIP42928.2021.9506058}
+}</pre>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Footer ===== -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-left">
+                <span class="footer-logo">Puzzle-CAM</span>
+                <span class="footer-venue">ICIP 2021 &middot; arXiv:2101.11253</span>
+            </div>
+            <div class="footer-right">
+                Template inspired by <a href="https://nerfies.github.io" target="_blank">Nerfies</a> &middot; <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">CC BY-SA 4.0</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script>
+// ===== Copy BibTeX =====
+function copyBibtex() {
+    const text = document.getElementById('bibtexCode').textContent;
+    navigator.clipboard.writeText(text).then(() => {
+        const btn = document.querySelector('.copy-btn span');
+        btn.textContent = 'Copied!';
+        setTimeout(() => btn.textContent = 'Copy', 2000);
+    });
+}
+
+// ===== Floating Nav =====
+const nav = document.getElementById('floatingNav');
+window.addEventListener('scroll', () => {
+    nav.classList.toggle('visible', window.scrollY > 520);
+});
+
+// ===== Scroll Animations =====
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const delay = entry.target.dataset.delay || 0;
+            setTimeout(() => {
+                entry.target.classList.add('animate-in');
+            }, parseInt(delay));
+            observer.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('[data-animate]').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>

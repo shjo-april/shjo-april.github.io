@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/img/site-logo/favicon_32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="../assets/img/site-logo/favicon_48.png">
+    <link rel="apple-touch-icon" href="../assets/img/site-logo/apple_touch_180.png">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DHR: Dual Features-Driven Hierarchical Rebalancing in Inter- and Intra-Class Regions for Weakly-Supervised Semantic Segmentation</title>
+    <meta name="description" content="DHR: a seed propagation method for weakly-supervised semantic segmentation that restores vanished minor classes by rebalancing inter-class regions with unsupervised features and intra-class regions with weakly-supervised features. ECCV 2024.">
+    <meta name="keywords" content="DHR, weakly-supervised semantic segmentation, WSS, unsupervised semantic segmentation, optimal transport, seed propagation, pseudo masks, ECCV 2024">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="DHR: Dual Features-Driven Hierarchical Rebalancing in Inter- and Intra-Class Regions for Weakly-Supervised Semantic Segmentation">
+    <meta property="og:description" content="Adjacent minor classes vanish from weakly-supervised pseudo masks. DHR restores them by rebalancing inter-class regions with unsupervised features and intra-class regions with weakly-supervised features. ECCV 2024.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://shjo-april.github.io/DHR/">
+    <meta property="og:image" content="https://shjo-april.github.io/assets/img/DHR.png">
+    <meta property="og:image:width" content="1527">
+    <meta property="og:image:height" content="593">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <!-- Academicons & Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.4/css/academicons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <link rel="stylesheet" href="static/css/style.css">
+</head>
+<body>
+
+<!-- ===== Floating Nav ===== -->
+<nav class="floating-nav" id="floatingNav">
+    <div class="nav-inner">
+        <span class="nav-logo">DHR</span>
+        <div class="nav-links">
+            <a href="#abstract">Abstract</a>
+            <a href="#method">Method</a>
+            <a href="#results">Results</a>
+            <a href="#analysis">Analysis</a>
+            <a href="#bibtex">BibTeX</a>
+        </div>
+    </div>
+</nav>
+
+<!-- ===== Hero: title panel ===== -->
+<header class="hero">
+    <div class="container">
+        <div class="hero-card">
+            <div class="venues">
+                <span class="venue-badge plain"><span class="venue-name">ECCV 2024</span></span>
+            </div>
+
+            <h1 class="hero-title">DHR</h1>
+            <!-- word joiners () and no-break spaces keep the hyphenated compounds whole when the title wraps -->
+            <p class="hero-sub"><span class="phrase">Dual Features-Driven Hierarchical Rebalancing in Inter- and Intra-Class Regions</span> <span class="phrase">for Weakly-Supervised Semantic Segmentation</span></p>
+
+            <!-- Authors -->
+            <div class="authors">
+                <span class="author"><a href="https://shjo-april.github.io/" target="_blank">Sanghyun Jo</a><sup>1</sup></span>
+                <span class="author">Fei Pan<sup>2</sup></span>
+                <span class="author">In-Jae Yu<sup>3</sup></span>
+                <span class="author"><a href="https://aibl.snu.ac.kr/pi-information" target="_blank">Kyungsu Kim</a><sup>4,&#8224;</sup></span>
+            </div>
+
+            <!-- Affiliations -->
+            <div class="affils">
+                <span class="affil"><sup>1</sup><img src="static/images/ogq.png" srcset="static/images/ogq.png 1x, static/images/ogq_2x.png 2x" width="82" height="26" alt="OGQ"></span>
+                <span class="affil"><sup>2</sup><img src="static/images/umich.png" srcset="static/images/umich.png 1x, static/images/umich_2x.png 2x" width="212" height="26" alt="University of Michigan"></span>
+                <span class="affil"><sup>3</sup><img src="static/images/samsung.png" srcset="static/images/samsung.png 1x, static/images/samsung_2x.png 2x" width="104" height="16" alt="Samsung"><span>Electronics</span></span>
+                <span class="affil long"><sup>4</sup><img src="static/images/mgh.png" srcset="static/images/mgh.png 1x, static/images/mgh_2x.png 2x" width="34" height="40" alt=""><span>Massachusetts General Hospital</span><span class="and">and</span><img src="static/images/hms.png" srcset="static/images/hms.png 1x, static/images/hms_2x.png 2x" width="35" height="40" alt=""><span>Harvard Medical School</span></span>
+            </div>
+            <div class="author-note"><span><sup>&#8224;</sup> Corresponding author</span></div>
+
+            <!-- Action Buttons -->
+            <div class="hero-actions">
+                <a href="https://www.ecva.net/papers/eccv_2024/papers_ECCV/papers/10547.pdf" target="_blank" class="btn btn-primary">
+                    <i class="fa-solid fa-file-pdf"></i><span>Paper</span>
+                </a>
+                <a href="https://arxiv.org/abs/2404.00380" target="_blank" class="btn btn-secondary">
+                    <i class="ai ai-arxiv"></i><span>arXiv</span>
+                </a>
+                <a href="https://github.com/shjo-april/DHR" target="_blank" class="btn btn-secondary">
+                    <i class="fa-brands fa-github"></i><span>Code</span>
+                </a>
+                <a href="https://eccv.ecva.net/media/PosterPDFs/ECCV%202024/2631.png?t=1726192568.1728678" target="_blank" class="btn btn-secondary">
+                    <i class="fa-solid fa-image"></i><span>Poster</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- ===== Teaser ===== -->
+<section class="section section-tight">
+    <div class="container">
+        <div class="figure-block" data-animate>
+            <div class="figure-frame">
+                <img class="fit" style="--w:89%" src="static/images/teaser.png" alt="Left: for one image and its tags, the outputs of Grounding DINO (233MB, box labels), Ferret (13,370MB, LLM prior) and the WSS model DHR (59MB, tags only), before and after HQ-SAM refinement, next to the ground truth. Right: scatter plot of PASCAL VOC 2012 mIoU against MS COCO 2014 mIoU, where DHR with and without SAM lies above the WSS models MARS, WeakTr, CLIP-ES and ToCo and the generalist models Ferret with SAM and Grounded SAM">
+            </div>
+            <p class="figure-caption">
+                <strong>WSS with image-level tags outperforms large-scale vision models.</strong>
+                (a) With only image-level supervision and 25% of the parameters, DHR outperforms large-scale vision models (Grounded&nbsp;SAM, Ferret), bypassing the need for extensive human annotations (image, text, and box pairs).
+                (b) DHR exceeds Grounded&nbsp;SAM, Ferret, and recent WSS models (MARS, CLIP-ES, ToCo, WeakTr) on the PASCAL&nbsp;VOC&nbsp;2012 and MS&nbsp;COCO&nbsp;2014 benchmarks.
+            </p>
+        </div>
+
+        <div class="insight" data-animate>
+            <div class="insight-label">Key Insight</div>
+            <p class="insight-text">
+                Conventional seed propagation overlooks class ratios: adjacent pixels from distinct classes merge, and <strong>spatially minor classes vanish</strong> from the pseudo masks.
+                Unsupervised (USS) features distinguish inter-class regions with dissimilar appearances (person vs.&nbsp;motorbike),
+                while weakly-supervised (WSS) features discern visually similar classes within the same inter-class region (dog vs.&nbsp;cat).
+                <strong>DHR rebalances the mask hierarchically</strong>, first across inter-class regions with USS features and then across intra-class regions with WSS features,
+                restoring all classes without losing minor ones.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Motivation ===== -->
+<section class="section section-tint">
+    <div class="container">
+        <h2 class="section-title" data-animate>Motivation</h2>
+        <p class="section-lead" data-animate>
+            Weakly-supervised semantic segmentation (WSS) generates pseudo masks from image-level tags by propagating initial class activation maps (CAMs).
+            Comparing WSS predictions with ground-truth masks uncovers a significant challenge: <strong>adjacent pixels from distinct classes often merge</strong>,
+            and the spatially minor class disappears. On the VOC dataset, adjacent regions constitute 35% of the total area, with 79% being inter-class regions,
+            while the COCO dataset has 75% adjacent regions, 55% of which are inter-class.
+        </p>
+        <div class="figure-block" data-animate>
+            <div class="figure-frame">
+                <img class="fit" style="--w:90%" src="static/images/motivation.jpg" alt="Two examples (a bottle held next to sheep and people, a person on a motorbike) with the image, the ground truth and the masks of ToCo, MARS, DHR and DHR with SAM: red boxes mark the minor class missing in ToCo and MARS, green boxes mark the same class restored by DHR">
+            </div>
+            <p class="figure-caption">
+                <strong>Vanishing problem of adjacent minor classes in WSS outputs.</strong>
+                Red boxes mark the false prediction of minor classes (e.g., bottle and person) in pseudo labels generated from WSS.
+                Green boxes highlight DHR outperforming state-of-the-art baselines (ToCo, MARS) in adjacent class regions.
+            </p>
+        </div>
+        <div class="contributions-grid cols-2">
+            <div class="contrib-card" data-animate data-delay="0">
+                <div class="contrib-number">USS FEATURES</div>
+                <h3>Separate Inter-Class Regions</h3>
+                <p>Unsupervised semantic segmentation (USS) methods learn visual similarities such as color and shape between images without tags, which lets them distinguish inter-class regions with dissimilar appearances (person vs.&nbsp;motorbike).</p>
+            </div>
+            <div class="contrib-card" data-animate data-delay="100">
+                <div class="contrib-number">WSS FEATURES</div>
+                <h3>Separate Intra-Class Regions</h3>
+                <p>WSS methods learn class-specific differences with human-annotated tags, which lets them discern visually similar classes (dog vs.&nbsp;cat) within the same inter-class region (animals).</p>
+            </div>
+        </div>
+        <div class="figure-block" data-animate>
+            <div class="figure-frame">
+                <img class="fit" style="--w:80%" src="static/images/features.jpg" alt="Cosine-similarity heatmaps of WSS and USS features for a clicked point. (a) Motorbike and person points: the WSS heatmaps fail to separate the two, the USS heatmaps succeed. (b) Cat and dog points: the WSS heatmaps separate the two animals, the USS heatmaps cover both">
+            </div>
+            <p class="figure-caption">
+                <strong>Heatmaps of WSS and USS features with target points.</strong>
+                (a) USS features precisely separate inter-class regions (person vs.&nbsp;motorbike), unlike WSS features.
+                (b) Thanks to training with image-level class labels, WSS features discern specific classes (dog vs.&nbsp;cat) in the same inter-class region (animal).
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Abstract ===== -->
+<section class="section" id="abstract">
+    <div class="container">
+        <h2 class="section-title" data-animate><span class="section-number">1</span>Abstract</h2>
+        <div class="abstract-content" data-animate>
+            <p>
+                Weakly-supervised semantic segmentation (WSS) ensures high-quality segmentation with limited data and excels when employed as
+                input seed masks for large-scale vision models such as Segment Anything. However, WSS faces challenges related to
+                <strong>minor classes</strong> since those are overlooked in images with adjacent multiple classes, a limitation originating from
+                the overfitting of traditional expansion methods like Random Walk.
+            </p>
+            <p>
+                We first address this by employing <strong>unsupervised and weakly-supervised feature maps</strong> instead of conventional
+                methodologies, allowing for <strong>hierarchical mask enhancement</strong>. This method distinctly categorizes higher-level classes
+                and subsequently separates their associated lower-level classes, ensuring all classes are correctly restored in the mask without
+                losing minor ones.
+            </p>
+            <p>
+                Our approach, validated through extensive experimentation, significantly improves WSS across five benchmarks
+                (<strong>VOC: 79.8%, COCO: 53.9%, Context: 49.0%, ADE: 32.9%, Stuff: 37.4%</strong>), reducing the gap with fully supervised
+                methods by <strong>over 84%</strong> on the VOC validation set. Code is available at
+                <a href="https://github.com/shjo-april/DHR" target="_blank">https://github.com/shjo-april/DHR</a>.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Contributions ===== -->
+<section class="section section-tint">
+    <div class="container">
+        <h2 class="section-title" data-animate><span class="section-number">2</span>Contributions</h2>
+        <div class="contributions-grid">
+            <div class="contrib-card" data-animate data-delay="0">
+                <div class="contrib-number">PROBLEM</div>
+                <h3>Vanishing Minor Classes</h3>
+                <p>We identify and tackle the issue of <strong>minor classes disappearing</strong> in WSS: adjacent pixels from distinct classes merge during propagation, and the spatially minor class is lost from the pseudo mask.</p>
+            </div>
+            <div class="contrib-card" data-animate data-delay="100">
+                <div class="contrib-number">METHOD</div>
+                <h3>Hierarchical Rebalancing</h3>
+                <p>DHR enhances class distinction through <strong>seed initialization based on optimal transport</strong>, then leverages <strong>USS and WSS features</strong> to separate inter- and intra-class regions.</p>
+            </div>
+            <div class="contrib-card" data-animate data-delay="200">
+                <div class="contrib-number">RESULTS</div>
+                <h3>Five Benchmarks</h3>
+                <p>DHR achieves a state-of-the-art mIoU of <strong>79.8%</strong> on the PASCAL&nbsp;VOC&nbsp;2012 test set, proves effective as a seeding technique for SAM, and is evaluated with recent WSS methods on three additional benchmarks (Context, ADE, Stuff).</p>
+            </div>
+        </div>
+
+        <div class="figure-block" data-animate>
+            <h3>How DHR Differs</h3>
+            <div class="figure-frame">
+                <img src="static/images/table_concept.png" alt="Table comparing ACR, ToCo, WeakTr, CLIP-ES, QA-CLIMS, FMA, MARS and DHR on five properties: solving the vanishing issue of adjacent minor classes, utilizing WSS features, utilizing USS features, no external datasets and models, and following a model-agnostic manner. Only DHR has all five">
+            </div>
+            <p class="figure-caption">
+                <strong>Conceptual comparison with recent approaches.</strong>
+                DHR is the only method in the comparison that solves the vanishing issue of adjacent minor classes. It utilizes both WSS and USS features to improve WSS masks, needs no external datasets or models, and follows a model-agnostic manner.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Method ===== -->
+<section class="section" id="method">
+    <div class="container">
+        <h2 class="section-title" data-animate><span class="section-number">3</span>Method</h2>
+        <p class="section-lead" data-animate>
+            To integrate easily with other WSS methods, DHR <strong>refines pre-propagated WSS masks</strong> during the segmentation learning phase
+            rather than replacing existing propagation tools. It comprises three steps, and the rebalanced masks train the segmentation model recursively.
+        </p>
+
+        <div class="figure-block" data-animate>
+            <div class="figure-frame">
+                <img class="fit" style="--w:90%" src="static/images/method_overview.png" alt="Overview of DHR: a frozen USS encoder and a learnable WSS encoder and decoder process the input image; the input WSS mask goes through OT-based seed initialization (Step 1, for vanished minor classes), USS rebalancing (Step 2, for inter-class regions) and WSS rebalancing (Step 3, for intra-class regions), and the resulting mask supervises the segmentation loss next to the classification loss">
+            </div>
+            <p class="figure-caption">
+                <strong>Overview of DHR.</strong>
+                The framework unfolds in three steps. It recovers vanished classes by replacing pixels of the input WSS mask with OT-based CAMs for seed initialization.
+                It then propagates the restored seeds hierarchically, using unsupervised feature maps for inter-class segregation (e.g., kitchenware)
+                and weakly-supervised features for intra-class differentiation (e.g., bottle and cup). Finally, the balanced masks are used to train the segmentation model recursively.
+            </p>
+        </div>
+
+        <!-- Method Steps -->
+        <div class="method-steps">
+            <div class="method-step" data-animate>
+                <div class="step-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/></svg>
+                </div>
+                <div class="step-content">
+                    <h3>Step 1: Optimal Transport-based Seed Initialization</h3>
+                    <p>To restore minor-class regions that vanish during the traditional propagation process, DHR revisits the CAMs utilized before the propagation. Optimal transport (OT) minimizes the occurrence of false positives in regions adjacent to the target classes, and the recovered minor-class regions are integrated with the input WSS mask to initialize the mask.</p>
+                </div>
+            </div>
+            <div class="method-step" data-animate>
+                <div class="step-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+                </div>
+                <div class="step-content">
+                    <h3>Step 2: USS Feature-based Rebalancing for Inter-class Regions</h3>
+                    <p>Class-level average pooling of the unsupervised feature map with the initial mask produces a USS centroid for each class. Clustering the pixels around these centroids by cosine similarity, followed by OT-based optimization, aids the distinct categorization of inter-class regions (e.g., kitchenware and furniture).</p>
+                </div>
+            </div>
+            <div class="method-step" data-animate>
+                <div class="step-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                </div>
+                <div class="step-content">
+                    <h3>Step 3: WSS Feature-based Rebalancing for Intra-class Regions</h3>
+                    <p>WSS centroids are generated in the same way from the weakly-supervised feature map, and the WSS-based clustered mask refines the USS-based mask for precise intra-class segregation. A pruning operator applies WSS rebalancing only to highly correlated USS centroids (similarity above &tau;), that is, to classes that USS cannot distinguish.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="figure-block" data-animate>
+            <h3>Hierarchical Clustering with Dual Features</h3>
+            <div class="figure-frame">
+                <img class="fit" style="--w:80%" src="static/images/hierarchy.png" alt="Left: correlation matrix of USS features between object classes, in which three blocks stand out: vehicle, animal and indoor thing. Right: tree in which USS clustering forms the inter classes vehicle, animal and indoor, and WSS clustering separates the intra classes of each, such as boat, bus, car, train, bicycle and bike under vehicle">
+            </div>
+            <p class="figure-caption">
+                <strong>Conceptual illustration of the hierarchical clustering.</strong>
+                Left: the USS feature correlation automatically groups inter classes.
+                Right: USS features categorize all inter classes (e.g., vehicle and animal), and WSS features then separate the intra classes (e.g., car and bus) of each inter class (e.g., vehicle).
+            </p>
+        </div>
+
+        <div class="figure-block" data-animate>
+            <h3>Step 1: Recovering Minor-Class Regions</h3>
+            <div class="figure-frame">
+                <img class="fit" style="--w:90%" src="static/images/ot_seed.png" alt="(a) CAMs of bicycle and bottle without OT, the optimal transport matrix, and the CAMs with OT, where the false positives in the adjacent class are reduced. (b) The input WSS mask of a motorbike image misses the rider; the OT seed replaces pixels of the mask, and the initialized mask restores the person region">
+            </div>
+            <p class="figure-caption">
+                <strong>Recovering minor-class regions from CAMs with OT.</strong>
+                (a) OT reduces false positives in adjacent class regions (e.g., bottle vs.&nbsp;bicycle).
+                (b) The input WSS mask often misses most minor-class areas (the person in the red box). Refining CAM seeds with OT eliminates overlapping areas and restores the minor-class regions that had vanished, as indicated in the green box.
+            </p>
+        </div>
+
+        <div class="figure-block" data-animate>
+            <h3>Steps 2 and 3: Hierarchical Rebalancing</h3>
+            <div class="figure-frame">
+                <img class="fit" style="--w:90%" src="static/images/rebalancing.png" alt="Diagram of hierarchical rebalancing: class-level average pooling turns WSS and USS features into class centroids, pixel-wise cosine similarity gives the WSS and USS maps, the USS correlation matrix thresholded by tau selects the classes to cluster for WSS rebalancing, and Step 2 (USS rebalancing), Step 3 (WSS rebalancing with the OT plan) and CRF produce the result mask">
+            </div>
+            <p class="figure-caption">
+                <strong>Hierarchical rebalancing based on dual features.</strong>
+                Starting from the initialized seeds with restored minor-class regions, USS features are used for inter-class grouping, and WSS features are then applied for intra-class separation within each inter-class region.
+                WSS rebalancing is applied conditionally, to classes with high USS correlation that USS cannot distinguish.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Results ===== -->
+<section class="section section-tint" id="results">
+    <div class="container">
+        <h2 class="section-title" data-animate><span class="section-number">4</span>Results</h2>
+
+        <!-- Highlight Numbers -->
+        <div class="results-highlights" data-animate>
+            <div class="highlight-card">
+                <div class="highlight-value">79.8%</div>
+                <div class="highlight-metric">PASCAL&nbsp;VOC&nbsp;2012 test</div>
+                <div class="highlight-desc">mIoU with ResNet-101, image-level labels only</div>
+            </div>
+            <div class="highlight-card">
+                <div class="highlight-value">53.9%</div>
+                <div class="highlight-metric">MS&nbsp;COCO&nbsp;2014 val</div>
+                <div class="highlight-desc">mIoU in the same setting, 49.4% for MARS</div>
+            </div>
+            <div class="highlight-card">
+                <div class="highlight-value">84%</div>
+                <div class="highlight-metric">Gap reduction</div>
+                <div class="highlight-desc">gap with fully supervised methods on the VOC validation set</div>
+            </div>
+            <div class="highlight-card">
+                <div class="highlight-value">5</div>
+                <div class="highlight-metric">Benchmarks</div>
+                <div class="highlight-desc">VOC, COCO, Context, ADE, and Stuff</div>
+            </div>
+        </div>
+
+        <div class="figure-block" data-animate>
+            <h3>Quantitative Comparison</h3>
+            <div class="figure-frame">
+                <img src="static/images/table_main.png" alt="Table of mIoU on VOC val and test, COCO, Context, ADE and Stuff for weakly-supervised segmentation models and open-vocabulary segmentation models. DHR with ResNet-101 and DeepLabv3+: 79.6, 79.8, 53.9, 49.0, 32.9, 37.4. DHR with Swin-L and Mask2Former: 82.3, 82.3, 56.8, 53.6, 36.9, 41.1. MARS: 77.7, 77.2, 49.4, 39.8, 22.0, 35.7">
+            </div>
+            <p class="figure-caption">
+                <strong>Performance comparison of WSS methods across five benchmarks (mIoU, %).</strong>
+                Depending solely on image-level supervision, DHR with ResNet-101 and DeepLabv3+ reaches 79.6 and 79.8 on the VOC val and test sets, surpassing MARS, the previous state of the art, by at least 1.9 in the same configuration.
+                With Swin-L and Mask2Former it reaches 82.3 on both sets. DHR also stays above the open-vocabulary models (MaskCLIP, TCL, Ferret with SAM, Grounded&nbsp;SAM) on all five benchmarks.
+            </p>
+        </div>
+
+        <div class="figure-block" data-animate>
+            <h3>Qualitative Comparison</h3>
+            <div class="figure-frame">
+                <img class="fit" style="--w:84%" src="static/images/qualitative.jpg" alt="One example each from VOC 2012, COCO 2014, Pascal Context, ADE 2016 and COCO-Stuff: image, ground truth, and the masks of TCL, Grounded SAM, ToCo, MARS and DHR for the listed tags">
+            </div>
+            <p class="figure-caption">
+                <strong>Qualitative comparison on the five benchmarks.</strong>
+                With the same tag inputs as TCL, Grounded&nbsp;SAM, ToCo, and MARS, DHR delineates the semantic boundaries between adjacent classes more accurately.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Analysis ===== -->
+<section class="section" id="analysis">
+    <div class="container">
+        <h2 class="section-title" data-animate><span class="section-number">5</span>Analysis</h2>
+
+        <div class="figure-block" data-animate>
+            <h3>Flexibility Across USS Methods</h3>
+            <div class="figure-frame">
+                <img class="fit" style="--w:86%" src="static/images/table_uss.png" alt="Table of mIoU on the PASCAL VOC 2012 validation set with ResNet-101: RSEPM 74.4, with MARS and STEGO 77.7 (+3.3), with DHR and STEGO 79.2 (+4.8), with DHR and CAUSE 79.6 (+5.2)">
+            </div>
+            <p class="figure-caption">
+                <strong>Two USS methods on the PASCAL&nbsp;VOC&nbsp;2012 validation set.</strong>
+                On the RSEPM baseline (74.4% mIoU), DHR gains +4.8 with STEGO and +5.2 with CAUSE: both USS methods give a comparable improvement of approximately 5%.
+            </p>
+        </div>
+
+        <div class="figure-block" data-animate>
+            <h3>Flexibility Across WSS Methods</h3>
+            <div class="figure-frame">
+                <img src="static/images/table_wss.png" alt="Table of mIoU and gap reduction on the PASCAL VOC 2012 validation set for four WSS methods with and without model-agnostic add-ons. IRNet 63.5, with DHR 72.7 (72%). SEAM 64.5, with DHR 73.6 (67%). AdvCAM 68.1, with DHR 73.6 (56%). RSEPM 74.4, with DHR 79.6 (84%)">
+            </div>
+            <p class="figure-caption">
+                <strong>Four WSS methods on the PASCAL&nbsp;VOC&nbsp;2012 validation set.</strong>
+                &Delta; is the percentage improvement in the gap between WSS and fully supervised segmentation (FSS).
+                On IRNet, SEAM, AdvCAM, and RSEPM alike, DHR outperforms the other model-agnostic approaches (ADELE, W-OoD, MARS) and reduces the gap by 56% to 84%.
+            </p>
+        </div>
+
+        <div class="figure-block" data-animate>
+            <h3>Effect of Key Components</h3>
+            <div class="figure-frame">
+                <img src="static/images/table_components.png" alt="Table of pseudo-mask mIoU on the VOC, COCO, Context, ADE and Stuff training sets. Baseline: 81.8, 52.6, 51.3, 30.2, 50.0. With OT-based seed initialization: 82.6, 55.1, 53.6, 32.4, 50.6. With OT-based seed initialization and DHR: 83.9, 58.6, 64.9, 48.1, 53.7">
+            </div>
+            <p class="figure-caption">
+                <strong>Quality of pseudo masks (mIoU) on all training datasets.</strong>
+                OT-based seed initialization alone enhances the performance by recovering vanished classes, and adding DHR has a notably larger effect.
+                On Context and ADE, which are composed solely of adjacent classes, the improvement is at least 13.6.
+            </p>
+        </div>
+
+        <div class="figure-block" data-animate>
+            <h3>Detailed Ablation on MS&nbsp;COCO&nbsp;2014</h3>
+            <div class="figure-frame">
+                <img src="static/images/table_ablation.png" alt="Ablation table on the MS COCO 2014 training dataset: baseline 52.6; optimal transport 54.3; refinement 53.4; both 55.1; adding USS balancing 56.8; adding WSS balancing only 55.3; USS and WSS balancing together 58.6 mIoU">
+            </div>
+            <p class="figure-caption">
+                <strong>Each component on the MS&nbsp;COCO&nbsp;2014 training dataset.</strong>
+                Optimal transport with CRF refinement for seed initialization adds +2.5 over the baseline (MARS, 52.6).
+                USS balancing followed by WSS balancing reaches +6.0, above USS balancing alone (+4.2) and WSS balancing alone (+2.7), which supports the sequential application of USS followed by WSS.
+            </p>
+        </div>
+
+        <div class="figure-block" data-animate>
+            <h3>Sensitivity to the Hyperparameter &tau;</h3>
+            <div class="figure-frame">
+                <img class="fit" style="--w:59%" src="static/images/tau.png" alt="Line chart of pseudo-mask mIoU on the COCO training dataset for tau from 0.5 to 1.0: DHR stays above 58 from 0.5 to 0.9 and drops to about 57 at 1.0, while the baseline is a flat line below 53">
+            </div>
+            <p class="figure-caption">
+                <strong>Sensitivity to &tau; on the COCO training dataset.</strong>
+                Setting &tau; to 1.0, which bypasses WSS balancing, results in only a slight improvement over the baseline (red line).
+                Adjusting &tau; between 0.5 and 0.9 has minimal impact on segmentation accuracy.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- ===== BibTeX ===== -->
+<section class="section section-tint" id="bibtex">
+    <div class="container">
+        <h2 class="section-title" data-animate><span class="section-number">6</span>Citation</h2>
+        <div class="bibtex-block" data-animate>
+            <div class="bibtex-header">
+                <span>BibTeX</span>
+                <button class="copy-btn" onclick="copyBibtex()">
+                    <i class="fa-regular fa-copy"></i>
+                    <span>Copy</span>
+                </button>
+            </div>
+            <pre class="bibtex-code" id="bibtexCode">@inproceedings{jo2024dhr,
+  title     = {DHR: Dual Features-Driven Hierarchical Rebalancing in Inter- and Intra-Class Regions for Weakly-Supervised Semantic Segmentation},
+  author    = {Jo, Sanghyun and Pan, Fei and Yu, In-Jae and Kim, Kyungsu},
+  booktitle = {European Conference on Computer Vision (ECCV)},
+  year      = {2024}
+}</pre>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Footer ===== -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-left">
+                <span class="footer-logo">DHR</span>
+                <span class="footer-venue">ECCV 2024 &middot; arXiv:2404.00380</span>
+            </div>
+            <div class="footer-right">
+                Template inspired by <a href="https://nerfies.github.io" target="_blank">Nerfies</a> &middot; <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">CC BY-SA 4.0</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script>
+// ===== Copy BibTeX =====
+function copyBibtex() {
+    const text = document.getElementById('bibtexCode').textContent;
+    navigator.clipboard.writeText(text).then(() => {
+        const btn = document.querySelector('.copy-btn span');
+        btn.textContent = 'Copied!';
+        setTimeout(() => btn.textContent = 'Copy', 2000);
+    });
+}
+
+// ===== Floating Nav =====
+const nav = document.getElementById('floatingNav');
+window.addEventListener('scroll', () => {
+    nav.classList.toggle('visible', window.scrollY > 520);
+});
+
+// ===== Scroll Animations =====
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const delay = entry.target.dataset.delay || 0;
+            setTimeout(() => {
+                entry.target.classList.add('animate-in');
+            }, parseInt(delay));
+            observer.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('[data-animate]').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>

@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/img/site-logo/favicon_32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="../assets/img/site-logo/favicon_48.png">
+    <link rel="apple-touch-icon" href="../assets/img/site-logo/apple_touch_180.png">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MARS: Model-agnostic Biased Object Removal without Additional Supervision for Weakly-Supervised Semantic Segmentation</title>
+    <meta name="description" content="MARS: a fully-automatic, model-agnostic framework that removes biased objects from the pseudo labels of weakly-supervised semantic segmentation with unsupervised semantic segmentation features, without additional supervision. ICCV 2023.">
+    <meta name="keywords" content="MARS, weakly-supervised semantic segmentation, WSSS, unsupervised semantic segmentation, USS, biased objects, pseudo labels, model-agnostic, ICCV 2023">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="MARS: Model-agnostic Biased Object Removal without Additional Supervision for Weakly-Supervised Semantic Segmentation">
+    <meta property="og:description" content="Biased objects, such as a railroad detected with the train class, are removed from WSSS pseudo labels by matching them with backgrounds in the same dataset through unsupervised features. No additional dataset or supervision. ICCV 2023.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://shjo-april.github.io/MARS/">
+    <meta property="og:image" content="https://shjo-april.github.io/assets/img/MARS.png">
+    <meta property="og:image:width" content="1618">
+    <meta property="og:image:height" content="977">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <!-- Academicons & Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.4/css/academicons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <link rel="stylesheet" href="static/css/style.css">
+</head>
+<body>
+
+<!-- ===== Floating Nav ===== -->
+<nav class="floating-nav" id="floatingNav">
+    <div class="nav-inner">
+        <span class="nav-logo">MARS</span>
+        <div class="nav-links">
+            <a href="#abstract">Abstract</a>
+            <a href="#method">Method</a>
+            <a href="#results">Results</a>
+            <a href="#analysis">Analysis</a>
+            <a href="#bibtex">BibTeX</a>
+        </div>
+    </div>
+</nav>
+
+<!-- ===== Hero: title panel ===== -->
+<header class="hero">
+    <div class="container">
+        <div class="hero-card">
+            <div class="venues">
+                <span class="venue-badge plain"><span class="venue-name">ICCV 2023</span></span>
+            </div>
+
+            <h1 class="hero-title">MARS</h1>
+            <p class="hero-sub">Model-agnostic Biased Object Removal without Additional Supervision for Weakly-Supervised Semantic Segmentation</p>
+
+            <!-- Authors -->
+            <div class="authors">
+                <span class="author"><a href="https://shjo-april.github.io/" target="_blank">Sanghyun Jo</a><sup>1</sup></span>
+                <span class="author">In-Jae Yu<sup>2</sup></span>
+                <span class="author"><a href="https://aibl.snu.ac.kr/pi-information" target="_blank">Kyungsu Kim</a><sup>3,&#8224;</sup></span>
+            </div>
+
+            <!-- Affiliations -->
+            <div class="affils">
+                <span class="affil"><sup>1</sup><img src="static/images/ogq.png" srcset="static/images/ogq.png 1x, static/images/ogq_2x.png 2x" width="82" height="26" alt="OGQ"></span>
+                <span class="affil"><sup>2</sup><img src="static/images/samsung.png" srcset="static/images/samsung.png 1x, static/images/samsung_2x.png 2x" width="104" height="16" alt="Samsung"><span>Electronics</span></span>
+                <span class="affil"><sup>3</sup><img src="static/images/skku.png" srcset="static/images/skku.png 1x, static/images/skku_2x.png 2x" width="158" height="40" alt="Sungkyunkwan University"></span>
+            </div>
+            <div class="author-note"><span><sup>&#8224;</sup> Corresponding author</span></div>
+
+            <!-- Action Buttons -->
+            <div class="hero-actions">
+                <a href="https://openaccess.thecvf.com/content/ICCV2023/papers/Jo_MARS_Model-agnostic_Biased_Object_Removal_without_Additional_Supervision_for_Weakly-Supervised_ICCV_2023_paper.pdf" target="_blank" class="btn btn-primary">
+                    <i class="fa-solid fa-file-pdf"></i><span>Paper</span>
+                </a>
+                <a href="https://arxiv.org/abs/2304.09913" target="_blank" class="btn btn-secondary">
+                    <i class="ai ai-arxiv"></i><span>arXiv</span>
+                </a>
+                <a href="https://github.com/shjo-april/MARS" target="_blank" class="btn btn-secondary">
+                    <i class="fa-brands fa-github"></i><span>Code</span>
+                </a>
+                <a href="https://openaccess.thecvf.com/content/ICCV2023/html/Jo_MARS_Model-agnostic_Biased_Object_Removal_without_Additional_Supervision_for_Weakly-Supervised_ICCV_2023_paper.html" target="_blank" class="btn btn-secondary">
+                    <i class="ai ai-open-access"></i><span>CVF</span>
+                </a>
+                <a href="./10811_MARS_poster.pdf" target="_blank" class="btn btn-secondary">
+                    <i class="fa-solid fa-image"></i><span>Poster</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- ===== Teaser ===== -->
+<section class="section section-tight">
+    <div class="container">
+        <div class="figure-block" data-animate>
+            <div class="figure-frame">
+                <img class="fit" style="--w:68%" src="static/images/teaser.png" alt="Analysis of the biased problem: FP and FN of WSSS methods against supervised learning, per-class FP, examples of biased objects in the boat and train classes, and the problematic classes of PASCAL VOC with their biased objects">
+            </div>
+            <p class="figure-caption">
+                <strong>The biased problem in weakly-supervised semantic segmentation (WSSS).</strong>
+                (a) The false positive (FP) is the most crucial bottleneck in narrowing the gap between WSSS and fully-supervised semantic segmentation (FSSS).
+                (b, c) FP grows when a target class such as boat or train is predicted together with a class-related object such as the sea or a railroad (red dotted circles).
+                (d) 35% of the classes in PASCAL VOC 2012 have such biased objects.
+            </p>
+        </div>
+
+        <div class="insight" data-animate>
+            <div class="insight-label">Key Insight</div>
+            <p class="insight-text">
+                Biased features can be separated and eliminated by <strong>matching biased objects with backgrounds in the same dataset</strong>.
+                Unsupervised semantic segmentation (USS) has fewer biased features than WSSS, because the bias issue is intrinsically linked to image-level supervision.
+                Clustering USS features inside each WSSS prediction separates the biased object from the target, and the one closer to the background regions of other images is the biased object.
+                MARS turns this into a fully-automatic removal of biased objects from pseudo labels, with <strong>no additional dataset or supervision</strong>.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Motivation ===== -->
+<section class="section section-tint">
+    <div class="container">
+        <h2 class="section-title" data-animate>Motivation</h2>
+        <p class="section-lead" data-animate>
+            Two earlier studies alleviate the biased problem, but both depend on additional supervision.
+            <strong>CLIMS</strong> uses the CLIP model, trained on 400 million image-text pairs, and needs the biased objects of every problematic class to be identified, such as a railroad for the train class.
+            <strong>W-OoD</strong> needs human annotators to collect additional images that contain only biased objects from the Open Images dataset.
+            These requirements hinder WSSS in the real world, where classes have complex relationships, and both methods share results only on PASCAL VOC 2012.
+        </p>
+        <div class="figure-block" data-animate>
+            <div class="figure-frame">
+                <img src="static/images/motivation.png" alt="Conceptual comparison of the requirements of CLIMS, W-OoD and MARS">
+            </div>
+            <p class="figure-caption">
+                <strong>Conceptual comparison of three WSSS requirements.</strong>
+                (a) CLIMS uses the knowledge of CLIP, trained on an image-text pairs dataset, after finding problematic classes and identifying their biased objects.
+                (b) For W-OoD, human annotators manually collect problematic images from the Open Images dataset to train biased objects directly.
+                (c) MARS applies an existing USS approach to remove biased objects without additional supervision.
+            </p>
+        </div>
+
+        <div class="figure-block" data-animate>
+            <h3>What Each Approach Requires</h3>
+            <div class="figure-frame">
+                <img class="fit" style="--w:62%" src="static/images/table_properties.png" alt="Table comparing the properties of CLIMS, W-OoD and MARS">
+            </div>
+            <p class="figure-caption">
+                <strong>Comparison with related debiasing methods.</strong>
+                All three remove biased objects, and W-OoD and MARS are model-agnostic. Only MARS needs none of the four requirements: an additional dataset, finding problematic classes, identifying biased objects and collecting problematic images.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Abstract ===== -->
+<section class="section" id="abstract">
+    <div class="container">
+        <h2 class="section-title" data-animate><span class="section-number">1</span>Abstract</h2>
+        <div class="abstract-content" data-animate>
+            <p>
+                Weakly-supervised semantic segmentation aims to reduce labeling costs by training semantic segmentation models using weak
+                supervision, such as image-level class labels. However, most approaches struggle to produce accurate localization maps and suffer
+                from <strong>false predictions in class-related backgrounds (i.e., biased objects)</strong>, such as detecting a railroad with the train class.
+                Recent methods that remove biased objects require additional supervision for manually identifying biased objects for each
+                problematic class and collecting their datasets by reviewing predictions, limiting their applicability to the real-world dataset
+                with multiple labels and complex relationships for biasing.
+            </p>
+            <p>
+                Following the first observation that biased features can be separated and eliminated by matching biased objects with backgrounds
+                in the same dataset, we propose a <strong>fully-automatic/model-agnostic biased removal framework</strong> called MARS
+                (<strong>M</strong>odel-<strong>A</strong>gnostic biased object <strong>R</strong>emoval without additional <strong>S</strong>upervision),
+                which utilizes semantically consistent features of an unsupervised technique to eliminate biased objects in pseudo labels.
+            </p>
+            <p>
+                Surprisingly, we show that MARS achieves new state-of-the-art results on two popular benchmarks, <strong>PASCAL VOC 2012 (val: 77.7%,
+                test: 77.2%)</strong> and <strong>MS COCO 2014 (val: 49.4%)</strong>, by consistently improving the performance of various WSSS models by at
+                least 30% without additional supervision. Code is available at <a href="https://github.com/shjo-april/MARS" target="_blank">https://github.com/shjo-april/MARS</a>.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Contributions ===== -->
+<section class="section section-tint">
+    <div class="container">
+        <h2 class="section-title" data-animate><span class="section-number">2</span>Contributions</h2>
+        <div class="contributions-grid">
+            <div class="contrib-card" data-animate data-delay="0">
+                <div class="contrib-number">OBSERVATION</div>
+                <h3>Two Observations on USS in WSSS</h3>
+                <p>Applying USS in WSSS finds biased objects automatically: <strong>USS-based feature clustering</strong> separates biased and target objects, and <strong>a new distance metric</strong> selects the biased object among the two isolated objects.</p>
+            </div>
+            <div class="contrib-card" data-animate data-delay="100">
+                <div class="contrib-number">METHOD</div>
+                <h3>Fully-Automatic, Model-Agnostic</h3>
+                <p>MARS leverages semantically consistent features learned through USS to eliminate biased objects <strong>without additional supervision and dataset</strong>, by connecting existing WSSS and USS methods.</p>
+            </div>
+            <div class="contrib-card" data-animate data-delay="200">
+                <div class="contrib-number">RESULTS</div>
+                <h3>Verified Beyond PASCAL VOC</h3>
+                <p>Current debiasing methods are validated only on PASCAL VOC 2012. MARS is also verified on MS COCO 2014, with larger and more complex labels, and achieves new state-of-the-art results on both (<strong>VOC: 77.7%, COCO: 49.4%</strong>).</p>
+            </div>
+        </div>
+
+        <div class="figure-block" data-animate>
+            <h3>Observation 1: USS Clustering Separates Biased and Target Objects</h3>
+            <div class="figure-frame">
+                <img class="fit" style="--w:62%" src="static/images/observation_clustering.png" alt="K-means clustering with USS features alone, with WSSS features inside the WSSS output, and with USS features inside the WSSS output">
+            </div>
+            <p class="figure-caption">
+                <strong>Integration of WSSS and USS.</strong>
+                (a) Without the WSSS output, the USS method fails to detect biased objects.
+                (b) The WSSS method cannot find biased objects because it uses biased features.
+                (c) With the WSSS guidance, the USS method identifies biased objects on a limited area of the WSSS output.
+            </p>
+        </div>
+
+        <div class="figure-block" data-animate>
+            <h3>Observation 2: Biased Objects Lie Close to the Backgrounds of Other Images</h3>
+            <div class="figure-frame">
+                <img class="fit" style="--w:62%" src="static/images/observation_distance.jpg" alt="Distances between the two separated objects of a boat image and the background regions of two other images">
+            </div>
+            <p class="figure-caption">
+                <strong>Correspondence between biased objects and backgrounds.</strong>
+                The distance is measured between each separated object (crosses) and the background regions of other images within the same dataset.
+                Long and short distances reflect target and biased objects, respectively, so the distance of USS features serves as the criterion to remove biased objects after clustering.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Method ===== -->
+<section class="section" id="method">
+    <div class="container">
+        <h2 class="section-title" data-animate><span class="section-number">3</span>Method</h2>
+        <p class="section-lead" data-animate>
+            MARS has four stages: training existing WSSS and USS methods, <strong>selecting debiased centroids</strong>,
+            <strong>generating debiased labels</strong>, and <strong>complementing debiased labels</strong> during the learning process.
+            The WSSS and USS models are trained from scratch on the same dataset and then frozen, so no additional dataset is required.
+        </p>
+
+        <div class="figure-block" data-animate>
+            <div class="figure-frame">
+                <img src="static/images/method_overview.png" alt="Overview of MARS: training setup, selecting debiased centroids, generating debiased labels and complementing debiased labels">
+            </div>
+            <p class="figure-caption">
+                <strong>Overview of MARS.</strong>
+                The USS and WSSS methods, trained from scratch, produce pixel-wise embedding vectors and pseudo labels that include biased objects.
+                K-means clustering generates image-wise centroids (biased and target objects) per class, and the debiased centroid of each class is the average of the top &alpha;% centroids most apart from the background centroids of all training images.
+                The similarity map between debiased centroids and USS embeddings gives the debiased label, and the segmentation network is trained with the weighted cross-entropy (WCE) loss.
+            </p>
+        </div>
+
+        <!-- Method Steps -->
+        <div class="method-steps">
+            <div class="method-step" data-animate>
+                <div class="step-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="6.5" cy="7" r="3.2"/><circle cx="17.5" cy="8.5" r="3.2"/><circle cx="11" cy="17.5" r="3.2"/></svg>
+                </div>
+                <div class="step-content">
+                    <h3>Selecting Debiased Centroids</h3>
+                    <p>The frozen USS model gives pixel-wise embedding vectors without class-specific information, and the frozen WSSS model gives pseudo labels that include both biased and target objects. For each class in an image, the embeddings inside the WSSS prediction region are clustered with K-means into image-wise centroids, and two clusters per foreground class separate the biased object from the target. Each foreground centroid is then scored by its average distance to the background centroids of all training images: a long distance means a target, a short distance a biased object. The top &alpha;% centroids most apart from the backgrounds are averaged into one debiased centroid per class.</p>
+                </div>
+            </div>
+            <div class="method-step" data-animate>
+                <div class="step-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 15l5-4 4 3 4-5 5 4"/></svg>
+                </div>
+                <div class="step-content">
+                    <h3>Generating Debiased Labels</h3>
+                    <p>The cosine similarity between each debiased centroid and the pixel-wise USS embeddings gives a similarity map. Since USS cannot separate classes that share a super-category (horse and sheep, for example), the maps of the classes in the image are merged with a pixel-wise maximum, followed by ReLU and a typical refinement such as CRF, into a binary debiased mask. A foreground pixel of the WSSS label that falls outside this mask is assigned to a new biased class, which removes the biased predictions of WSSS.</p>
+                </div>
+            </div>
+            <div class="method-step" data-animate>
+                <div class="step-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.5 12a8.5 8.5 0 1 1-2.6-6.1"/><path d="M20.5 3.5v5h-5"/></svg>
+                </div>
+                <div class="step-content">
+                    <h3>Complementing Debiased Labels</h3>
+                    <p>The removal also eliminates some non-biased objects (people's clothes, for example), which increases false negatives (FN) in non-problematic classes. A teacher network, updated with an exponential moving average, fills the biased pixels with its refined online predictions. Because these predictions are uncertain in early epochs, a certain mask weights the per-pixel cross-entropy loss (WCE): on the complemented pixels it holds the teacher's maximum probability over the classes of the image, and it is 1 elsewhere.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="figure-block" data-animate>
+            <h3>The Complementing Process</h3>
+            <div class="figure-frame">
+                <img class="fit" style="--w:62%" src="static/images/complementing.png" alt="Complementing process: the teacher network fills the biased pixels of the debiased label, and the student is trained with the WCE loss on complemented labels and certain masks">
+            </div>
+            <p class="figure-caption">
+                <strong>Illustration of the complementing process.</strong>
+                With the refinement, the teacher network produces the teacher's label. Biased pixels in the debiased label are complemented with the teacher's prediction to prevent increasing FN of non-problematic classes.
+                To avoid training on uncertain labels, the student network is updated with the WCE loss using complemented labels and certain masks.
+            </p>
+        </div>
+
+        <div class="figure-block" data-animate>
+            <h3>Effect of Each Component</h3>
+            <div class="figure-frame">
+                <img class="fit" style="--w:70%" src="static/images/components.jpg" alt="Outputs of conventional WSSS, debiased labels and MARS for a train image, a boat image and a dog image">
+            </div>
+            <p class="figure-caption">
+                <strong>Effect of the proposed components.</strong>
+                For problematic classes with biased objects (train and boat), selecting debiased centroids and generating debiased labels remove the biased objects, and complementing keeps them removed (first and second rows).
+                For non-problematic classes without biased objects (dog), complementing accurately restores the non-biased objects (third row).
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Results ===== -->
+<section class="section section-tint" id="results">
+    <div class="container">
+        <h2 class="section-title" data-animate><span class="section-number">4</span>Results</h2>
+
+        <!-- Highlight Numbers -->
+        <div class="results-highlights" data-animate>
+            <div class="highlight-card">
+                <div class="highlight-value">77.7%</div>
+                <div class="highlight-metric">mIoU, VOC 2012 val</div>
+                <div class="highlight-desc">77.2% on the test set</div>
+            </div>
+            <div class="highlight-card">
+                <div class="highlight-value">49.4%</div>
+                <div class="highlight-metric">mIoU, COCO 2014 val</div>
+                <div class="highlight-desc">46.4% for RS+EPM</div>
+            </div>
+            <div class="highlight-card">
+                <div class="highlight-value">53%</div>
+                <div class="highlight-metric">Gap to FSSS narrowed</div>
+                <div class="highlight-desc">with RS+EPM on VOC 2012 val</div>
+            </div>
+            <div class="highlight-card">
+                <div class="highlight-value">+29%</div>
+                <div class="highlight-metric">IoU, train class</div>
+                <div class="highlight-desc">over RS+EPM; boat +9%</div>
+            </div>
+        </div>
+
+        <div class="figure-block" data-animate>
+            <h3>Comparison with State-of-the-Art Methods</h3>
+            <div class="figure-frame">
+                <img class="fit" style="--w:58%" src="static/images/table_main.png" alt="Table of mIoU on PASCAL VOC 2012 val and test and MS COCO 2014 val for WSSS methods and MARS">
+            </div>
+            <p class="figure-caption">
+                <strong>mIoU (%) on PASCAL VOC 2012 and MS COCO 2014.</strong>
+                With image-level class labels only (I), MARS reaches 77.7% (val) and 77.2% (test) on VOC and 49.4% on COCO, above the methods that add saliency supervision (S) or an external dataset (D).
+                FSSS (F) is trained with pixel-wise annotations. * and &dagger; indicate VGG-16 and ResNet-50 backbones.
+            </p>
+        </div>
+
+        <div class="figure-block" data-animate>
+            <h3>Flexibility Across WSSS and USS Methods</h3>
+            <div class="figure-frame">
+                <div class="frame-pair">
+                    <img src="static/images/table_wsss.png" alt="Table of mIoU on PASCAL VOC 2012 when MARS, ADELE and W-OoD are applied to IRNet, SEAM, AdvCAM and RS+EPM, with the fully-supervised reference">
+                    <img src="static/images/table_uss.png" alt="Table of mIoU on PASCAL VOC 2012 when MARS uses Leopart or STEGO as the USS method with IRNet and RS+EPM">
+                </div>
+            </div>
+            <p class="figure-caption">
+                <strong>Consistent gains on PASCAL VOC 2012, whichever WSSS or USS method is used.</strong>
+                First table: with the same backbone and segmentation model, MARS improves IRNet, SEAM, AdvCAM and RS+EPM by 6.3%, 6.3%, 2.2% and 3.3% on the val set; the parentheses give the percentage improvement in the gap between WSSS and FSSS.
+                Second table: MARS outperforms the baselines with either Leopart or STEGO, and STEGO performs best.
+            </p>
+        </div>
+
+        <div class="figure-block" data-animate>
+            <h3>Qualitative Results</h3>
+            <div class="figure-frame">
+                <img src="static/images/qualitative.jpg" alt="Segmentation results of RS+EPM and MARS next to the image and the ground truth on PASCAL VOC 2012 and MS COCO 2014 validation images">
+            </div>
+            <p class="figure-caption">
+                <strong>Qualitative results on PASCAL VOC 2012 and MS COCO 2014 validation sets.</strong>
+                Compared with RS+EPM, MARS removes the biased objects of problematic classes, such as the railroad in train, the tennis court in tennis racket and the sea in surfboard, and covers more object regions for large-scale objects such as horse, car and dining table.
+            </p>
+        </div>
+
+        <div class="figure-block" data-animate>
+            <h3>Category-Wise Improvements</h3>
+            <div class="figure-frame">
+                <img class="fit" style="--w:68%" src="static/images/category.png" alt="Scatter plots of per-class IoU on PASCAL VOC 2012: SEAM against SEAM with MARS, and RS+EPM against RS+EPM with MARS">
+            </div>
+            <p class="figure-caption">
+                <strong>Category-wise IoU (%) on the PASCAL VOC 2012 validation set.</strong>
+                MARS improves most categories, with significant improvements in the classes that have biased objects: +29% for train and +9% for boat over RS+EPM, and +19% and +22% over SEAM.
+                A few categories such as tv/monitor decrease marginally because of the poor quality of the pseudo masks from the WSSS method.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Analysis ===== -->
+<section class="section" id="analysis">
+    <div class="container">
+        <h2 class="section-title" data-animate><span class="section-number">5</span>Analysis</h2>
+
+        <div class="figure-block" data-animate>
+            <h3>Do the Selected Centroids Belong to Target Objects?</h3>
+            <div class="figure-frame">
+                <img class="fit" style="--w:62%" src="static/images/centroids.png" alt="T-SNE plots of target and biased centroids for the train and boat classes, with the percentage of target centroids">
+            </div>
+            <p class="figure-caption">
+                <strong>Visualization of selecting debiased centroids.</strong>
+                Centroids of the train and boat classes are labelled as target or biased with pixel-wise annotations and shown after T-SNE.
+                Among the selected centroids, 94% are target centroids for train and 85% for boat.
+            </p>
+        </div>
+
+        <div class="figure-block" data-animate>
+            <h3>Effect of Complementing</h3>
+            <div class="figure-frame">
+                <img class="fit" style="--w:62%" src="static/images/table_ablation.png" alt="Ablation table of the complementing process and the WCE loss with mIoU, FP and FN on the PASCAL VOC 2012 train set">
+            </div>
+            <p class="figure-caption">
+                <strong>Effect of the key components on the PASCAL VOC 2012 train set.</strong>
+                Row 1 is the RS+EPM baseline (77.4%). Complementing without the WCE loss (row 2) raises mIoU to 80.9% and lowers FN from 0.108 to 0.075.
+                Adding the WCE loss with certain masks (row 3) lowers FP from 0.122 to 0.099 and gives the best mIoU, 81.8%.
+            </p>
+        </div>
+
+        <div class="figure-block" data-animate>
+            <h3>Sensitivity to Hyperparameters</h3>
+            <div class="figure-frame">
+                <img class="fit" style="--w:62%" src="static/images/hyperparameters.png" alt="mIoU on PASCAL VOC 2012 val for different numbers of background clusters and different ratios alpha, with the RS+EPM baseline as a red line">
+            </div>
+            <p class="figure-caption">
+                <strong>Sensitivity to K<sub>bg</sub> and &alpha; on the PASCAL VOC 2012 val set.</strong>
+                MARS improves over the RS+EPM baseline (red line) across all settings. Varying K<sub>bg</sub> from 1 to 5 does not significantly affect the performance.
+                Larger values of &alpha; (above 0.5) bring only marginal improvements, because biased and target centroids become difficult to disentangle. The final results use K<sub>bg</sub>&nbsp;=&nbsp;2 and &alpha;&nbsp;=&nbsp;0.40.
+            </p>
+        </div>
+
+        <div class="figure-block" data-animate>
+            <h3>Latency</h3>
+            <p class="block-lead">
+                On an Intel Xeon Gold 6130 CPU with 64 cores, the clustering step and the refinement step take <strong>10 and 9 minutes</strong> on the PASCAL VOC training set.
+                In evaluation, MARS has the same runtime as the other methods.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- ===== BibTeX ===== -->
+<section class="section section-tint" id="bibtex">
+    <div class="container">
+        <h2 class="section-title" data-animate><span class="section-number">6</span>Citation</h2>
+        <div class="bibtex-block" data-animate>
+            <div class="bibtex-header">
+                <span>BibTeX</span>
+                <button class="copy-btn" onclick="copyBibtex()">
+                    <i class="fa-regular fa-copy"></i>
+                    <span>Copy</span>
+                </button>
+            </div>
+            <pre class="bibtex-code" id="bibtexCode">@InProceedings{Jo_2023_ICCV,
+    author    = {Jo, Sanghyun and Yu, In-Jae and Kim, Kyungsu},
+    title     = {MARS: Model-agnostic Biased Object Removal without Additional Supervision for Weakly-Supervised Semantic Segmentation},
+    booktitle = {Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV)},
+    month     = {October},
+    year      = {2023},
+    pages     = {614-623}
+}</pre>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Footer ===== -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-left">
+                <span class="footer-logo">MARS</span>
+                <span class="footer-venue">ICCV 2023 &middot; arXiv:2304.09913</span>
+            </div>
+            <div class="footer-right">
+                Template inspired by <a href="https://nerfies.github.io" target="_blank">Nerfies</a> &middot; <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">CC BY-SA 4.0</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script>
+// ===== Copy BibTeX =====
+function copyBibtex() {
+    const text = document.getElementById('bibtexCode').textContent;
+    navigator.clipboard.writeText(text).then(() => {
+        const btn = document.querySelector('.copy-btn span');
+        btn.textContent = 'Copied!';
+        setTimeout(() => btn.textContent = 'Copy', 2000);
+    });
+}
+
+// ===== Floating Nav =====
+const nav = document.getElementById('floatingNav');
+window.addEventListener('scroll', () => {
+    nav.classList.toggle('visible', window.scrollY > 520);
+});
+
+// ===== Scroll Animations =====
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const delay = entry.target.dataset.delay || 0;
+            setTimeout(() => {
+                entry.target.classList.add('animate-in');
+            }, parseInt(delay));
+            observer.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('[data-animate]').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>

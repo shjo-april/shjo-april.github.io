@@ -65,7 +65,7 @@
 
         /* Hero Row */
         .hero-row{position:relative;flex:0 0 auto;padding:3.2rem 2.5rem 0}
-        .hero-inner{max-width:var(--max-width);margin:0 auto;display:grid;grid-template-columns:260px 1fr;gap:3.5rem;align-items:center}
+        .hero-inner{max-width:var(--max-width);margin:0 auto;display:grid;grid-template-columns:19.5rem 1fr;gap:3rem;align-items:center}
 
         .profile-card{text-align:center}
         .profile-image-wrap{position:relative;width:190px;height:190px;margin:0 auto 1.2rem}
@@ -73,9 +73,9 @@
         @keyframes rotateRing{to{transform:rotate(360deg)}}
         .profile-image-wrap img{position:relative;width:100%;height:100%;border-radius:50%;object-fit:cover;object-position:center 20%;border:3px solid var(--bg-primary);z-index:1}
         .profile-name{font-family:var(--font-display);font-size:1.8rem;font-weight:700;color:var(--text-primary);margin-bottom:0.15rem}
-        .profile-role{font-size:0.9rem;color:var(--teal-dark);font-weight:700;letter-spacing:0.02em;text-transform:none;margin-bottom:0.2rem}
-        .profile-affiliation{font-size:0.95rem;color:var(--text-secondary);font-weight:600;margin-bottom:0.15rem}
-        .profile-affiliation + .profile-role{margin-top:0.6rem}
+        .profile-role{font-size:0.92rem;line-height:1.5;color:var(--teal-dark);font-weight:700;letter-spacing:0.01em;white-space:nowrap;margin-bottom:0.2rem}
+        .profile-role a{color:var(--text-secondary);font-weight:600}.profile-role a:hover{color:var(--teal)}
+        .profile-role + .profile-email{margin-top:0.5rem}
         .profile-email{font-family:var(--font-mono);font-size:0.8rem;color:var(--text-secondary);margin-bottom:1rem}
         .social-links{display:flex;justify-content:center;gap:6px}
         .social-links .brand-logo{width:18px;height:18px;object-fit:contain;display:block}
@@ -120,6 +120,23 @@
         .section-label{font-family:var(--font-mono);font-size:0.76rem;color:var(--teal);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:0.4rem}
         .section-title{font-family:var(--font-display);font-size:2.5rem;font-weight:700;color:var(--text-primary);line-height:1.2}
         .section-divider{height:1px;background:linear-gradient(90deg,transparent,var(--border),var(--border-strong),var(--border),transparent)}
+
+        /* Appointments & Education: one card per institution, roles and degrees as dated rows */
+        .bg-list{display:flex;flex-direction:column;gap:1rem}
+        .bg-card{display:grid;grid-template-columns:auto minmax(0,1fr);gap:1.5rem;align-items:start;padding:1.4rem 1.5rem;background:var(--bg-card);border:1px solid var(--border);border-radius:14px}
+        .bg-logo{display:flex;align-items:center;justify-content:center;width:88px;height:88px;background:#fff;border:1px solid var(--border);border-radius:10px;color:var(--teal);font-size:1.7rem}
+        .bg-logo img{display:block;max-width:calc(100% - 10px);max-height:calc(100% - 12px);width:auto;height:auto}
+        /* the line under the institution introduces the lab, or the startup the company grew from */
+        .bg-intro{font-size:0.92rem;line-height:1.6;color:var(--text-secondary);margin-top:0.25rem}
+        .bg-org{font-family:var(--font-display);font-size:1.45rem;font-weight:700;line-height:1.25;color:var(--text-primary)}
+        .bg-org a{color:inherit}.bg-org a:hover{color:var(--teal)}
+        .bg-org-note{display:inline-block;font-family:var(--font-body);font-size:0.9rem;font-weight:500;color:var(--text-secondary)}
+        .bg-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:0.15rem 1.5rem;align-items:baseline;margin-top:0.6rem}
+        .bg-row + .bg-row{padding-top:0.6rem;border-top:1px solid var(--border)}
+        .bg-role{font-size:0.98rem;font-weight:600;line-height:1.6;color:var(--text-primary)}
+        .bg-period{font-family:var(--font-mono);font-size:0.8rem;font-weight:600;color:var(--teal-dark);white-space:nowrap}
+        .bg-note{grid-column:1/-1;font-size:0.9rem;line-height:1.6;color:var(--text-secondary)}
+        @media(max-width:640px){.bg-card{grid-template-columns:minmax(0,1fr);gap:0.9rem}.bg-logo{width:72px;height:72px}.bg-row{grid-template-columns:minmax(0,1fr)}}
 
         /* Publications */
         .pub-list{display:flex;flex-direction:column;gap:1.5rem}
@@ -212,7 +229,7 @@
         [data-animate]{opacity:0;transform:translateY(20px)}
         [data-animate].animate-in{opacity:1;transform:translateY(0);transition:opacity 0.6s ease,transform 0.6s ease}
 
-        @media(max-width:1000px){
+        @media(max-width:1180px){
             .topbar{padding:0 1.2rem}.topbar-inner{height:auto;display:block}
             .topbar-id{min-height:48px}
             .topbar-links{flex-wrap:wrap;gap:0.2rem 1rem;padding:0 0 0.5rem}.topbar-links a{white-space:nowrap;font-size:0.7rem;padding:0.2rem 0}
@@ -235,6 +252,8 @@
             .talks-grid{column-count:1}
             .section{padding:3rem 1.2rem}
         }
+        @media(max-width:400px){.topbar-links{gap:0.2rem 0.7rem}.topbar-links a{letter-spacing:0.02em}}
+        @media(max-width:360px){.profile-role{white-space:normal}}
         @media(max-width:480px){
             .hero-stats{flex-wrap:wrap;gap:1.5rem}
                         .news-item{grid-template-columns:1fr;gap:0.2rem}
@@ -250,6 +269,7 @@
             Sanghyun Jo <span class="sep">|</span> <span class="affil">SNU AIBL Lab &middot; OGQ</span>
         </div>
         <div class="topbar-links">
+            <a href="#education">Education</a>
             <a href="#publications">Publications</a>
             <a href="#under-review">Under Review &amp; Preprints</a>
             <a href="#impact">Industry</a>
@@ -271,14 +291,8 @@
                     <img src="./assets/img/profile_600.jpg" alt="Sanghyun Jo">
                 </div>
                 <div class="profile-name">Sanghyun Jo</div>
-                <div class="profile-role">Core External Researcher</div>
-                <div class="profile-affiliation">
-                    <a href="https://aibl.snu.ac.kr/" target="_blank">SNU AIBL Lab</a>
-                </div>
-                <div class="profile-role">Principal AI Researcher</div>
-                <div class="profile-affiliation">
-                    <a href="https://ogqmarket.naver.com/" target="_blank">OGQ</a>
-                </div>
+                <div class="profile-role">Core External Researcher, <a href="https://aibl.snu.ac.kr/" target="_blank">SNU AIBL Lab</a></div>
+                <div class="profile-role">Principal AI Researcher, <a href="https://ogqmarket.naver.com/" target="_blank">OGQ</a></div>
                 <div class="profile-email">shjo.april@gmail.com</div>
                 <div class="social-links">
                     <a href="https://scholar.google.com/citations?user=xgP6q2YAAAAJ&hl=en" target="_blank" title="Google Scholar"><img src="./assets/img/scholar.svg" alt="Google Scholar" class="brand-logo"></a>
@@ -297,7 +311,7 @@
                     My research works toward <strong>Physical AI</strong>: vision systems that perceive the physical world, let people interact with what is perceived, and remain deployable under real-world constraints. I pursue three connected axes, treating them not as separate topics but as the perception, generation, and deployment layers of a single pipeline: <strong>segmentation, extending from images to video and 3D</strong>; <strong>interactive segmentation and editing</strong>; and <strong>multimodal distillation and quantization</strong>. Across all three, my approach is to exploit the implicit knowledge already embedded in large-scale foundation models, using generative priors and lightweight interaction to remove the annotation and optimization burdens that make vision systems expensive to build and maintain.
                 </p>
                 <p class="hero-bio-text">
-                    I have been with <a href="https://ogqmarket.naver.com/" target="_blank"><strong>OGQ</strong></a> since 2017, currently serving as the <strong>Principal AI Researcher</strong> and leading industrial AI research and development to maximize tangible real-world impact. In parallel, I have pursued my research under the guidance of <a href="https://aibl.snu.ac.kr/team/pi-information" target="_blank"><strong>Prof. Kyungsu Kim</strong></a> since 2021; following his appointment at Seoul National University, I joined the <a href="https://aibl.snu.ac.kr/" target="_blank"><strong>SNU AIBL Lab</strong></a> as a <strong>Core External Researcher</strong> in September 2024, where I mentor graduate and undergraduate researchers and lead core projects as a co-corresponding author. Integrating industrial R&amp;D leadership with academic rigor, I aim to develop machine learning systems that are both scientifically grounded and practically deployable.
+                    I have been with <a href="https://ogqmarket.naver.com/" target="_blank"><strong>OGQ</strong></a> since 2017, currently serving as the <strong>Principal AI Researcher</strong> and leading industrial AI research and development to maximize tangible real-world impact. In parallel, I have pursued my research under the guidance of <a href="https://aibl.snu.ac.kr/pi-information" target="_blank"><strong>Prof. Kyungsu Kim</strong></a> since 2021; following his appointment at Seoul National University, I joined the <a href="https://aibl.snu.ac.kr/" target="_blank"><strong>SNU AIBL Lab</strong></a> as a <strong>Core External Researcher</strong> in September 2024, where I mentor graduate and undergraduate researchers and lead core projects as a co-corresponding author. Integrating industrial R&amp;D leadership with academic rigor, I aim to develop machine learning systems that are both scientifically grounded and practically deployable.
                 </p>
                 <div class="hero-stats">
                     <div class="stat-item"><div class="stat-value" id="pubCount">-</div><div class="stat-label">Publications</div></div>
@@ -318,7 +332,7 @@
                     <div class="news-item" data-animate><div class="news-date">2026.10</div><div class="news-content"><a href="https://shjo-april.github.io/Chain-of-Prompts/"><strong>CoP</strong></a> selected as <strong>Spotlight</strong> at <strong style="white-space:nowrap">NeurIPS 2026 Workshop</strong> <span class="news-highlight">Spotlight</span></div></div>
                     <div class="news-item" data-animate><div class="news-date">2026.10</div><div class="news-content"><a href="https://shjo-april.github.io/Chain-of-Prompts/"><strong>CoP</strong></a> selected as <strong>Oral</strong> at <strong>ACCV 2026</strong> <span class="news-highlight">Oral</span></div></div>
                     <div class="news-item" data-animate><div class="news-date">2026.09</div><div class="news-content"><a href="https://shjo-april.github.io/Chain-of-Prompts/"><strong>CoP</strong></a> accepted to <strong>ACCV 2026</strong></div></div>
-                    <div class="news-item" data-animate><div class="news-date">2026.06</div><div class="news-content">Two papers (<a href="https://shjo-april.github.io/ISAC/"><strong>ISAC</strong></a>, <a href="https://arxiv.org/abs/2512.21545"><strong>EraseLoRA</strong></a>) accepted to <strong>ECCV 2026</strong></div></div>
+                    <div class="news-item" data-animate><div class="news-date">2026.06</div><div class="news-content">Two papers (<a href="https://shjo-april.github.io/ISAC/"><strong>ISAC</strong></a>, <a href="https://shjo-april.github.io/EraseLoRA/"><strong>EraseLoRA</strong></a>) accepted to <strong>ECCV 2026</strong></div></div>
                     <div class="news-item" data-animate><div class="news-date">2026.06</div><div class="news-content"><a href="https://hyeongsubkim.github.io/GeneRAG-project-page/"><strong>GeneRAG</strong></a> accepted to <strong>MICCAI 2026</strong></div></div>                    <div class="news-item" data-animate><div class="news-date">2026.05</div><div class="news-content"><a href="https://ziseoklee.github.io/projects/ACE/"><strong>ACE</strong></a> accepted to <strong>ICML 2026</strong></div></div>
                     <div class="news-item" data-animate><div class="news-date">2026.02</div><div class="news-content"><a href="https://shjo-april.github.io/TRACE/"><strong>TRACE</strong></a> selected as <strong>Oral</strong> at <strong>ICLR 2026</strong> (Top 1.13%, 223 of 19,735) <span class="news-highlight">Oral</span></div></div>
                 </div>
@@ -326,14 +340,60 @@
                     <div class="news-item" data-animate><div class="news-date">2026.01</div><div class="news-content"><a href="https://shjo-april.github.io/TRACE/"><strong>TRACE</strong></a> accepted to <strong>ICLR 2026</strong></div></div>
                     <div class="news-item" data-animate><div class="news-date">2025.06</div><div class="news-content">Two papers (<a href="https://shjo-april.github.io/COIN/"><strong>COIN</strong></a>, <a href="https://elect-diffusion.github.io/"><strong>ELECT</strong></a>) accepted to <strong>ICCV 2025</strong></div></div>
                     <div class="news-item" data-animate><div class="news-date">2025.06</div><div class="news-content">Named <a href="https://cvpr.thecvf.com/Conferences/2025/ProgramCommittee#all-outstanding-reviewer"><strong>Outstanding Reviewer</strong></a> at <strong>CVPR 2025</strong> (Top 5.6%) <span class="news-highlight">Award</span></div></div>
-                    <div class="news-item" data-animate><div class="news-date">2024.07</div><div class="news-content">Two papers (<a href="https://www.ecva.net/papers/eccv_2024/papers_ECCV/papers/10547.pdf"><strong>DHR</strong></a>, <a href="https://www.ecva.net/papers/eccv_2024/papers_ECCV/papers/10592.pdf"><strong>TTD</strong></a>) accepted to <strong>ECCV 2024</strong></div></div>
-                    <div class="news-item" data-animate><div class="news-date">2023.07</div><div class="news-content"><a href="https://openaccess.thecvf.com/content/ICCV2023/papers/Jo_MARS_Model-agnostic_Biased_Object_Removal_without_Additional_Supervision_for_Weakly-Supervised_ICCV_2023_paper.pdf"><strong>MARS</strong></a> accepted to <strong>ICCV 2023</strong></div></div>
-                    <div class="news-item" data-animate><div class="news-date">2021.01</div><div class="news-content"><a href="https://arxiv.org/abs/2101.11253"><strong>Puzzle-CAM</strong></a> accepted to <strong>ICIP 2021</strong></div></div>
+                    <div class="news-item" data-animate><div class="news-date">2024.07</div><div class="news-content">Two papers (<a href="https://shjo-april.github.io/DHR/"><strong>DHR</strong></a>, <a href="https://shjo-april.github.io/TTD/"><strong>TTD</strong></a>) accepted to <strong>ECCV 2024</strong></div></div>
+                    <div class="news-item" data-animate><div class="news-date">2023.07</div><div class="news-content"><a href="https://shjo-april.github.io/MARS/"><strong>MARS</strong></a> accepted to <strong>ICCV 2023</strong></div></div>
+                    <div class="news-item" data-animate><div class="news-date">2021.01</div><div class="news-content"><a href="https://shjo-april.github.io/Puzzle-CAM/"><strong>Puzzle-CAM</strong></a> accepted to <strong>ICIP 2021</strong></div></div>
                 </div>
             </div>
         </div>
     </div>
 
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ===== Appointments & Education ===== -->
+<section class="section" id="education">
+    <div class="container">
+        <div class="section-header" data-animate>
+            <h2 class="section-title">Appointments &amp; Education</h2>
+        </div>
+        <div class="bg-list">
+            <div class="bg-card" data-animate>
+                <div class="bg-logo"><img src="./assets/img/org/snu_emblem_l.png" srcset="./assets/img/org/snu_emblem_l.png 1x, ./assets/img/org/snu_emblem_l_2x.png 2x" width="69" height="72" alt=""></div>
+                <div class="bg-body">
+                    <div class="bg-org">Seoul National University</div>
+                    <div class="bg-row">
+                        <div class="bg-role"><span class="role-tag lead">Incoming</span> Integrated M.S./Ph.D. Student, <a href="https://snuai.snu.ac.kr/" target="_blank">Graduate School of Artificial Intelligence</a></div>
+                        <div class="bg-period">Starting Mar. 2027</div>
+                        <div class="bg-note">Admitted in Nov. 2026; enrollment begins in Mar. 2027.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-card" data-animate>
+                <div class="bg-logo"><img src="./assets/img/org/aibl.png" srcset="./assets/img/org/aibl.png 1x, ./assets/img/org/aibl_2x.png 2x" width="76" height="67" alt=""></div>
+                <div class="bg-body">
+                    <div class="bg-org">Seoul National University</div>
+                    <div class="bg-intro"><a href="https://aibl.snu.ac.kr/" target="_blank">SNU AIBL Lab</a> (Artificial Intelligence &amp; Biomedicine Lab), advised by <a href="https://aibl.snu.ac.kr/pi-information" target="_blank">Prof. Kyungsu Kim</a></div>
+                    <div class="bg-row">
+                        <div class="bg-role">Core External Researcher</div>
+                        <div class="bg-period">Sep. 2024 &ndash; Present</div>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-card" data-animate>
+                <div class="bg-logo"><img src="./assets/img/org/ogq.png" srcset="./assets/img/org/ogq.png 1x, ./assets/img/org/ogq_2x.png 2x" width="78" height="24" alt=""></div>
+                <div class="bg-body">
+                    <div class="bg-org"><a href="https://ogqmarket.naver.com/" target="_blank">OGQ</a> <span class="bg-org-note">Seoul, Korea</span></div>
+                    <div class="bg-intro">Joined GYN, an AI startup, as an early member in 2017; OGQ acquired GYN in 2022.</div>
+                    <div class="bg-row">
+                        <div class="bg-role">Principal AI Researcher</div>
+                        <div class="bg-period">Jul. 2017 &ndash; Present</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 
 <div class="section-divider"></div>
@@ -489,7 +549,7 @@
             <div class="pub-card" data-animate>
                 <div class="pub-image"><span class="pub-badge conference">ECCV'24</span><img src="./assets/img/DHR.png" alt="DHR"></div>
                 <div class="pub-info">
-                    <div class="pub-title">DHR: Dual Features-Driven Hierarchical Rebalancing in Inter-and Intra-Class Regions for Weakly-Supervised Semantic Segmentation</div>
+                    <div class="pub-title">DHR: Dual Features-Driven Hierarchical Rebalancing in Inter- and Intra-Class Regions for Weakly-Supervised Semantic Segmentation</div>
                     <div class="pub-authors"><strong>Sanghyun Jo</strong>, Fei Pan, In-Jae Yu, Kyungsu Kim&#8224;</div>
                     <div class="pub-venue">European Conference on Computer Vision (ECCV), 2024.</div>
                     <div class="pub-note"><span class="role-tag lead">First Author</span>Acceptance Rate 27.9% (2,395 of 8,585 submissions)</div>
@@ -497,6 +557,7 @@
                         <a href="https://www.ecva.net/papers/eccv_2024/papers_ECCV/papers/10547.pdf" target="_blank" class="pub-link"><i class="fa-solid fa-file-pdf"></i> PDF</a>
                         <a href="https://arxiv.org/abs/2404.00380" target="_blank" class="pub-link"><i class="ai ai-arxiv"></i> arXiv</a>
                         <a href="https://github.com/shjo-april/DHR" target="_blank" class="pub-link"><i class="fa-brands fa-github"></i> Code</a>
+                        <a href="https://shjo-april.github.io/DHR/" target="_blank" class="pub-link"><i class="fa-solid fa-globe"></i> Project</a>
                         <a href="https://eccv.ecva.net/media/PosterPDFs/ECCV%202024/2631.png?t=1726192568.1728678" target="_blank" class="pub-link"><i class="fa-solid fa-image"></i> Poster</a>
                     </div>
                 </div>
@@ -513,6 +574,7 @@
                         <a href="https://www.ecva.net/papers/eccv_2024/papers_ECCV/papers/10592.pdf" target="_blank" class="pub-link"><i class="fa-solid fa-file-pdf"></i> PDF</a>
                         <a href="https://arxiv.org/abs/2404.00384" target="_blank" class="pub-link"><i class="ai ai-arxiv"></i> arXiv</a>
                         <a href="https://github.com/shjo-april/TTD" target="_blank" class="pub-link"><i class="fa-brands fa-github"></i> Code</a>
+                        <a href="https://shjo-april.github.io/TTD/" target="_blank" class="pub-link"><i class="fa-solid fa-globe"></i> Project</a>
                         <a href="https://eccv.ecva.net/media/eccv-2024/Slides/2259_i4ex75H.pdf" target="_blank" class="pub-link"><i class="fa-solid fa-person-chalkboard"></i> Slides</a>
                         <a href="https://eccv.ecva.net/media/PosterPDFs/ECCV%202024/2259.png?t=1726141858.1666896" target="_blank" class="pub-link"><i class="fa-solid fa-image"></i> Poster</a>
                         <a href="https://youtu.be/kiCgc99BA9Y" target="_blank" class="pub-link"><i class="fa-brands fa-youtube"></i> Video</a>
@@ -532,6 +594,7 @@
                         <a href="https://openaccess.thecvf.com/content/ICCV2023/html/Jo_MARS_Model-agnostic_Biased_Object_Removal_without_Additional_Supervision_for_Weakly-Supervised_ICCV_2023_paper.html" target="_blank" class="pub-link"><i class="ai ai-open-access"></i> CVF</a>
                         <a href="https://arxiv.org/abs/2304.09913" target="_blank" class="pub-link"><i class="ai ai-arxiv"></i> arXiv</a>
                         <a href="https://github.com/shjo-april/MARS" target="_blank" class="pub-link"><i class="fa-brands fa-github"></i> Code</a>
+                        <a href="https://shjo-april.github.io/MARS/" target="_blank" class="pub-link"><i class="fa-solid fa-globe"></i> Project</a>
                         <a href="./MARS/10811_MARS_poster.pdf" target="_blank" class="pub-link"><i class="fa-solid fa-image"></i> Poster</a>
                     </div>
                 </div>
@@ -549,6 +612,7 @@
                         <a href="https://ieeexplore.ieee.org/document/9506058" target="_blank" class="pub-link"><i class="fa-solid fa-book"></i> IEEE</a>
                         <a href="https://arxiv.org/abs/2101.11253" target="_blank" class="pub-link"><i class="ai ai-arxiv"></i> arXiv</a>
                         <a href="https://github.com/shjo-april/PuzzleCAM" target="_blank" class="pub-link"><i class="fa-brands fa-github"></i> Code</a>
+                        <a href="https://shjo-april.github.io/Puzzle-CAM/" target="_blank" class="pub-link"><i class="fa-solid fa-globe"></i> Project</a>
                         <a href="./Puzzle-CAM/ICIP2021_PuzzleCAM_PPT_210722.pdf" target="_blank" class="pub-link"><i class="fa-solid fa-person-chalkboard"></i> Slides</a>
                         <a href="./Puzzle-CAM/ICIP2021_Poster_210718.pdf" target="_blank" class="pub-link"><i class="fa-solid fa-image"></i> Poster</a>
                     </div>
@@ -722,13 +786,14 @@
             <div class="pub-card" data-animate>
                 <div class="pub-image"><span class="pub-badge preprint">Preprint</span><img src="./assets/img/RSEPM.png" alt="RSEPM"></div>
                 <div class="pub-info">
-                    <div class="pub-title">RecurSeed and EdgePredictMix: Pseudo-Label Refinement Learning for Weakly Supervised Semantic Segmentation</div>
+                    <div class="pub-title">RecurSeed and EdgePredictMix: Pseudo-Label Refinement Learning for Weakly Supervised Semantic Segmentation across Single- and Multi-Stage Frameworks</div>
                     <div class="pub-authors"><strong>Sanghyun Jo</strong>, In-Jae Yu, Kyungsu Kim&#8224;</div>
                     <div class="pub-venue">arXiv:2204.06754</div>
                     <div class="pub-note"><span class="role-tag lead">First Author</span></div>
                     <div class="pub-links">
                         <a href="https://arxiv.org/abs/2204.06754" target="_blank" class="pub-link"><i class="ai ai-arxiv"></i> arXiv</a>
                         <a href="https://github.com/shjo-april/RecurSeed_and_EdgePredictMix" target="_blank" class="pub-link"><i class="fa-brands fa-github"></i> Code</a>
+                        <a href="https://shjo-april.github.io/RSEPM/" target="_blank" class="pub-link"><i class="fa-solid fa-globe"></i> Project</a>
                     </div>
                 </div>
             </div>
