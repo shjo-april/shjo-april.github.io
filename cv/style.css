@@ -62,7 +62,7 @@ a:hover{color:var(--teal);text-decoration:underline;text-underline-offset:2px}
 .sub-note{font-weight:400;color:var(--text-secondary);margin-left:0.5rem}
 
 /* Lines inside entries; a split line puts its right part (dates, roles) at the right edge */
-.ln{font-size:0.93rem;color:var(--text-secondary)}
+.ln{font-size:0.93rem;color:var(--text-secondary);text-wrap:pretty}
 .ln strong{color:var(--text-primary)}
 .ln.gap{margin-top:0.7rem}
 .split{display:flex;flex-wrap:wrap;justify-content:space-between;column-gap:1.2rem}
@@ -76,6 +76,9 @@ a .ttl{color:inherit}
 .c-ink{color:var(--text-primary)}
 .c-dim{color:var(--text-dim)}
 .nb{white-space:nowrap}
+/* hyphenated compounds stay whole, so lines wrap between words as in the PDF; phones may still break them */
+.hy{white-space:nowrap}
+@media(max-width:480px){.hy{white-space:normal}}
 .quad{display:inline-block;width:0.9em}
 sup{font-size:0.7em;line-height:0}
 

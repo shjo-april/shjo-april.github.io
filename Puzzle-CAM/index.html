@@ -96,16 +96,23 @@
     </div>
 </header>
 
-<!-- ===== Teaser & Key Insight ===== -->
+<!-- ===== Hero Demo & Key Insight ===== -->
 <section class="section section-tight">
     <div class="container">
         <div class="figure-block" data-animate>
             <div class="figure-frame">
-                <img class="fit" style="--w:54%" src="static/images/teaser.jpg" alt="Class activation maps of one image: (a) conventional CAM of the original image, (b) CAMs of the four tiled patches, (c) CAM predicted by Puzzle-CAM, which covers both people">
+                <video autoplay muted loop playsinline poster="static/images/hero_poster.jpg" aria-label="Puzzle-CAM in four scenes: the CAM of an image and the CAMs of its tiled patches, the CAMs of two training images after every epoch with and without the puzzle module, the loss ablation, and segmentation results">
+                    <source src="static/images/hero.webm" type="video/webm">
+                    <source src="static/images/hero.mp4" type="video/mp4">
+                </video>
             </div>
             <p class="figure-caption">
-                <strong>CAMs generated from tiled and original images.</strong>
-                (a) Conventional CAMs from the original image, (b) CAMs generated from the tiled images, and (c) CAMs predicted by the proposed Puzzle-CAM.
+                <strong>Puzzle-CAM in four scenes.</strong>
+                The CAM of an image and the CAMs of its tiled patches do not match, and Puzzle-CAM trains them to match.
+                In the recorded ResNet-50 training runs, the CAMs of the same training images spread over the objects epoch by epoch with the puzzle module
+                (CAM mIoU logged during training: 43.20 without it, 47.58 with it).
+                The loss ablation of the paper goes from 47.82% to <strong>51.53%</strong>, followed by segmentation results.
+                The <a href="https://github.com/shjo-april/PuzzleCAM#7-reproduce-the-hero-gif" target="_blank">code repository</a> reproduces this demo from the released training logs.
             </p>
         </div>
 
