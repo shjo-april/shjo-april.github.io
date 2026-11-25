@@ -101,9 +101,26 @@
     </div>
 </header>
 
-<!-- ===== Teaser and Key Insight ===== -->
+<!-- ===== Hero Demo, Teaser and Key Insight ===== -->
 <section class="section section-tight">
     <div class="container">
+        <div class="figure-block" data-animate>
+            <div class="figure-frame">
+                <video autoplay muted loop playsinline poster="static/images/hero_poster.jpg" aria-label="TTD in four scenes: the single tag bias of CLIP-based models without and with TTD, tag selection by pixel-tag scoring with the heatmaps sorted by score, text-tag self-distillation of the union of the pseudo-tag heatmaps, and segmentation results">
+                    <source src="static/images/hero.webm" type="video/webm">
+                    <source src="static/images/hero.mp4" type="video/mp4">
+                </video>
+            </div>
+            <p class="figure-caption">
+                <strong>TTD in four scenes.</strong>
+                Without TTD, the similarity map and the tag scores of a CLIP-based model highlight a single tag of the text.
+                Pixel-tag scoring scores each tag by its most correlated pixel and selects the tags above the largest score gap as pseudo-tags,
+                and the union of their heatmaps is distilled into the image-text map.
+                With TTD, CaptionIoU rises from 60.4% to <strong>65.5%</strong> for TCL and from 41.0% to <strong>50.2%</strong> for MaskCLIP, followed by open-vocabulary segmentation results on six benchmarks.
+                Every picture is a panel of the paper's figures, and the <a href="https://github.com/shjo-april/TTD#reproduce-the-hero-gif" target="_blank">code repository</a> rebuilds this demo from them.
+            </p>
+        </div>
+
         <div class="figure-block" data-animate>
             <div class="figure-frame">
                 <img src="static/images/teaser.png" alt="Single tag bias in CLIP-based models: without TTD the similarity map and the tag scores highlight a single tag, and with TTD the other relevant tags are activated as well">

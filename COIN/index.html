@@ -101,9 +101,26 @@
     </div>
 </header>
 
-<!-- ===== Key Insight ===== -->
+<!-- ===== Hero Demo & Key Insight ===== -->
 <section class="section section-tight">
     <div class="container">
+        <div class="figure-block" data-animate>
+            <div class="figure-frame">
+                <video autoplay muted loop playsinline poster="static/images/hero_poster.jpg" aria-label="COIN in five scenes: the absence of error-free instances in existing unsupervised models, pixel-level cell propagation, instance-level confidence scoring with SAM, recursive self-distillation, and results on the MoNuSeg test set">
+                    <source src="static/images/hero.webm" type="video/webm">
+                    <source src="static/images/hero.mp4" type="video/mp4">
+                </video>
+            </div>
+            <p class="figure-caption">
+                <strong>COIN in five scenes.</strong>
+                Existing unsupervised models produce no error-free instance (IoU = 1).
+                COIN takes one MoNuSeg training image through its three steps: pixel-level cell propagation, instance-level confidence scoring with SAM
+                (six scored instances are shown), and recursive self-distillation, after which the confident cells (IoU &ge; 0.8) of this image rise from 2% to <strong>63%</strong>.
+                The last scene shows MoNuSeg test examples and the AJI of the paper: 0.259 to <strong>0.580</strong> on MoNuSeg and 0.273 to 0.568 on TNBC, with SSA as the baseline.
+                The <a href="https://github.com/shjo-april/COIN#-reproduce-the-hero-gif" target="_blank">code repository</a> rebuilds this demo from the panels of the paper figures.
+            </p>
+        </div>
+
         <div class="insight" data-animate>
             <div class="insight-label">Key Insight</div>
             <p class="insight-text">

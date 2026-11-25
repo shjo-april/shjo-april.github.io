@@ -96,9 +96,25 @@
     </div>
 </header>
 
-<!-- ===== Teaser ===== -->
+<!-- ===== Hero Demo & Teaser ===== -->
 <section class="section section-tight">
     <div class="container">
+        <div class="figure-block" data-animate>
+            <div class="figure-frame">
+                <video autoplay muted loop playsinline poster="static/images/hero_poster.jpg" aria-label="MARS in five scenes: the biased problem, separating biased and target objects with USS features, selecting debiased centroids by the distance to the backgrounds of other images, from the conventional WSSS label to the debiased label, and segmentation results">
+                    <source src="static/images/hero.webm" type="video/webm">
+                    <source src="static/images/hero.mp4" type="video/mp4">
+                </video>
+            </div>
+            <p class="figure-caption">
+                <strong>MARS in five scenes.</strong>
+                Weakly-supervised semantic segmentation (WSSS) labels class-related backgrounds such as the sea or a railroad together with the target class.
+                Inside a WSSS output, features of unsupervised semantic segmentation (USS) separate the biased object from the target, and the one closer to the backgrounds of other images is the biased object.
+                MARS removes it from the pseudo label and complements the label during training, which improves RS+EPM from 74.4% to <strong>77.7%</strong> mIoU on the PASCAL VOC 2012 val set.
+                Every panel comes from the figures of the paper, and the <a href="https://github.com/shjo-april/MARS#reproduce-the-hero-gif" target="_blank">code repository</a> rebuilds this demo from them.
+            </p>
+        </div>
+
         <div class="figure-block" data-animate>
             <div class="figure-frame">
                 <img class="fit" style="--w:68%" src="static/images/teaser.png" alt="Analysis of the biased problem: FP and FN of WSSS methods against supervised learning, per-class FP, examples of biased objects in the boat and train classes, and the problematic classes of PASCAL VOC with their biased objects">

@@ -117,9 +117,26 @@
     </div>
 </header>
 
-<!-- ===== Key Insight ===== -->
+<!-- ===== Hero Demo & Key Insight ===== -->
 <section class="section section-tight">
     <div class="container">
+        <div class="figure-block" data-animate>
+            <div class="figure-frame">
+                <video autoplay muted loop playsinline poster="static/images/hero_poster.jpg" aria-label="TRACE in five scenes: instance cues in diffusion self-attention during the reverse process, the instance emergence point on a real image, ABDiv and one-step self-distillation, masks refined with the instance edges, and the results">
+                    <source src="static/images/hero.webm" type="video/webm">
+                    <source src="static/images/hero.mp4" type="video/mp4">
+                </video>
+            </div>
+            <p class="figure-caption">
+                <strong>TRACE in five scenes.</strong>
+                In the reverse process of a text-to-image diffusion model, self-attention separates two adjacent cats at specific timesteps, while cross-attention remains semantic.
+                On a real image, TRACE locates this instance emergence point, converts the self-attention map into an edge map with ABDiv, and distills it into a one-step edge decoder
+                (3,682 ms to 45 ms per image, about <strong>81× faster</strong>).
+                The edges then reconnect fragmented masks and separate adjacent objects in the outputs of MaskCut and DHR.
+                Every panel is taken from the figures of the paper, and the <a href="https://github.com/shjo-april/TRACE#-reproduce-the-hero-gif" target="_blank">repository</a> holds the panels and the script that composes this demo.
+            </p>
+        </div>
+
         <div class="insight" data-animate>
             <div class="insight-label">Key Insight</div>
             <p class="insight-text">

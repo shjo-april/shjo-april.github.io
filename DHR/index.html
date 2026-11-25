@@ -96,9 +96,26 @@
     </div>
 </header>
 
-<!-- ===== Teaser ===== -->
+<!-- ===== Hero Demo, Teaser & Key Insight ===== -->
 <section class="section section-tight">
     <div class="container">
+        <div class="figure-block" data-animate>
+            <div class="figure-frame">
+                <video autoplay muted loop playsinline poster="static/images/hero_poster.jpg" aria-label="DHR in four scenes: the vanishing problem of adjacent minor classes, the complementary USS and WSS features, the masks of two training images after each step of DHR, and the results on five benchmarks">
+                    <source src="static/images/hero.webm" type="video/webm">
+                    <source src="static/images/hero.mp4" type="video/mp4">
+                </video>
+            </div>
+            <p class="figure-caption">
+                <strong>DHR in four scenes.</strong>
+                Minor classes next to a larger class vanish from the pseudo labels of recent WSS methods, and DHR restores them.
+                USS features separate inter-class regions and WSS features separate intra-class regions, so DHR rebalances the input WSS mask in three steps:
+                OT-based seed initialization, USS rebalancing, and WSS rebalancing (pseudo-mask mIoU on the MS&nbsp;COCO&nbsp;2014 training set: from 52.6% to <strong>58.6%</strong>).
+                The last scene compares DHR with TCL, Grounded&nbsp;SAM, ToCo, and MARS on five benchmarks.
+                The <a href="https://github.com/shjo-april/DHR#reproduce-the-hero-gif" target="_blank">code repository</a> reproduces this demo from the figures of the paper.
+            </p>
+        </div>
+
         <div class="figure-block" data-animate>
             <div class="figure-frame">
                 <img class="fit" style="--w:89%" src="static/images/teaser.png" alt="Left: for one image and its tags, the outputs of Grounding DINO (233MB, box labels), Ferret (13,370MB, LLM prior) and the WSS model DHR (59MB, tags only), before and after HQ-SAM refinement, next to the ground truth. Right: scatter plot of PASCAL VOC 2012 mIoU against MS COCO 2014 mIoU, where DHR with and without SAM lies above the WSS models MARS, WeakTr, CLIP-ES and ToCo and the generalist models Ferret with SAM and Grounded SAM">
