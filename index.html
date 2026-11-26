@@ -196,10 +196,10 @@
         .dual-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem}
         .info-block-title{font-family:var(--font-display);font-size:1.6rem;font-weight:700;color:var(--text-primary);margin-bottom:1.3rem;padding-bottom:0.7rem;border-bottom:1px solid var(--border)}
         .service-group-label{font-size:0.78rem;font-weight:600;color:var(--teal);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:0.5rem;margin-top:1rem}
-        .service-group-label:first-child{margin-top:0}
-        .service-cols{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
-        .service-item{font-size:0.92rem;color:var(--text-secondary);padding:0.3rem 0 0.3rem 1rem;position:relative}
-        .service-item::before{content:'';position:absolute;left:0;top:50%;width:4px;height:4px;border-radius:50%;background:var(--teal-tint);border:1px solid var(--teal);transform:translateY(-50%)}
+        .info-block-title+.service-group-label{margin-top:0}
+        .service-row{display:grid;grid-template-columns:2.6rem 1fr;gap:0.9rem;align-items:baseline;font-size:0.92rem;color:var(--text-secondary);padding:0.3rem 0}
+        .service-row.plain{display:block}
+        .service-yr{font-family:var(--font-mono);font-size:0.78rem;color:var(--text-dim);white-space:nowrap}
         .award-item{padding:0.8rem 0;border-bottom:1px solid var(--border)}
         .award-item:last-child{border-bottom:none}
         .award-title{font-size:0.95rem;font-weight:600;color:var(--text-primary);margin-bottom:0.2rem}
@@ -902,27 +902,15 @@
         <div class="dual-grid">
             <div class="info-block" data-animate>
                 <div class="info-block-title">Academic Services</div>
-                <div class="service-cols">
-                    <div>
-                        <div class="service-group-label">Conference Reviewing</div>
-                        <div class="service-item"><a href="https://iclr.cc/Conferences/2026/ProgramCommittee#reviewer" target="_blank">ICLR 2026&ndash;2027</a></div>
-                        <div class="service-item"><a href="https://icml.cc/Conferences/2022/Reviewers" target="_blank">ICML 2022, 2027</a></div>
-                        <div class="service-item">AAAI 2027</div>
-                        <div class="service-item">NeurIPS 2026</div>
-                        <div class="service-item"><a href="https://cvpr.thecvf.com/Conferences/2025/ProgramCommittee#all-outstanding-reviewer" target="_blank">CVPR 2025&ndash;2026</a></div>
-                        <div class="service-item"><a href="https://eccv.ecva.net/Conferences/2026/ProgramCommittee#reviewer" target="_blank">ECCV 2026</a></div>
-                        <div class="service-item">MICCAI 2026</div>
-                        <div class="service-item">ACCV 2026</div>
-                        <div class="service-item"><a href="https://iccv.thecvf.com/Conferences/2025/ProgramCommittee#all-reviewers-w-at-least-1-review" target="_blank">ICCV 2025</a></div>
-                        <div class="service-item">ICPR 2024</div>
-                        <div class="service-item">ICIP 2022&ndash;2024</div>
-                    </div>
-                    <div>
-                        <div class="service-group-label">Journal Reviewing</div>
-                        <div class="service-item"><a href="https://orcid.org/0000-0001-5371-2069" target="_blank">IJCV 2024&ndash;2026</a></div>
-                        <div class="service-item">IEEE TCSVT 2022</div>
-                    </div>
-                </div>
+                <div class="service-group-label">Conference Reviewing</div>
+                <div class="service-row"><span class="service-yr">2027</span><span>ICLR, ICML, AAAI</span></div>
+                <div class="service-row"><span class="service-yr">2026</span><span><a href="https://iclr.cc/Conferences/2026/ProgramCommittee#reviewer" target="_blank">ICLR</a>, NeurIPS, <a href="https://cvpr.thecvf.com/Conferences/2026/ProgramCommittee#reviewer" target="_blank">CVPR</a>, <a href="https://eccv.ecva.net/Conferences/2026/ProgramCommittee#reviewer" target="_blank">ECCV</a>, MICCAI, ACCV</span></div>
+                <div class="service-row"><span class="service-yr">2025</span><span><a href="https://cvpr.thecvf.com/Conferences/2025/ProgramCommittee#all-outstanding-reviewer" target="_blank">CVPR</a>, <a href="https://iccv.thecvf.com/Conferences/2025/ProgramCommittee#all-reviewers-w-at-least-1-review" target="_blank">ICCV</a></span></div>
+                <div class="service-row"><span class="service-yr">2024</span><span>ICPR, ICIP</span></div>
+                <div class="service-row"><span class="service-yr">2023</span><span>ICIP</span></div>
+                <div class="service-row"><span class="service-yr">2022</span><span><a href="https://icml.cc/Conferences/2022/Reviewers" target="_blank">ICML</a>, ICIP</span></div>
+                <div class="service-group-label">Journal Reviewing</div>
+                <div class="service-row plain"><a href="https://orcid.org/0000-0001-5371-2069" target="_blank">IJCV</a> (2024&ndash;2026), IEEE TCSVT (2022)</div>
             </div>
             <div class="info-block" data-animate id="awards">
                 <div class="info-block-title">Awards</div>
